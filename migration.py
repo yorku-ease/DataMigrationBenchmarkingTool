@@ -5,6 +5,7 @@ import gzip
 print(paramiko.__version__)
 
 
+
 def progress_callback(transferred, total):
     percent = transferred / total * 100
     print(f'{transferred} bytes transferred ({percent:.2f}%)')
