@@ -10,8 +10,10 @@ def progress_callback(transferred, total):
 
 
 def  transferfile(sftp_client, filepath, remotefilepath, compression, limit):
-    with open(local_file_path, "rb") as f:
+    with open(filepath, "rb") as f:
         chunk=f.read(limit)
+        #only for testing this code will be updated later to check the fo the right compression 
+        # current code only does gzip compression if needed
         if compression != None:
             remotefilepath += ".gz"
 
