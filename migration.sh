@@ -50,7 +50,7 @@ if [[ "$compressionResponse" == "yes" ]]; then
     outputfilename="output-file.${filename}.${limit}.${compressionType}"
     tempoutputfilename="temp."$outputfilename
     
-    cat ${filename} | pv -fL $limit  2>> $tempoutputfilename | $compressionType | ssh remote1 "cat > /home/casuser/${filename}.${limit}.${compressionType}" > /dev/null 2>&1
+    cat ${filename} | pv -fL $limit  2>> $tempoutputfilename | $compressionType | ssh remote1 "cat > /home/casuser/test/${filename}.${limit}.${compressionType}" > /dev/null 2>&1
 else
     outputfilename="output-file.${filename}.${limit}"
     tempoutputfilename="temp."$outputfilename
@@ -105,11 +105,15 @@ rm temp1
 }
 
 #only for testing
-numberOfTransfers=5
+numberOfTransfers=1
 
-files=(customer.ddl DS_001.csv DS_002.csv customer.csv )
-limits=( 1g 500m 50m 5m)
-compressionTypes=(None gzip lz4)
+#files=(customer.ddl DS_001.csv DS_002.csv customer.csv )
+#limits=( 1g 500m 50m 5m)
+#compressionTypes=(None gzip lz4)
+
+files=(data/test1.pdf )
+limits=( 1024b)
+compressionTypes=(gzip)
 
 for p in "${files[@]}"
 do
