@@ -59,7 +59,7 @@ def splitFile(input_file,num_files):
 
 
 def removeFiles(input_file,num_files):
-    # Loop through each file in the directory
+    # Loop through each splitted file in the directory
     for i in range(1,num_files + 1 ):
      # Check if the file exists and is a file (not a directory)
         if os.path.isfile(f"{input_file}_{i:03d}"):

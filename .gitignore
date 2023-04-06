@@ -1,2 +1,4 @@
 output/
 data/
+classes/__pycache__
+notes
