@@ -30,7 +30,7 @@ Docker
   **data**    : In this folder you need to put all the files you want to migrate.<br />
   **output**  : All outputs of the experiment will be found here.<br />
   **configs** : All configs of the experiment must be here.<br />
-     **config.ini** :  The configuration file you'll need to edit in step 2.
+     &nbsp; &nbsp;**config.ini** :  The configuration file you'll need to edit in step 2.
 
 </details>
 
