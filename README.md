@@ -2,15 +2,17 @@
 # Manual for using the data migration tool 
 
 ## Overview
-blablalbla
+
 
 ## Physical Requirements
-blablalbla
+- 1 machine containing the files to be transferred, called local server.
+- 1 remote machine where the files are going to be migrated.
 
 
 ## Prerequisites
 
-Docker
+- Docker must be installed on the local server that has the files to be migrated.
+- SSH connection must be enabled on the remote server where the files will be migrated to.
 
 
  ## Get Started
@@ -70,6 +72,8 @@ The migration tool is going to be running on the localServer, But we need the pa
 &nbsp; &nbsp; - **limits** = 1,10,1024 : limits should be in bytes 
 
 &nbsp; &nbsp; - **compressionTypes** = None,lz4,gzip : compression types can be None, lz4 and gzip
+
+ #### NOtE : all combinations of the 3 above variables will be executed as different experiments.
 
 ### **[output]**
 
