@@ -50,13 +50,15 @@ Here you save all SSH credentials of the remote server where to migrate the file
 &nbsp; &nbsp; - **host** : hostname / IP address of the server<br />
 &nbsp; &nbsp; - **username** : username of the server<br />
 &nbsp; &nbsp; - **password** : password of the server<br />
-&nbsp; &nbsp; - **dataFolder_path** : folder where files are going to be stored on the remote server ( path should always end with / )<br />
+&nbsp; &nbsp; - **dataFolder_path** : folder where files are going to be stored on the remote server <br /> 
+&nbsp; &nbsp;( path should always end with / )<br />
 
 ### **[localServer]**  
 The migration tool is going to be running on the localServer, But we need the password for this server  to run some sudo commands
 
 &nbsp; &nbsp; - **password** : password to run sudo command<br />
-&nbsp; &nbsp; - **dataFolder_path** : folder where files that are going to be migrated are savedb (path should always end with /). &nbsp; &nbsp;This value should always be data/ since you're saving your files in that folder as specified in step 1.
+&nbsp; &nbsp; - **dataFolder_path** : folder where files that are going to be migrated are savedb (path should always end with /).<br /> 
+&nbsp; &nbsp;This value should always be data/ since you're saving your files in that folder as specified in step 1.
   
 ### **[experiment]** 
 
