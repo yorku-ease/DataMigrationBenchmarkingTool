@@ -25,11 +25,11 @@ Docker
 └── configs/
     └── config.ini
 
-  This is the structure you need to setup first.
+  This is the structure you need to setup first.<br />
   
-  **data**    : In this folder you need to put all the files you want to migrate.
-  **output**  : All outputs of the experiment will be found here.
-  **configs** : All configs of the experiment must be here.
+  **data**    : In this folder you need to put all the files you want to migrate.<br />
+  **output**  : All outputs of the experiment will be found here.<br />
+  **configs** : All configs of the experiment must be here.<br />
      **config.ini** :  The configuration file you'll need to edit in step 2.
 
 </details>
