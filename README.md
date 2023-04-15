@@ -44,14 +44,16 @@ Docker
 In this step, you'll edit the config.ini file in the configs folder.
 Copy the template of config.ini from configs/config.ini in this repository and change it according to your needs.
 
-**[remoteServer]**  here you save all SSH credentials of the remote server where to migrate the files
+**[remoteServer]**  
+Here you save all SSH credentials of the remote server where to migrate the files
 
 &nbsp; &nbsp; - **host** : hostname / IP address of the server<br />
 &nbsp; &nbsp; - **username** : username of the server<br />
 &nbsp; &nbsp; - **password** : password of the server<br />
 &nbsp; &nbsp; - **dataFolder_path** : folder where files are going to be stored on the remote server ( path should always end with / )<br />
 
-**[localServer]**  The migration tool is going to be running on the localServer, But we need the password for this server  to run some sudo commands
+**[localServer]**  
+The migration tool is going to be running on the localServer, But we need the password for this server  to run some sudo commands
 
 &nbsp; &nbsp; - **password** : password to run sudo command<br />
 &nbsp; &nbsp; - **dataFolder_path** : folder where files that are going to be migrated are savedb (path should always end with /). This value should always be data/ since you're saving your files in that folder as specified in step 1.
