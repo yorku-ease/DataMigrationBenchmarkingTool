@@ -2,7 +2,7 @@
 # Manual for using the data migration tool 
 
 ## Overview
-
+A benchmarking tool that allows users to transfer files while compressing or decompressing them in real-time based on their preferences. The tool enables users to set transfer limits and generates a CSV report that displays the time taken for each step of the transfer process.
 
 ## Physical Requirements
 - 1 machine containing the files to be transferred, called local server.
