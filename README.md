@@ -46,30 +46,30 @@ Copy the template of config.ini from configs/config.ini in this repository and c
 
 **[remoteServer]**  here you save all SSH credentials of the remote server where to migrate the files
 
-&nbsp; &nbsp;**host** : hostname / IP address of the server<br />
-&nbsp; &nbsp;**username** : username of the server<br />
-&nbsp; &nbsp;**password** : password of the server<br />
-&nbsp; &nbsp;**dataFolder_path** : folder where files are going to be stored on the remote server ( path should always end with / )<br />
+&nbsp; &nbsp; - **host** : hostname / IP address of the server<br />
+&nbsp; &nbsp; - **username** : username of the server<br />
+&nbsp; &nbsp; - **password** : password of the server<br />
+&nbsp; &nbsp; - **dataFolder_path** : folder where files are going to be stored on the remote server ( path should always end with / )<br />
 
 **[localServer]**  The migration tool is going to be running on the localServer, But we need the password for this server  to run some sudo commands
 
-&nbsp; &nbsp;**password** : password to run sudo command<br />
-&nbsp; &nbsp;**dataFolder_path** : folder where files that are going to be migrated are savedb (path should always end with /). This value should always be data/ since you're saving your files in that folder as specified in step 1.
+&nbsp; &nbsp; - **password** : password to run sudo command<br />
+&nbsp; &nbsp; - **dataFolder_path** : folder where files that are going to be migrated are savedb (path should always end with /). This value should always be data/ since you're saving your files in that folder as specified in step 1.
   
 **[experiment]** 
 
 
-&nbsp; &nbsp;**numberOfExperiments** : how many times each experiment is repeated with the same configuration ( for the accuracy of the results ).
+&nbsp; &nbsp; - **numberOfExperiments** : how many times each experiment is repeated with the same configuration ( for the accuracy of the results ).
 
-&nbsp; &nbsp;**files** = file1,file2,file3 :  only provide the names of the files. These files must be stored in the data folder specified above.
+&nbsp; &nbsp; - **files** = file1,file2,file3 :  only provide the names of the files. These files must be stored in the data folder specified above.
 
-&nbsp; &nbsp;**limits** = 1,10,1024 : limits should be in bytes 
+&nbsp; &nbsp; - **limits** = 1,10,1024 : limits should be in bytes 
 
-&nbsp; &nbsp;**compressionTypes** = None,lz4,gzip : compression types can be None, lz4 and gzip
+&nbsp; &nbsp; - **compressionTypes** = None,lz4,gzip : compression types can be None, lz4 and gzip
 
 **[output]**
 
-&nbsp; &nbsp;**path** = output/output.csv : path to the file to save the output of the experiments (CSV Format).This value should always be output/something.csv since as specified in step 1, the output of te experiment will be saved in the output folder.
+&nbsp; &nbsp; - **path** = output/output.csv : path to the file to save the output of the experiments (CSV Format).This value should always be output/something.csv since as specified in step 1, the output of te experiment will be saved in the output folder.
 
 </details>
 
