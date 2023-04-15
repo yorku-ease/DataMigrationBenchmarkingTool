@@ -16,6 +16,7 @@ Docker
  ## Get Started
 
 <details><summary> Step 1 : Setting Up Folders and Files</summary>
+
 ```bash
 .
 ├── data/
