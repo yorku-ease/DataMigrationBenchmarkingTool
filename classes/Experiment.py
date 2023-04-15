@@ -1,6 +1,6 @@
 from classes.ConnectionManager import ConnectionManager
 from classes.FilesManager import FilesManager
-import paramiko
+import paramiko,time
 import subprocess
       
 class Experiment:
@@ -54,6 +54,7 @@ class Experiment:
         return self.limit
 
     def runTransfer(self):
+        print('before connection')
         connectionManager = ConnectionManager(self.remoteHostname, self.remoteUsername, self.remotePassword,self.limit)
         try:
             connectionManager.connect()
@@ -62,11 +63,16 @@ class Experiment:
             print('Unable to establish SSH connection: %s' % sshException)
         except paramiko.SFTPError as sftpError:
             print('Unable to open SFTP session: %s' % sftpError)
+        print('before clear')
 
+        timeBeforeClear = time.time()
         self.clearRamCacheSwap(connectionManager.get_SSH())
-
+        timeAfterClear = time.time()
+        TotalClearTime = timeAfterClear - timeBeforeClear
+        print('before transfer')
         data = FilesManager.transferfile(connectionManager.get_SFTP(),self.local_file_path,self.remote_file_path,self.compressionType,self.limit,connectionManager.get_SSH())
-        
+        data['TotalClearTime'] = TotalClearTime
+        print('afterTransfer')
         connectionManager.close()
         return data
 

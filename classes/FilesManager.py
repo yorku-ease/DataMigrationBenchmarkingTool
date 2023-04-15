@@ -97,7 +97,7 @@ class FilesManager:
                     timeAfterCompression = time.time()
                     compressionTime += timeAfterCompression - timeBeforeCompression
 
-                elif compression == None:
+                elif compression == 'None':
                     compressedChunk = chunk
                 else :
                     print("Wrong compression type")
@@ -108,9 +108,7 @@ class FilesManager:
                 with sftp_client.open(remoteFilePath, 'ab') as outfile:
                     outfile.set_pipelined()
                     timeBeforeTransfer = time.time()
-                    print("before write")
                     outfile.write(compressedChunk)
-                    print("after write")
                     timeAfterTransfer = time.time()
                     dataTransferTime += timeAfterTransfer - timeBeforeTransfer
 
