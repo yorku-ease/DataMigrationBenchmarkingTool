@@ -44,7 +44,7 @@ Docker
 In this step, you'll edit the config.ini file in the configs folder.
 Copy the template of config.ini from configs/config.ini in this repository and change it according to your needs.
 
-**[remoteServer]**  
+### **[remoteServer]**  
 Here you save all SSH credentials of the remote server where to migrate the files
 
 &nbsp; &nbsp; - **host** : hostname / IP address of the server<br />
@@ -52,13 +52,13 @@ Here you save all SSH credentials of the remote server where to migrate the file
 &nbsp; &nbsp; - **password** : password of the server<br />
 &nbsp; &nbsp; - **dataFolder_path** : folder where files are going to be stored on the remote server ( path should always end with / )<br />
 
-**[localServer]**  
+### **[localServer]**  
 The migration tool is going to be running on the localServer, But we need the password for this server  to run some sudo commands
 
 &nbsp; &nbsp; - **password** : password to run sudo command<br />
 &nbsp; &nbsp; - **dataFolder_path** : folder where files that are going to be migrated are savedb (path should always end with /). &nbsp; &nbsp;This value should always be data/ since you're saving your files in that folder as specified in step 1.
   
-**[experiment]** 
+### **[experiment]** 
 
 
 &nbsp; &nbsp; - **numberOfExperiments** : how many times each experiment is repeated with the same configuration ( for the accuracy of the results ).
@@ -69,7 +69,7 @@ The migration tool is going to be running on the localServer, But we need the pa
 
 &nbsp; &nbsp; - **compressionTypes** = None,lz4,gzip : compression types can be None, lz4 and gzip
 
-**[output]**
+### **[output]**
 
 &nbsp; &nbsp; - **path** = output/output.csv : path to the file to save the output of the experiments (CSV Format).This value should always be output/something.csv since as specified in step 1, the output of te experiment will be saved in the output folder.
 
