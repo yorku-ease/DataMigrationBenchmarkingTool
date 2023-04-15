@@ -16,6 +16,7 @@ Docker
  ## Get Started
 
 <details><summary> Step 1 : Setting Up Folders and Files</summary>
+```bash
 .
 ├── data/
 │   ├── file1.txt
@@ -24,6 +25,7 @@ Docker
 ├── output/
 └── configs/
     └── config.ini
+```
 
   This is the structure you need to setup first.<br />
   
