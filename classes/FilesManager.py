@@ -1,4 +1,4 @@
-import os,time,gzip,lz4
+import os,time,gzip,lz4.frame
 class FilesManager:
 
     @staticmethod

@@ -20,9 +20,13 @@ class Experiment:
 
     def clearRamCacheSwap(self,ssh):
         #clear RAM Cache as well as Swap Space at local machine
+        result = subprocess.run([f"echo {self.localPassword} | ./clearcache.sh"], stdout=subprocess.PIPE, shell=True)
 
-        output = subprocess.check_output([f"echo {self.localPassword} | ./clearcache.sh"],shell=True)
-        print(output.decode("utf-8"))
+        # Print the output of the command
+        print(result.stdout.decode('utf-8'))
+
+        #output = subprocess.check_output([f"echo {self.localPassword} | ./clearcache.sh"],shell=True)
+        #print(output.decode("utf-8"))
         print("On local machine")
         #clear RAM Cache as well as Swap Space at remote machine
 
