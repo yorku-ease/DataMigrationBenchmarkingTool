@@ -1,0 +1,18 @@
+paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_8.9p1)
+paramiko.transport - INFO - Authentication (publickey) failed.
+paramiko.transport - INFO - Authentication (publickey) failed.
+paramiko.transport - INFO - Authentication (password) successful!
+paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_8.9p1)
+paramiko.transport - INFO - Connected (version 2.0, client OpenSSH_8.9p1)
+paramiko.transport - INFO - Authentication (publickey) failed.
+paramiko.transport - INFO - Authentication (publickey) failed.
+paramiko.transport - INFO - Authentication (publickey) failed.
+paramiko.transport - INFO - Authentication (publickey) failed.
+paramiko.transport - INFO - Authentication (password) successful!
+paramiko.transport - INFO - Authentication (password) successful!
+paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+paramiko.transport.sftp - INFO - [chan 0] Opened sftp connection (server version 3)
+paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
+paramiko.transport.sftp - INFO - [chan 0] sftp session closed.
