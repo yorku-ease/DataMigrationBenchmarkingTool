@@ -1,6 +1,7 @@
-import os,time,gzip,lz4.frame,threading
+import os,time,threading
 from classes.KafkaLogger import KafkaLogger
-
+from classes.migrationEngine.defaultEngine.compression.GzipCompressor import GzipCompressor
+from classes.migrationEngine.defaultEngine.compression.Lz4Compressor import Lz4Compressor
 
 
 class FilesManager:
@@ -79,10 +80,17 @@ class FilesManager:
             remoteFilePath += "." + str(limit)
 
             if compression == "gzip":
-                remoteFilePath +=  ".gz"
+                compressor = GzipCompressor()
             elif compression == "lz4":
-                remoteFilePath += ".lz4"
+                compressor = Lz4Compressor()
+            elif compression == "None":
+                pass
+            else:
+                print("Wrong compression type")
+                return 0
             
+            if compression != 'None':
+                remoteFilePath = compressor.addFileExtension(remoteFilePath)
 
 
             transferred = 0
@@ -93,23 +101,14 @@ class FilesManager:
             readingFileTime += timeAfterReadingFile - timeBeforeReadingFile
 
             while (chunk):
-                if compression == "gzip":
-                    timeBeforeCompression = time.time()
-                    compressedChunk = gzip.compress(chunk)
-                    timeAfterCompression = time.time()
-                    compressionTime += timeAfterCompression - timeBeforeCompression
-
-                elif compression == "lz4":
-                    timeBeforeCompression = time.time()
-                    compressedChunk = lz4.frame.compress(chunk)
-                    timeAfterCompression = time.time()
-                    compressionTime += timeAfterCompression - timeBeforeCompression
-
-                elif compression == 'None':
+                if compression == 'None':
                     compressedChunk = chunk
-                else :
-                    print("Wrong compression type")
-                    return 0
+                else:
+                    timeBeforeCompression = time.time()
+                    compressedChunk = compressor.compress(chunk)
+                    timeAfterCompression = time.time()
+                    compressionTime += timeAfterCompression - timeBeforeCompression
+
                 
                 sizeOnTargetMachine += len(compressedChunk)
                 with sftp_client.open(remoteFilePath, 'ab') as outfile:

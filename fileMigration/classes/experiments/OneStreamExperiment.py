@@ -1,4 +1,4 @@
-from classes.Experiment import Experiment
+from classes.experiments.Experiment import Experiment
 
 
 class OneStreamExperiment(Experiment):

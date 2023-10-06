@@ -11,7 +11,7 @@ class KafkaLogger:
 
     def init_kafka_logger(self):
         # Define the Kafka broker(s) and topic name
-        self.bootstrap_servers = "192.168.122.230:9092"  # Replace with your Kafka broker address
+        self.bootstrap_servers = "192.168.122.143:9092"  # Replace with your Kafka broker address
         self.topic_name = "my_topic"  # Replace with the Kafka topic you want to produce to
 
         # Create a Kafka producer instance

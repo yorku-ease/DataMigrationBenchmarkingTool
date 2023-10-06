@@ -1,10 +1,14 @@
-import time
-from classes.OneStreamExperiment import OneStreamExperiment
-from classes.MultipleStreamsExperiment import MultipleStreamsExperiment
+import time,os,configparser
+from classes.experiments.OneStreamExperiment import OneStreamExperiment
+from classes.experiments.MultipleStreamsExperiment import MultipleStreamsExperiment
 from classes.KafkaLogger import KafkaLogger
 
 
-import configparser
+# Get the directory of the currently running script
+script_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Change the working directory to the script's directory
+os.chdir(script_dir)
 
 logger = KafkaLogger()
 
@@ -12,7 +16,7 @@ timeBeforeExperiment = time.time()
 
 config = configparser.ConfigParser()
 config.comment_prefixes = (';',)  # Set the prefix character for comments
-config.read('/home/fareshamouda/DataMigrationBenchmarkingTool/fileMigration/configs/config1.ini')
+config.read('configs/config1.ini')
 
 
 # Define the path of the folder containing data files 
@@ -67,26 +71,9 @@ for stream in streams:
 
 
                     timeBeforeTransfer = time.time()
-                    data = experiment.runExperiment()
+                    experiment.runExperiment()
                     timeAfterTransfer = time.time()
                     TotaltransferTime = timeAfterTransfer - timeBeforeTransfer
                     logger.log(loggingId,f"TotaltransferTime : {TotaltransferTime}")
-#                    data["TotaltransferTime"] = TotaltransferTime
-#                    experiment.setOutput(data)
-#                    repetitions.append(experiment)
-#                experiments.append(repetitions)
-
-
-
-
-#outputManager = OutputManager(config.get('output', 'path'))
-
-#outputManager.writeCSVHeader()
-#for experiment in experiments:
-#    outputManager.writeCSVContent(experiment)
-
-#timeAfterExperiment = time.time()
-#totalExperimentTime = (timeAfterExperiment - timeBeforeExperiment)/3600
-#outputManager.writeTotalExperimentTime(totalExperimentTime)
 
 logger.terminate_kafka_logger()

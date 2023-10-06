@@ -9,12 +9,11 @@ class FastTransport(paramiko.Transport):
 
 class ConnectionManager:
 
-    def __init__(self, hostname,username,password,limit):
+    def __init__(self, hostname,username,password):
         # Define the SSH parameters
         self.hostname = hostname
         self.username = username
         self.password = password
-        self.limit = limit
 
     def connect(self):
 
@@ -26,14 +25,6 @@ class ConnectionManager:
         # Open a SFTP connection
         self.sftp = self.ssh.open_sftp()
         
-        '''self.ssh = None
-        transport = paramiko.Transport(self.hostname, 22)
-        transport.default_window_size = 2147483647 # 2147483647
-        transport.packetizer.REKEY_BYTES = pow(2, 40)
-        transport.packetizer.REKEY_PACKETS = pow(2, 40)
-        transport.connect(username=self.username, password=self.password)
-
-        self.sftp = paramiko.SFTPClient.from_transport(transport)'''
 
     def get_SSH(self):
         return self.ssh

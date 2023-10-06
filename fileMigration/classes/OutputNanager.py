@@ -1,8 +1,6 @@
 import csv
-from classes.Experiment import Experiment
+from fileMigration.classes.experiments.Experiment import Experiment
 
-from classes.OneStreamExperiment import OneStreamExperiment
-from classes.MultipleStreamsExperiment import MultipleStreamsExperiment 
 import logging
 from confluent_kafka import Producer
 

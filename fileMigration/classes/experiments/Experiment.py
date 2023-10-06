@@ -1,6 +1,7 @@
-from classes.ConnectionManager import ConnectionManager
-from classes.FilesManager import FilesManager
-import paramiko,time,os
+from classes.migrationEngine.defaultEngine.ConnectionManager import ConnectionManager
+from classes.migrationEngine.defaultEngine.FilesManager import FilesManager
+from classes.migrationEngine.defaultEngine.DefaultFileMigrator import DefaultFileMigrator
+import paramiko,time
 import subprocess
 from threading import Thread
 from classes.KafkaLogger import KafkaLogger
@@ -30,7 +31,7 @@ class Experiment(Thread):
     def clearRamCacheSwap(self,ssh,sftp):
 
         # Specify the desired working directory
-        working_directory = '/home/fareshamouda/DataMigrationBenchmarkingTool/fileMigration'
+        #working_directory = '/home/fareshamouda/DataMigrationBenchmarkingTool/fileMigration'
 
         # Change the current working directory
         #os.chdir(working_directory)
@@ -87,26 +88,18 @@ class Experiment(Thread):
             local_file_path = f"{self.local_file_path}_{stream:03d}"
             remote_file_path = f"{self.remote_file_path}_{stream:03d}"
 
-        connectionManager = ConnectionManager(self.remoteHostname, self.remoteUsername, self.remotePassword,self.limit)
-        try:
-            connectionManager.connect()
-
-        except paramiko.SSHException as sshException:
-            print('Unable to establish SSH connection: %s' % sshException)
-        except paramiko.SFTPError as sftpError:
-            print('Unable to open SFTP session: %s' % sftpError)
+        migrationEngine = DefaultFileMigrator(self.remoteHostname,self.remoteUsername,self.remotePassword,self.localPassword,self.loggingId)
 
         timeBeforeClear = time.time()
-        self.clearRamCacheSwap(connectionManager.get_SSH(),connectionManager.get_SFTP())
+        migrationEngine.clearRamCacheSwap()
         timeAfterClear = time.time()
         TotalClearTime = timeAfterClear - timeBeforeClear
         self.logger.log(self.loggingId,f"TotalClearTime : {TotalClearTime}, stream : {stream}")
-        data = FilesManager.transferfile(connectionManager.get_SFTP(),local_file_path,remote_file_path,self.compressionType,self.limit,connectionManager.get_SSH(),self.loggingId)
+
+        data = migrationEngine.migrate(local_file_path,remote_file_path,self.compressionType,self.limit)
         self.logger.log(self.loggingId,f"sizeOnTargetMachine : {data['sizeOnTargetMachine']}, stream : {stream}")
         self.logger.log(self.loggingId,f"sizeOnLocalMachine : {data['sizeOnTargetMachine']}, stream : {stream}")
         self.logger.log(self.loggingId,f"compressionTime : {data['compressionTime']}, stream : {stream}")
         self.logger.log(self.loggingId,f"dataTransferTime : {data['dataTransferTime']}, stream : {stream}")        
         self.logger.log(self.loggingId,f"readingFileTime : {data['readingFileTime']}, stream : {stream}")        
-        data['TotalClearTime'] = TotalClearTime 
-        connectionManager.close()
-        return data
+        migrationEngine.shutdown()
