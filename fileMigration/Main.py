@@ -1,6 +1,5 @@
 import time,os,configparser
-from classes.experiments.OneStreamExperiment import OneStreamExperiment
-from classes.experiments.MultipleStreamsExperiment import MultipleStreamsExperiment
+from classes.Experiment import Experiment
 from classes.KafkaLogger import KafkaLogger
 
 
@@ -64,12 +63,7 @@ for stream in streams:
                         loggingId = "-".join([str(i+1),file,str(limit),str(stream),compressionType])
                     else:
                         loggingId = cloggingId
-                    if stream == 1 : 
-                        experiment = OneStreamExperiment(local_file_path, remote_file_path, compressionType, limit, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId)
-                    else:
-                        experiment = MultipleStreamsExperiment(local_file_path, remote_file_path, compressionType, limit, remoteHostname, remoteUsername, remotePassword, localPassword,stream,loggingId)
-
-
+                    experiment = Experiment(local_file_path, remote_file_path, compressionType, limit, stream, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId)                    
                     timeBeforeTransfer = time.time()
                     experiment.runExperiment()
                     timeAfterTransfer = time.time()

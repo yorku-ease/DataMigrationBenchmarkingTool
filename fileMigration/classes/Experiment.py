@@ -1,7 +1,4 @@
-from classes.migrationEngine.defaultEngine.ConnectionManager import ConnectionManager
-from classes.migrationEngine.defaultEngine.FilesManager import FilesManager
 from classes.migrationEngine.defaultEngine.DefaultFileMigrator import DefaultFileMigrator
-import paramiko,time
 import subprocess
 from threading import Thread
 from classes.KafkaLogger import KafkaLogger
@@ -12,7 +9,7 @@ class Experiment(Thread):
 
     output : dict
 
-    def __init__(self, local_file_path, remote_file_path, compressionType, limit, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId):
+    def __init__(self, local_file_path, remote_file_path, compressionType, limit,streams, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId):
         self.local_file_path = local_file_path
         self.remote_file_path = remote_file_path
         self.compressionType = compressionType
@@ -21,7 +18,7 @@ class Experiment(Thread):
         self.remoteUsername = remoteUsername
         self.remotePassword = remotePassword
         self.localPassword = localPassword
-        self.streams = 1
+        self.streams = streams
         self.loggingId = loggingId
         self.logger = KafkaLogger()
 
@@ -79,27 +76,8 @@ class Experiment(Thread):
 
         return self.streams
                         
-    def runTransfer(self,stream):
+    def runExperiment(self):
         
-        local_file_path = self.local_file_path
-        remote_file_path = self.remote_file_path
-
-        if stream != None:
-            local_file_path = f"{self.local_file_path}_{stream:03d}"
-            remote_file_path = f"{self.remote_file_path}_{stream:03d}"
-
-        migrationEngine = DefaultFileMigrator(self.remoteHostname,self.remoteUsername,self.remotePassword,self.localPassword,self.loggingId)
-
-        timeBeforeClear = time.time()
-        migrationEngine.clearRamCacheSwap()
-        timeAfterClear = time.time()
-        TotalClearTime = timeAfterClear - timeBeforeClear
-        self.logger.log(self.loggingId,f"TotalClearTime : {TotalClearTime}, stream : {stream}")
-
-        data = migrationEngine.migrate(local_file_path,remote_file_path,self.compressionType,self.limit)
-        self.logger.log(self.loggingId,f"sizeOnTargetMachine : {data['sizeOnTargetMachine']}, stream : {stream}")
-        self.logger.log(self.loggingId,f"sizeOnLocalMachine : {data['sizeOnTargetMachine']}, stream : {stream}")
-        self.logger.log(self.loggingId,f"compressionTime : {data['compressionTime']}, stream : {stream}")
-        self.logger.log(self.loggingId,f"dataTransferTime : {data['dataTransferTime']}, stream : {stream}")        
-        self.logger.log(self.loggingId,f"readingFileTime : {data['readingFileTime']}, stream : {stream}")        
-        migrationEngine.shutdown()
+        migrationEngine = DefaultFileMigrator(self.remoteHostname,self.remoteUsername,self.remotePassword,self.localPassword,self.loggingId,self.logger)
+        migrationEngine.migrate(self.local_file_path,self.remote_file_path,self.compressionType,self.limit,self.streams)
+    

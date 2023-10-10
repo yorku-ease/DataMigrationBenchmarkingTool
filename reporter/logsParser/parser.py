@@ -10,8 +10,8 @@ class Parser():
         # Define a regular expression pattern to extract the key and key-value pairs
         self.log_pattern = r'Key=(.*?), Value=(.*?)$'
         self.header = ['file','limit','stream','compressionType' ,'Experiment Number']
-        self.streamMetrics = ['TotalClearTime','sizeOnTargetMachine','sizeOnLocalMachine','compressionTime','dataTransferTime','readingFileTime']
-        self.nonStreamMetrics = ['TotalBackupTime','TotaltransferTime','TotalMigrationTime','TotalValidationTime']
+        self.streamMetrics = ['sizeOnTargetMachine','sizeOnLocalMachine','compressionTime','dataTransferTime','readingFileTime']
+        self.nonStreamMetrics = ['TotalBackupTime','TotaltransferTime','TotalMigrationTime','TotalValidationTime','TotalClearTime']
         self.data = {}
 
     def parsetoJson(self):
@@ -67,7 +67,7 @@ class Parser():
                     else:
                         print("No match found in line:", line.strip())
         except FileNotFoundError:
-            print(f"File '{log_file_path}' not found.")
+            print(f"File '{self.log_file_path}' not found.")
         except IOError as e:
             print(f"Error reading the file: {e}")
         return self.data
@@ -94,9 +94,6 @@ class Parser():
 
     def parsetoCSV(self,csv_file_name):
         self.writeCSVHeader(csv_file_name)
-
-        streamMetrics = ['TotalClearTime','sizeOnTargetMachine','sizeOnLocalMachine','compressionTime','dataTransferTime','readingFileTime']
-        nonStreamMetrics = ['TotalBackupTime','TotaltransferTime','TotalMigrationTime','TotalValidationTime']
 
         for key in self.data.keys():
             row = key.split('-')

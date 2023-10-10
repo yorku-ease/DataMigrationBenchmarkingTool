@@ -1,9 +1,6 @@
-fileMigration/data/
 fileMigration/classes/__pycache__
-fileMigration/classes/experiments/__pycache__
 fileMigration/classes/migrationEngine/__pycache__
 fileMigration/classes/migrationEngine/defaultEngine/__pycache__
-fileMigration/notes
 fileMigration/configs/config1.ini
 __pycache__/
 databaseMigration/sourcedatadir/
