@@ -1,6 +1,8 @@
 import re
 import json
 import csv
+import traceback
+
 class Parser():
 
 
@@ -46,8 +48,7 @@ class Parser():
                             self.data[key][experimentNumber] = {}
                             if "stream" in extracted_dict:
                                 temp = next(iter(extracted_dict))
-                                print(extracted_dict)
-                                self.data[key][experimentNumber][extracted_dict["stream"]]={temp : extracted_dict[temp]}
+                                self.data[key][experimentNumber][int(extracted_dict["stream"])]={temp : extracted_dict[temp]}
                             else:
                                 self.data[key][experimentNumber].update(extracted_dict)
 
@@ -58,7 +59,9 @@ class Parser():
                                 stream = extracted_dict["stream"]
                                 if stream in self.data[key][experimentNumber]:
                                     temp = next(iter(extracted_dict))
-                                    self.data[key][experimentNumber][stream].update({temp : extracted_dict[temp]})
+                                    old_value = float(self.data[key][experimentNumber][stream].get(temp,0))
+                                    new_value = str(float(extracted_dict[temp]) + old_value)
+                                    self.data[key][experimentNumber][stream].update({temp : new_value})
                                 else:
                                     temp = next(iter(extracted_dict))
                                     self.data[key][experimentNumber][stream] = {temp : extracted_dict[temp]}
@@ -95,6 +98,8 @@ class Parser():
     def parsetoCSV(self,csv_file_name):
         self.writeCSVHeader(csv_file_name)
 
+
+
         for key in self.data.keys():
             row = key.split('-')
             p = list(row)
@@ -110,11 +115,12 @@ class Parser():
                         row.extend(len(self.streamMetrics)*3*[0])
                     elif "1" in self.data[key][ikey].keys():
                         row.extend(len(self.streamMetrics)*[0])
-                        streams = int(row[2])
+                        streams = len([s for s in self.data[key][ikey].keys() if s.isdigit()])          
                         for sMetric in self.streamMetrics:
                             vsum = 0
                             maximum = -1
                             for i in range(1,streams + 1):
+
                                 metricValue = float(self.data[key][ikey].get(str(i)).get(sMetric))
                                 vsum +=  metricValue
                                 maximum = max(maximum,metricValue)                       
@@ -124,10 +130,10 @@ class Parser():
                             row.append(avg)
                     else:
                         row.extend(len(self.streamMetrics)*4*[0])
-                    print(len(row))
                     with open(csv_file_name, 'a', encoding='UTF8') as csvfile:
                         writer = csv.writer(csvfile)
                         writer.writerow(row)   
                 except Exception as e:
                     print(f"An error occurred: {str(e)}")
+                    traceback.print_exc()
                     pass  

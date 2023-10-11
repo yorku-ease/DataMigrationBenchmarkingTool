@@ -63,7 +63,6 @@ class FilesManager:
     def progressCallback(transferred, total):
         percent = transferred / total * 100
         current_thread = threading.current_thread()
-
         print("Thread", current_thread.name)
         print(f'{transferred} bytes of the original file migrated ({percent:.2f}%)')
     

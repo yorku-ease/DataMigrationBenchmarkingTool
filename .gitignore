@@ -1,4 +1,5 @@
 fileMigration/classes/__pycache__
+fileMigration/data
 fileMigration/classes/migrationEngine/__pycache__
 fileMigration/classes/migrationEngine/defaultEngine/__pycache__
 fileMigration/configs/config1.ini

@@ -1,8 +1,10 @@
 from classes.migrationEngine.FileMigrator import FileMigrator 
 from classes.migrationEngine.defaultEngine.ConnectionManager import ConnectionManager 
 from classes.migrationEngine.defaultEngine.FilesManager import FilesManager 
-from classes.migrationEngine.defaultEngine.ThreadStream import ThreadStream 
-import paramiko,subprocess,time
+import paramiko,subprocess,time,threading
+import concurrent.futures
+
+
 
 class DefaultFileMigrator(FileMigrator):
 
@@ -73,7 +75,7 @@ class DefaultFileMigrator(FileMigrator):
         return data
             
 
-    def migrateOneStream(self,local_file_path,remote_file_path,compressionType,limit,streamNumber = None):
+    def migrateOneStream(self,local_file_path,remote_file_path,compressionType,limit):
         
 
         connectionManager = self.connect()
@@ -81,6 +83,11 @@ class DefaultFileMigrator(FileMigrator):
         sftp = connectionManager.get_SFTP()
 
         data = FilesManager.transferfile(sftp,local_file_path,remote_file_path,compressionType,limit,ssh,self.loggingId)
+        threadName = threading.current_thread().name
+        if threadName == "MainThread":
+            streamNumber = None
+        else:
+            streamNumber = int(threadName.split("_")[1]) + 1
         connectionManager.close()
         self.logger.log(self.loggingId,f"sizeOnTargetMachine : {data['sizeOnTargetMachine']}, stream : {streamNumber}")
         self.logger.log(self.loggingId,f"sizeOnLocalMachine : {data['sizeOnTargetMachine']}, stream : {streamNumber}")
@@ -90,16 +97,15 @@ class DefaultFileMigrator(FileMigrator):
         return data
     
     def migrateMultipleStreams(self,local_file_path,remote_file_path,compressionType,limit,streams):
-        threads = []
         
         FilesManager.splitFile(local_file_path,streams)
 
-        for i in range(1,streams +1 ):
-            slocal_file_path = f"{local_file_path}_{i:03d}"
-            sremote_file_path = f"{remote_file_path}_{i:03d}"
-            thread = ThreadStream(target=self.migrateOneStream, streamNumber=i,local_file_path = slocal_file_path,remote_file_path = sremote_file_path,compressionType= compressionType,limit = limit)
-            thread.start()
-            threads.append(thread)
-        
-        for thread in threads:
-            thread.join()
+        max_threads = streams
+        # Create a ThreadPoolExecutor with the specified number of threads
+        with concurrent.futures.ThreadPoolExecutor(max_threads) as executor:
+
+            # Submit tasks to the pool with parameters
+            for i in range(1,streams +1 ):
+                slocal_file_path = f"{local_file_path}_{i:03d}"
+                sremote_file_path = f"{remote_file_path}_{i:03d}"
+                executor.submit(self.migrateOneStream, slocal_file_path,sremote_file_path,compressionType,limit)
