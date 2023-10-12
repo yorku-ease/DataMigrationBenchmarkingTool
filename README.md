@@ -29,7 +29,6 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 │   ├── file1.txt
 │   ├── file2.csv
 │   └── file3.jpg
-├── output/
 └── configs/
     └── config.ini
 ```
@@ -37,7 +36,6 @@ A benchmarking tool that allows users to transfer files while compressing or dec
   This is the structure you need to setup first.<br />
   
   **data**    : In this folder you need to put all the files you want to migrate.<br />
-  **output**  : All outputs of the experiment will be found here.<br />
   **configs** : All configs of the experiment must be here.<br />
      &nbsp; &nbsp;**config.ini** :  The configuration file you'll need to edit in step 2.
 
