@@ -6,8 +6,8 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 
 ## Physical Requirements
 - 1 machine containing the files to be transferred, called local server.
-- 1 remote machine where the files are going to be migrated.
-- 1 remote machine to deploy the Kafka cluster to save all logs.
+- 1 machine where the files are going to be migrated.
+- 1 machine to deploy the Kafka cluster to save all logs.
 
 
 ## Prerequisites
