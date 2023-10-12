@@ -16,7 +16,6 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 - Docker Compose & Python must be installed on the Kafka machine.
 - Python must be installed on the local server.
 - SSH connection must be enabled on the remote server where the files will be migrated to.
-- SSH connection must be enabled on the Kafka machine.
 
 
  ## Get Started
