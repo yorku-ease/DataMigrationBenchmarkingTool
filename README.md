@@ -7,12 +7,16 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 ## Physical Requirements
 - 1 machine containing the files to be transferred, called local server.
 - 1 remote machine where the files are going to be migrated.
+- 1 remote machine to deploy the Kafka cluster to save all logs.
 
 
 ## Prerequisites
 
-- Docker must be installed on the local server that has the files to be migrated.
+- Docker Compose & Python must be installed on the local server that has the files to be migrated.
+- Docker Compose & Python must be installed on the Kafka machine.
+- Python must be installed on the local server.
 - SSH connection must be enabled on the remote server where the files will be migrated to.
+- SSH connection must be enabled on the Kafka machine.
 
 
  ## Get Started
