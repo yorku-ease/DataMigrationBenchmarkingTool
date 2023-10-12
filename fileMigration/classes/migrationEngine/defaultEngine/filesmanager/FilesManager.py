@@ -7,8 +7,9 @@ from classes.migrationEngine.defaultEngine.compression.Lz4Compressor import Lz4C
 class FilesManager:
 
     @staticmethod
-    def splitFile(input_file,num_files):
+    def splitFile(input_file,num_files = None):
         
+        Totalnum_files = num_files
         # Open the input file for reading in binary mode
         with open(input_file, 'rb') as f_in:
             
@@ -28,9 +29,8 @@ class FilesManager:
                 # If the chunk is empty, we have reached the end of the file
                 if not chunk:
                     break
-                
                 # Define the output file name
-                output_file = f"{input_file}_{file_num:03d}"
+                output_file = f"{input_file}_{Totalnum_files}_{file_num:03d}"
                 
                 # Open the output file for writing in binary mode
                 with open(output_file, 'wb') as f_out:
@@ -48,16 +48,25 @@ class FilesManager:
                     break
                 # Recalculate the split size for the remaining files
                 split_size = (file_size - f_in.tell()) // num_files
+    @staticmethod
+    def getChunksPaths(local_file_path,remote_file_path,num_files = None):
+        local_chunks_paths =[]
+        remote_chunks_paths =[]
+        for i in range(1,num_files +1 ):
+            local_chunks_paths.append(f"{local_file_path}_{num_files}_{i:03d}")
+            remote_chunks_paths.append(f"{remote_file_path}_{num_files}_{i:03d}")
+        return local_chunks_paths,remote_chunks_paths
+        
 
     @staticmethod
-    def removeSplittedFiles(input_file,num_files):
+    def removeSplittedFiles(input_file,num_files=None):
         # Loop through each splitted file in the directory
         for i in range(1,num_files + 1 ):
         # Check if the file exists and is a file (not a directory)
-            if os.path.isfile(f"{input_file}_{i:03d}"):
+            if os.path.isfile(f"{input_file}_{num_files}_{i:03d}"):
                 
                 # Delete the file
-                os.remove(f"{input_file}_{i:03d}")
+                os.remove(f"{input_file}_{num_files}_{i:03d}")
 
     @staticmethod
     def progressCallback(transferred, total):

@@ -1,6 +1,6 @@
 from classes.migrationEngine.FileMigrator import FileMigrator 
 from classes.migrationEngine.defaultEngine.ConnectionManager import ConnectionManager 
-from classes.migrationEngine.defaultEngine.FilesManager import FilesManager 
+from classes.migrationEngine.defaultEngine.filesmanager.FilesManager import FilesManager 
 import paramiko,subprocess,time,threading
 import concurrent.futures
 
@@ -98,14 +98,22 @@ class DefaultFileMigrator(FileMigrator):
     
     def migrateMultipleStreams(self,local_file_path,remote_file_path,compressionType,limit,streams):
         
-        FilesManager.splitFile(local_file_path,streams)
+        filesmanager = FilesManager 
 
+        filesmanager.splitFile(local_file_path,streams)
+        local_chunks_paths,remote_chunks_paths = filesmanager.getChunksPaths(local_file_path,remote_file_path,streams)
         max_threads = streams
+
         # Create a ThreadPoolExecutor with the specified number of threads
         with concurrent.futures.ThreadPoolExecutor(max_threads) as executor:
 
             # Submit tasks to the pool with parameters
-            for i in range(1,streams +1 ):
-                slocal_file_path = f"{local_file_path}_{i:03d}"
-                sremote_file_path = f"{remote_file_path}_{i:03d}"
+            for i in range(len(local_chunks_paths)):
+                slocal_file_path = local_chunks_paths[i]
+                sremote_file_path = remote_chunks_paths[i]
                 executor.submit(self.migrateOneStream, slocal_file_path,sremote_file_path,compressionType,limit)
+        
+        # Shut down the executor and wait for all tasks to finish
+        executor.shutdown(wait=True)
+
+        filesmanager.removeSplittedFiles(local_file_path,streams)
