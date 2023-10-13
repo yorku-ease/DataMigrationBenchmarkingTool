@@ -81,7 +81,7 @@ The migration tool is going to be running on the localServer, But we need the pa
 <p> 2. run </p> 
 ```  
 docker compose up 
-
+```  
 <p>3. pip </p>
 </details>
 
