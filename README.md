@@ -15,10 +15,7 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 - Target server : SSH must be enabled on the machine. 
 - Kafka Cluster : Docker Compose & Python must be installed on the machine.
 
-
- ## Get Started
-
-### I.Configuration
+## Configuration
 <details><summary> Kafka Cluster</summary>
 <br />
 <p> 1. Download deployment/reporter.</p>
@@ -73,7 +70,7 @@ The migration tool is going to be running on the localServer, But we need the pa
 </p>
 </details>
 
-### II.Running the experiment 
+## Running the experiment 
 <details><summary> Kafka Cluster</summary>
 
 <br />
