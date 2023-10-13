@@ -90,7 +90,7 @@ The migration tool is going to be running on the localServer, But we need the pa
 <br />
 <p> 1. Change Directory ; use the 'cd' command to change your working directory to deployment/sourceserver.</p>
 <p> 2. Run docker compose up </p>
-
+<p> Now you can follow the experiments running ; you can follow the output in the source server and you can also see the logs of  consumer.py in the Kafka cluster</p>
 </details>
 
 ## Result
