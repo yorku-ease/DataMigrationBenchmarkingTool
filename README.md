@@ -18,7 +18,7 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 
  ## Get Started
 
-#### Configuration
+### I. Configuration
 <details><summary> Kafka Cluster</summary>
 <br />
 <p> 1. Download deployment/reporter.</p>
@@ -69,7 +69,7 @@ The migration tool is going to be running on the localServer, But we need the pa
 </p>
 </details>
 
-#### Running the experiment 
+### II. Running the experiment 
 <details><summary> Step 3 : Run the experiment</summary>
 
 Now everything is ready. 
