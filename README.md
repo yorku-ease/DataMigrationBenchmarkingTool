@@ -78,7 +78,7 @@ The migration tool is going to be running on the localServer, But we need the pa
 
 <br />
 <p> 1. Change Directory ; use the 'cd' command to change your working directory to deployment/reporter/kafka cluster.</p>
-<p> 2. run </p>  ```
+<p> 2. run </p> 
  
 docker compose up 
 ``` 
