@@ -84,7 +84,7 @@ The migration tool is going to be running on the localServer, But we need the pa
 <br />
 <p> 1. Make sure SSH server is ready for connections.</p>
 <p> 2. Make sure there is enough space on the machine.</p>
-</details
+</details>
  
 <details><summary> Source Server</summary>
 <br />
