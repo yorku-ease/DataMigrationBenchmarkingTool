@@ -70,6 +70,20 @@ The migration tool is going to be running on the localServer, But we need the pa
 </details>
 
 ### II.Running the experiment 
+<details><summary> Kafka Cluster</summary>
+<br />
+<p> 1. Download .</p>
+<p> 2. Edit </p>
+<p>3. pip </p>
+</details>
+
+<details><summary> Source Server</summary>
+<br />
+<p>1. Download </p>
+<p>2. Save </p>
+
+</details>
+
 <details><summary> Step 3 : Run the experiment</summary>
 
 Now everything is ready. 
