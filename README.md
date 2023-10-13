@@ -5,17 +5,15 @@
 A benchmarking tool that allows users to transfer files while compressing or decompressing them in real-time based on their preferences. The tool enables users to set transfer limits and generates a CSV report that displays the time taken for each step of the transfer process.
 
 ## Physical Requirements
-- 1 machine containing the files to be transferred, called local server.
-- 1 machine where the files are going to be migrated.
-- 1 machine to deploy the Kafka cluster to save all logs.
+- Source Server : 1 machine containing the files to be transferred.
+- Remote Server : 1 machine where the files are going to be migrated.
+- Kafka Cluster : 1 machine to deploy the Kafka cluster to save all logs.
 
 
 ## Prerequisites
-
-- Docker Compose & Python must be installed on the local server that has the files to be migrated.
-- Docker Compose & Python must be installed on the Kafka machine.
-- Python must be installed on the local server.
-- SSH connection must be enabled on the remote server where the files will be migrated to.
+- Source server : Docker Compose must be installed on the machine.
+- Remote server : SSH must be enabled on the machine. 
+- Kafka Cluster : Docker Compose & Python must be installed on the machine.
 
 
  ## Get Started
