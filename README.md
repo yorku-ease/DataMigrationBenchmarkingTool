@@ -83,8 +83,7 @@ docker compose up
 <br />
 <p> 1. Change Directory ; use the 'cd' command to change your working directory to deployment/reporter/kafka cluster.</p>
 <p> 2. run   ```docker
-
-docker run --privileged --memory="0" --cpus="0" -v "$(pwd)"/data:/app/data -v "$(pwd)"/configs:/app/configs -v "$(pwd)"/output:/app/output fareshamouda/datamigrationbenchmarkingtool ```d ```
+```docker compose up ```
 <p>3. pip </p>
 </details>
 
