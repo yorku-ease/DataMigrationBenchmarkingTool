@@ -18,7 +18,8 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 
  ## Get Started
  
-### Configuration
+#### Configuration
+
 <details><summary> Step 1 : Setting Up Folders and Files</summary>
 
 ```bash
