@@ -38,7 +38,7 @@ A benchmarking tool that allows users to transfer files while compressing or dec
    <br />
    In this step, you'll edit the deployment/sourceserver/configs/config.ini file in the configs folder.
 
-### **[remoteServer]**  
+### **[targetServer]**  
 Here you save all SSH credentials of the remote server where to migrate the files
 
 &nbsp; &nbsp; - **host** : hostname / IP address of the server<br />
@@ -47,7 +47,7 @@ Here you save all SSH credentials of the remote server where to migrate the file
 &nbsp; &nbsp; - **dataFolder_path** : folder where files are going to be stored on the remote server <br /> 
 &nbsp; &nbsp;( path should always end with / )<br />
 
-### **[localServer]**  
+### **[sourceServer]**  
 The migration tool is going to be running on the localServer, But we need the password for this server  to run some sudo commands
 
 &nbsp; &nbsp; - **password** : password to run sudo command<br />
@@ -64,6 +64,10 @@ The migration tool is going to be running on the localServer, But we need the pa
 &nbsp; &nbsp; - **limits** = 1,10,1024 : limits should be in bytes 
 
 &nbsp; &nbsp; - **compressionTypes** = None,lz4,gzip : compression types can be None, lz4 and gzip
+
+&nbsp; &nbsp; - **streams** = 1,2,3 : the number of streams that files will be migrated over
+
+&nbsp; &nbsp; - **logginId** =  : Id used when logging everything about experiments, if kept empty a new id will be created
 
  #### Note : all combinations of the 3 above variables will be executed as different experiments.
 </p>
