@@ -78,6 +78,7 @@ The migration tool is going to be running on the localServer, But we need the pa
 <p> 2. Run docker compose up </p>
 <p> 3. Wait until kafka cluster is up and ready. </p>
 <p> 4. Run python consumer.py. </p>
+NOTE: if this is not the first time running the experiment, don't forget to delete logs saved in deployment/reporter/kafka cluster/output.log, if you don't want to see the logs of the old experiments in the final result.
 </details>
 
 <details><summary> Target Server</summary>
