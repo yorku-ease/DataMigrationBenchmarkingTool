@@ -76,8 +76,11 @@ The migration tool is going to be running on the localServer, But we need the pa
 ### II.Running the experiment 
 <details><summary> Kafka Cluster</summary>
 <br />
-<p> 1. Download .</p>
-<p> 2. Edit </p>
+<p> 1. Change Directory ; use the 'cd' command to change your working directory to deployment/reporter/kafka cluster.</p>
+<p> 2. run ```console
+foo@bar:~$ whoami
+foo
+``` </p>
 <p>3. pip </p>
 </details>
 
