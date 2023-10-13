@@ -20,13 +20,17 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 
 #### Configuration
 <details><summary> Kafka Cluster</summary>
-
+<br />
 1. Download deployment/reporter
+ <br />
 2. Edit deployment/reporter/kafka cluster/docker-compose.yml :
+ <br />
    In docker compose change these environment variables by changing 192.168.122.230 with your machine's public ip address.
     KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka1:19092,EXTERNAL://192.168.122.230:9092,DOCKER://host.docker.internal:29092
     KAFKA_JMX_HOSTNAME: 192.168.122.230
+ <br />
 3. pip install -r deployment/reporter/requirements.txt
+ <br />
 </details>
 
 <details><summary> Source Server</summary>
