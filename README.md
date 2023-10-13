@@ -17,8 +17,14 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 
 
  ## Get Started
- 
+
 #### Configuration
+<details><summary> Kafka Cluster</summary>
+
+
+</details>
+
+#### 2. Running the experiment 
 
 <details><summary> Step 1 : Setting Up Folders and Files</summary>
 
