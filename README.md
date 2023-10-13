@@ -80,28 +80,17 @@ The migration tool is going to be running on the localServer, But we need the pa
 <p> 4. Run python consumer.py. </p>
 </details>
 
+<details><summary> Target Server</summary>
+<br />
+<p> 1. Make sure SSH server is ready for connections.</p>
+<p> 2. Make sure there is enough space on the machine.</p>
+</details
+ 
 <details><summary> Source Server</summary>
 <br />
-<p>1. Download </p>
-<p>2. Save </p>
+<p> 1. Change Directory ; use the 'cd' command to change your working directory to deployment/sourceserver.</p>
+<p> 2. Run docker compose up </p>
 
 </details>
 
-<details><summary> Step 3 : Run the experiment</summary>
-
-Now everything is ready. 
-Go to the root directory of the project and launch this command 
-```docker
-
-docker run --privileged --memory="0" --cpus="0" -v "$(pwd)"/data:/app/data -v "$(pwd)"/configs:/app/configs -v "$(pwd)"/output:/app/output fareshamouda/datamigrationbenchmarkingtool
-
-```
-
-this code will run the container with unlimited resources amd launch the experiment.
-</details>
-
-<details><summary> Step 4 : Result</summary>
-
-The result of the experiment will be found in output folder in a CSV format file.
-
-</details>
+## Result
