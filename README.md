@@ -15,9 +15,9 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 - Remote server : SSH must be enabled on the machine. 
 - Kafka Cluster : Docker Compose & Python must be installed on the machine.
 
-
+### Header 3
  ## Get Started
- ### Configuration
+
 <details><summary> Step 1 : Setting Up Folders and Files</summary>
 
 ```bash
