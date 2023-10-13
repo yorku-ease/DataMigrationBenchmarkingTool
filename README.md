@@ -32,9 +32,9 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 
 <details><summary> Source Server</summary>
 
-1. Download deployment/sourceserver
-2. Save all files you want to migrate in deployment/sourceserver/data
-3. Choose the right configuration for the experiment.
+<p>1. Download deployment/sourceserver</p>
+<p>2. Save all files you want to migrate in deployment/sourceserver/data</p>
+<p>3. Choose the right configuration for the experiment.
    <br />
    In this step, you'll edit the deployment/sourceserver/configs/config.ini file in the configs folder.
 
@@ -66,8 +66,7 @@ The migration tool is going to be running on the localServer, But we need the pa
 &nbsp; &nbsp; - **compressionTypes** = None,lz4,gzip : compression types can be None, lz4 and gzip
 
  #### NOtE : all combinations of the 3 above variables will be executed as different experiments.
-
-
+</p>
 </details>
 
 #### Running the experiment 
