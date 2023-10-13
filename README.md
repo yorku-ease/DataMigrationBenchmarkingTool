@@ -6,13 +6,13 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 
 ## Physical Requirements
 - Source Server : 1 machine containing the files to be transferred.
-- Remote Server : 1 machine where the files are going to be migrated.
+- Target Server : 1 machine where the files are going to be migrated.
 - Kafka Cluster : 1 machine to deploy the Kafka cluster to save all logs.
 
 
 ## Prerequisites
 - Source server : Docker Compose must be installed on the machine.
-- Remote server : SSH must be enabled on the machine. 
+- Target server : SSH must be enabled on the machine. 
 - Kafka Cluster : Docker Compose & Python must be installed on the machine.
 
 
@@ -21,37 +21,21 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 #### Configuration
 <details><summary> Kafka Cluster</summary>
 
-
+1. Download deployment/reporter
+2. Edit deployment/reporter/kafka cluster/docker-compose.yml :
+   In docker compose change these environment variables by changing 192.168.122.230 with your machine's public ip address.
+    KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka1:19092,EXTERNAL://192.168.122.230:9092,DOCKER://host.docker.internal:29092
+    KAFKA_JMX_HOSTNAME: 192.168.122.230
+3. pip install -r deployment/reporter/requirements.txt
 </details>
 
-#### Running the experiment 
+<details><summary> Source Server</summary>
 
-<details><summary> Step 1 : Setting Up Folders and Files</summary>
-
-```bash
-.
-├── data/
-│   ├── file1.txt
-│   ├── file2.csv
-│   └── file3.jpg
-└── configs/
-    └── config.ini
-```
-
-  This is the structure you need to setup first.<br />
-  
-  **data**    : In this folder you need to put all the files you want to migrate.<br />
-  **configs** : All configs of the experiment must be here.<br />
-     &nbsp; &nbsp;**config.ini** :  The configuration file you'll need to edit in step 2.
-
-</details>
-
-
-<details><summary> Step 2 : Choosing the right configuration for the experiment</summary>
-<br />
-
-In this step, you'll edit the config.ini file in the configs folder.
-Copy the template of config.ini from configs/config.ini in this repository and change it according to your needs.
+1. Download deployment/sourceserver
+2. Save all files you want to migrate in deployment/sourceserver/data
+3. Choose the right configuration for the experiment.
+   <br />
+   In this step, you'll edit the deployment/sourceserver/configs/config.ini file in the configs folder.
 
 ### **[remoteServer]**  
 Here you save all SSH credentials of the remote server where to migrate the files
@@ -82,12 +66,10 @@ The migration tool is going to be running on the localServer, But we need the pa
 
  #### NOtE : all combinations of the 3 above variables will be executed as different experiments.
 
-### **[output]**
-
-&nbsp; &nbsp; - **path** = output/output.csv : path to the file to save the output of the experiments (CSV Format).This value should always be output/something.csv since as specified in step 1, the output of te experiment will be saved in the output folder.
 
 </details>
 
+#### Running the experiment 
 <details><summary> Step 3 : Run the experiment</summary>
 
 Now everything is ready. 
