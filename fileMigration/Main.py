@@ -19,17 +19,17 @@ config.read('configs/config1.ini')
 
 
 # Define the path of the folder containing data files 
-local_DataFolder_path = config.get('localServer', 'dataFolder_path')
+local_DataFolder_path = config.get('sourceServer', 'dataFolder_path')
 
 # Define the remote file path
-remote_DataFolder_path = config.get('remoteServer', 'dataFolder_path')
+remote_DataFolder_path = config.get('targetServer', 'dataFolder_path')
 
 
-localPassword  = config.get('localServer', 'password')
+localPassword  = config.get('sourceServer', 'password')
 
-remoteHostname = config.get('remoteServer', 'host')
-remoteUsername = config.get('remoteServer', 'username')
-remotePassword = config.get('remoteServer', 'password')
+remoteHostname = config.get('targetServer', 'host')
+remoteUsername = config.get('targetServer', 'username')
+remotePassword = config.get('targetServer', 'password')
 
 
 
