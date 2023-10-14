@@ -5,48 +5,37 @@
 A benchmarking tool that allows users to transfer files while compressing or decompressing them in real-time based on their preferences. The tool enables users to set transfer limits and generates a CSV report that displays the time taken for each step of the transfer process.
 
 ## Physical Requirements
-- 1 machine containing the files to be transferred, called local server.
-- 1 remote machine where the files are going to be migrated.
+- Source Server : 1 machine containing the files to be transferred.
+- Target Server : 1 machine where the files are going to be migrated.
+- Kafka Cluster : 1 machine to deploy the Kafka cluster to save all logs.
 
 
 ## Prerequisites
+- Source server : Docker Compose must be installed on the machine.
+- Target server : SSH must be enabled on the machine. 
+- Kafka Cluster : Docker Compose & Python must be installed on the machine.
 
-- Docker must be installed on the local server that has the files to be migrated.
-- SSH connection must be enabled on the remote server where the files will be migrated to.
-
-
- ## Get Started
-
-<details><summary> Step 1 : Setting Up Folders and Files</summary>
-
-```bash
-.
-├── data/
-│   ├── file1.txt
-│   ├── file2.csv
-│   └── file3.jpg
-├── output/
-└── configs/
-    └── config.ini
-```
-
-  This is the structure you need to setup first.<br />
-  
-  **data**    : In this folder you need to put all the files you want to migrate.<br />
-  **output**  : All outputs of the experiment will be found here.<br />
-  **configs** : All configs of the experiment must be here.<br />
-     &nbsp; &nbsp;**config.ini** :  The configuration file you'll need to edit in step 2.
-
+## Configuration
+<details><summary> Kafka Cluster</summary>
+<br />
+<p> 1. Download deployment/reporter.</p>
+<p> 2. Edit deployment/reporter/kafka cluster/docker-compose.yml :
+ <br/>  <br/>
+   In docker compose change these environment variables by changing 192.168.122.230 with your machine's public ip address.
+   KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka1:19092,EXTERNAL://192.168.122.230:9092,DOCKER://host.docker.internal:29092
+   KAFKA_JMX_HOSTNAME: 192.168.122.230.</p>
+<p>3. pip install -r deployment/reporter/requirements.txt </p>
 </details>
 
-
-<details><summary> Step 2 : Choosing the right configuration for the experiment</summary>
+<details><summary> Source Server</summary>
 <br />
+<p>1. Download deployment/sourceserver</p>
+<p>2. Save all files you want to migrate in deployment/sourceserver/data</p>
+<p>3. Choose the right configuration for the experiment.
+   <br />
+   In this step, you'll edit the deployment/sourceserver/configs/config.ini file in the configs folder.
 
-In this step, you'll edit the config.ini file in the configs folder.
-Copy the template of config.ini from configs/config.ini in this repository and change it according to your needs.
-
-### **[remoteServer]**  
+### **[targetServer]**  
 Here you save all SSH credentials of the remote server where to migrate the files
 
 &nbsp; &nbsp; - **host** : hostname / IP address of the server<br />
@@ -55,7 +44,7 @@ Here you save all SSH credentials of the remote server where to migrate the file
 &nbsp; &nbsp; - **dataFolder_path** : folder where files are going to be stored on the remote server <br /> 
 &nbsp; &nbsp;( path should always end with / )<br />
 
-### **[localServer]**  
+### **[sourceServer]**  
 The migration tool is going to be running on the localServer, But we need the password for this server  to run some sudo commands
 
 &nbsp; &nbsp; - **password** : password to run sudo command<br />
@@ -73,29 +62,40 @@ The migration tool is going to be running on the localServer, But we need the pa
 
 &nbsp; &nbsp; - **compressionTypes** = None,lz4,gzip : compression types can be None, lz4 and gzip
 
- #### NOtE : all combinations of the 3 above variables will be executed as different experiments.
+&nbsp; &nbsp; - **streams** = 1,2,3 : the number of streams that files will be migrated over
 
-### **[output]**
+&nbsp; &nbsp; - **logginId** =  : Id used when logging everything about experiments, if kept empty a new id will be created
 
-&nbsp; &nbsp; - **path** = output/output.csv : path to the file to save the output of the experiments (CSV Format).This value should always be output/something.csv since as specified in step 1, the output of te experiment will be saved in the output folder.
-
+ #### Note : all combinations of the 3 above variables will be executed as different experiments.
+</p>
 </details>
 
-<details><summary> Step 3 : Run the experiment</summary>
+## Running the experiment 
+<details><summary> Kafka Cluster</summary>
 
-Now everything is ready. 
-Go to the root directory of the project and launch this command 
-```docker
-
-docker run --privileged --memory="0" --cpus="0" -v "$(pwd)"/data:/app/data -v "$(pwd)"/configs:/app/configs -v "$(pwd)"/output:/app/output fareshamouda/datamigrationbenchmarkingtool
-
-```
-
-this code will run the container with unlimited resources amd launch the experiment.
+<br />
+<p> 1. Change Directory ; use the 'cd' command to change your working directory to deployment/reporter/kafka cluster.</p>
+<p> 2. Run docker compose up </p>
+<p> 3. Wait until kafka cluster is up and ready. </p>
+<p> 4. Run python consumer.py. </p>
+NOTE: if this is not the first time running the experiment, don't forget to delete logs saved in deployment/reporter/kafka cluster/output.log, if you don't want to see the logs of the old experiments in the final result.
 </details>
 
-<details><summary> Step 4 : Result</summary>
-
-The result of the experiment will be found in output folder in a CSV format file.
-
+<details><summary> Target Server</summary>
+<br />
+<p> 1. Make sure SSH server is ready for connections.</p>
+<p> 2. Make sure there is enough space on the machine.</p>
 </details>
+ 
+<details><summary> Source Server</summary>
+<br />
+<p> 1. Change Directory ; use the 'cd' command to change your working directory to deployment/sourceserver.</p>
+<p> 2. Run docker compose up </p>
+<p> Now you can follow the experiments running ; you can follow the output in the source server and you can also see the logs of  consumer.py in the Kafka cluster</p>
+</details>
+
+## Result
+<p> 1. Change Directory ; use the 'cd' command to change your working directory to deployment/reporter/logsParser. </p>
+<p> 4. Run python main.py </p>
+
+Now you'll find data.json and data.csv in logsParser folder containing all becnhmarks of the experiments.
