@@ -95,3 +95,7 @@ NOTE: if this is not the first time running the experiment, don't forget to dele
 </details>
 
 ## Result
+<p> 1. Change Directory ; use the 'cd' command to change your working directory to deployment/reporter/logsParser. </p>
+<p> 4. Run python main.py </p>
+
+Now you'll find data.json and data.csv in logsParser folder containing all becnhmarks of the experiments.
