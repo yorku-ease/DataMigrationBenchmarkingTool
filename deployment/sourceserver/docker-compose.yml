@@ -1,0 +1,10 @@
+version: '3'
+services:
+  test:
+    image: fareshamouda/datamigrationbenchmarkingtool:latest
+    privileged: true
+    mem_limit: 0
+    cpus: '0'
+    volumes:
+      - ./data:/app/data
+      - ./configs:/app/configs
