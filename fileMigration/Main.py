@@ -34,7 +34,6 @@ remotePassword = config.get('targetServer', 'password')
 
 
 
-
 #Total tranfer time must always be calculated here
 
 numberOfExperiments = config.getint('experiment', 'numberOfExperiments')
@@ -47,6 +46,8 @@ cloggingId = config.get('experiment', 'loggingId')
 compressionTypes = config.get('experiment', 'compressionTypes').split(',')
 
 streams = config.get('experiment', 'streams').split(',')
+
+
 
 experiments = []
 for stream in streams:

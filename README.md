@@ -51,6 +51,13 @@ The migration tool is going to be running on the localServer, But we need the pa
 &nbsp; &nbsp; - **dataFolder_path** : folder where files that are going to be migrated are savedb (path should always end with /).<br /> 
 &nbsp; &nbsp;This value should always be data/ since you're saving your files in that folder as specified in step 1.
   
+### **[KafkaCluster]**  
+The migration tool is going to be running on the localServer, But we need the password for this server  to run some sudo commands
+
+&nbsp; &nbsp; - **host** :  hostname / IP address of the machine hosting the kafka cluster<br />
+&nbsp; &nbsp; - **port** :  the port on which the kafka cluster is listening ; the value should be 9092<br /> 
+  
+
 ### **[experiment]** 
 
 

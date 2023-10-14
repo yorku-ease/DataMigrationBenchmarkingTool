@@ -1,5 +1,5 @@
 from confluent_kafka import Producer
-
+import configparser
 class KafkaLogger:
     _instance = None  # Private class variable to store the single instance
 
@@ -11,7 +11,13 @@ class KafkaLogger:
 
     def init_kafka_logger(self):
         # Define the Kafka broker(s) and topic name
-        self.bootstrap_servers = "192.168.122.143:9092"  # Replace with your Kafka broker address
+        config = configparser.ConfigParser()
+        config.comment_prefixes = (';',)  # Set the prefix character for comments
+        config.read('configs/config1.ini')
+
+        kafkaClusterIP = config.get('KafkaCluster', 'host')
+        kafkaClusterPort = config.get('KafkaCluster', 'port')
+        self.bootstrap_servers = f"{kafkaClusterIP}:{kafkaClusterPort}"  # Replace with your Kafka broker address
         self.topic_name = "my_topic"  # Replace with the Kafka topic you want to produce to
 
         # Create a Kafka producer instance

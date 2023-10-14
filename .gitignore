@@ -1,5 +1,6 @@
 **/__pycache__/
 fileMigration/data
 fileMigration/configs/config1.ini
+deployment/sourceserver/configs/config1.ini
 databaseMigration/sourcedatadir/
 databaseMigration/targetdatadir/
