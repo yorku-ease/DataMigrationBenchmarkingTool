@@ -15,7 +15,7 @@ timeBeforeExperiment = time.time()
 
 config = configparser.ConfigParser()
 config.comment_prefixes = (';',)  # Set the prefix character for comments
-config.read('configs/config1.ini')
+config.read('configs/config.ini')
 
 
 # Define the path of the folder containing data files 
