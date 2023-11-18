@@ -1,7 +1,7 @@
 import os,time,threading
-from classes.KafkaLogger import KafkaLogger
-from classes.migrationEngine.defaultEngine.compression.GzipCompressor import GzipCompressor
-from classes.migrationEngine.defaultEngine.compression.Lz4Compressor import Lz4Compressor
+from KafkaLogger import KafkaLogger
+from compression.GzipCompressor import GzipCompressor
+from compression.Lz4Compressor import Lz4Compressor
 
 
 class FilesManager:
@@ -76,12 +76,14 @@ class FilesManager:
         print(f'{transferred} bytes of the original file migrated ({percent:.2f}%)')
     
     @staticmethod
-    def transferfile(sftp_client, localFilePath, remoteFilePath, compression, limit,ssh,loggingId):
+    def transferfile(sftp_client, localFilePath, remoteFilePath, compression, limit,ssh,loggingId,streamNumber):
         logger = KafkaLogger()
         compressionTime = 0
         dataTransferTime = 0
         readingFileTime = 0
         with open(localFilePath, "rb") as f:
+            logger.logMigrationEngine(loggingId,f"type : info, ReadingFile : started, Timestamp : {time.time()}, stream : {streamNumber}")
+
             timeBeforeReadingFile = time.time()
 
             chunk=f.read(limit)
@@ -107,24 +109,32 @@ class FilesManager:
 
             timeAfterReadingFile = time.time()
             readingFileTime += timeAfterReadingFile - timeBeforeReadingFile
+            logger.logMigrationEngine(loggingId,f"type : info, ReadingFile : completed, Timestamp : {time.time()}, stream : {streamNumber}")
 
+            i = 0 
             while (chunk):
+                i += 1 
                 if compression == 'None':
                     compressedChunk = chunk
                 else:
+                    logger.logMigrationEngine(loggingId,f"type : info, FileChunk{i} : started, Timestamp : {time.time()}, stream : {streamNumber}")
                     timeBeforeCompression = time.time()
                     compressedChunk = compressor.compress(chunk)
                     timeAfterCompression = time.time()
                     compressionTime += timeAfterCompression - timeBeforeCompression
+                    logger.logMigrationEngine(loggingId,f"type : info, FileChunk{i} : completed, Timestamp : {time.time()}, stream : {streamNumber}")
+
 
                 
                 sizeOnTargetMachine += len(compressedChunk)
+                logger.logMigrationEngine(loggingId,f"type : info, FileChunk{i}Transfer : started, Timestamp : {time.time()}, stream : {streamNumber}")
                 with sftp_client.open(remoteFilePath, 'ab') as outfile:
                     outfile.set_pipelined()
                     timeBeforeTransfer = time.time()
                     outfile.write(compressedChunk)
                     timeAfterTransfer = time.time()
                     dataTransferTime += timeAfterTransfer - timeBeforeTransfer
+                logger.logMigrationEngine(loggingId,f"type : info, FileChunk{i}Transfer : completed, Timestamp : {time.time()}, stream : {streamNumber}")
 
 
                 transferred += len(chunk)
@@ -136,12 +146,8 @@ class FilesManager:
             print(f'{sizeOnTargetMachine} bytes is the size of the file on the target Machine ')
             print(f'Compression took {compressionTime} seconds')
             print(f'Data Transfer took {dataTransferTime} seconds')
-            data = {}
-
-            data['readingFileTime'] = readingFileTime
-            data['dataTransferTime'] = dataTransferTime
-            data['compressionTime'] = compressionTime
-            data['sizeOnTargetMachine'] = sizeOnTargetMachine
-            data['sizeOnLocalMachine'] = sizeOnLocalMachine
-
-        return data
+            logger.logPerformanceBenchmark(loggingId,f"sizeOnTargetMachine : {sizeOnTargetMachine}, stream : {streamNumber}")
+            logger.logPerformanceBenchmark(loggingId,f"sizeOnLocalMachine : {sizeOnTargetMachine}, stream : {streamNumber}")
+            logger.logPerformanceBenchmark(loggingId,f"compressionTime : {compressionTime}, stream : {streamNumber}")
+            logger.logPerformanceBenchmark(loggingId,f"dataTransferTime : {dataTransferTime}, stream : {streamNumber}")        
+            logger.logPerformanceBenchmark(loggingId,f"readingFileTime : {readingFileTime}, stream : {streamNumber}")   

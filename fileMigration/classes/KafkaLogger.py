@@ -13,13 +13,13 @@ class KafkaLogger:
         # Define the Kafka broker(s) and topic name
         config = configparser.ConfigParser()
         config.comment_prefixes = (';',)  # Set the prefix character for comments
-        config.read('configs/config1.ini')
+        config.read('configs/config.ini')
 
         kafkaClusterIP = config.get('KafkaCluster', 'host')
         kafkaClusterPort = config.get('KafkaCluster', 'port')
-        self.bootstrap_servers = f"{kafkaClusterIP}:{kafkaClusterPort}"  # Replace with your Kafka broker address
-        self.topic_name = "my_topic"  # Replace with the Kafka topic you want to produce to
-
+        self.bootstrap_servers = f"{kafkaClusterIP}:{kafkaClusterPort}"  
+        self.performanceBenchmarkTopic = config.get('KafkaCluster', 'performanceBenchmarkTopic')  
+        self.frameworkTopicName = config.get('KafkaCluster', 'frameworkTopicName')
         # Create a Kafka producer instance
         self.producer = Producer({
             'bootstrap.servers': self.bootstrap_servers,
@@ -27,8 +27,15 @@ class KafkaLogger:
             'delivery.timeout.ms': 10000  # Set a delivery timeout (optional)
         })
 
-    def log(self, id, message_value):
-        self.producer.produce(topic=self.topic_name, key=id, value=message_value)
+    def log(self,topic_name, id, message_value):
+        self.producer.produce(topic=topic_name, key=id, value=message_value)
+    
+    def logPerformanceBenchmark(self,id, message_value):
+        self.producer.produce(topic=self.performanceBenchmarkTopic, key=id, value=message_value)
+        
+
+    def logFramework(self,id, message_value):
+        self.producer.produce(topic=self.frameworkTopicName, key=id, value=message_value)
 
     def terminate_kafka_logger(self):
         # Wait for any outstanding messages to be delivered and delivery reports to be received

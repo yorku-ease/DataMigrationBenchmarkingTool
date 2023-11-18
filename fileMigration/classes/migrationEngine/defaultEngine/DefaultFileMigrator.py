@@ -1,12 +1,11 @@
-from classes.migrationEngine.FileMigrator import FileMigrator 
-from classes.migrationEngine.defaultEngine.ConnectionManager import ConnectionManager 
-from classes.migrationEngine.defaultEngine.filesmanager.FilesManager import FilesManager 
+from ConnectionManager import ConnectionManager 
+from filesmanager.FilesManager import FilesManager 
 import paramiko,subprocess,time,threading
 import concurrent.futures
 
 
 
-class DefaultFileMigrator(FileMigrator):
+class DefaultFileMigrator():
 
     def __init__(self,remoteHostname, remoteUsername, remotePassword,localPassword,loggingId,logger = None):
         self.localPassword = localPassword
@@ -29,44 +28,8 @@ class DefaultFileMigrator(FileMigrator):
         return connectionManager
     
 
-    def clearRamCacheSwap(self):
-
-        connectionManager = self.connect()
-        ssh = connectionManager.get_SSH()
-        sftp = connectionManager.get_SFTP()
-
-        
-        # Change the current working directory
-        #os.chdir(working_directory)
-        # Copy the file to the remote machine
-        #sftp.put("clearcache.sh", "clearcache.sh")
-
-        
-        #clear RAM Cache as well as Swap Space at local machine
-        result = subprocess.run([f"echo {self.localPassword} | ./clearcache.sh"], stdout=subprocess.PIPE, shell=True)
-        # Print the output of the command
-        print(result.stdout.decode('utf-8'))
-
-        #output = subprocess.check_output([f"echo {self.localPassword} | ./clearcache.sh"],shell=True)
-        #print(output.decode("utf-8"))
-        print("On local machine")
-        #clear RAM Cache as well as Swap Space at remote machine
-
-        stdin, stdout, stderr = ssh.exec_command(f"echo {self.remotePassword} | ./clearcache.sh")
-        output = stdout.read().decode("utf-8")
-
-        # Print output 
-        print(output)
-        print("On remote machine")
-        connectionManager.close()
 
     def migrate(self,local_file_path,remote_file_path,compressionType,limit,streams):
-
-        timeBeforeClear = time.time()
-        self.clearRamCacheSwap()
-        timeAfterClear = time.time()
-        TotalClearTime = timeAfterClear - timeBeforeClear
-        self.logger.log(self.loggingId,f"TotalClearTime : {TotalClearTime}")
         
         if streams == 1 :
             data = self.migrateOneStream(local_file_path,remote_file_path,compressionType,limit)
@@ -76,31 +39,29 @@ class DefaultFileMigrator(FileMigrator):
             
 
     def migrateOneStream(self,local_file_path,remote_file_path,compressionType,limit):
-        
-
-        connectionManager = self.connect()
-        ssh = connectionManager.get_SSH()
-        sftp = connectionManager.get_SFTP()
-
-        data = FilesManager.transferfile(sftp,local_file_path,remote_file_path,compressionType,limit,ssh,self.loggingId)
         threadName = threading.current_thread().name
         if threadName == "MainThread":
             streamNumber = None
         else:
             streamNumber = int(threadName.split("_")[1]) + 1
+
+        self.logger.logMigrationEngine(self.loggingId,f"type : info, migration : started, Timestamp : {time.time()}, stream : {streamNumber}")
+        connectionManager = self.connect()
+        ssh = connectionManager.get_SSH()
+        sftp = connectionManager.get_SFTP()
+
+
+        FilesManager.transferfile(sftp,local_file_path,remote_file_path,compressionType,limit,ssh,self.loggingId,streamNumber)
+
         connectionManager.close()
-        self.logger.log(self.loggingId,f"sizeOnTargetMachine : {data['sizeOnTargetMachine']}, stream : {streamNumber}")
-        self.logger.log(self.loggingId,f"sizeOnLocalMachine : {data['sizeOnTargetMachine']}, stream : {streamNumber}")
-        self.logger.log(self.loggingId,f"compressionTime : {data['compressionTime']}, stream : {streamNumber}")
-        self.logger.log(self.loggingId,f"dataTransferTime : {data['dataTransferTime']}, stream : {streamNumber}")        
-        self.logger.log(self.loggingId,f"readingFileTime : {data['readingFileTime']}, stream : {streamNumber}")   
-        return data
+        self.logger.logMigrationEngine(self.loggingId,f"type : info, migration : completed, Timestamp : {time.time()}, stream : {streamNumber}")
+
     
     def migrateMultipleStreams(self,local_file_path,remote_file_path,compressionType,limit,streams):
-        
-        filesmanager = FilesManager 
-
+        filesmanager = FilesManager
+        self.logger.logMigrationEngine(self.loggingId,f"type : info, fileSplitting : started, Timestamp : {time.time()}")
         filesmanager.splitFile(local_file_path,streams)
+        self.logger.logMigrationEngine(self.loggingId,f"type : info, fileSplitting : completed, Timestamp : {time.time()}")
         local_chunks_paths,remote_chunks_paths = filesmanager.getChunksPaths(local_file_path,remote_file_path,streams)
         max_threads = streams
 

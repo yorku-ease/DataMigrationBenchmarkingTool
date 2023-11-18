@@ -1,4 +1,4 @@
-from classes.migrationEngine.defaultEngine.compression.Compressor import Compressor
+from compression.Compressor import Compressor
 import gzip
 class GzipCompressor(Compressor):
 

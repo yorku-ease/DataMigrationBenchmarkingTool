@@ -50,25 +50,24 @@ streams = config.get('experiment', 'streams').split(',')
 
 
 experiments = []
-for stream in streams:
-    stream = int(stream)
-    for limit in limits:
-        limit = int(limit)
-        for file in files:
-            local_file_path = local_DataFolder_path + file
-            remote_file_path = f"{remote_DataFolder_path}{file}"
-            for compressionType in compressionTypes:
-                repetitions = []
-                for i in range(0,numberOfExperiments):
-                    if not cloggingId:
-                        loggingId = "-".join([str(i+1),file,str(limit),str(stream),compressionType])
-                    else:
-                        loggingId = cloggingId
-                    experiment = Experiment(local_file_path, remote_file_path, compressionType, limit, stream, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId)                    
-                    timeBeforeTransfer = time.time()
-                    experiment.runExperiment()
-                    timeAfterTransfer = time.time()
-                    TotaltransferTime = timeAfterTransfer - timeBeforeTransfer
-                    logger.log(loggingId,f"TotaltransferTime : {TotaltransferTime}")
-
-logger.terminate_kafka_logger()
+try:
+    for stream in streams:
+        stream = int(stream)
+        for limit in limits:
+            limit = int(limit)
+            for file in files:
+                for compressionType in compressionTypes:
+                    repetitions = []
+                    for i in range(0,numberOfExperiments):
+                        if not cloggingId:
+                            loggingId = "-".join([str(i+1),file,str(time.time()),str(limit),str(stream),compressionType])
+                        else:
+                            loggingId = cloggingId
+                        experiment = Experiment(file, compressionType, limit, stream, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId)                    
+                        timeBeforeTransfer = time.time()
+                        experiment.runExperiment()
+                        timeAfterTransfer = time.time()
+                        TotaltransferTime = timeAfterTransfer - timeBeforeTransfer
+                        logger.logPerformanceBenchmark(loggingId,f"TotaltransferTime : {TotaltransferTime}")
+finally:
+    logger.terminate_kafka_logger()
