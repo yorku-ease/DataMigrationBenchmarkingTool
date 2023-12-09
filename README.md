@@ -27,6 +27,26 @@ While it's possible to deploy everything on one machine, it's recommended to use
 In our Git repository, you'll find a dedicated deployment folder. Inside this folder, there are distinct subfolders—databases, controller, and reporter—each designed for download onto their respective machines.
 
 ## Configuration
+In this section, we’ll configure each component of the framework deployed on each machine, assuming you’ve already downloaded the corresponding folders onto each machine.
+
+<details><summary> Databases</summary>
+<br />
+For this machine, the only necessary configuration is to access the file `prometheus.yml` and modify the following sections by replacing 'localhost' with the IP address of the Controller & Migration Engine machine:
+
+```yaml
+- job_name: 'node-exporter'
+  static_configs:
+    - targets: ['<Controller-IP>:9100']
+
+- job_name: 'cAdvisorr'
+  static_configs:
+    - targets: ['<Controller-IP>:9100']
+```
+Replace <Controller-IP> with the actual IP address of your Controller & Migration Engine machine. 
+
+</details>
+
+
 <details><summary> Kafka Cluster</summary>
 <br />
 <p> 1. Download deployment/reporter.</p>
