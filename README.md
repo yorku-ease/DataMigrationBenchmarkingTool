@@ -135,8 +135,7 @@ In this process, we will proceed step by step, emphasizing the importance of exe
 Let's begin systematically:
 
 <details><summary> Databases</summary>
-
-   - Start by initiating the databases.
+Start by initiating the databases.
    - On the Databases machine, change the current working directory to the databases folder.
    - Run the following command:
      ```bash
@@ -147,7 +146,7 @@ Let's begin systematically:
 </details>
 
 <details><summary> Kafka Cluster</summary>
-   - Next, launch the Kafka cluster.
+  Next, launch the Kafka cluster.
    - On the Kafka cluster machine, change the current working directory to the reporter/kafka cluster folder.
    - Run the following command:
      ```bash
@@ -157,7 +156,7 @@ Let's begin systematically:
 </details>
  
 <details><summary> Kafka Consumer</summary>
-   - After ensuring that all databases are up and ready, follow up by activating the Kafka cluster's consumer.
+  After ensuring that all databases are up and ready, follow up by activating the Kafka cluster's consumer.
    - On the Kafka cluster machine, change the current working directory to the reporter/kafka cluster folder.
    - Run the following command:
      ```bash
@@ -165,7 +164,8 @@ Let's begin systematically:
      ```
 </details>
 <details><summary> Controller</summary>
-   - Finally, initiate the Controller, which will orchestrate and commence all experiments.
+  
+  Finally, initiate the Controller, which will orchestrate and commence all experiments.
    - On the controller machine, change the current working directory to the controller folder.
    - Run the following command:
      ```bash
@@ -177,7 +177,7 @@ Let's begin systematically:
 
 </details>
 <details><summary> Parser</summary>
-   - Upon completion of the experiment, indicated by the termination of the Controller container, it is essential to navigate to the Kafka cluster machine.
+  Upon completion of the experiment, indicated by the termination of the Controller container, it is essential to navigate to the Kafka cluster machine.
    - Subsequently, the parser needs to be executed. Throughout the experiment, resource consumption logs were promptly stored in Prometheus. However, the logs pertaining to performance benchmarks remain localized on the Kafka machine.
    - Running the parser becomes imperative at this juncture. Its role is twofold: to render the performance benchmark logs human-readable and to facilitate their exportation into `JSON` and `CSV` files. Furthermore, the parser ensures the archival of these logs in the `MongoDB` database for comprehensive analysis and reference.
    - On the Kafka cluster machine, change the current working directory to the reporter/logsParser folder.
