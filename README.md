@@ -69,54 +69,60 @@ For this machine, we have to configure two subfolders.
    - `password = example`: This is the default password used to run the NoSQL MongoDB. If you want to change it, you also have to change `MONGO_INITDB_ROOT_PASSWORD` in `docker-compose.yml` on the databases machine.
 </details>
 
-<details><summary> Source Server</summary>
+<details><summary> Controller</summary>
 <br />
-<p>1. Download deployment/sourceserver</p>
-<p>2. Save all files you want to migrate in deployment/sourceserver/data</p>
-<p>3. Choose the right configuration for the experiment.
-   <br />
-   In this step, you'll edit the deployment/sourceserver/configs/config.ini file in the configs folder.
 
-### **[targetServer]**  
-Here you save all SSH credentials of the remote server where to migrate the files
+### Controller:
+#### Migration Environment Configuration
+The Controller utilizes a pivotal configuration file named "config.ini," crucial for providing essential settings to the Migration Engine. This configuration holds paramount importance, guiding users in the dockerization of their migration engine.
 
-&nbsp; &nbsp; - **host** : hostname / IP address of the server<br />
-&nbsp; &nbsp; - **username** : username of the server<br />
-&nbsp; &nbsp; - **password** : password of the server<br />
-&nbsp; &nbsp; - **dataFolder_path** : folder where files are going to be stored on the remote server <br /> 
-&nbsp; &nbsp;( path should always end with / )<br />
+The "config.ini" file consists of two integral parts:
 
-### **[sourceServer]**  
-The migration tool is going to be running on the localServer, But we need the password for this server  to run some sudo commands
-
-&nbsp; &nbsp; - **password** : password to run sudo command<br />
-&nbsp; &nbsp; - **dataFolder_path** : folder where files that are going to be migrated are savedb (path should always end with /).<br /> 
-&nbsp; &nbsp;This value should always be data/ since you're saving your files in that folder as specified in step 1.
+1. **First Part:**
+   - This section is transmitted unaltered to the Migration Engine. Its content remains intact when creating `config.ini` for the migration engine.
   
-### **[KafkaCluster]**  
-The migration tool is going to be running on the localServer, But we need the password for this server  to run some sudo commands
+   - **[[targetServer]]**
+     - In this section, the user can put any information needed to connect to the target Server.
+       - **host**
+       - **user**
+       - **password**
+       
+   - **[[sourceServer]]**
+     - In this section, the user can put any information needed to connect to the source Server.
+       - **host**
+       - **user**
+       - **password**
+       
+   - **[[KafkaCluster]]**
+     - In this section, the user should only change the value of the IP address of the reporter machine. The other variables should remain with the default values.
+       - **host**=192.168.122.143; this should be changed with the reporter IP
+       - **port**=9092
+       - **performanceBenchmarkTopic**=performanceBenchmark
+       - **frameworkTopicName**=framework
+       
+   - **[[migrationEnvironment]]**
+     - In this section, the user should choose to put information needed for the migration.
+       - **migrationEngineDockerImage**: the name of the docker image the user created for the migration engine.
+       - **loggingId**: In case the user needs all the logs and information collected during the monitoring to be assigned to a certain Id; this can be left empty.
+       - **numberofexperiments**: how many times each experiment is repeated with the same configuration (for the accuracy of the results).
 
-&nbsp; &nbsp; - **host** :  hostname / IP address of the machine hosting the kafka cluster<br />
-&nbsp; &nbsp; - **port** :  the port on which the kafka cluster is listening ; the value should be 9092<br /> 
-  
+2. **Second Part:**
+   - The second part encompasses all conceivable parameters for the migration scenarios users wish to evaluate. Each parameter combination is systematically chosen by the Controller, which then conveys these specific parameters to the Migration Engine one at a time.
+   
+   - **[[experiment]]**
+     - In this section, this is an example for parameters for a file migration engine, the user can put parameters according to his engine.
+       - **file** = file1.csv, file2.txt, file3.java
+       - **limit** = 1048576, 1048576
+       - **compressiontype** = None, gzip, lz4
+       - **stream** = 3, 2, 1
+       
+   The Controller is responsible for examining all possible combinations when generating the configuration file for the Migration Engine. As an illustration of the second part of the configuration file, consider the following example:
+   - **[[experiment]]**
+     - **file** = file1.csv
+     - **limit** = 1048576
+     - **compressiontype** = None
+     - **stream** = 3
 
-### **[experiment]** 
-
-
-&nbsp; &nbsp; - **numberOfExperiments** : how many times each experiment is repeated with the same configuration ( for the accuracy of the results ).
-
-&nbsp; &nbsp; - **files** = file1,file2,file3 :  only provide the names of the files. These files must be stored in the data folder specified above.
-
-&nbsp; &nbsp; - **limits** = 1,10,1024 : limits should be in bytes 
-
-&nbsp; &nbsp; - **compressionTypes** = None,lz4,gzip : compression types can be None, lz4 and gzip
-
-&nbsp; &nbsp; - **streams** = 1,2,3 : the number of streams that files will be migrated over
-
-&nbsp; &nbsp; - **logginId** =  : Id used when logging everything about experiments, if kept empty a new id will be created
-
- #### Note : all combinations of the 3 above variables will be executed as different experiments.
-</p>
 </details>
 
 ## Running the experiment 
