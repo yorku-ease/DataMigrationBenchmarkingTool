@@ -191,8 +191,8 @@ Start by initiating the databases.
      python main.py
      ```
 </details>
-## Result
-<p> 1. Change Directory ; use the 'cd' command to change your working directory to deployment/reporter/logsParser. </p>
-<p> 4. Run python main.py </p>
 
-Now you'll find data.json and data.csv in logsParser folder containing all becnhmarks of the experiments.
+## Result
+
+After following all the steps we talked about earlier, you've got a bunch of data from your experiments. Every performance benchmark, including migration time per experiment and, if there's any, compression time, is now neatly stored in the MongoDB database. At the same time, PrometheusDB has all the nitty-gritty details about resource consumption, and you can easily visualize it using the Grafana Dashboard. This mix ensures you've got all the important info at your fingertips for a deep dive into your experiments.
+
