@@ -22,6 +22,10 @@ For easy setup and deployment, all components of the framework are packaged as D
 - Databases: Docker
 While it's possible to deploy everything on one machine, it's recommended to use separate machines, preferably in different locations. This setup adds a touch of realism to the migration process, accounting for potential network delays in the evaluation.
 
+## Setting up the environment
+
+In our Git repository, you'll find a dedicated deployment folder. Inside this folder, there are distinct subfolders—databases, controller, and reporter—each designed for download onto their respective machines.
+
 ## Configuration
 <details><summary> Kafka Cluster</summary>
 <br />
