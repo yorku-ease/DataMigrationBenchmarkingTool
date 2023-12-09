@@ -5,6 +5,9 @@
 A benchmarking tool that allows users to transfer files while compressing or decompressing them in real-time based on their preferences. The tool enables users to set transfer limits and generates a CSV report that displays the time taken for each step of the transfer process.
 If you want to extend our tool follow this [manual](EXTEND.md)
 
+If you encounter any issues or have questions while using our system, please don't hesitate to submit an issue on our GitHub repository.  Your contributions are crucial in improving the user experience.
+
+
 ## Physical Requirements
 - Source Machine: Where the data journey begins. The Migration Engine grabs data from here to send it off to the target machine.
 - Target Machine: The final stop for migrated data. This is where data ends up after the Migration Engine does its job, finding its new home.
