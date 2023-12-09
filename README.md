@@ -14,9 +14,13 @@ If you want to extend our tool follow this [manual](EXTEND.md)
 
 
 ## Prerequisites
-- Source server : Docker Compose must be installed on the machine.
-- Target server : SSH must be enabled on the machine. 
-- Kafka Cluster : Docker Compose & Python must be installed on the machine.
+For easy setup and deployment, all components of the framework are packaged as Docker containers. To run the tool, you'll need five machines, each with specific dependencies:
+- Source Server
+- Target Server
+- Controller & Migration Engine: Docker
+- Kafka Cluster: Docker, Python
+- Databases: Docker
+While it's possible to deploy everything on one machine, it's recommended to use separate machines, preferably in different locations. This setup adds a touch of realism to the migration process, accounting for potential network delays in the evaluation.
 
 ## Configuration
 <details><summary> Kafka Cluster</summary>
