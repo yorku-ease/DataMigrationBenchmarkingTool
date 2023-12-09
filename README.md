@@ -6,6 +6,7 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 If you want to extend our tool follow this [manual](EXTEND.md)
 
 ## Issues
+
 If you encounter any issues or have questions while using our system, please don't hesitate to submit an issue on our GitHub repository.  Your contributions are crucial in improving the user experience.
 
 
