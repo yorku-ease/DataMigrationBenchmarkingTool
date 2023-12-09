@@ -158,7 +158,7 @@ Start by initiating the databases.
 </details>
  
 <details><summary> Kafka Consumer</summary>
-  After ensuring that all databases are up and ready, follow up by activating the Kafka cluster's consumer.
+  After ensuring that Kafka is up and ready, follow up by activating the Kafka cluster's consumer.
   
    - On the Kafka cluster machine, change the current working directory to the reporter/kafka cluster folder.
    - Run the following command:
