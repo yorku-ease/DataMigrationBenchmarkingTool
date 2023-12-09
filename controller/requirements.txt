@@ -1,4 +1,4 @@
-paramiko
 lz4
 confluent_kafka
 docker
+paramiko

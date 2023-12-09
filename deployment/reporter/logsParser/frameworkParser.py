@@ -17,5 +17,5 @@ class FrameworkParser(Parser):
         self.collection_name = config.get('mongo', 'frameworklogsCollection_name')
         # Define a regular expression pattern to extract the key and key-value pairs
         self.log_pattern = r'Key=(.*?), Value=(.*?)$'
-        self.header = ['Experiment Number','file','Experiment startTime','limit','stream','compressionType' ,'logType','operation','statusOfOperation','timestamp']
+        self.header = ['Experiment Number','file','limit','compressionType','stream','Experiment startTime','logType','operation','statusOfOperation','timestamp']
 

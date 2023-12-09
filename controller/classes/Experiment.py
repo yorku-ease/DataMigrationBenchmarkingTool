@@ -9,15 +9,13 @@ class Experiment(Thread):
 
     output : dict
 
-    def __init__(self, file, compressionType, limit,streams, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId):
-        self.file = file
-        self.compressionType = compressionType
-        self.limit = limit
+    def __init__(self, experimentOptions, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId):
+        self.experimentOptions = experimentOptions
+ 
         self.remoteHostname = remoteHostname
         self.remoteUsername = remoteUsername
         self.remotePassword = remotePassword
         self.localPassword = localPassword
-        self.streams = streams
         self.loggingId = loggingId
         self.logger = KafkaLogger()
 
@@ -66,17 +64,6 @@ class Experiment(Thread):
         connectionManager.close()
         self.logger.logFramework(self.loggingId,f"type : info, clearRamCacheSwap : completed, Timestamp : {time.time()}")
 
-   
-    def getCompressionType(self):
-        
-        return self.compressionType
-   
-    def getLimit(self):
-
-        return self.limit
-    def getStreamsNumber(self):
-
-        return self.streams
                         
     def runExperiment(self):
 
@@ -88,7 +75,7 @@ class Experiment(Thread):
             self.logger.logPerformanceBenchmark(self.loggingId,f"TotalClearTime : {TotalClearTime}")
             self.logger.logFramework(self.loggingId,f"type : info, Experiment : started, Timestamp : {time.time()}")
             # Log error information
-            self.migrate(self.file,self.compressionType,self.limit,self.streams,self.loggingId)
+            self.migrate()
             self.logger.logFramework(self.loggingId,f"type : info, Experiment : completed, Timestamp : {time.time()}")
         except Exception as e:
             timestamp = time.time()
@@ -101,8 +88,8 @@ class Experiment(Thread):
             print(message)
             print(stack_trace)
 
-    def migrate(self,file,compressionType,limit,streams,loggingId):
-
+    def migrate(self):
+        
         try:
 
             FOLDERS_PATH = os.environ.get("FOLDERS_PATH")
@@ -117,16 +104,11 @@ class Experiment(Thread):
             # Set the prefix character for comments
             config.read(f'configs/config.ini')
 
-
-            config.set('experiment', 'file', file)
-            config.set('experiment', 'limit', limit)
-            config.set('experiment', 'compressiontype', compressionType)
-            config.set('experiment', 'streams', streams)
-            config.set('experiment', 'loggingId', loggingId)
-            del config['experiment']['numberofexperiments']
-            del config['experiment']['files']
-            del config['experiment']['limits']
-            del config['experiment']['compressiontypes']
+            for key in self.experimentOptions:
+                config.set('experiment', key, self.experimentOptions[key])
+    
+            config.set('migrationEnvironment', 'loggingId', self.loggingId)
+            
 
 
             # Writing our configuration file to 'example.ini'
@@ -134,7 +116,7 @@ class Experiment(Thread):
                 config.write(configfile)
 
             client = docker.from_env()
-            image_name = config.get('experiment', 'migrationEngineDockerImage')
+            image_name = config.get('migrationEnvironment', 'migrationEngineDockerImage')
             container_name = "MigrationEngine"
 
             volumes = {
@@ -142,7 +124,7 @@ class Experiment(Thread):
                 f"{FOLDERS_PATH}/configs": {"bind": "/app/configs", "mode": "rw"},
             }
             labels = {
-            'loggingId': loggingId,
+            'loggingId': self.loggingId,
             }
             try:
                 container = client.containers.get(container_name)
@@ -157,7 +139,11 @@ class Experiment(Thread):
                 container = client.containers.get(container_name)
                 container.restart()
             else:'''
-
+            ports = {
+    '50050': 50050,
+    '13080': 13080,
+    '14080': 14080
+}
             #Run the migration engine in a docker container as a sibling to the container running this code.
             container = client.containers.run(
                 privileged = True,
@@ -166,7 +152,9 @@ class Experiment(Thread):
                 image=image_name,
                 name=container_name,
                 labels=labels,
-                detach= True 
+                detach= True,
+                ports=ports  # Add the 'ports' parameter
+
                 #cpuset_cpus = "0",
             )
             log_generator = container.logs(stream=True)

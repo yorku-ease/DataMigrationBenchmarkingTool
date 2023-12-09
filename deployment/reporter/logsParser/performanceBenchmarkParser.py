@@ -18,7 +18,7 @@ class PerformanceBenchmarkParser(Parser):
 
         # Define a regular expression pattern to extract the key and key-value pairs
         self.log_pattern = r'Key=(.*?), Value=(.*?)$'
-        self.header = ['file','Experiment startTime','limit','stream','compressionType' ,'Experiment Number']
+        self.header = ['Experiment Number','file','limit','compressionType','stream','Experiment startTime']
         self.streamMetrics = ['sizeOnTargetMachine','sizeOnLocalMachine','compressionTime','dataTransferTime','readingFileTime']
         self.nonStreamMetrics = ['TotalBackupTime','TotaltransferTime','TotalMigrationTime','TotalValidationTime','TotalClearTime']
 
@@ -106,7 +106,7 @@ class PerformanceBenchmarkParser(Parser):
             for ikey in self.data[key].keys():
                 try:
                     row = list(p)
-                    row.append(ikey)
+                    row.insert(0,ikey)
                     for nSMetric in self.nonStreamMetrics:
                         row.append(self.data[key][ikey].get(nSMetric,0))
                     if "None" in self.data[key][ikey].keys():

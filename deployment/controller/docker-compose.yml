@@ -19,7 +19,7 @@ services:
     privileged: true
     devices: 
       - "/dev/kmsg"
-  migrationFramework:
+  controller:
     image: fareshamouda/datamigrationbenchmarkingtool:latest
     privileged: true
     environment:
