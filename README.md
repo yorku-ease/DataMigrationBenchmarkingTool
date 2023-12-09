@@ -136,6 +136,7 @@ Let's begin systematically:
 
 <details><summary> Databases</summary>
 Start by initiating the databases.
+  
    - On the Databases machine, change the current working directory to the databases folder.
    - Run the following command:
      ```bash
