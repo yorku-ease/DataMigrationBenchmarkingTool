@@ -6,10 +6,6 @@ A benchmarking tool that allows users to transfer files while compressing or dec
 If you want to extend our tool follow this [manual](EXTEND.md)
 
 ## Physical Requirements
-- Source Server : 1 machine containing the files to be transferred.
-- Target Server : 1 machine where the files are going to be migrated.
-- Kafka Cluster : 1 machine to deploy the Kafka cluster to save all logs.
-
 - Source Machine: Where the data journey begins. The Migration Engine grabs data from here to send it off to the target machine.
 - Target Machine: The final stop for migrated data. This is where data ends up after the Migration Engine does its job, finding its new home.
 - Controller: The mastermind behind all experiments. It sets up the Migration Engine for each experiment, tweaking parameters. The Controller kicks off and oversees the migration, keeping an eye on performance through migration logs. It also tracks resource usage by using cAdvisor and node-exporter on the same setup as the migration engine.
