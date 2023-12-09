@@ -72,8 +72,6 @@ For this machine, we have to configure two subfolders.
 <details><summary> Controller</summary>
 <br />
 
-### Controller:
-#### Migration Environment Configuration
 The Controller utilizes a pivotal configuration file named "config.ini," crucial for providing essential settings to the Migration Engine. This configuration holds paramount importance, guiding users in the dockerization of their migration engine.
 
 The "config.ini" file consists of two integral parts:
