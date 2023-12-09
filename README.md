@@ -55,9 +55,9 @@ For this machine, we have to configure two subfolders.
 1. Change the current working directory to the Kafka cluster folder.
 2. Edit docker-compose.yml :
  <br/>  <br/>
-   In docker compose change these environment variables by changing 192.168.122.230 with your machine's public ip address.
-   KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka1:19092,EXTERNAL://192.168.122.230:9092,DOCKER://host.docker.internal:29092
-   KAFKA_JMX_HOSTNAME: 192.168.122.230.
+   In docker compose change these environment variables by changing 192.168.122.145 with your machine's public ip address.
+   KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka1:19092,EXTERNAL://192.168.122.145:9092,DOCKER://host.docker.internal:29092
+   KAFKA_JMX_HOSTNAME: 192.168.122.145.
 3. Run `pip install -r requirements.txt`.
 
 **Logs Reporter**
