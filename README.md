@@ -2,8 +2,7 @@
 # Manual for using the data migration benchmarking tool 
 
 ## Overview
-A benchmarking tool that allows users to transfer files while compressing or decompressing them in real-time based on their preferences. The tool enables users to set transfer limits and generates a CSV report that displays the time taken for each step of the transfer process.
-If you want to extend our tool follow this [manual](EXTEND.md)
+Welcome to DMBench – a versatile and scalable solution designed to streamline the process of data migration across diverse scenarios. This framework orchestrates the migration journey from a source machine to a target machine through a robust Controller and Migration Engine. Leveraging Docker containers for seamless deployment.
 
 ## Issues
 
