@@ -1,0 +1,33 @@
+version: '3'
+services:
+  node-exporter:
+    network_mode: "host"
+    image: prom/node-exporter
+    ports:
+      - 9100:9100
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    network_mode: "host"
+    ports:
+      - 8080:8080
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - "/dev/disk/:/dev/disk"
+    privileged: true
+    devices: 
+      - "/dev/kmsg"
+  controller:
+    image: fareshamouda/datamigrationbenchmarkingtool:latest
+    privileged: true
+    environment:
+      - FOLDERS_PATH=$PWD
+    volumes:
+      - ./data:/app/data
+      - ./configs:/app/configs
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - cadvisor
+      - node-exporter

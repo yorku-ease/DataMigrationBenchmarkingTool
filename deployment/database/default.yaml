@@ -1,0 +1,13 @@
+apiVersion: 1
+
+providers:
+- name: Docker containers monitoring # A uniquely identifiable name for the provider
+  folder: Services # The folder where to place the dashboards
+  type: file
+  options:
+    path: /var/lib/grafana/dashboards/dockercontainersmonitoring.json
+- name: System monitoring # A uniquely identifiable name for the provider
+  folder: Services # The folder where to place the dashboards
+  type: file
+  options:
+    path: /var/lib/grafana/dashboards/Systemmonitoring.json
