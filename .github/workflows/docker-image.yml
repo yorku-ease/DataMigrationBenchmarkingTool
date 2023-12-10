@@ -17,4 +17,4 @@ jobs:
     - name: Build the Docker image
       run: |
         cd deployment/database
-        docker compose up
+        docker compose up -d
