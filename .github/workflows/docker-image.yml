@@ -21,4 +21,4 @@ jobs:
     - name: Wait for Prometheus to be healthy
       run: |
         # Wait for Prometheus to be healthy
-        dockerize -wait http://localhost:9090/-/healthy -timeout 1m
+        docker -wait http://localhost:9090/-/healthy -timeout 1m
