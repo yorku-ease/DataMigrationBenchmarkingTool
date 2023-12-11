@@ -36,4 +36,24 @@ jobs:
       run: |
         cd deployment/reporter/"kafka cluster"
         docker compose up -d
-
+    - name: Check kafka
+      run: |
+        ./.github/workflows/check_health.sh kafka1
+    - name: kill reporter
+      run: |
+        cd deployment/reporter/"kafka cluster"
+        docker compose down
+    - name: Run cAdvisor and node-exporter
+      run: |
+        cd deployment/controller
+        docker compose start cadvisor node-exporter    
+    - name: Check cadvisor
+      run: |
+        ./.github/workflows/check_health.sh cadvisor
+    - name: Check node-exporter
+      run: |
+        ./.github/workflows/check_health.sh node-exporter
+    - name: kill cAdvisor and node-exporter
+      run: |
+        cd deployment/controller
+        docker compose down
