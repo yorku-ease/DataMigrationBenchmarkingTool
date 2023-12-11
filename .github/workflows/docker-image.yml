@@ -18,8 +18,14 @@ jobs:
       run: |
         cd deployment/database
         docker compose up -d
-    - name: Check container health
+    - name: Check Prometheus
       run: |
         chmod +x ./.github/workflows/check_health.sh
         ./.github/workflows/check_health.sh prometheus
+    - name: Check Mongo
+      run: |
+        ./.github/workflows/check_health.sh my-mongodb
+    - name: Check Grafana
+      run: |
+        ./.github/workflows/check_health.sh my-mongodb
  
