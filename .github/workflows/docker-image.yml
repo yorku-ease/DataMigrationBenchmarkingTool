@@ -25,7 +25,7 @@ jobs:
     - name: Run cAdvisor and node-exporter
       run: |
         cd deployment/controller
-        docker compose start cadvisor  
+        docker compose up
     - name: Check cadvisor
       run: |
         ./.github/workflows/check_health.sh cadvisor
