@@ -16,7 +16,8 @@ jobs:
     - uses: actions/checkout@v3
     - name: Run databases
       run: |
-        grep cgroup /proc/filesystems
+        echo 'GRUB_CMDLINE_LINUX=systemd.unified_cgroup_hierarchy=false' > /etc/default/grub.d/cgroup.cfg
+        update-grub
         cd deployment/database
         docker compose up -d
     - name: Check Prometheus
@@ -26,7 +27,7 @@ jobs:
     - name: Run cAdvisor and node-exporter
       run: |
         cd deployment/controller
-        docker compose up -d node-exporter
+        docker compose up -d cadvisor
     - name: Check node-exporter
       run: |
         ./.github/workflows/check_health.sh node-exporter
