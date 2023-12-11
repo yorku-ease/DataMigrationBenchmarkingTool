@@ -3,10 +3,14 @@ services:
   prometheus:
     network_mode: "host"
     image: prom/prometheus:latest
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:9090/-/healthy | grep -q 'Prometheus Server is Healthy'"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     container_name: prometheus
     volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-      
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml      
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
@@ -16,6 +20,11 @@ services:
     container_name: my-mongodb
     ports:
       - "27017:27017"
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
@@ -28,6 +37,11 @@ services:
     network_mode: "host"
     ports:
       - "3000:3000"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sS http://localhost:3000/healthz | grep -i 'ok'"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
     environment:
       - GF_PATHS_PROVISIONING=/etc/grafana/provisioning
       - DS_PROMETHEUS=prometheus

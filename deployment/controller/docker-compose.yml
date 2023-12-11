@@ -5,6 +5,11 @@ services:
     image: prom/node-exporter
     ports:
       - 9100:9100
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 9100 || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     network_mode: "host"
