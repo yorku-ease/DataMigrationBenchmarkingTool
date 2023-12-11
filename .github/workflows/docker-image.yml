@@ -40,10 +40,10 @@ jobs:
             # Check if the container is healthy
             if [ "$STATUS" == "healthy" ]; then
                 echo "Container is healthy!"
-                return 0
+                exit 0
             elif [ "$STATUS" == "unhealthy" ]; then
                 echo "Container is unhealthy!"
-                exit 1  # Return 9 for unhealthy
+                exit 1  # Return 1 for unhealthy
             else
                 echo "Attempt $i: Container is still starting. Waiting for $INTERVAL seconds... $STATUS"
                 sleep "$INTERVAL"
