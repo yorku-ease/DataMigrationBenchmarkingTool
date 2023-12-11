@@ -28,7 +28,7 @@ jobs:
         docker compose up -d node-exporter
     - name: Check node-exporter
       run: |
-        ./.github/workflows/check_health.sh cadvisor
+        ./.github/workflows/check_health.sh node-exporter
     - name: Check node-exporter
       run: |
         ./.github/workflows/check_health.sh node-exporter
