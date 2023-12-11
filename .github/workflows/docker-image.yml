@@ -14,7 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
+    - name: Run databases
       run: |
         cd deployment/database
         docker compose up -d
@@ -28,4 +28,7 @@ jobs:
     - name: Check Grafana
       run: |
         ./.github/workflows/check_health.sh my-mongodb
+    - name: kill databases
+      run: |
+        docker compose down
  
