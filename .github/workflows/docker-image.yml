@@ -25,10 +25,10 @@ jobs:
     - name: Run cAdvisor and node-exporter
       run: |
         cd deployment/controller
-        docker compose up -d cadvisor
-    - name: Check node-exporter
+        docker compose up -d cadvisor node-exporter
+    - name: Check cadvisor
       run: |
-        ./.github/workflows/check_health.sh node-exporter
+        ./.github/workflows/check_health.sh cadvisor
     - name: Check node-exporter
       run: |
         ./.github/workflows/check_health.sh node-exporter
