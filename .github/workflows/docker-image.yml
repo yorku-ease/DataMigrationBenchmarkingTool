@@ -40,6 +40,7 @@ jobs:
             # Check if the container is healthy
             if [ "$STATUS" == "healthy" ]; then
                 echo "Container is healthy!"
+                return 0
             elif [ "$STATUS" == "unhealthy" ]; then
                 echo "Container is unhealthy!"
                 exit 1  # Return 9 for unhealthy
