@@ -8,6 +8,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+    container_name: prometheus
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml      
     command:
