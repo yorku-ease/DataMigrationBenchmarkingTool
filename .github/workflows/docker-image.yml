@@ -32,4 +32,8 @@ jobs:
       run: |
         cd deployment/database
         docker compose down
- 
+    - name: Run reporter
+      run: |
+        cd deployment/reporter/"kafka cluster"
+        docker compose up -d
+
