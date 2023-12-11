@@ -20,6 +20,6 @@ jobs:
         docker compose up -d
     - name: Check container health
       run: |
-        # Define the container name or ID
-        ./check_health.sh prometheus
+        chmod +x ./.github/workflows/check_health.sh
+        ./.github/workflows/check_health.sh prometheus
  
