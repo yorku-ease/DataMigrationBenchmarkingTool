@@ -18,7 +18,9 @@ jobs:
       run: |
         cd deployment/database
         docker compose up -d
-    - name: Wait for Prometheus to be healthy
+    - name: Check container health
       run: |
         # Wait for Prometheus to be healthy
-        curl -sS http://localhost:9091/metrics
+        HEALTH=$(docker inspect --format='{{json .State.Health}}' prometheus)
+        STATUS=$(echo "$HEALTH" | jq -r '.Status')
+        [ "$STATUS" == "healthy" ] || exit 1
