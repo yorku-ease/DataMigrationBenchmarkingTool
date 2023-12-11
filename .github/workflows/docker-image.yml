@@ -30,5 +30,6 @@ jobs:
         ./.github/workflows/check_health.sh my-mongodb
     - name: kill databases
       run: |
+        cd deployment/database
         docker compose down
  
