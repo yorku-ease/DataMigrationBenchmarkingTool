@@ -44,7 +44,7 @@ jobs:
                 echo "Container is unhealthy!"
                 exit 1  # Return 9 for unhealthy
             else
-                echo "Attempt $i: Container is still starting. Waiting for $INTERVAL seconds..."
+                echo "Attempt $i: Container is still starting. Waiting for $INTERVAL seconds... $STATUS"
                 sleep "$INTERVAL"
             fi
         done
