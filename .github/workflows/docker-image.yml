@@ -61,4 +61,4 @@ jobs:
       run: |
         cd deployment/reporter/"kafka cluster"
         pip install -r requirements.txt
-        python consumer.py
+        nohup python consumer.py > output.log 2>&1 &
