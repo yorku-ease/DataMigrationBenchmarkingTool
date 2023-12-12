@@ -60,4 +60,5 @@ jobs:
     - name: Run consumer
       run: |
         cd deployment/reporter/"kafka cluster"
+        pip install -r requirements.txt
         python consumer.py
