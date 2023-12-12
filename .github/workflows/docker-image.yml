@@ -22,6 +22,16 @@ jobs:
       run: |
         chmod +x ./.github/workflows/check_health.sh
         ./.github/workflows/check_health.sh prometheus
+#    - name: kill cAdvisor and node-exporter
+#      run: |
+#       cd deployment/controller
+#       docker compose down
+    - name: Check Mongo
+      run: |
+        ./.github/workflows/check_health.sh my-mongodb
+    - name: Check Grafana
+      run: |
+        ./.github/workflows/check_health.sh my-mongodb
     - name: Run cAdvisor and node-exporter
       run: |
         cd deployment/controller
@@ -32,20 +42,10 @@ jobs:
     - name: Check node-exporter
       run: |
         ./.github/workflows/check_health.sh node-exporter
-    - name: kill cAdvisor and node-exporter
-      run: |
-        cd deployment/controller
-        docker compose down
-    - name: Check Mongo
-      run: |
-        ./.github/workflows/check_health.sh my-mongodb
-    - name: Check Grafana
-      run: |
-        ./.github/workflows/check_health.sh my-mongodb
-    - name: kill databases
-      run: |
-        cd deployment/database
-        docker compose down
+#    - name: kill databases
+ #     run: |
+ #       cd deployment/database
+ #       docker compose down
     - name: Run reporter
       run: |
         cd deployment/reporter/"kafka cluster"
@@ -53,8 +53,11 @@ jobs:
     - name: Check kafka
       run: |
         ./.github/workflows/check_health.sh kafka1
-    - name: kill reporter
+#    - name: kill reporter
+#      run: |
+#        cd deployment/reporter/"kafka cluster"
+#        docker compose down
+    - name: Run consumer
       run: |
         cd deployment/reporter/"kafka cluster"
-        docker compose down
-
+        python consumer.py
