@@ -61,7 +61,7 @@ jobs:
       run: |
         cd deployment/reporter/"kafka cluster"
         pip install -r requirements.txt
-        nohup python consumer.py > output.log 2>&1 
+        nohup python consumer.py > output.log 2>&1 &
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2
       if: always()
