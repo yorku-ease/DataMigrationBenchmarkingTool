@@ -48,10 +48,10 @@ experimentsCombinations = [dict(zip(experimentLists.keys(), combination)) for co
 
 try:
     for experimentOptions in experimentsCombinations:
+        startTime = str(time.time())
         for i in range(0,numberOfExperiments):
-
             if not cloggingId:
-                loggingId = "-".join([str(i+1),*list(experimentOptions.values()),str(time.time())])
+                loggingId = "-".join([str(i+1),*list(experimentOptions.values()),startTime])
             else:
                 loggingId = cloggingId
             experiment = Experiment(experimentOptions, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId)
