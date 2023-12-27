@@ -34,6 +34,7 @@ class Parser():
     def toJsonData(self):
                # Compile the regular expression
         self.data = []
+        
         extracted_dict = {}
         log_regex = re.compile(self.log_pattern)
         try:
