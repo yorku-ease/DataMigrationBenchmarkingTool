@@ -101,8 +101,8 @@ class Parser():
         # Convert DataFrame to a list of dictionaries (each row becomes a dictionary)
         dBdata = df.to_dict(orient='records')
 
-        # Insert data into MongoDB
-        collection.insert_many(dBdata)
+        if dBdata:
+            collection.insert_many(dBdata)
 
         # Close MongoDB connection
         client.close()    
