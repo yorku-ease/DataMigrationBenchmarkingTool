@@ -63,13 +63,13 @@ jobs:
         nohup python consumer.py > output.log 2>&1 &
     - name: Run experiment
       env:
-      SOURCE_HOST: ${{ secrets.SOURCE_HOST }}
-      SOURCE_PASSWORD: ${{ secrets.SOURCE_PASSWORD }}
-      SOURCE_USERNAME: ${{ secrets.SOURCE_USERNAME }}
-      TARGET_HOST: ${{ secrets.TARGET_HOST }}
-      TARGET_PASSWORD: ${{ secrets.TARGET_PASSWORD }}
-      TARGET_PORT: ${{ secrets.TARGET_PORT }}
-      TARGET_TYPE: ${{ secrets.TARGET_TYPE }}
-      TARGET_USERNAME: ${{ secrets.TARGET_USERNAME }}
+        SOURCE_HOST: ${{ secrets.SOURCE_HOST }}
+        SOURCE_PASSWORD: ${{ secrets.SOURCE_PASSWORD }}
+        SOURCE_USERNAME: ${{ secrets.SOURCE_USERNAME }}
+        TARGET_HOST: ${{ secrets.TARGET_HOST }}
+        TARGET_PASSWORD: ${{ secrets.TARGET_PASSWORD }}
+        TARGET_PORT: ${{ secrets.TARGET_PORT }}
+        TARGET_TYPE: ${{ secrets.TARGET_TYPE }}
+        TARGET_USERNAME: ${{ secrets.TARGET_USERNAME }}
       run: |
         cp ./.github/workflows/config.ini deployment/controller/configs/config.ini 
