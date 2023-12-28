@@ -73,6 +73,7 @@ jobs:
         TARGET_USERNAME: ${{ secrets.TARGET_USERNAME }}
       run: |
         cp ./.github/workflows/config.ini deployment/controller/configs/config.ini 
+        echo $SOURCE_HOST
         cd deployment/controller
         docker compose down
         docker compose up -d 
