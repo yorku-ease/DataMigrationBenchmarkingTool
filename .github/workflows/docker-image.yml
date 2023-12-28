@@ -75,3 +75,4 @@ jobs:
         cp ./.github/workflows/config.ini deployment/controller/configs/config.ini 
         cd deployment/controller
         docker compose up -d controller
+        docker logs controller --follow
