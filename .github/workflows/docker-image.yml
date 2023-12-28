@@ -73,3 +73,5 @@ jobs:
         TARGET_USERNAME: ${{ secrets.TARGET_USERNAME }}
       run: |
         cp ./.github/workflows/config.ini deployment/controller/configs/config.ini 
+        cd deployment/controller
+        docker compose up -d cadvisor node-exporter
