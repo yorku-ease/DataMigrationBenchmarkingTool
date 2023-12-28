@@ -61,10 +61,15 @@ jobs:
         cd deployment/reporter/"kafka cluster"
         pip install -r requirements.txt
         nohup python consumer.py > output.log 2>&1 &
+    - name: Set environment variables for secrets
+      run: |
+        for secret in $(compgen -e); do
+          echo "$secret=${{ secrets[$secret] }}" >> $GITHUB_ENV
+        done
+
     - name: edit config.ini for controller
       run: |
         variables=("SOURCE_HOST" "SOURCE_PASSWORD" "SOURCE_PORT" "SOURCE_USERNAME" "TARGET_HOST" "TARGET_PASSWORD" "TARGET_PORT" "TARGET_TYPE" "TARGET_USERNAME")
-
         for var in "${variables[@]}"; do
-          sed -i "s/__${var}__/${{ secrets.${var} }}/g" ./.github/workflows/config.ini
+          sed -i "s/__${var}__/${!var}/g" path/to/config.ini
         done
