@@ -1,0 +1,135 @@
+[
+    {
+        "Experiment Number": "1",
+        "file": "NO",
+        "limit": "3",
+        "compressionType": "TESTDB=>TARGETDB",
+        "stream": "PART1",
+        "Experiment startTime": "1703697967.3254213",
+        "type": "info",
+        "Experiment": "started",
+        "Timestamp": "1703697967.3254626"
+    },
+    {
+        "Experiment Number": "1",
+        "file": "NO",
+        "limit": "3",
+        "compressionType": "TESTDB=>TARGETDB",
+        "stream": "PART1",
+        "Experiment startTime": "1703697967.3254213",
+        "type": "info",
+        "Experiment": "completed",
+        "Timestamp": "1703697991.0351045"
+    },
+    {
+        "Experiment Number": "2",
+        "file": "NO",
+        "limit": "3",
+        "compressionType": "TESTDB=>TARGETDB",
+        "stream": "PART1",
+        "Experiment startTime": "1703697967.3254213",
+        "type": "info",
+        "Experiment": "started",
+        "Timestamp": "1703697991.03521"
+    },
+    {
+        "Experiment Number": "2",
+        "file": "NO",
+        "limit": "3",
+        "compressionType": "TESTDB=>TARGETDB",
+        "stream": "PART1",
+        "Experiment startTime": "1703697967.3254213",
+        "type": "info",
+        "Experiment": "completed",
+        "Timestamp": "1703698016.8608937"
+    },
+    {
+        "Experiment Number": "3",
+        "file": "NO",
+        "limit": "3",
+        "compressionType": "TESTDB=>TARGETDB",
+        "stream": "PART1",
+        "Experiment startTime": "1703697967.3254213",
+        "type": "info",
+        "Experiment": "started",
+        "Timestamp": "1703698016.861018"
+    },
+    {
+        "Experiment Number": "3",
+        "file": "NO",
+        "limit": "3",
+        "compressionType": "TESTDB=>TARGETDB",
+        "stream": "PART1",
+        "Experiment startTime": "1703697967.3254213",
+        "type": "info",
+        "Experiment": "completed",
+        "Timestamp": "1703698050.916437"
+    },
+    {
+        "Experiment Number": "1",
+        "file": "GZIP",
+        "limit": "3",
+        "compressionType": "TESTDB=>TARGETDB",
+        "stream": "PART1",
+        "Experiment startTime": "1703698050.9165666",
+        "type": "info",
+        "Experiment": "started",
+        "Timestamp": "1703698050.9166055"
+    },
+    {
+        "Experiment Number": "1",
+        "file": "GZIP",
+        "limit": "3",
+        "compressionType": "TESTDB=>TARGETDB",
+        "stream": "PART1",
+        "Experiment startTime": "1703698050.9165666",
+        "type": "info",
+        "Experiment": "completed",
+        "Timestamp": "1703698075.1300673"
+    },
+    {
+        "Experiment Number": "2",
+        "file": "GZIP",
+        "limit": "3",
+        "compressionType": "TESTDB=>TARGETDB",
+        "stream": "PART1",
+        "Experiment startTime": "1703698050.9165666",
+        "type": "info",
+        "Experiment": "started",
+        "Timestamp": "1703698075.130165"
+    },
+    {
+        "Experiment Number": "2",
+        "file": "GZIP",
+        "limit": "3",
+        "compressionType": "TESTDB=>TARGETDB",
+        "stream": "PART1",
+        "Experiment startTime": "1703698050.9165666",
+        "type": "info",
+        "Experiment": "completed",
+        "Timestamp": "1703698100.3145795"
+    },
+    {
+        "Experiment Number": "3",
+        "file": "GZIP",
+        "limit": "3",
+        "compressionType": "TESTDB=>TARGETDB",
+        "stream": "PART1",
+        "Experiment startTime": "1703698050.9165666",
+        "type": "info",
+        "Experiment": "started",
+        "Timestamp": "1703698100.3147311"
+    },
+    {
+        "Experiment Number": "3",
+        "file": "GZIP",
+        "limit": "3",
+        "compressionType": "TESTDB=>TARGETDB",
+        "stream": "PART1",
+        "Experiment startTime": "1703698050.9165666",
+        "type": "info",
+        "Experiment": "completed",
+        "Timestamp": "1703698124.80204"
+    }
+ ]
+ 

@@ -1,0 +1,31 @@
+{
+    "NO-3-TESTDB=>TARGETDB-PART1-1703697967.3254213": {
+        "1": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "23.70971703529358"
+        },
+        "2": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "25.825770378112793"
+        },
+        "3": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "34.055529832839966"
+        }
+    },
+    "GZIP-3-TESTDB=>TARGETDB-PART1-1703698050.9165666": {
+        "1": {
+            "TotalClearTime": "4.76837158203125e-07",
+            "TotaltransferTime": "24.213536977767944"
+        },
+        "2": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "25.18450927734375"
+        },
+        "3": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "24.487411975860596"
+        }
+    }
+ }
+ 
