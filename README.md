@@ -178,6 +178,9 @@ Start by initiating the databases.
    - On the controller machine, change the current working directory to the controller folder.
    - Run the following command:
      ```bash
+     docker pull "<your migration engine image>"
+     ```
+     ```bash
      docker compose up
      ```
    - This will initiate the controller along with `cAdvisor` and `node-exporter`.
