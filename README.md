@@ -10,8 +10,8 @@ If you encounter any issues or have questions while using our system, please don
 
 
 ## Physical Requirements
-- Source Machine: Where the data journey begins. The Migration Engine grabs data from here to send it off to the target machine.
-- Target Machine: The final stop for migrated data. This is where data ends up after the Migration Engine does its job, finding its new home.
+- Data Source: Where the data journey begins. The Migration Engine grabs data from here to send it off to the target machine.
+- Data Target: The final stop for migrated data. This is where data ends up after the Migration Engine does its job, finding its new home.
 - Controller: The mastermind behind all experiments. It sets up the Migration Engine for each experiment, tweaking parameters. The Controller kicks off and oversees the migration, keeping an eye on performance through migration logs. It also tracks resource usage by using cAdvisor and node-exporter on the same setup as the migration engine.
 - Databases: Two key players in the framework. Prometheus, the timeseries database, gathers resource data from cAdvisor. The second database is the home for all performance data from experiments. Prometheus focuses on resource metrics, while the second database stores broader performance data, making sure all experiment results are neatly organized.
 - Logs Reporter: The organizer of experiment logs. It has two parts. The first part is a Kafka cluster, a storage space for all logs. Both the Controller and Migration Engine share their logs here, managed by a dedicated consumer. The second part is the parser. It not only extracts data from logs but also makes it easy for humans to read. Parsed info goes into CSV files before finding a permanent home in a NoSQL database. This two-part system ensures a smooth and effective process for handling, understanding, and gaining insights from experiment logs.
@@ -19,8 +19,8 @@ If you encounter any issues or have questions while using our system, please don
 
 ## Prerequisites
 For easy setup and deployment, all components of the framework are packaged as Docker containers. To run the tool, you'll need five machines, each with specific dependencies:
-- Source Server
-- Target Server
+- Data Source Machine
+- Data Target Machine
 - Controller & Migration Engine: Docker
 - Kafka Cluster: Docker, Python
 - Databases: Docker <br />
