@@ -1,5 +1,0 @@
-In docker compose :
-    KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka1:19092,EXTERNAL://192.168.122.230:9092,DOCKER://host.docker.internal:29092
-    KAFKA_JMX_HOSTNAME: 192.168.122.230
-
-change 192.168.122.230 with the public ip of the host of the kafka cluster.

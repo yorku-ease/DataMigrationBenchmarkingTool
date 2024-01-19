@@ -47,18 +47,18 @@ jobs:
  #       docker compose down
     - name: Run reporter
       run: |
-        cd deployment/reporter/"kafka cluster"
+        cd deployment/reporter/"kafkacluster"
         docker compose up -d
     - name: Check kafka
       run: |
         ./.github/workflows/check_health.sh kafka1
 #    - name: kill reporter
 #      run: |
-#        cd deployment/reporter/"kafka cluster"
+#        cd deployment/reporter/"kafkacluster"
 #        docker compose down
     - name: Run consumer
       run: |
-        cd deployment/reporter/"kafka cluster"
+        cd deployment/reporter/"kafkacluster"
         pip install -r requirements.txt
         nohup python consumer.py > output.log 2>&1 &
     - name: Run experiment

@@ -1,6 +1,6 @@
 from ConnectionManager import ConnectionManager 
 from filesmanager.FilesManager import FilesManager 
-import paramiko,subprocess,time,threading
+import paramiko,subprocess,time,threading,sys,traceback
 import concurrent.futures
 
 
@@ -46,14 +46,26 @@ class DefaultFileMigrator():
             streamNumber = int(threadName.split("_")[1]) + 1
 
         self.logger.logMigrationEngine(self.loggingId,f"type : info, migration : started, Timestamp : {time.time()}, stream : {streamNumber}")
-        connectionManager = self.connect()
-        ssh = connectionManager.get_SSH()
-        sftp = connectionManager.get_SFTP()
+        try:
+            connectionManager = self.connect()
+            ssh = connectionManager.get_SSH()
+            sftp = connectionManager.get_SFTP()
 
 
-        FilesManager.transferfile(sftp,local_file_path,remote_file_path,compressionType,limit,ssh,self.loggingId,streamNumber)
+            FilesManager.transferfile(sftp,local_file_path,remote_file_path,compressionType,limit,ssh,self.loggingId,streamNumber)
 
-        connectionManager.close()
+            connectionManager.close()
+        except Exception as e:
+            timestamp = time.time()
+            error_message = str(e)
+            error_location = f"File: {__file__}, Function: {__name__}, Line: {sys.exc_info()[-1].tb_lineno}"
+            exception_type = type(e).__name__
+            message = f"type : error, Timestamp: {timestamp}, ErrorMessage: {error_message}, {error_location}, ExceptionType: {exception_type}"
+            self.logger.logMigrationEngine(self.loggingId,message)
+            stack_trace = traceback.format_exc()
+            print(message)
+            print(stack_trace)
+
         self.logger.logMigrationEngine(self.loggingId,f"type : info, migration : completed, Timestamp : {time.time()}, stream : {streamNumber}")
 
     

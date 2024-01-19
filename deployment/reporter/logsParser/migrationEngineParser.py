@@ -1,4 +1,4 @@
-from parser import Parser
+from my_parser import Parser
 import re
 import json
 import csv

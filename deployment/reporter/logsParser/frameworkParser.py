@@ -1,8 +1,5 @@
-from parser import Parser
-import re
-import json
-import csv
-import traceback
+from my_parser import Parser
+
 import configparser
 from pymongo import MongoClient
 import pandas as pd

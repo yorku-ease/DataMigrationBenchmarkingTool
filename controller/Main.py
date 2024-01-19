@@ -1,8 +1,6 @@
 import time,os,configparser
-from classes.Experiment import Experiment
-from classes.KafkaLogger import KafkaLogger
-from itertools import product
-
+from src.Experiment import Experiment
+from src.KafkaLogger import KafkaLogger
 
 # Get the directory of the currently running script
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -35,15 +33,8 @@ remotePassword = config.get('targetServer', 'password')
 numberOfExperiments = config.getint('migrationEnvironment', 'numberOfExperiments')
 cloggingId = config.get('migrationEnvironment', 'loggingId')
 
-
-experimentLists = dict(config['experiment'])
-experimentLists = {key: value.split(',') if ',' in value else [value] for key, value in experimentLists.items()}
-
-# Generate all combinations
-experimentsCombinations = list(product(*experimentLists.values()))
-
-# Create a list of dictionaries with combinations
-experimentsCombinations = [dict(zip(experimentLists.keys(), combination)) for combination in experimentsCombinations]
+experiments = config['experiment']
+experimentsCombinations = Experiment.extractExperimentsCombinations(experiments)
 
 
 try:
