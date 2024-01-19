@@ -8,6 +8,11 @@ Welcome to DMBench – a versatile and scalable solution designed to streamline 
 
 If you encounter any issues or have questions while using our system, please don't hesitate to submit an issue on our GitHub repository.  Your contributions are crucial in improving the user experience.
 
+## Tests
+
+## Running Tests
+
+To run tests for this project, please refer to the [test.md](test.md) file. The `test.md` file provides detailed instructions for each test scenario, including prerequisites, dependencies, and execution steps. Follow the outlined procedures to ensure the correctness and functionality of the project. If you encounter any issues or have questions related to the testing process, feel free to open an issue for assistance.
 
 ## Physical Requirements
 - Data Source: Where the data journey begins. The Migration Engine grabs data from here to send it off to the target machine.
@@ -154,7 +159,7 @@ Start by initiating the databases.
 <details><summary> Kafka Cluster</summary>
   Next, launch the Kafka cluster.
   
-   - On the Kafka cluster machine, change the current working directory to the reporter/kafka cluster folder.
+   - On the Kafka cluster machine, change the current working directory to the reporter/kafkacluster folder.
    - Run the following command:
      ```bash
      docker-compose up
@@ -165,7 +170,7 @@ Start by initiating the databases.
 <details><summary> Kafka Consumer</summary>
   After ensuring that Kafka is up and ready, follow up by activating the Kafka cluster's consumer.
   
-   - On the Kafka cluster machine, change the current working directory to the reporter/kafka cluster folder.
+   - On the Kafka cluster machine, change the current working directory to the reporter/kafkacluster folder.
    - Run the following command:
      ```bash
      python consumer.py

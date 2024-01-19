@@ -8,8 +8,6 @@ parent_directory = os.path.abspath(os.path.join(current_directory, os.pardir))
 os.chdir(parent_directory)
 
 
-from parser import Parser
-
 from frameworkParser import FrameworkParser
 from performanceBenchmarkParser import PerformanceBenchmarkParser
 from migrationEngineParser import MigrationEngineParser

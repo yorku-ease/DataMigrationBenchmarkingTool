@@ -1,4 +1,4 @@
-from confluent_kafka import Consumer, KafkaError, Producer
+from confluent_kafka import Consumer, KafkaError
 from confluent_kafka.admin import AdminClient, NewTopic
 import time
 
@@ -45,7 +45,6 @@ def startConsumer():
         'enable.auto.commit': False  # Disable automatic offset commits
     })
 
-
     topic_files = {}
     for topic_name in topic_names:
         topic_files[topic_name] = open(f"{topic_name}.log","a")
@@ -56,9 +55,9 @@ def startConsumer():
     
     try:
         while True:
+
             # Poll for new messages
             msg = consumer.poll(1.0)  # Adjust the timeout as needed
-
             if msg is None:
                 continue
             if msg.error():
@@ -82,6 +81,7 @@ def startConsumer():
         pass
 
     finally:
+
         # Close the Kafka consumer gracefully
         consumer.close()
         for file in topic_files.values():
@@ -91,7 +91,9 @@ def startConsumer():
         file.close()
 
 
-create_topics(bootstrap_servers)
-startConsumer()
 
 
+if __name__ == "__main__":
+    # Code that should only run when this module is executed, not when imported
+    create_topics(bootstrap_servers)
+    startConsumer()

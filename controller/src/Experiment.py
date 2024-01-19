@@ -1,7 +1,8 @@
 import time,sys,traceback,os,shutil,configparser,docker,paramiko,subprocess
 from threading import Thread
-from classes.KafkaLogger import KafkaLogger
-from classes.ConnectionManager import ConnectionManager
+from src.KafkaLogger import KafkaLogger
+from src.ConnectionManager import ConnectionManager
+from itertools import product
 
 
 
@@ -18,6 +19,18 @@ class Experiment(Thread):
         self.localPassword = localPassword
         self.loggingId = loggingId
         self.logger = KafkaLogger()
+
+    @staticmethod
+    def extractExperimentsCombinations(experiments):
+        experimentLists = dict(experiments)
+        experimentLists = {key: value.split(',') if ',' in value else [value] for key, value in experimentLists.items()}
+
+        # Generate all combinations
+        experimentsCombinations = list(product(*experimentLists.values()))
+
+        # Create a list of dictionaries with combinations
+        experimentsCombinations = [dict(zip(experimentLists.keys(), combination)) for combination in experimentsCombinations]
+        return experimentsCombinations
 
     def connect(self):
         connectionManager = ConnectionManager(self.remoteHostname, self.remoteUsername, self.remotePassword)
@@ -88,32 +101,60 @@ class Experiment(Thread):
             print(message)
             print(stack_trace)
 
+    def createMigrationEngineConfig(self):
+        FOLDERS_PATH = os.environ.get("FOLDERS_PATH")
+        
+        try:
+            # Try to open the file in write mode
+            with open('configs/migrationEngineConfig.ini', "w") as file:
+                # Writing an empty string to create the file
+                file.write("")
+        except FileNotFoundError:
+            print("Error: The specified path or file name is invalid.")
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        #prepare the configuration file for the migration engine 
+        shutil.copy(f'configs/migrationEngineConfig.ini', f'configs/migrationEngineConfig1.ini')
+
+
+
+        config = configparser.RawConfigParser()
+        config.comment_prefixes = (';',)  
+        
+        # Set the prefix character for comments
+        config.read(f'configs/config.ini')
+
+        for key in self.experimentOptions:
+            config.set('experiment', key, self.experimentOptions[key])
+
+        config.set('migrationEnvironment', 'loggingId', self.loggingId)
+        
+
+
+        # Writing our configuration file to 'example.ini'
+        with open(f'configs/migrationEngineConfig.ini', 'w') as configfile:
+            config.write(configfile)
+
+    def removeConfigFile(self):
+        os.remove("configs/migrationEngineConfig.ini")
+        shutil.copy('configs/migrationEngineConfig1.ini', 'configs/migrationEngineConfig.ini')
+        os.remove("configs/migrationEngineConfig1.ini")
+
+
     def migrate(self):
         
         try:
+            container = None
 
             FOLDERS_PATH = os.environ.get("FOLDERS_PATH")
-            #prepare the configuration file for the migration engine 
-            shutil.copy(f'configs/migrationEngineConfig.ini', f'configs/migrationEngineConfig1.ini')
-
-
-
+            
             config = configparser.RawConfigParser()
             config.comment_prefixes = (';',)  
             
             # Set the prefix character for comments
             config.read(f'configs/config.ini')
 
-            for key in self.experimentOptions:
-                config.set('experiment', key, self.experimentOptions[key])
-    
-            config.set('migrationEnvironment', 'loggingId', self.loggingId)
-            
-
-
-            # Writing our configuration file to 'example.ini'
-            with open(f'configs/migrationEngineConfig.ini', 'w') as configfile:
-                config.write(configfile)
+            self.createMigrationEngineConfig()
 
             client = docker.from_env()
             image_name = config.get('migrationEnvironment', 'migrationEngineDockerImage')
@@ -163,10 +204,8 @@ class Experiment(Thread):
 
             container.wait()
 
-            os.remove("configs/migrationEngineConfig.ini")
-            shutil.copy('configs/migrationEngineConfig1.ini', 'configs/migrationEngineConfig.ini')
-            os.remove("configs/migrationEngineConfig1.ini")
 
+            self.removeConfigFile()
 
         finally:
             if container is not None:

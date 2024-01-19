@@ -2,7 +2,7 @@ from confluent_kafka import Producer
 
 # Define the Kafka broker(s) and topic name
 bootstrap_servers = "localhost:9092"  # Replace with your Kafka broker address
-topic_name = "my_topic"  # Replace with the Kafka topic you want to produce to
+topic_name = "framework"  # Replace with the Kafka topic you want to produce to
 
 # Create a Kafka producer instance
 producer = Producer({
