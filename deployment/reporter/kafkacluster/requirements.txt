@@ -1,0 +1,5 @@
+confluent_kafka
+pymongo
+pandas
+pytest
+unittest
