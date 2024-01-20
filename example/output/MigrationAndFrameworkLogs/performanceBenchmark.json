@@ -1,0 +1,82 @@
+{
+    "ubuntu.iso-1048576-None-1-1705721671.4707599": {
+        "1": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "None": {
+                "sizeOnTargetMachine": "5037662208",
+                "sizeOnLocalMachine": "5037662208.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "83.53046917915344",
+                "readingFileTime": "0.0008883476257324219"
+            },
+            "TotaltransferTime": "130.64451098442078"
+        }
+    },
+    "ubuntu.iso-1048576-None-3-1705721802.115297": {
+        "1": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "2": {
+                "sizeOnTargetMachine": "1679220736",
+                "sizeOnLocalMachine": "1679220736.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "106.42661714553833",
+                "readingFileTime": "0.0006520748138427734"
+            },
+            "3": {
+                "sizeOnTargetMachine": "1679220736",
+                "sizeOnLocalMachine": "1679220736.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "105.87238812446594",
+                "readingFileTime": "0.00067901611328125"
+            },
+            "1": {
+                "sizeOnTargetMachine": "1679220736",
+                "sizeOnLocalMachine": "1679220736.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "103.00130701065063",
+                "readingFileTime": "0.0011696815490722656"
+            },
+            "TotaltransferTime": "143.44246745109558"
+        }
+    },
+    "ubuntu.iso-1048576-gzip-1-1705721945.5577855": {
+        "1": {
+            "TotalClearTime": "0.0",
+            "None": {
+                "sizeOnTargetMachine": "5006646669",
+                "sizeOnLocalMachine": "5006646669.0",
+                "compressionTime": "193.10831141471863",
+                "dataTransferTime": "62.31037640571594",
+                "readingFileTime": "0.0017697811126708984"
+            },
+            "TotaltransferTime": "286.5031089782715"
+        }
+    },
+    "ubuntu.iso-1048576-gzip-3-1705722232.0609145": {
+        "1": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "2": {
+                "sizeOnTargetMachine": "1677015923",
+                "sizeOnLocalMachine": "1677015923.0",
+                "compressionTime": "70.74603414535522",
+                "dataTransferTime": "43.57656788825989",
+                "readingFileTime": "0.0006804466247558594"
+            },
+            "3": {
+                "sizeOnTargetMachine": "1670423688",
+                "sizeOnLocalMachine": "1670423688.0",
+                "compressionTime": "72.01887345314026",
+                "dataTransferTime": "43.981149673461914",
+                "readingFileTime": "0.0006330013275146484"
+            },
+            "1": {
+                "sizeOnTargetMachine": "1659211699",
+                "sizeOnLocalMachine": "1659211699.0",
+                "compressionTime": "73.58139705657959",
+                "dataTransferTime": "41.75231146812439",
+                "readingFileTime": "0.00734710693359375"
+            },
+            "TotaltransferTime": "147.6042947769165"
+        }
+    }
+}
