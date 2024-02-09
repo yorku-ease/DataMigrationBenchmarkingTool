@@ -1,0 +1,303 @@
+{
+    "Sample-SQL-File-50000rows.sql-104857-None-1-1707477063.9797995": {
+        "1": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "None": {
+                "sizeOnTargetMachine": "4443612",
+                "sizeOnLocalMachine": "4443612.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "0.035167694091796875",
+                "readingFileTime": "9.655952453613281e-05"
+            },
+            "TotaltransferTime": "8.112895488739014"
+        },
+        "2": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "None": {
+                "sizeOnTargetMachine": "4443612",
+                "sizeOnLocalMachine": "4443612.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "0.03665924072265625",
+                "readingFileTime": "9.918212890625e-05"
+            },
+            "TotaltransferTime": "9.226214170455933"
+        },
+        "3": {
+            "TotalClearTime": "0.0",
+            "None": {
+                "sizeOnTargetMachine": "4443612",
+                "sizeOnLocalMachine": "4443612.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "0.03517508506774902",
+                "readingFileTime": "6.985664367675781e-05"
+            },
+            "TotaltransferTime": "12.010397911071777"
+        }
+    },
+    "Sample-SQL-File-50000rows.sql-104857-None-3-1707477093.3293934": {
+        "1": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "1": {
+                "sizeOnTargetMachine": "4443612.0",
+                "sizeOnLocalMachine": "4443612.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "0.040872812271118164",
+                "readingFileTime": "0.00023937225341796875"
+            },
+            "TotaltransferTime": "12.924423933029175"
+        },
+        "2": {
+            "TotalClearTime": "0.0",
+            "1": {
+                "sizeOnTargetMachine": "4443612.0",
+                "sizeOnLocalMachine": "4443612.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "0.03882312774658203",
+                "readingFileTime": "0.0002460479736328125"
+            },
+            "TotaltransferTime": "9.909878492355347"
+        },
+        "3": {
+            "TotalClearTime": "0.0",
+            "1": {
+                "sizeOnTargetMachine": "4443612.0",
+                "sizeOnLocalMachine": "4443612.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "0.03699088096618652",
+                "readingFileTime": "0.0003085136413574219"
+            },
+            "TotaltransferTime": "10.326976537704468"
+        }
+    },
+    "Sample-SQL-File-50000rows.sql-104857-gzip-1-1707477126.4907594": {
+        "1": {
+            "TotalClearTime": "0.0",
+            "None": {
+                "sizeOnTargetMachine": "1541838",
+                "sizeOnLocalMachine": "1541838.0",
+                "compressionTime": "0.9586491584777832",
+                "dataTransferTime": "0.024881362915039062",
+                "readingFileTime": "5.435943603515625e-05"
+            },
+            "TotaltransferTime": "10.007040739059448"
+        },
+        "2": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "None": {
+                "sizeOnTargetMachine": "1541838",
+                "sizeOnLocalMachine": "1541838.0",
+                "compressionTime": "0.9716804027557373",
+                "dataTransferTime": "0.016911745071411133",
+                "readingFileTime": "6.4849853515625e-05"
+            },
+            "TotaltransferTime": "7.385434865951538"
+        },
+        "3": {
+            "TotalClearTime": "0.0",
+            "None": {
+                "sizeOnTargetMachine": "1541838",
+                "sizeOnLocalMachine": "1541838.0",
+                "compressionTime": "0.9632024765014648",
+                "dataTransferTime": "0.019105911254882812",
+                "readingFileTime": "5.555152893066406e-05"
+            },
+            "TotaltransferTime": "7.5506203174591064"
+        }
+    },
+    "Sample-SQL-File-50000rows.sql-104857-gzip-3-1707477151.4339416": {
+        "1": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "1": {
+                "sizeOnTargetMachine": "1542317.0",
+                "sizeOnLocalMachine": "1542317.0",
+                "compressionTime": "0.9541645050048828",
+                "dataTransferTime": "0.01737046241760254",
+                "readingFileTime": "0.0003478527069091797"
+            },
+            "TotaltransferTime": "11.06884241104126"
+        },
+        "2": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "1": {
+                "sizeOnTargetMachine": "1542317.0",
+                "sizeOnLocalMachine": "1542317.0",
+                "compressionTime": "0.9615108966827393",
+                "dataTransferTime": "0.01669621467590332",
+                "readingFileTime": "0.00023698806762695312"
+            },
+            "TotaltransferTime": "9.290515184402466"
+        },
+        "3": {
+            "TotalClearTime": "0.0",
+            "1": {
+                "sizeOnTargetMachine": "1542317.0",
+                "sizeOnLocalMachine": "1542317.0",
+                "compressionTime": "0.9598701000213623",
+                "dataTransferTime": "0.015729188919067383",
+                "readingFileTime": "0.0002562999725341797"
+            },
+            "TotaltransferTime": "9.59605073928833"
+        }
+    },
+    "Sample-SQL-File-100000rows.sql-104857-None-1-1707477181.3894303": {
+        "1": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "None": {
+                "sizeOnTargetMachine": "8897927",
+                "sizeOnLocalMachine": "8897927.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "0.08154010772705078",
+                "readingFileTime": "0.00041556358337402344"
+            },
+            "TotaltransferTime": "6.524138927459717"
+        },
+        "2": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "None": {
+                "sizeOnTargetMachine": "8897927",
+                "sizeOnLocalMachine": "8897927.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "0.06924581527709961",
+                "readingFileTime": "6.389617919921875e-05"
+            },
+            "TotaltransferTime": "7.889828681945801"
+        },
+        "3": {
+            "TotalClearTime": "4.76837158203125e-07",
+            "None": {
+                "sizeOnTargetMachine": "8897927",
+                "sizeOnLocalMachine": "8897927.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "0.07181715965270996",
+                "readingFileTime": "5.817413330078125e-05"
+            },
+            "TotaltransferTime": "6.991333246231079"
+        }
+    },
+    "Sample-SQL-File-100000rows.sql-104857-None-3-1707477202.794831": {
+        "1": {
+            "TotalClearTime": "0.0",
+            "1": {
+                "sizeOnTargetMachine": "8897927.0",
+                "sizeOnLocalMachine": "8897927.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "0.07134604454040527",
+                "readingFileTime": "0.000301361083984375"
+            },
+            "TotaltransferTime": "10.23484992980957"
+        },
+        "2": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "1": {
+                "sizeOnTargetMachine": "8897927.0",
+                "sizeOnLocalMachine": "8897927.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "0.07422709465026855",
+                "readingFileTime": "0.00022459030151367188"
+            },
+            "TotaltransferTime": "9.798264026641846"
+        },
+        "3": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "1": {
+                "sizeOnTargetMachine": "8897927.0",
+                "sizeOnLocalMachine": "8897927.0",
+                "compressionTime": "0.0",
+                "dataTransferTime": "0.07517790794372559",
+                "readingFileTime": "0.00021266937255859375"
+            },
+            "TotaltransferTime": "8.688404083251953"
+        }
+    },
+    "Sample-SQL-File-100000rows.sql-104857-gzip-1-1707477231.5164623": {
+        "1": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "None": {
+                "sizeOnTargetMachine": "3082979",
+                "sizeOnLocalMachine": "3082979.0",
+                "compressionTime": "1.9331245422363281",
+                "dataTransferTime": "0.031696319580078125",
+                "readingFileTime": "0.0001392364501953125"
+            },
+            "TotaltransferTime": "8.054442644119263"
+        },
+        "2": {
+            "TotalClearTime": "0.0",
+            "None": {
+                "sizeOnTargetMachine": "3082979",
+                "sizeOnLocalMachine": "3082979.0",
+                "compressionTime": "1.9289579391479492",
+                "dataTransferTime": "0.033564090728759766",
+                "readingFileTime": "0.0001468658447265625"
+            },
+            "TotaltransferTime": "9.631493091583252"
+        },
+        "3": {
+            "TotalClearTime": "0.0",
+            "None": {
+                "sizeOnTargetMachine": "3082979",
+                "sizeOnLocalMachine": "3082979.0",
+                "compressionTime": "1.9380125999450684",
+                "dataTransferTime": "0.03737616539001465",
+                "readingFileTime": "9.322166442871094e-05"
+            },
+            "TotaltransferTime": "9.564950227737427"
+        }
+    },
+    "Sample-SQL-File-100000rows.sql-104857-gzip-3-1707477258.7674754": {
+        "1": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "1": {
+                "sizeOnTargetMachine": "2057049.0",
+                "sizeOnLocalMachine": "2057049.0",
+                "compressionTime": "1.2882356643676758",
+                "dataTransferTime": "0.028423786163330078",
+                "readingFileTime": "0.00018715858459472656"
+            },
+            "2": {
+                "sizeOnTargetMachine": "1026527",
+                "sizeOnLocalMachine": "1026527.0",
+                "compressionTime": "0.6382474899291992",
+                "dataTransferTime": "0.014266014099121094",
+                "readingFileTime": "0.00012969970703125"
+            },
+            "TotaltransferTime": "11.48469090461731"
+        },
+        "2": {
+            "TotalClearTime": "0.0",
+            "1": {
+                "sizeOnTargetMachine": "2057049.0",
+                "sizeOnLocalMachine": "2057049.0",
+                "compressionTime": "1.2780086994171143",
+                "dataTransferTime": "0.023349285125732422",
+                "readingFileTime": "0.00016951560974121094"
+            },
+            "2": {
+                "sizeOnTargetMachine": "1026527",
+                "sizeOnLocalMachine": "1026527.0",
+                "compressionTime": "0.635195255279541",
+                "dataTransferTime": "0.011114358901977539",
+                "readingFileTime": "0.000141143798828125"
+            },
+            "TotaltransferTime": "9.675969123840332"
+        },
+        "3": {
+            "TotalClearTime": "0.0",
+            "1": {
+                "sizeOnTargetMachine": "2057049.0",
+                "sizeOnLocalMachine": "2057049.0",
+                "compressionTime": "1.2922167778015137",
+                "dataTransferTime": "0.020648479461669922",
+                "readingFileTime": "0.0001621246337890625"
+            },
+            "2": {
+                "sizeOnTargetMachine": "1026527",
+                "sizeOnLocalMachine": "1026527.0",
+                "compressionTime": "0.6401917934417725",
+                "dataTransferTime": "0.012900590896606445",
+                "readingFileTime": "0.00010347366333007812"
+            },
+            "TotaltransferTime": "9.27461552619934"
+        }
+    }
+}
