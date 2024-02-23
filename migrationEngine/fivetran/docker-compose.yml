@@ -1,0 +1,9 @@
+version: '3'
+services:
+  fivetran:
+    image: fareshamouda/fivetranreplicationengine
+    privileged: true
+    container_name: fivetran
+    volumes:
+      - ./data:/app/data
+      - ./configs:/app/configs
