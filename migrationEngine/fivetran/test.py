@@ -68,26 +68,10 @@ def atlas(method, endpoint, payload=None):
         return None
 
 
-def waitFor(wantedState):
-    state = ""
-    while state != wantedState:
-        time.sleep(1)
-        method = 'GET'  #'POST' 'PATCH' 'GET'
-        endpoint = 'connectors/' + connector_id 
-
-        payload = {}
-
-        response = atlas(method, endpoint, payload)
-        
-        if response is not None:
-            state = response['data']['status']['sync_state'] 
-
-        print(f"waiting for {wantedState} state ...")
-
 def runSync():
 
-    method = 'POST'  #'POST' 'PATCH' 'GET'
-    endpoint = 'connectors/' + connector_id + '/resync'
+    method = 'GET'  #'POST' 'PATCH' 'GET'
+    endpoint = 'connectors/' + connector_id + '/state'
     payload = {
         "scope":{
         schema : tables
@@ -95,16 +79,11 @@ def runSync():
     }
 
     response = atlas(method, endpoint, payload)
-
+    print(response)
     if response is not None:
         print(Fore.CYAN + 'Call: ' + method + ' ' + endpoint + ' ' + str(payload))
         print(Fore.GREEN +  'Response: ' + response['code'])
         print(Fore.MAGENTA + str(response))
-
-    waitFor("syncing")
-    waitFor("scheduled")
-    print("syncing is done ! ")
-
 
     
 
