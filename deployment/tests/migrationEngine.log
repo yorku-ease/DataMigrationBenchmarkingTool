@@ -1,0 +1,26 @@
+Key=thisIdIsForTestPurposes, Value=type : info, migration : started, Timestamp : 1709659326.5661273, stream : None
+Key=thisIdIsForTestPurposes, Value=type : info, ReadingFile : started, Timestamp : 1709659326.7762191, stream : None
+Key=thisIdIsForTestPurposes, Value=type : info, ReadingFile : completed, Timestamp : 1709659326.778334, stream : None
+Key=thisIdIsForTestPurposes, Value=type : info, FileChunk1Transfer : started, Timestamp : 1709659326.7783477, stream : None
+Key=thisIdIsForTestPurposes, Value=type : info, FileChunk1Transfer : completed, Timestamp : 1709659326.7940555, stream : None
+Key=thisIdIsForTestPurposes, Value=type : info, migration : completed, Timestamp : 1709659326.7946944, stream : None
+Key=thisIdIsForTestPurposes, Value=type : info, fileSplitting : started, Timestamp : 1709659329.4438257
+Key=thisIdIsForTestPurposes, Value=type : info, fileSplitting : completed, Timestamp : 1709659329.445744
+Key=thisIdIsForTestPurposes, Value=type : info, migration : started, Timestamp : 1709659329.4498239, stream : 1
+Key=thisIdIsForTestPurposes, Value=type : info, migration : started, Timestamp : 1709659329.4503195, stream : 2
+Key=thisIdIsForTestPurposes, Value=type : info, migration : started, Timestamp : 1709659329.450828, stream : 3
+Key=thisIdIsForTestPurposes, Value=type : info, ReadingFile : started, Timestamp : 1709659329.6420085, stream : 1
+Key=thisIdIsForTestPurposes, Value=type : info, ReadingFile : completed, Timestamp : 1709659329.6424284, stream : 1
+Key=thisIdIsForTestPurposes, Value=type : info, FileChunk1Transfer : started, Timestamp : 1709659329.642456, stream : 1
+Key=thisIdIsForTestPurposes, Value=type : info, FileChunk1Transfer : completed, Timestamp : 1709659329.6521423, stream : 1
+Key=thisIdIsForTestPurposes, Value=type : info, migration : completed, Timestamp : 1709659329.6526196, stream : 1
+Key=thisIdIsForTestPurposes, Value=type : info, ReadingFile : started, Timestamp : 1709659329.6867502, stream : 2
+Key=thisIdIsForTestPurposes, Value=type : info, ReadingFile : started, Timestamp : 1709659329.6869645, stream : 3
+Key=thisIdIsForTestPurposes, Value=type : info, ReadingFile : completed, Timestamp : 1709659329.687122, stream : 2
+Key=thisIdIsForTestPurposes, Value=type : info, FileChunk1Transfer : started, Timestamp : 1709659329.6871345, stream : 2
+Key=thisIdIsForTestPurposes, Value=type : info, ReadingFile : completed, Timestamp : 1709659329.6876502, stream : 3
+Key=thisIdIsForTestPurposes, Value=type : info, FileChunk1Transfer : started, Timestamp : 1709659329.6876633, stream : 3
+Key=thisIdIsForTestPurposes, Value=type : info, FileChunk1Transfer : completed, Timestamp : 1709659329.6992798, stream : 2
+Key=thisIdIsForTestPurposes, Value=type : info, FileChunk1Transfer : completed, Timestamp : 1709659329.7001302, stream : 3
+Key=thisIdIsForTestPurposes, Value=type : info, migration : completed, Timestamp : 1709659329.7003543, stream : 2
+Key=thisIdIsForTestPurposes, Value=type : info, migration : completed, Timestamp : 1709659329.7011514, stream : 3

@@ -1,0 +1,24 @@
+Key=thisIdIsForTestPurposes, Value=TotalClearTime : 2.384185791015625e-07
+Key=thisIdIsForTestPurposes, Value=sizeOnTargetMachine : 1048576, stream : None
+Key=thisIdIsForTestPurposes, Value=sizeOnLocalMachine : 1048576, stream : None
+Key=thisIdIsForTestPurposes, Value=compressionTime : 0, stream : None
+Key=thisIdIsForTestPurposes, Value=dataTransferTime : 0.012774229049682617, stream : None
+Key=thisIdIsForTestPurposes, Value=readingFileTime : 0.0020580291748046875, stream : None
+Key=thisIdIsForTestPurposes, Value=TotaltransferTime : 1.9513633251190186
+Key=thisIdIsForTestPurposes, Value=TotalClearTime : 2.384185791015625e-07
+Key=thisIdIsForTestPurposes, Value=sizeOnTargetMachine : 349525, stream : 1
+Key=thisIdIsForTestPurposes, Value=sizeOnLocalMachine : 349525, stream : 1
+Key=thisIdIsForTestPurposes, Value=compressionTime : 0, stream : 1
+Key=thisIdIsForTestPurposes, Value=dataTransferTime : 0.006072521209716797, stream : 1
+Key=thisIdIsForTestPurposes, Value=readingFileTime : 0.00034928321838378906, stream : 1
+Key=thisIdIsForTestPurposes, Value=sizeOnTargetMachine : 349525, stream : 2
+Key=thisIdIsForTestPurposes, Value=sizeOnLocalMachine : 349525, stream : 2
+Key=thisIdIsForTestPurposes, Value=compressionTime : 0, stream : 2
+Key=thisIdIsForTestPurposes, Value=dataTransferTime : 0.007311105728149414, stream : 2
+Key=thisIdIsForTestPurposes, Value=readingFileTime : 0.0003216266632080078, stream : 2
+Key=thisIdIsForTestPurposes, Value=sizeOnTargetMachine : 349526, stream : 3
+Key=thisIdIsForTestPurposes, Value=sizeOnLocalMachine : 349526, stream : 3
+Key=thisIdIsForTestPurposes, Value=compressionTime : 0, stream : 3
+Key=thisIdIsForTestPurposes, Value=dataTransferTime : 0.008144378662109375, stream : 3
+Key=thisIdIsForTestPurposes, Value=readingFileTime : 0.0006554126739501953, stream : 3
+Key=thisIdIsForTestPurposes, Value=TotaltransferTime : 1.9816677570343018
