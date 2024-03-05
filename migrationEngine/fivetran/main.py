@@ -20,11 +20,16 @@ config.read('configs/migrationEngineConfig.ini')
 
 
 
-api_key = config.get('experiment', 'API_KEY')
-api_secret = config.get('experiment', 'API_SECRET')
+api_key = config.get('migrationEnvironment', 'API_KEY')
+api_secret = config.get('migrationEnvironment', 'API_SECRET')
 connector_id = config.get('experiment', 'connector_id')
 group_id = config.get('experiment', 'group_id')
 schema = config.get('experiment', 'schema')
+time_to_wait_beforeRequest = config.getint('migrationEnvironment', 'time_to_wait_beforeRequest')
+
+if time_to_wait_beforeRequest is None:
+    time_to_wait_beforeRequest = 1
+
 tables =  config.get('experiment', 'tables').split("+")
 a = HTTPBasicAuth(api_key, api_secret)
 
@@ -71,7 +76,7 @@ def atlas(method, endpoint, payload=None):
 def waitFor(wantedState):
     state = ""
     while state != wantedState:
-        time.sleep(1)
+        time.sleep(time_to_wait_beforeRequest)
         method = 'GET'  #'POST' 'PATCH' 'GET'
         endpoint = 'connectors/' + connector_id 
 

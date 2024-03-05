@@ -5,9 +5,9 @@ providers:
   folder: Services # The folder where to place the dashboards
   type: file
   options:
-    path: /var/lib/grafana/dashboards/dockercontainersmonitoring.json
+    path: /var/lib/grafana/dashboards/dockerContainersMonitoring.json
 - name: System monitoring # A uniquely identifiable name for the provider
   folder: Services # The folder where to place the dashboards
   type: file
   options:
-    path: /var/lib/grafana/dashboards/Systemmonitoring.json
+    path: /var/lib/grafana/dashboards/systemMonitoring.json

@@ -19,28 +19,28 @@ jobs:
         docker compose up -d
     - name: Check Prometheus
       run: |
-        chmod +x ./.github/workflows/check_health.sh
-        ./.github/workflows/check_health.sh prometheus
+        chmod +x ./.github/workflows/checkHealth.sh
+        ./.github/workflows/checkHealth.sh prometheus
 #    - name: kill cAdvisor and node-exporter
 #      run: |
 #       cd deployment/controller
 #       docker compose down
     - name: Check Mongo
       run: |
-        ./.github/workflows/check_health.sh my-mongodb
+        ./.github/workflows/checkHealth.sh my-mongodb
     - name: Check Grafana
       run: |
-        ./.github/workflows/check_health.sh my-mongodb
+        ./.github/workflows/checkHealth.sh my-mongodb
     - name: Run cAdvisor and node-exporter
       run: |
         cd deployment/controller
         docker compose up -d cadvisor node-exporter
     - name: Check cadvisor
       run: |
-        ./.github/workflows/check_health.sh cadvisor
+        ./.github/workflows/checkHealth.sh cadvisor
     - name: Check node-exporter
       run: |
-        ./.github/workflows/check_health.sh node-exporter
+        ./.github/workflows/checkHealth.sh node-exporter
 #    - name: kill databases
  #     run: |
  #       cd deployment/database
@@ -51,7 +51,7 @@ jobs:
         docker compose up -d
     - name: Check kafka
       run: |
-        ./.github/workflows/check_health.sh kafka1
+        ./.github/workflows/checkHealth.sh kafka1
 #    - name: kill reporter
 #      run: |
 #        cd deployment/reporter/"kafkacluster"

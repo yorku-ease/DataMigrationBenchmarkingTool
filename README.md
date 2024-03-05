@@ -12,7 +12,7 @@ If you encounter any issues or have questions while using our system, please don
 
 ## Running Tests
 
-To run tests for this project, please refer to the [test.md](test.md) file. The `test.md` file provides detailed instructions for each test scenario, including prerequisites, dependencies, and execution steps. Follow the outlined procedures to ensure the correctness and functionality of the project. If you encounter any issues or have questions related to the testing process, feel free to open an issue for assistance.
+To run tests for this project, please refer to the [TEST.md](TEST.md) file. The `TEST.md` file provides detailed instructions for each test scenario, including prerequisites, dependencies, and execution steps. Follow the outlined procedures to ensure the correctness and functionality of the project. If you encounter any issues or have questions related to the testing process, feel free to open an issue for assistance.
 
 ## Physical Requirements
 - Data Source: Where the data journey begins. The Migration Engine grabs data from here to send it off to the target machine.

@@ -1,5 +1,5 @@
-from DefaultFileMigrator import DefaultFileMigrator
-from KafkaLogger import KafkaLogger
+from defaultFileMigrator import DefaultFileMigrator
+from kafkaLogger import KafkaLogger
 
 import os,configparser,time,traceback,sys
 

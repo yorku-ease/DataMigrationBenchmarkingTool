@@ -1,4 +1,4 @@
-from my_parser import Parser
+from myParser import Parser
 
 import configparser
 from pymongo import MongoClient

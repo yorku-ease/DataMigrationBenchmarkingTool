@@ -48,8 +48,8 @@ services:
     volumes: 
       - "grafana-data:/var/lib/grafana"
       - "./datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml"
-      - "./dockercontainersmonitoring.json:/var/lib/grafana/dashboards/dockercontainersmonitoring.json"
-      - "./Systemmonitoring.json:/var/lib/grafana/dashboards/Systemmonitoring.json"
+      - "./dockerContainersMonitoring.json:/var/lib/grafana/dashboards/dockerContainersMonitoring.json"
+      - "./systemMonitoring.json:/var/lib/grafana/dashboards/systemMonitoring.json"
       - "./default.yaml:/etc/grafana/provisioning/dashboards/default.yaml"
     privileged: true
     depends_on:
