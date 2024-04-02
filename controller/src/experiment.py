@@ -95,7 +95,7 @@ class Experiment(Thread):
             error_message = str(e)
             error_location = f"File: {__file__}, Function: {__name__}, Line: {sys.exc_info()[-1].tb_lineno}"
             exception_type = type(e).__name__
-            message = f"type : error, Timestamp: {timestamp}, ErrorMessage: {error_message}, {error_location}, ExceptionType: {exception_type}"
+            message = f"type : error, Timestamp : {timestamp}, ErrorMessage: {error_message}, {error_location}, ExceptionType: {exception_type}"
             self.logger.logFramework(self.loggingId,message)
             stack_trace = traceback.format_exc()
             print(message)
