@@ -1,68 +1,35 @@
 [
     {
         "Experiment Number": "1",
-        "file": "5mbFile",
-        "limit": "104857600",
-        "compressionType": "None",
-        "stream": "3",
-        "Experiment startTime": "1712535787.2321649",
+        "file": "GZIP",
+        "limit": "3",
+        "compressionType": "testdb=>testdb",
+        "stream": "TEST",
+        "Experiment startTime": "1713184082.223874",
         "type": "info",
         "Experiment": "started",
-        "Timestamp": "1712535792.2329063"
+        "Timestamp": "1713184083.2241578"
     },
     {
         "Experiment Number": "1",
-        "file": "5mbFile",
-        "limit": "104857600",
-        "compressionType": "None",
-        "stream": "3",
-        "Experiment startTime": "1712535787.2321649",
+        "file": "GZIP",
+        "limit": "3",
+        "compressionType": "testdb=>testdb",
+        "stream": "TEST",
+        "Experiment startTime": "1713184082.223874",
         "type": "info",
         "Experiment": "completed",
-        "Timestamp": "1712535797.9971437"
+        "Timestamp": "1713184329.4417403"
     },
     {
-        "Experiment Number": "1",
-        "file": "5mbFile",
-        "limit": "104857600",
-        "compressionType": "gzip",
-        "stream": "3",
-        "Experiment startTime": "1712535797.997203",
+        "Experiment Number": "2",
+        "file": "GZIP",
+        "limit": "3",
+        "compressionType": "testdb=>testdb",
+        "stream": "TEST",
+        "Experiment startTime": "1713184082.223874",
         "type": "info",
         "Experiment": "started",
-        "Timestamp": "1712535802.9975805"
-    },
-    {
-        "Experiment Number": "1",
-        "file": "5mbFile",
-        "limit": "104857600",
-        "compressionType": "gzip",
-        "stream": "3",
-        "Experiment startTime": "1712535797.997203",
-        "type": "info",
-        "Experiment": "completed",
-        "Timestamp": "1712535807.5743916"
-    },
-    {
-        "Experiment Number": "1",
-        "file": "5mbFile",
-        "limit": "104857600",
-        "compressionType": "lz4",
-        "stream": "3",
-        "Experiment startTime": "1712535807.5744715",
-        "type": "info",
-        "Experiment": "started",
-        "Timestamp": "1712535812.5751595"
-    },
-    {
-        "Experiment Number": "1",
-        "file": "5mbFile",
-        "limit": "104857600",
-        "compressionType": "lz4",
-        "stream": "3",
-        "Experiment startTime": "1712535807.5744715",
-        "type": "info",
-        "Experiment": "completed",
-        "Timestamp": "1712535819.6213117"
+        "Timestamp": "1713184330.4421504"
     }
 ]

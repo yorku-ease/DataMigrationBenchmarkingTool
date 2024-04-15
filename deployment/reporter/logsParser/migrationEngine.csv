@@ -1,73 +1,137 @@
-Experiment Number,file,limit,compressionType,streams,Experiment startTime,logType,operation,statusOfOperation,timestamp,streamNumber
-1,5mbFile,104857600,None,3,1712535787.2321649,info,fileSplitting,started,1712535795.1410866
-1,5mbFile,104857600,None,3,1712535787.2321649,info,fileSplitting,completed,1712535795.152426
-1,5mbFile,104857600,None,3,1712535787.2321649,info,migration,started,1712535795.1560838,1
-1,5mbFile,104857600,None,3,1712535787.2321649,info,migration,started,1712535795.1564016,2
-1,5mbFile,104857600,None,3,1712535787.2321649,info,migration,started,1712535795.156727,3
-1,5mbFile,104857600,None,3,1712535787.2321649,info,ReadingFile,started,1712535795.6924217,1
-1,5mbFile,104857600,None,3,1712535787.2321649,info,ReadingFile,completed,1712535795.693628,1
-1,5mbFile,104857600,None,3,1712535787.2321649,info,FileChunk1Transfer,started,1712535795.6936467,1
-1,5mbFile,104857600,None,3,1712535787.2321649,info,ReadingFile,started,1712535795.6960044,3
-1,5mbFile,104857600,None,3,1712535787.2321649,info,ReadingFile,started,1712535795.6968846,2
-1,5mbFile,104857600,None,3,1712535787.2321649,info,ReadingFile,completed,1712535795.69711,3
-1,5mbFile,104857600,None,3,1712535787.2321649,info,FileChunk1Transfer,started,1712535795.697125,3
-1,5mbFile,104857600,None,3,1712535787.2321649,info,ReadingFile,completed,1712535795.6989527,2
-1,5mbFile,104857600,None,3,1712535787.2321649,info,FileChunk1Transfer,started,1712535795.6989834,2
-1,5mbFile,104857600,None,3,1712535787.2321649,info,FileChunk1Transfer,completed,1712535795.7429698,1
-1,5mbFile,104857600,None,3,1712535787.2321649,info,migration,completed,1712535795.7456794,1
-1,5mbFile,104857600,None,3,1712535787.2321649,info,FileChunk1Transfer,completed,1712535795.7531538,3
-1,5mbFile,104857600,None,3,1712535787.2321649,info,migration,completed,1712535795.7546537,3
-1,5mbFile,104857600,None,3,1712535787.2321649,info,FileChunk1Transfer,completed,1712535795.7653422,2
-1,5mbFile,104857600,None,3,1712535787.2321649,info,migration,completed,1712535795.765881,2
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,fileSplitting,started,1712535805.086895
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,fileSplitting,completed,1712535805.0962148
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,migration,started,1712535805.099935,1
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,migration,started,1712535805.100808,2
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,migration,started,1712535805.1012897,3
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,ReadingFile,started,1712535805.6370387,1
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,ReadingFile,completed,1712535805.6382654,1
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,FileChunk1,started,1712535805.6382828,1
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,ReadingFile,started,1712535805.6437643,2
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,ReadingFile,completed,1712535805.644979,2
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,FileChunk1,started,1712535805.6449916,2
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,FileChunk1,completed,1712535805.647444,1
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,FileChunk1Transfer,started,1712535805.6474557,1
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,FileChunk1Transfer,completed,1712535805.6497679,1
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,migration,completed,1712535805.6502578,1
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,ReadingFile,started,1712535805.6522324,3
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,ReadingFile,completed,1712535805.6534085,3
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,FileChunk1,started,1712535805.6534238,3
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,FileChunk1,completed,1712535805.6544065,2
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,FileChunk1Transfer,started,1712535805.6544218,2
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,FileChunk1Transfer,completed,1712535805.6583061,2
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,migration,completed,1712535805.6591122,2
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,FileChunk1,completed,1712535805.663051,3
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,FileChunk1Transfer,started,1712535805.6630678,3
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,FileChunk1Transfer,completed,1712535805.6655338,3
-1,5mbFile,104857600,gzip,3,1712535797.997203,info,migration,completed,1712535805.6659894,3
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,fileSplitting,started,1712535815.6404088
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,fileSplitting,completed,1712535815.65294
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,migration,started,1712535815.6572297,1
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,migration,started,1712535815.658099,2
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,migration,started,1712535815.6588717,3
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,ReadingFile,started,1712535817.2151952,2
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,ReadingFile,started,1712535817.2154398,3
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,ReadingFile,started,1712535817.2156708,1
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,ReadingFile,completed,1712535817.216652,2
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,FileChunk1,started,1712535817.216671,2
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,ReadingFile,completed,1712535817.2168138,3
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,FileChunk1,started,1712535817.2168279,3
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,FileChunk1,completed,1712535817.2169433,2
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,FileChunk1Transfer,started,1712535817.2169523,2
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,FileChunk1,completed,1712535817.2171295,3
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,FileChunk1Transfer,started,1712535817.2171385,3
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,ReadingFile,completed,1712535817.217407,1
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,FileChunk1,started,1712535817.2174225,1
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,FileChunk1,completed,1712535817.2178843,1
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,FileChunk1Transfer,started,1712535817.217894,1
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,FileChunk1Transfer,completed,1712535817.2427568,1
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,migration,completed,1712535817.2432873,1
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,FileChunk1Transfer,completed,1712535817.2699435,2
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,FileChunk1Transfer,completed,1712535817.2704806,3
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,migration,completed,1712535817.2708275,2
-1,5mbFile,104857600,lz4,3,1712535807.5744715,info,migration,completed,1712535817.2714024,3
+Experiment Number,compress,maxStreams,sourceDatabasetoTargetDatabase,tables,Experiment startTime,logTime,logType,logLocation,logDescription
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,IBM db_migr -- log (2024-04-15 12:28:31.171965)
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Version - 1.0.0 (404b0de)
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.173,TRACE,<1074:MainThread> logger.py:81,Migration parameters
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Temporary directory:             /tmp/db_migr/db_migr-20240415_122831.167609
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Maximum # of insertion workers:  3
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,"Information format:              [USER, PASSW, DBNAME, PORT, SCHEMA]"
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Source information:              db2inst1 ***** testdb 50000
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Target information:              db2inst1 ***** testdb 50000
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Source hosts:                    ['206.12.99.99']
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Target hosts:                    ['206.12.95.67']
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Number of tables to transfer:    1
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.173,INFO,<1074:MainThread> logger.py:213,Executed Command: /usr/bin/migration_client db2_db2 --shosts 206.12.99.99 --sport 50000 --suser db2inst1 --spass ***** --sdb testdb --thost 206.12.95.67 --tport 50000 --tuser db2inst1 --tpass ***** --tdb testdb --compress GZIP --max-data-streams 3 --mv TEST TEST
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.174,INFO,<1074:MainThread> query_executor.py:93,Db2 driver has not been provided by user. Searching in default locations.
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.181,INFO,<1074:MainThread> query_executor.py:97,Using db2 driver libdb2.so from system loadable library path
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.181,INFO,<1074:MainThread> query_executor.py:93,Db2 driver has not been provided by user. Searching in default locations.
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.181,INFO,<1074:MainThread> query_executor.py:97,Using db2 driver libdb2.so from system loadable library path
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.183,INFO,<1074:MainThread> prechecks.py:901,Precheck dependencies validated succesfully
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.183,INFO,<1074:ThreadPoolExecutor-0_0> prechecks.py:787,Running precheck: PRE: check source port ssl
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.184,INFO,<1074:ThreadPoolExecutor-0_1> prechecks.py:787,Running precheck: PRE: check target port ssl
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.184,INFO,<1074:ThreadPoolExecutor-0_0> prechecks.py:742,Precheck 'check source port ssl' in stage PRE:  SKIPPED as N/A: No ssl specified in source connection specification
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.184,INFO,<1074:ThreadPoolExecutor-0_2> prechecks.py:787,Running precheck: PRE: check if maintenance mode can be enabled
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.184,INFO,<1074:ThreadPoolExecutor-0_1> prechecks.py:742,Precheck 'check target port ssl' in stage PRE:  SKIPPED as N/A: No ssl specified in target connection specification
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.185,DEBUG,<1074:ThreadPoolExecutor-0_0> prechecks.py:827,Precheck check source port ssl took 0:00:00.001522
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.185,INFO,<1074:ThreadPoolExecutor-0_2> prechecks.py:742,Precheck 'check if maintenance mode can be enabled' in stage PRE:  SKIPPED as N/A: no --maint-mode parameter passed
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.185,DEBUG,<1074:ThreadPoolExecutor-0_1> prechecks.py:827,Precheck check target port ssl took 0:00:00.001639
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.186,INFO,<1074:ThreadPoolExecutor-0_1> prechecks.py:787,Running precheck: PRE: check source port ssl cert
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.186,INFO,<1074:ThreadPoolExecutor-0_1> prechecks.py:742,Precheck 'check source port ssl cert' in stage PRE:  SKIPPED as N/A: No ssl specified in source connection specification
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.186,DEBUG,<1074:ThreadPoolExecutor-0_1> prechecks.py:827,Precheck check source port ssl cert took 0:00:00.000308
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.187,DEBUG,<1074:ThreadPoolExecutor-0_2> prechecks.py:827,Precheck check if maintenance mode can be enabled took 0:00:00.002405
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.187,INFO,<1074:ThreadPoolExecutor-0_4> prechecks.py:787,Running precheck: PRE: check target port ssl cert
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.188,INFO,<1074:ThreadPoolExecutor-0_5> prechecks.py:787,Running precheck: PRE: check source database connection
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.188,INFO,<1074:ThreadPoolExecutor-0_4> prechecks.py:742,Precheck 'check target port ssl cert' in stage PRE:  SKIPPED as N/A: No ssl specified in target connection specification
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.189,DEBUG,<1074:ThreadPoolExecutor-0_4> prechecks.py:827,Precheck check target port ssl cert took 0:00:00.001687
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.191,INFO,<1074:ThreadPoolExecutor-0_0> prechecks.py:787,Running precheck: PRE: check target database connection
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.665,INFO,<1074:ThreadPoolExecutor-0_5> prechecks.py:742,Precheck 'check source database connection' in stage PRE:  PASSED
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.666,DEBUG,<1074:ThreadPoolExecutor-0_5> prechecks.py:827,Precheck check source database connection took 0:00:00.477991
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.666,INFO,<1074:ThreadPoolExecutor-0_7> prechecks.py:787,Running precheck: PRE: check source tables
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.667,INFO,<1074:ThreadPoolExecutor-0_8> prechecks.py:787,Running precheck: PRE: check source DBMS version
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.670,INFO,<1074:ThreadPoolExecutor-0_9> prechecks.py:787,Running precheck: PRE: check external tables on source
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.672,INFO,<1074:ThreadPoolExecutor-0_10> prechecks.py:787,Running precheck: PRE: check source driver version
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.674,INFO,<1074:ThreadPoolExecutor-0_11> prechecks.py:787,Running precheck: PRE: check source tenant
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.679,INFO,<1074:ThreadPoolExecutor-0_12> prechecks.py:787,Running precheck: PRE: check DDL extractor
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.679,INFO,<1074:ThreadPoolExecutor-0_11> prechecks.py:742,Precheck 'check source tenant' in stage PRE:  SKIPPED as N/A: No precheck needed for default source TENANT
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.679,TRACE,<1074:ThreadPoolExecutor-0_12> logger.py:81,db2look options: -d testdb -c -e -noview -t SYSCAT.TABLES -td @ -i db2inst1 -a -w <hidden>
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.680,DEBUG,<1074:ThreadPoolExecutor-0_11> prechecks.py:827,Precheck check source tenant took 0:00:00.006517
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.812,INFO,<1074:ThreadPoolExecutor-0_8> prechecks.py:742,Precheck 'check source DBMS version' in stage PRE:  PASSED
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.813,DEBUG,<1074:ThreadPoolExecutor-0_8> prechecks.py:827,Precheck check source DBMS version took 0:00:00.145510
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.813,INFO,<1074:ThreadPoolExecutor-0_10> prechecks.py:742,Precheck 'check source driver version' in stage PRE:  PASSED
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:31.814,DEBUG,<1074:ThreadPoolExecutor-0_10> prechecks.py:827,Precheck check source driver version took 0:00:00.141810
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:32.194,INFO,<1074:ThreadPoolExecutor-0_7> prechecks.py:742,Precheck 'check source tables' in stage PRE:  PASSED
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:32.194,DEBUG,<1074:ThreadPoolExecutor-0_7> prechecks.py:827,Precheck check source tables took 0:00:00.527828
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:32.197,INFO,<1074:ThreadPoolExecutor-0_9> prechecks.py:742,Precheck 'check external tables on source' in stage PRE:  PASSED
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:32.197,DEBUG,<1074:ThreadPoolExecutor-0_9> prechecks.py:827,Precheck check external tables on source took 0:00:00.527735
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:32.923,INFO,<1074:ThreadPoolExecutor-0_12> prechecks.py:742,Precheck 'check DDL extractor' in stage PRE:  PASSED
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:32.924,DEBUG,<1074:ThreadPoolExecutor-0_12> prechecks.py:827,Precheck check DDL extractor took 0:00:01.245536
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:37.000,INFO,<1074:ThreadPoolExecutor-0_0> prechecks.py:742,Precheck 'check target database connection' in stage PRE:  PASSED
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:37.001,DEBUG,<1074:ThreadPoolExecutor-0_0> prechecks.py:827,Precheck check target database connection took 0:00:05.809809
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:37.001,INFO,<1074:ThreadPoolExecutor-0_13> prechecks.py:787,Running precheck: PRE: check target DBMS version
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:37.002,INFO,<1074:ThreadPoolExecutor-0_14> prechecks.py:787,Running precheck: PRE: check external tables on target
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:37.005,INFO,<1074:ThreadPoolExecutor-0_15> prechecks.py:787,Running precheck: PRE: check target driver version
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:37.006,INFO,<1074:ThreadPoolExecutor-0_4> prechecks.py:787,Running precheck: PRE: check tablespace
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:37.006,INFO,<1074:ThreadPoolExecutor-0_6> prechecks.py:787,Running precheck: PRE: check target tenant
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:37.012,INFO,<1074:ThreadPoolExecutor-0_4> prechecks.py:742,Precheck 'check tablespace' in stage PRE:  PASSED
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:37.013,INFO,<1074:ThreadPoolExecutor-0_6> prechecks.py:742,Precheck 'check target tenant' in stage PRE:  SKIPPED as N/A: No precheck needed for default target TENANT
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:37.013,DEBUG,<1074:ThreadPoolExecutor-0_4> prechecks.py:827,Precheck check tablespace took 0:00:00.007598
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:37.014,DEBUG,<1074:ThreadPoolExecutor-0_6> prechecks.py:827,Precheck check target tenant took 0:00:00.007739
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:48.117,INFO,<1074:ThreadPoolExecutor-0_15> prechecks.py:742,Precheck 'check target driver version' in stage PRE:  PASSED
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:48.118,DEBUG,<1074:ThreadPoolExecutor-0_15> prechecks.py:827,Precheck check target driver version took 0:00:11.113370
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:50.191,INFO,<1074:ThreadPoolExecutor-0_13> prechecks.py:742,Precheck 'check target DBMS version' in stage PRE:  PASSED
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:50.191,DEBUG,<1074:ThreadPoolExecutor-0_13> prechecks.py:827,Precheck check target DBMS version took 0:00:13.189882
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:57.431,INFO,<1074:ThreadPoolExecutor-0_14> prechecks.py:742,Precheck 'check external tables on target' in stage PRE:  PASSED
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:28:57.431,DEBUG,<1074:ThreadPoolExecutor-0_14> prechecks.py:827,Precheck check external tables on target took 0:00:20.429369
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:01.049,TRACE,<1074:MainThread> logger.py:81,"Created test table: ""24f649105c2b49eea9ee2da38428725d"" on host: 206.12.95.67"
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:21.932,TRACE,<1074:MainThread> logger.py:81,"Inserted a verification key into ""24f649105c2b49eea9ee2da38428725d"" on host 206.12.95.67"
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:21.933,INFO,<1074:MainThread> single_machine_validator.py:123,All target hosts point to the same machine
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:21.933,INFO,<1074:MainThread> single_machine_validator.py:92,Checking whether source host is the same as target
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:22.073,DEBUG,<1074:MainThread> single_machine_validator.py:128,Source and target are located on different machines
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:37.577,TRACE,<1074:MainThread> logger.py:81,"Removed test table: ""24f649105c2b49eea9ee2da38428725d"" on host: 206.12.95.67"
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:37.578,DEBUG,<1074:MainThread> migration_runner.py:244,Verifying db2 version on source...
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:37.716,INFO,<1074:MainThread> migration_runner.py:247,db2 version on source: 11.5.9.0
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:37.716,DEBUG,<1074:MainThread> migration_runner.py:258,Verifying db2 version on target...
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:53.950,INFO,<1074:MainThread> migration_runner.py:261,db2 version on target: 11.5.9.0
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:53.952,INFO,<1074:MainThread> db_handler.py:1028,"Getting {('DB2INST1', 'TEST')} sizes from the database."
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:54.716,DEBUG,<1074:MainThread> db_handler.py:1033,Query for getting table sizes took: 0:00:00.763540
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:54.716,DEBUG,<1074:MainThread> db_handler.py:1053,"Table size processing took: -1 day, 23:59:59.999164"
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:54.717,DEBUG,<1074:MainThread> table_splitter.py:68,"Big tables: [(('DB2INST1', 'TEST'), 0.25)]"
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:54.717,DEBUG,<1074:MainThread> table_splitter.py:70,Small tables: []
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:54.717,DEBUG,<1074:MainThread> scenario.py:120,Big workers number: 1
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:54.717,DEBUG,<1074:MainThread> scenario.py:121,Small workers number: 0.
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:54.721,INFO,<1074:MainThread> query_executor.py:93,Db2 driver has not been provided by user. Searching in default locations.
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:54.722,INFO,<1074:MainThread> query_executor.py:97,Using db2 driver libdb2.so from system loadable library path
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:54.722,INFO,<1074:MainThread> query_executor.py:93,Db2 driver has not been provided by user. Searching in default locations.
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:54.722,INFO,<1074:MainThread> query_executor.py:97,Using db2 driver libdb2.so from system loadable library path
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:55.732,INFO,<1126:MainThread> base_migration.py:230,Starting the transferring process...
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,------------------------------------------------------------------------------------------
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:55.732,TRACE,<1126:MainThread> logger.py:81,"""DB2INST1"".""TEST"" -> ""DB2INST1"".""TEST"""
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:55.732,INFO,<1126:MainThread> base_migration.py:147,"Searching for ""DB2INST1"".""TEST"" (tables) on source..."
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:30:56.023,INFO,<1126:MainThread> base_migration.py:155,"Searching for ""DB2INST1"".""TEST"" (tables) on target..."
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:25.876,TRACE,<1126:MainThread> logger.py:81,"""DB2INST1"".""TEST"" was found"
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:37.979,INFO,<1126:MainThread> column_compatibility_checker.py:97,Source and target table have an equal number of columns (9)
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:37.980,INFO,<1126:MainThread> column_compatibility_checker.py:109,Column compatibility check succeeded
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:38.274,INFO,<1126:MainThread> datasliced_migration.py:165,"Preparing to unload ""DB2INST1"".""TEST""..."
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:38.274,DEBUG,<1126:MainThread> datasliced_migration.py:171,Chunk.000 100 rows (1 slices)
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:38.274,TRACE,<1126:MainThread> logger.py:81,Job.1: 0
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:38.274,TRACE,<1126:MainThread> logger.py:81,"UNLOAD: /usr/bin/python3 /usr/local/ibm_migration_platform/db_migr/scenarios/db2_db2/connection/query_script.py SOURCE libdb2.so 206.12.99.99 50000 testdb db2inst1 ***** False CREATE EXTERNAL TABLE '/tmp/db_migr/db_migr-20240415_122831.167609/com.ibm.migration.unload._bk1h2wo/40237b2de4dc4edba39074d609f617c1migr.pipe.001' USING ( LOGDIR '/tmp/db_migr/db_migr-20240415_122831.167609/com.ibm.migration.unload._bk1h2wo/40237b2de4dc4edba39074d609f617c1' BOOLSTYLE '1_0' CCSID 1208 CRINSTRING True DATEDELIM '-' DATESTYLE 'YMD' DECIMALDELIM '.' DELIMITER '|' FORMAT 'TEXT' INCLUDEHEADER False INCLUDEZEROSECONDS True NULLVALUE 'NULL' SOCKETBUFSIZE 8388608 TIMEDELIM ':' TIMESTYLE '24HOUR' ESCAPECHAR '\' COMPRESS GZIP REMOTESOURCE 'YES'  ) AS SELECT * FROM ""DB2INST1"".""TEST"" WHERE DATASLICEID IN (0) SYSTEM"
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:38.278,INFO,<1126:MainThread> datasliced_migration.py:101,Starting the transferring process...
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:38.278,TRACE,<1126:MainThread> logger.py:81,"LOAD: /usr/bin/python3 /usr/local/ibm_migration_platform/db_migr/scenarios/db2_db2/connection/query_script.py TARGET libdb2.so 206.12.95.67 50000 testdb db2inst1 ***** False INSERT INTO (SELECT * FROM ""DB2INST1"".""TEST"" LIMIT 0) SELECT * FROM EXTERNAL '/tmp/db_migr/db_migr-20240415_122831.167609/com.ibm.migration.unload._bk1h2wo/40237b2de4dc4edba39074d609f617c1migr.pipe.001' (""O_ORDERKEY"" INTEGER, ""O_CUSTKEY"" INTEGER, ""O_ORDERSTATUS"" CHARACTER(1 OCTETS), ""O_TOTALPRICE"" DECIMAL(10,2), ""O_ORDERDATE"" DATE, ""O_ORDERPRIORITY"" CHARACTER(15 OCTETS), ""O_CLERK"" CHARACTER(15 OCTETS), ""O_SHIPPRIORITY"" INTEGER, ""O_COMMENT"" VARCHAR(79 OCTETS)) USING ( LOGDIR '/tmp/db_migr/db_migr-20240415_122831.167609/com.ibm.migration.unload._bk1h2wo/40237b2de4dc4edba39074d609f617c1' BOOLSTYLE '1_0' CCSID 1208 CRINSTRING True DATEDELIM '-' DATESTYLE 'YMD' DECIMALDELIM '.' DELIMITER '|' FORMAT 'TEXT' INCLUDEHEADER False INCLUDEZEROSECONDS True NULLVALUE 'NULL' SOCKETBUFSIZE 8388608 TIMEDELIM ':' TIMESTYLE '24HOUR' ESCAPECHAR '\' COMPRESS GZIP REMOTESOURCE 'YES' CTRLCHARS True FILLRECORD False IGNOREZERO 'KEEP' MAXERRORS 1 MAXROWS 0 QUOTEDNULL True QUOTEDVALUE 'NO' RECORDDELIM '\n' REQUIREQUOTES False SKIPROWS 0 STRICTNUMERIC False TIMEROUNDNANOS False TRUNCSTRING False Y2BASE 2000  ) SYSTEM"
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:58.816,DEBUG,<1126:MainThread> base_migration.py:403,Successful insertions - 206.12.95.67: 1/1
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:58.816,DEBUG,<1126:MainThread> base_migration.py:405,Successful insertions - total: 1/1
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:58.816,DEBUG,<1126:MainThread> base_migration.py:128,Successful extractions: 1/1
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:58.817,INFO,<1126:MainThread> base_migration.py:374,The transfer has finished successfully
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:58.817,INFO,<1126:MainThread> base_migration.py:377,"""DB2INST1"".""TEST"" -> ""DB2INST1"".""TEST"" time: 00:01:03.850"
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:58.818,TRACE,<1126:MainThread> logger.py:81,Removing 1 pipes...
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,------------------------------------------------------------------------------------------
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:58.818,INFO,<1126:MainThread> base_migration.py:309,Migration summary
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,"Source object:        ""DB2INST1"".""TEST"""
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,"Target object:        ""DB2INST1"".""TEST"""
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Object type:          Table
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Success:              True
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Elapsed:              00:01:03.850
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Start time:           2024-04-15 12:30:55.731976
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,End time:             2024-04-15 12:31:58.817101
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:58.819,DEBUG,<1126:MainThread> base_migration.py:328,Removing /tmp/db_migr/db_migr-20240415_122831.167609/com.ibm.migration.unload._bk1h2wo/40237b2de4dc4edba39074d609f617c1 ...
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:59.850,INFO,<1074:MainThread> migration_runner.py:387,Total time: 208.6765627861023 (0:03:28)
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:59.850,DEBUG,<1074:MainThread> migration_runner.py:504,Migration finished with exit code 0
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:59.850,INFO,<1074:MainThread> migration_runner.py:508,Log file: /tmp/db_migr/db_migr-20240415_122831.167609/db_migr-20240415_122831.171965.log
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:59.856,INFO,<1074:MainThread> migration_runner.py:513,JSON file: /tmp/db_migr/db_migr-20240415_122831.167609/migration_history_ad60fd37fb3145c1a69e775525e17950/migration_report.json
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,12:31:59.860,TRACE,<1074:MainThread> logger.py:81,Migration executed with the following arguments:
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Explicit arguments:
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,
+1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,,,,Default arguments:
