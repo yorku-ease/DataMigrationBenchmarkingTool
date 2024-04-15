@@ -1,0 +1,272 @@
+Key=, Value=^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Key=, Value=IBM db_migr -- log (2024-04-11 17:04:32.707934)
+Key=, Value=Version - 1.0.0 (404b0de)
+Key=, Value=^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Key=, Value=17:04:32.709 |    TRACE | <955:MainThread> logger.py:81 | Migration parameters
+Key=, Value=Temporary directory:             /tmp/db_migr/db_migr-20240411_170432.702860
+Key=, Value=Maximum # of insertion workers:  3
+Key=, Value=Information format:              [USER, PASSW, DBNAME, PORT, SCHEMA]
+Key=, Value=Source information:              db2inst1 ***** testdb 50000
+Key=, Value=Target information:              db2inst1 ***** testdb 50000
+Key=, Value=Source hosts:                    ['206.12.99.99']
+Key=, Value=Target hosts:                    ['206.12.98.221']
+Key=, Value=Number of tables to transfer:    1
+Key=, Value=
+Key=, Value=17:04:32.709 |     INFO | <955:MainThread> logger.py:213 | Executed Command: /usr/bin/migration_client db2_db2 --shosts 206.12.99.99 --sport 50000 --suser db2inst1 --spass ***** --sdb testdb --thost 206.12.98.221 --tport 50000 --tuser db2inst1 --tpass ***** --tdb testdb --compress GZIP --max-data-streams 3 --mv TEST TEST
+Key=, Value=17:04:32.710 |     INFO | <955:MainThread> query_executor.py:93 | Db2 driver has not been provided by user. Searching in default locations.
+Key=, Value=17:04:32.721 |     INFO | <955:MainThread> query_executor.py:97 | Using db2 driver libdb2.so from system loadable library path
+Key=, Value=17:04:32.721 |     INFO | <955:MainThread> query_executor.py:93 | Db2 driver has not been provided by user. Searching in default locations.
+Key=, Value=17:04:32.721 |     INFO | <955:MainThread> query_executor.py:97 | Using db2 driver libdb2.so from system loadable library path
+Key=, Value=17:04:32.723 |     INFO | <955:MainThread> prechecks.py:901 | Precheck dependencies validated succesfully
+Key=, Value=17:04:32.724 |     INFO | <955:ThreadPoolExecutor-0_0> prechecks.py:787 | Running precheck: PRE: check source port ssl
+Key=, Value=17:04:32.724 |     INFO | <955:ThreadPoolExecutor-0_1> prechecks.py:787 | Running precheck: PRE: check target port ssl
+Key=, Value=17:04:32.724 |     INFO | <955:ThreadPoolExecutor-0_0> prechecks.py:742 | Precheck 'check source port ssl' in stage PRE:  SKIPPED as N/A: No ssl specified in source connection specification
+Key=, Value=17:04:32.725 |     INFO | <955:ThreadPoolExecutor-0_2> prechecks.py:787 | Running precheck: PRE: check if maintenance mode can be enabled
+Key=, Value=17:04:32.725 |     INFO | <955:ThreadPoolExecutor-0_1> prechecks.py:742 | Precheck 'check target port ssl' in stage PRE:  SKIPPED as N/A: No ssl specified in target connection specification
+Key=, Value=17:04:32.725 |    DEBUG | <955:ThreadPoolExecutor-0_0> prechecks.py:827 | Precheck check source port ssl took 0:00:00.001564
+Key=, Value=17:04:32.726 |     INFO | <955:ThreadPoolExecutor-0_2> prechecks.py:742 | Precheck 'check if maintenance mode can be enabled' in stage PRE:  SKIPPED as N/A: no --maint-mode parameter passed
+Key=, Value=17:04:32.726 |    DEBUG | <955:ThreadPoolExecutor-0_2> prechecks.py:827 | Precheck check if maintenance mode can be enabled took 0:00:00.001785
+Key=, Value=17:04:32.727 |     INFO | <955:ThreadPoolExecutor-0_2> prechecks.py:787 | Running precheck: PRE: check source port ssl cert
+Key=, Value=17:04:32.727 |     INFO | <955:ThreadPoolExecutor-0_2> prechecks.py:742 | Precheck 'check source port ssl cert' in stage PRE:  SKIPPED as N/A: No ssl specified in source connection specification
+Key=, Value=17:04:32.727 |    DEBUG | <955:ThreadPoolExecutor-0_1> prechecks.py:827 | Precheck check target port ssl took 0:00:00.002605
+Key=, Value=17:04:32.728 |    DEBUG | <955:ThreadPoolExecutor-0_2> prechecks.py:827 | Precheck check source port ssl cert took 0:00:00.000896
+Key=, Value=17:04:32.728 |     INFO | <955:ThreadPoolExecutor-0_4> prechecks.py:787 | Running precheck: PRE: check target port ssl cert
+Key=, Value=17:04:32.728 |     INFO | <955:ThreadPoolExecutor-0_5> prechecks.py:787 | Running precheck: PRE: check source database connection
+Key=, Value=17:04:32.729 |     INFO | <955:ThreadPoolExecutor-0_4> prechecks.py:742 | Precheck 'check target port ssl cert' in stage PRE:  SKIPPED as N/A: No ssl specified in target connection specification
+Key=, Value=17:04:32.732 |    DEBUG | <955:ThreadPoolExecutor-0_4> prechecks.py:827 | Precheck check target port ssl cert took 0:00:00.003588
+Key=, Value=17:04:32.732 |     INFO | <955:ThreadPoolExecutor-0_1> prechecks.py:787 | Running precheck: PRE: check target database connection
+Key=, Value=17:04:34.399 |     INFO | <955:ThreadPoolExecutor-0_1> prechecks.py:742 | Precheck 'check target database connection' in stage PRE:  PASSED
+Key=, Value=17:04:34.400 |    DEBUG | <955:ThreadPoolExecutor-0_1> prechecks.py:827 | Precheck check target database connection took 0:00:01.667381
+Key=, Value=17:04:34.401 |     INFO | <955:ThreadPoolExecutor-0_0> prechecks.py:787 | Running precheck: PRE: check target DBMS version
+Key=, Value=17:04:34.404 |     INFO | <955:ThreadPoolExecutor-0_8> prechecks.py:787 | Running precheck: PRE: check external tables on target
+Key=, Value=17:04:34.405 |     INFO | <955:ThreadPoolExecutor-0_9> prechecks.py:787 | Running precheck: PRE: check target driver version
+Key=, Value=17:04:34.405 |     INFO | <955:ThreadPoolExecutor-0_10> prechecks.py:787 | Running precheck: PRE: check tablespace
+Key=, Value=17:04:34.406 |     INFO | <955:ThreadPoolExecutor-0_4> prechecks.py:787 | Running precheck: PRE: check target tenant
+Key=, Value=17:04:34.411 |     INFO | <955:ThreadPoolExecutor-0_10> prechecks.py:742 | Precheck 'check tablespace' in stage PRE:  PASSED
+Key=, Value=17:04:34.411 |     INFO | <955:ThreadPoolExecutor-0_4> prechecks.py:742 | Precheck 'check target tenant' in stage PRE:  SKIPPED as N/A: No precheck needed for default target TENANT
+Key=, Value=17:04:34.414 |    DEBUG | <955:ThreadPoolExecutor-0_4> prechecks.py:827 | Precheck check target tenant took 0:00:00.007628
+Key=, Value=17:04:34.414 |    DEBUG | <955:ThreadPoolExecutor-0_10> prechecks.py:827 | Precheck check tablespace took 0:00:00.008866
+Key=, Value=17:04:35.158 |     INFO | <955:ThreadPoolExecutor-0_9> prechecks.py:742 | Precheck 'check target driver version' in stage PRE:  PASSED
+Key=, Value=17:04:35.158 |     INFO | <955:ThreadPoolExecutor-0_0> prechecks.py:742 | Precheck 'check target DBMS version' in stage PRE:  PASSED
+Key=, Value=17:04:35.159 |    DEBUG | <955:ThreadPoolExecutor-0_9> prechecks.py:827 | Precheck check target driver version took 0:00:00.753875
+Key=, Value=17:04:35.159 |    DEBUG | <955:ThreadPoolExecutor-0_0> prechecks.py:827 | Precheck check target DBMS version took 0:00:00.758468
+Key=, Value=17:04:35.160 |     INFO | <955:ThreadPoolExecutor-0_5> prechecks.py:742 | Precheck 'check source database connection' in stage PRE:  PASSED
+Key=, Value=17:04:35.160 |    DEBUG | <955:ThreadPoolExecutor-0_5> prechecks.py:827 | Precheck check source database connection took 0:00:02.431762
+Key=, Value=17:04:35.161 |     INFO | <955:ThreadPoolExecutor-0_1> prechecks.py:787 | Running precheck: PRE: check source tables
+Key=, Value=17:04:35.162 |     INFO | <955:ThreadPoolExecutor-0_13> prechecks.py:787 | Running precheck: PRE: check source DBMS version
+Key=, Value=17:04:35.163 |     INFO | <955:ThreadPoolExecutor-0_14> prechecks.py:787 | Running precheck: PRE: check external tables on source
+Key=, Value=17:04:35.166 |     INFO | <955:ThreadPoolExecutor-0_15> prechecks.py:787 | Running precheck: PRE: check source driver version
+Key=, Value=17:04:35.168 |     INFO | <955:ThreadPoolExecutor-0_3> prechecks.py:787 | Running precheck: PRE: check DDL extractor
+Key=, Value=17:04:35.168 |     INFO | <955:ThreadPoolExecutor-0_11> prechecks.py:787 | Running precheck: PRE: check source tenant
+Key=, Value=17:04:35.175 |    TRACE | <955:ThreadPoolExecutor-0_3> logger.py:81 | db2look options: -d testdb -c -e -noview -t SYSCAT.TABLES -td @ -i db2inst1 -a -w <hidden>
+Key=, Value=17:04:35.181 |     INFO | <955:ThreadPoolExecutor-0_11> prechecks.py:742 | Precheck 'check source tenant' in stage PRE:  SKIPPED as N/A: No precheck needed for default source TENANT
+Key=, Value=17:04:35.182 |    DEBUG | <955:ThreadPoolExecutor-0_11> prechecks.py:827 | Precheck check source tenant took 0:00:00.014184
+Key=, Value=17:04:35.308 |     INFO | <955:ThreadPoolExecutor-0_1> prechecks.py:742 | Precheck 'check source tables' in stage PRE:  PASSED
+Key=, Value=17:04:35.308 |    DEBUG | <955:ThreadPoolExecutor-0_1> prechecks.py:827 | Precheck check source tables took 0:00:00.147431
+Key=, Value=17:04:35.312 |     INFO | <955:ThreadPoolExecutor-0_13> prechecks.py:742 | Precheck 'check source DBMS version' in stage PRE:  PASSED
+Key=, Value=17:04:35.312 |    DEBUG | <955:ThreadPoolExecutor-0_13> prechecks.py:827 | Precheck check source DBMS version took 0:00:00.150722
+Key=, Value=17:04:35.314 |     INFO | <955:ThreadPoolExecutor-0_15> prechecks.py:742 | Precheck 'check source driver version' in stage PRE:  PASSED
+Key=, Value=17:04:35.315 |    DEBUG | <955:ThreadPoolExecutor-0_15> prechecks.py:827 | Precheck check source driver version took 0:00:00.149012
+Key=, Value=17:04:35.572 |     INFO | <955:ThreadPoolExecutor-0_8> prechecks.py:742 | Precheck 'check external tables on target' in stage PRE:  PASSED
+Key=, Value=17:04:35.572 |     INFO | <955:ThreadPoolExecutor-0_14> prechecks.py:742 | Precheck 'check external tables on source' in stage PRE:  PASSED
+Key=, Value=17:04:35.573 |    DEBUG | <955:ThreadPoolExecutor-0_8> prechecks.py:827 | Precheck check external tables on target took 0:00:01.168617
+Key=, Value=17:04:35.573 |    DEBUG | <955:ThreadPoolExecutor-0_14> prechecks.py:827 | Precheck check external tables on source took 0:00:00.410340
+Key=, Value=17:04:36.200 |     INFO | <955:ThreadPoolExecutor-0_3> prechecks.py:742 | Precheck 'check DDL extractor' in stage PRE:  PASSED
+Key=, Value=17:04:36.200 |    DEBUG | <955:ThreadPoolExecutor-0_3> prechecks.py:827 | Precheck check DDL extractor took 0:00:01.032344
+Key=, Value=17:04:50.046 |    TRACE | <955:MainThread> logger.py:81 | Created test table: "f410c16d465f4b28ae89e569d77ae544" on host: 206.12.98.221
+Key=, Value=17:04:50.453 |    TRACE | <955:MainThread> logger.py:81 | Inserted a verification key into "f410c16d465f4b28ae89e569d77ae544" on host 206.12.98.221
+Key=, Value=17:04:50.454 |     INFO | <955:MainThread> single_machine_validator.py:123 | All target hosts point to the same machine
+Key=, Value=17:04:50.454 |     INFO | <955:MainThread> single_machine_validator.py:92 | Checking whether source host is the same as target
+Key=, Value=17:04:50.598 |    DEBUG | <955:MainThread> single_machine_validator.py:128 | Source and target are located on different machines
+Key=, Value=17:04:57.663 |    TRACE | <955:MainThread> logger.py:81 | Removed test table: "f410c16d465f4b28ae89e569d77ae544" on host: 206.12.98.221
+Key=, Value=17:04:57.663 |    DEBUG | <955:MainThread> migration_runner.py:244 | Verifying db2 version on source...
+Key=, Value=17:04:57.807 |     INFO | <955:MainThread> migration_runner.py:247 | db2 version on source: 11.5.9.0
+Key=, Value=17:04:57.807 |    DEBUG | <955:MainThread> migration_runner.py:258 | Verifying db2 version on target...
+Key=, Value=17:04:57.936 |     INFO | <955:MainThread> migration_runner.py:261 | db2 version on target: 11.5.9.0
+Key=, Value=17:04:57.937 |     INFO | <955:MainThread> db_handler.py:1028 | Getting {('DB2INST1', 'TEST')} sizes from the database.
+Key=, Value=17:04:58.321 |    DEBUG | <955:MainThread> db_handler.py:1033 | Query for getting table sizes took: 0:00:00.383804
+Key=, Value=17:04:58.322 |    DEBUG | <955:MainThread> db_handler.py:1053 | Table size processing took: -1 day, 23:59:59.999430
+Key=, Value=17:04:58.322 |    DEBUG | <955:MainThread> table_splitter.py:68 | Big tables: [(('DB2INST1', 'TEST'), 0.25)]
+Key=, Value=17:04:58.322 |    DEBUG | <955:MainThread> table_splitter.py:70 | Small tables: []
+Key=, Value=17:04:58.323 |    DEBUG | <955:MainThread> scenario.py:120 | Big workers number: 1
+Key=, Value=17:04:58.323 |    DEBUG | <955:MainThread> scenario.py:121 | Small workers number: 0.
+Key=, Value=17:04:58.327 |     INFO | <955:MainThread> query_executor.py:93 | Db2 driver has not been provided by user. Searching in default locations.
+Key=, Value=17:04:58.328 |     INFO | <955:MainThread> query_executor.py:97 | Using db2 driver libdb2.so from system loadable library path
+Key=, Value=17:04:58.329 |     INFO | <955:MainThread> query_executor.py:93 | Db2 driver has not been provided by user. Searching in default locations.
+Key=, Value=17:04:58.329 |     INFO | <955:MainThread> query_executor.py:97 | Using db2 driver libdb2.so from system loadable library path
+Key=, Value=17:04:59.338 |     INFO | <1001:MainThread> base_migration.py:230 | Starting the transferring process...
+Key=, Value=------------------------------------------------------------------------------------------
+Key=, Value=17:04:59.339 |    TRACE | <1001:MainThread> logger.py:81 | "DB2INST1"."TEST" -> "DB2INST1"."TEST"
+Key=, Value=17:04:59.339 |     INFO | <1001:MainThread> base_migration.py:147 | Searching for "DB2INST1"."TEST" (tables) on source...
+Key=, Value=17:04:59.622 |     INFO | <1001:MainThread> base_migration.py:155 | Searching for "DB2INST1"."TEST" (tables) on target...
+Key=, Value=17:04:59.753 |    TRACE | <1001:MainThread> logger.py:81 | "DB2INST1"."TEST" was found
+Key=, Value=17:04:59.930 |     INFO | <1001:MainThread> column_compatibility_checker.py:97 | Source and target table have an equal number of columns (9)
+Key=, Value=17:04:59.931 |     INFO | <1001:MainThread> column_compatibility_checker.py:109 | Column compatibility check succeeded
+Key=, Value=17:05:00.205 |     INFO | <1001:MainThread> datasliced_migration.py:165 | Preparing to unload "DB2INST1"."TEST"...
+Key=, Value=17:05:00.206 |    DEBUG | <1001:MainThread> datasliced_migration.py:171 | Chunk.000 100 rows (1 slices)
+Key=, Value=17:05:00.206 |    TRACE | <1001:MainThread> logger.py:81 | Job.1: 0
+Key=, Value=17:05:00.206 |    TRACE | <1001:MainThread> logger.py:81 | UNLOAD: /usr/bin/python3 /usr/local/ibm_migration_platform/db_migr/scenarios/db2_db2/connection/query_script.py SOURCE libdb2.so 206.12.99.99 50000 testdb db2inst1 ***** False CREATE EXTERNAL TABLE '/tmp/db_migr/db_migr-20240411_170432.702860/com.ibm.migration.unload.hi2wme7w/738f35ff9bc746858d34f04ab97985ddmigr.pipe.001' USING ( LOGDIR '/tmp/db_migr/db_migr-20240411_170432.702860/com.ibm.migration.unload.hi2wme7w/738f35ff9bc746858d34f04ab97985dd' BOOLSTYLE '1_0' CCSID 1208 CRINSTRING True DATEDELIM '-' DATESTYLE 'YMD' DECIMALDELIM '.' DELIMITER '|' FORMAT 'TEXT' INCLUDEHEADER False INCLUDEZEROSECONDS True NULLVALUE 'NULL' SOCKETBUFSIZE 8388608 TIMEDELIM ':' TIMESTYLE '24HOUR' ESCAPECHAR '\' COMPRESS GZIP REMOTESOURCE 'YES'  ) AS SELECT * FROM "DB2INST1"."TEST" WHERE DATASLICEID IN (0) SYSTEM
+Key=, Value=17:05:00.209 |     INFO | <1001:MainThread> datasliced_migration.py:101 | Starting the transferring process...
+Key=, Value=17:05:00.210 |    TRACE | <1001:MainThread> logger.py:81 | LOAD: /usr/bin/python3 /usr/local/ibm_migration_platform/db_migr/scenarios/db2_db2/connection/query_script.py TARGET libdb2.so 206.12.98.221 50000 testdb db2inst1 ***** False INSERT INTO (SELECT * FROM "DB2INST1"."TEST" LIMIT 0) SELECT * FROM EXTERNAL '/tmp/db_migr/db_migr-20240411_170432.702860/com.ibm.migration.unload.hi2wme7w/738f35ff9bc746858d34f04ab97985ddmigr.pipe.001' ("O_ORDERKEY" INTEGER, "O_CUSTKEY" INTEGER, "O_ORDERSTATUS" CHARACTER(1 OCTETS), "O_TOTALPRICE" DECIMAL(10,2), "O_ORDERDATE" DATE, "O_ORDERPRIORITY" CHARACTER(15 OCTETS), "O_CLERK" CHARACTER(15 OCTETS), "O_SHIPPRIORITY" INTEGER, "O_COMMENT" VARCHAR(79 OCTETS)) USING ( LOGDIR '/tmp/db_migr/db_migr-20240411_170432.702860/com.ibm.migration.unload.hi2wme7w/738f35ff9bc746858d34f04ab97985dd' BOOLSTYLE '1_0' CCSID 1208 CRINSTRING True DATEDELIM '-' DATESTYLE 'YMD' DECIMALDELIM '.' DELIMITER '|' FORMAT 'TEXT' INCLUDEHEADER False INCLUDEZEROSECONDS True NULLVALUE 'NULL' SOCKETBUFSIZE 8388608 TIMEDELIM ':' TIMESTYLE '24HOUR' ESCAPECHAR '\' COMPRESS GZIP REMOTESOURCE 'YES' CTRLCHARS True FILLRECORD False IGNOREZERO 'KEEP' MAXERRORS 1 MAXROWS 0 QUOTEDNULL True QUOTEDVALUE 'NO' RECORDDELIM '\n' REQUIREQUOTES False SKIPROWS 0 STRICTNUMERIC False TIMEROUNDNANOS False TRUNCSTRING False Y2BASE 2000  ) SYSTEM
+Key=, Value=17:05:12.242 |    DEBUG | <1001:MainThread> base_migration.py:403 | Successful insertions - 206.12.98.221: 1/1
+Key=, Value=17:05:12.242 |    DEBUG | <1001:MainThread> base_migration.py:405 | Successful insertions - total: 1/1
+Key=, Value=17:05:12.243 |    DEBUG | <1001:MainThread> base_migration.py:128 | Successful extractions: 1/1
+Key=, Value=17:05:12.243 |     INFO | <1001:MainThread> base_migration.py:374 | The transfer has finished successfully
+Key=, Value=17:05:12.243 |     INFO | <1001:MainThread> base_migration.py:377 | "DB2INST1"."TEST" -> "DB2INST1"."TEST" time: 00:00:12.904
+Key=, Value=17:05:12.243 |    TRACE | <1001:MainThread> logger.py:81 | Removing 1 pipes...
+Key=, Value=------------------------------------------------------------------------------------------
+Key=, Value=17:05:12.244 |     INFO | <1001:MainThread> base_migration.py:309 | Migration summary
+Key=, Value=Source object:        "DB2INST1"."TEST"
+Key=, Value=Target object:        "DB2INST1"."TEST"
+Key=, Value=Object type:          Table
+Key=, Value=Success:              True
+Key=, Value=Elapsed:              00:00:12.904
+Key=, Value=Start time:           2024-04-11 17:04:59.338427
+Key=, Value=End time:             2024-04-11 17:05:12.243319
+Key=, Value=
+Key=, Value=
+Key=, Value=17:05:12.244 |    DEBUG | <1001:MainThread> base_migration.py:328 | Removing /tmp/db_migr/db_migr-20240411_170432.702860/com.ibm.migration.unload.hi2wme7w/738f35ff9bc746858d34f04ab97985dd ...
+Key=, Value=17:05:13.275 |     INFO | <955:MainThread> migration_runner.py:387 | Total time: 40.56522989273071 (0:00:40)
+Key=, Value=17:05:13.275 |    DEBUG | <955:MainThread> migration_runner.py:504 | Migration finished with exit code 0
+Key=, Value=17:05:13.275 |     INFO | <955:MainThread> migration_runner.py:508 | Log file: /tmp/db_migr/db_migr-20240411_170432.702860/db_migr-20240411_170432.707934.log
+Key=, Value=17:05:13.281 |     INFO | <955:MainThread> migration_runner.py:513 | JSON file: /tmp/db_migr/db_migr-20240411_170432.702860/migration_history_bef40c24f6624771886cf2db98dc8b93/migration_report.json
+Key=, Value=17:05:13.285 |    TRACE | <955:MainThread> logger.py:81 | Migration executed with the following arguments:
+Key=, Value=Explicit arguments:
+Key=, Value=
+Key=, Value=Default arguments:
+Key=, Value=^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Key=, Value=IBM db_migr -- log (2024-04-11 17:10:30.697866)
+Key=, Value=Version - 1.0.0 (404b0de)
+Key=, Value=^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Key=, Value=17:10:30.699 |    TRACE | <967:MainThread> logger.py:81 | Migration parameters
+Key=, Value=Temporary directory:             /tmp/db_migr/db_migr-20240411_171030.692520
+Key=, Value=Maximum # of insertion workers:  3
+Key=, Value=Information format:              [USER, PASSW, DBNAME, PORT, SCHEMA]
+Key=, Value=Source information:              db2inst1 ***** testdb 50000
+Key=, Value=Target information:              db2inst1 ***** testdb 50000
+Key=, Value=Source hosts:                    ['206.12.99.99']
+Key=, Value=Target hosts:                    ['206.12.98.221']
+Key=, Value=Number of tables to transfer:    1
+Key=, Value=
+Key=, Value=17:10:30.699 |     INFO | <967:MainThread> logger.py:213 | Executed Command: /usr/bin/migration_client db2_db2 --shosts 206.12.99.99 --sport 50000 --suser db2inst1 --spass ***** --sdb testdb --thost 206.12.98.221 --tport 50000 --tuser db2inst1 --tpass ***** --tdb testdb --compress GZIP --max-data-streams 3 --mv TEST TEST
+Key=, Value=17:10:30.700 |     INFO | <967:MainThread> query_executor.py:93 | Db2 driver has not been provided by user. Searching in default locations.
+Key=, Value=17:10:30.710 |     INFO | <967:MainThread> query_executor.py:97 | Using db2 driver libdb2.so from system loadable library path
+Key=, Value=17:10:30.710 |     INFO | <967:MainThread> query_executor.py:93 | Db2 driver has not been provided by user. Searching in default locations.
+Key=, Value=17:10:30.710 |     INFO | <967:MainThread> query_executor.py:97 | Using db2 driver libdb2.so from system loadable library path
+Key=, Value=17:10:30.712 |     INFO | <967:MainThread> prechecks.py:901 | Precheck dependencies validated succesfully
+Key=, Value=17:10:30.713 |     INFO | <967:ThreadPoolExecutor-0_0> prechecks.py:787 | Running precheck: PRE: check source port ssl
+Key=, Value=17:10:30.714 |     INFO | <967:ThreadPoolExecutor-0_1> prechecks.py:787 | Running precheck: PRE: check target port ssl
+Key=, Value=17:10:30.714 |     INFO | <967:ThreadPoolExecutor-0_0> prechecks.py:742 | Precheck 'check source port ssl' in stage PRE:  SKIPPED as N/A: No ssl specified in source connection specification
+Key=, Value=17:10:30.715 |     INFO | <967:ThreadPoolExecutor-0_2> prechecks.py:787 | Running precheck: PRE: check if maintenance mode can be enabled
+Key=, Value=17:10:30.715 |     INFO | <967:ThreadPoolExecutor-0_1> prechecks.py:742 | Precheck 'check target port ssl' in stage PRE:  SKIPPED as N/A: No ssl specified in target connection specification
+Key=, Value=17:10:30.716 |    DEBUG | <967:ThreadPoolExecutor-0_0> prechecks.py:827 | Precheck check source port ssl took 0:00:00.003302
+Key=, Value=17:10:30.717 |     INFO | <967:ThreadPoolExecutor-0_3> prechecks.py:787 | Running precheck: PRE: check source port ssl cert
+Key=, Value=17:10:30.718 |     INFO | <967:ThreadPoolExecutor-0_2> prechecks.py:742 | Precheck 'check if maintenance mode can be enabled' in stage PRE:  SKIPPED as N/A: no --maint-mode parameter passed
+Key=, Value=17:10:30.719 |    DEBUG | <967:ThreadPoolExecutor-0_1> prechecks.py:827 | Precheck check target port ssl took 0:00:00.004760
+Key=, Value=17:10:30.719 |     INFO | <967:ThreadPoolExecutor-0_3> prechecks.py:742 | Precheck 'check source port ssl cert' in stage PRE:  SKIPPED as N/A: No ssl specified in source connection specification
+Key=, Value=17:10:30.719 |    DEBUG | <967:ThreadPoolExecutor-0_2> prechecks.py:827 | Precheck check if maintenance mode can be enabled took 0:00:00.004621
+Key=, Value=17:10:30.720 |     INFO | <967:ThreadPoolExecutor-0_4> prechecks.py:787 | Running precheck: PRE: check target port ssl cert
+Key=, Value=17:10:30.720 |    DEBUG | <967:ThreadPoolExecutor-0_3> prechecks.py:827 | Precheck check source port ssl cert took 0:00:00.002918
+Key=, Value=17:10:30.721 |     INFO | <967:ThreadPoolExecutor-0_4> prechecks.py:742 | Precheck 'check target port ssl cert' in stage PRE:  SKIPPED as N/A: No ssl specified in target connection specification
+Key=, Value=17:10:30.721 |     INFO | <967:ThreadPoolExecutor-0_1> prechecks.py:787 | Running precheck: PRE: check source database connection
+Key=, Value=17:10:30.722 |    DEBUG | <967:ThreadPoolExecutor-0_4> prechecks.py:827 | Precheck check target port ssl cert took 0:00:00.001401
+Key=, Value=17:10:30.725 |     INFO | <967:ThreadPoolExecutor-0_6> prechecks.py:787 | Running precheck: PRE: check target database connection
+Key=, Value=17:10:32.191 |     INFO | <967:ThreadPoolExecutor-0_1> prechecks.py:742 | Precheck 'check source database connection' in stage PRE:  PASSED
+Key=, Value=17:10:32.191 |    DEBUG | <967:ThreadPoolExecutor-0_1> prechecks.py:827 | Precheck check source database connection took 0:00:01.470265
+Key=, Value=17:10:32.193 |     INFO | <967:ThreadPoolExecutor-0_7> prechecks.py:787 | Running precheck: PRE: check source tables
+Key=, Value=17:10:32.193 |     INFO | <967:ThreadPoolExecutor-0_8> prechecks.py:787 | Running precheck: PRE: check source DBMS version
+Key=, Value=17:10:32.194 |     INFO | <967:ThreadPoolExecutor-0_9> prechecks.py:787 | Running precheck: PRE: check external tables on source
+Key=, Value=17:10:32.195 |     INFO | <967:ThreadPoolExecutor-0_10> prechecks.py:787 | Running precheck: PRE: check source driver version
+Key=, Value=17:10:32.196 |     INFO | <967:ThreadPoolExecutor-0_11> prechecks.py:787 | Running precheck: PRE: check source tenant
+Key=, Value=17:10:32.200 |     INFO | <967:ThreadPoolExecutor-0_12> prechecks.py:787 | Running precheck: PRE: check DDL extractor
+Key=, Value=17:10:32.209 |     INFO | <967:ThreadPoolExecutor-0_11> prechecks.py:742 | Precheck 'check source tenant' in stage PRE:  SKIPPED as N/A: No precheck needed for default source TENANT
+Key=, Value=17:10:32.209 |    TRACE | <967:ThreadPoolExecutor-0_12> logger.py:81 | db2look options: -d testdb -c -e -noview -t SYSCAT.TABLES -td @ -i db2inst1 -a -w <hidden>
+Key=, Value=17:10:32.210 |    DEBUG | <967:ThreadPoolExecutor-0_11> prechecks.py:827 | Precheck check source tenant took 0:00:00.013548
+Key=, Value=17:10:32.343 |     INFO | <967:ThreadPoolExecutor-0_8> prechecks.py:742 | Precheck 'check source DBMS version' in stage PRE:  PASSED
+Key=, Value=17:10:32.344 |    DEBUG | <967:ThreadPoolExecutor-0_8> prechecks.py:827 | Precheck check source DBMS version took 0:00:00.150595
+Key=, Value=17:10:32.349 |     INFO | <967:ThreadPoolExecutor-0_10> prechecks.py:742 | Precheck 'check source driver version' in stage PRE:  PASSED
+Key=, Value=17:10:32.350 |    DEBUG | <967:ThreadPoolExecutor-0_10> prechecks.py:827 | Precheck check source driver version took 0:00:00.154499
+Key=, Value=17:10:32.623 |     INFO | <967:ThreadPoolExecutor-0_7> prechecks.py:742 | Precheck 'check source tables' in stage PRE:  PASSED
+Key=, Value=17:10:32.624 |    DEBUG | <967:ThreadPoolExecutor-0_7> prechecks.py:827 | Precheck check source tables took 0:00:00.431327
+Key=, Value=17:10:32.776 |     INFO | <967:ThreadPoolExecutor-0_12> prechecks.py:742 | Precheck 'check DDL extractor' in stage PRE:  PASSED
+Key=, Value=17:10:32.776 |    DEBUG | <967:ThreadPoolExecutor-0_12> prechecks.py:827 | Precheck check DDL extractor took 0:00:00.576588
+Key=, Value=17:10:32.988 |     INFO | <967:ThreadPoolExecutor-0_9> prechecks.py:742 | Precheck 'check external tables on source' in stage PRE:  PASSED
+Key=, Value=17:10:32.988 |    DEBUG | <967:ThreadPoolExecutor-0_9> prechecks.py:827 | Precheck check external tables on source took 0:00:00.793721
+Key=, Value=17:10:33.593 |     INFO | <967:ThreadPoolExecutor-0_6> prechecks.py:742 | Precheck 'check target database connection' in stage PRE:  PASSED
+Key=, Value=17:10:33.594 |    DEBUG | <967:ThreadPoolExecutor-0_6> prechecks.py:827 | Precheck check target database connection took 0:00:02.868318
+Key=, Value=17:10:33.594 |     INFO | <967:ThreadPoolExecutor-0_2> prechecks.py:787 | Running precheck: PRE: check target DBMS version
+Key=, Value=17:10:33.595 |     INFO | <967:ThreadPoolExecutor-0_3> prechecks.py:787 | Running precheck: PRE: check external tables on target
+Key=, Value=17:10:33.602 |     INFO | <967:ThreadPoolExecutor-0_15> prechecks.py:787 | Running precheck: PRE: check target driver version
+Key=, Value=17:10:33.603 |     INFO | <967:ThreadPoolExecutor-0_4> prechecks.py:787 | Running precheck: PRE: check tablespace
+Key=, Value=17:10:33.603 |     INFO | <967:ThreadPoolExecutor-0_0> prechecks.py:787 | Running precheck: PRE: check target tenant
+Key=, Value=17:10:33.604 |     INFO | <967:ThreadPoolExecutor-0_4> prechecks.py:742 | Precheck 'check tablespace' in stage PRE:  PASSED
+Key=, Value=17:10:33.606 |     INFO | <967:ThreadPoolExecutor-0_0> prechecks.py:742 | Precheck 'check target tenant' in stage PRE:  SKIPPED as N/A: No precheck needed for default target TENANT
+Key=, Value=17:10:33.607 |    DEBUG | <967:ThreadPoolExecutor-0_4> prechecks.py:827 | Precheck check tablespace took 0:00:00.004785
+Key=, Value=17:10:33.608 |    DEBUG | <967:ThreadPoolExecutor-0_0> prechecks.py:827 | Precheck check target tenant took 0:00:00.005339
+Key=, Value=17:10:33.734 |     INFO | <967:ThreadPoolExecutor-0_2> prechecks.py:742 | Precheck 'check target DBMS version' in stage PRE:  PASSED
+Key=, Value=17:10:33.735 |    DEBUG | <967:ThreadPoolExecutor-0_2> prechecks.py:827 | Precheck check target DBMS version took 0:00:00.140217
+Key=, Value=17:10:33.738 |     INFO | <967:ThreadPoolExecutor-0_15> prechecks.py:742 | Precheck 'check target driver version' in stage PRE:  PASSED
+Key=, Value=17:10:33.739 |    DEBUG | <967:ThreadPoolExecutor-0_15> prechecks.py:827 | Precheck check target driver version took 0:00:00.136769
+Key=, Value=17:10:34.656 |     INFO | <967:ThreadPoolExecutor-0_3> prechecks.py:742 | Precheck 'check external tables on target' in stage PRE:  PASSED
+Key=, Value=17:10:34.656 |    DEBUG | <967:ThreadPoolExecutor-0_3> prechecks.py:827 | Precheck check external tables on target took 0:00:01.060400
+Key=, Value=17:10:44.714 |    TRACE | <967:MainThread> logger.py:81 | Created test table: "428827aaff7f4006a87b6c9db9561e60" on host: 206.12.98.221
+Key=, Value=17:10:45.370 |    TRACE | <967:MainThread> logger.py:81 | Inserted a verification key into "428827aaff7f4006a87b6c9db9561e60" on host 206.12.98.221
+Key=, Value=17:10:45.370 |     INFO | <967:MainThread> single_machine_validator.py:123 | All target hosts point to the same machine
+Key=, Value=17:10:45.370 |     INFO | <967:MainThread> single_machine_validator.py:92 | Checking whether source host is the same as target
+Key=, Value=17:10:45.509 |    DEBUG | <967:MainThread> single_machine_validator.py:128 | Source and target are located on different machines
+Key=, Value=17:10:52.326 |    TRACE | <967:MainThread> logger.py:81 | Removed test table: "428827aaff7f4006a87b6c9db9561e60" on host: 206.12.98.221
+Key=, Value=17:10:52.326 |    DEBUG | <967:MainThread> migration_runner.py:244 | Verifying db2 version on source...
+Key=, Value=17:10:52.476 |     INFO | <967:MainThread> migration_runner.py:247 | db2 version on source: 11.5.9.0
+Key=, Value=17:10:52.476 |    DEBUG | <967:MainThread> migration_runner.py:258 | Verifying db2 version on target...
+Key=, Value=17:10:52.610 |     INFO | <967:MainThread> migration_runner.py:261 | db2 version on target: 11.5.9.0
+Key=, Value=17:10:52.611 |     INFO | <967:MainThread> db_handler.py:1028 | Getting {('DB2INST1', 'TEST')} sizes from the database.
+Key=, Value=17:10:52.754 |    DEBUG | <967:MainThread> db_handler.py:1033 | Query for getting table sizes took: 0:00:00.143022
+Key=, Value=17:10:52.755 |    DEBUG | <967:MainThread> db_handler.py:1053 | Table size processing took: -1 day, 23:59:59.999532
+Key=, Value=17:10:52.755 |    DEBUG | <967:MainThread> table_splitter.py:68 | Big tables: [(('DB2INST1', 'TEST'), 0.25)]
+Key=, Value=17:10:52.755 |    DEBUG | <967:MainThread> table_splitter.py:70 | Small tables: []
+Key=, Value=17:10:52.755 |    DEBUG | <967:MainThread> scenario.py:120 | Big workers number: 1
+Key=, Value=17:10:52.756 |    DEBUG | <967:MainThread> scenario.py:121 | Small workers number: 0.
+Key=, Value=17:10:52.761 |     INFO | <967:MainThread> query_executor.py:93 | Db2 driver has not been provided by user. Searching in default locations.
+Key=, Value=17:10:52.761 |     INFO | <967:MainThread> query_executor.py:97 | Using db2 driver libdb2.so from system loadable library path
+Key=, Value=17:10:52.761 |     INFO | <967:MainThread> query_executor.py:93 | Db2 driver has not been provided by user. Searching in default locations.
+Key=, Value=17:10:52.762 |     INFO | <967:MainThread> query_executor.py:97 | Using db2 driver libdb2.so from system loadable library path
+Key=, Value=17:10:53.770 |     INFO | <1014:MainThread> base_migration.py:230 | Starting the transferring process...
+Key=, Value=------------------------------------------------------------------------------------------
+Key=, Value=17:10:53.771 |    TRACE | <1014:MainThread> logger.py:81 | "DB2INST1"."TEST" -> "DB2INST1"."TEST"
+Key=, Value=17:10:53.771 |     INFO | <1014:MainThread> base_migration.py:147 | Searching for "DB2INST1"."TEST" (tables) on source...
+Key=, Value=17:10:54.064 |     INFO | <1014:MainThread> base_migration.py:155 | Searching for "DB2INST1"."TEST" (tables) on target...
+Key=, Value=17:10:54.198 |    TRACE | <1014:MainThread> logger.py:81 | "DB2INST1"."TEST" was found
+Key=, Value=17:10:54.331 |     INFO | <1014:MainThread> column_compatibility_checker.py:97 | Source and target table have an equal number of columns (9)
+Key=, Value=17:10:54.332 |     INFO | <1014:MainThread> column_compatibility_checker.py:109 | Column compatibility check succeeded
+Key=, Value=17:10:55.077 |     INFO | <1014:MainThread> datasliced_migration.py:165 | Preparing to unload "DB2INST1"."TEST"...
+Key=, Value=17:10:55.077 |    DEBUG | <1014:MainThread> datasliced_migration.py:171 | Chunk.000 100 rows (1 slices)
+Key=, Value=17:10:55.078 |    TRACE | <1014:MainThread> logger.py:81 | Job.1: 0
+Key=, Value=17:10:55.078 |    TRACE | <1014:MainThread> logger.py:81 | UNLOAD: /usr/bin/python3 /usr/local/ibm_migration_platform/db_migr/scenarios/db2_db2/connection/query_script.py SOURCE libdb2.so 206.12.99.99 50000 testdb db2inst1 ***** False CREATE EXTERNAL TABLE '/tmp/db_migr/db_migr-20240411_171030.692520/com.ibm.migration.unload.oas4i548/6c2724826cb64a1e9b8bd946895e60d1migr.pipe.001' USING ( LOGDIR '/tmp/db_migr/db_migr-20240411_171030.692520/com.ibm.migration.unload.oas4i548/6c2724826cb64a1e9b8bd946895e60d1' BOOLSTYLE '1_0' CCSID 1208 CRINSTRING True DATEDELIM '-' DATESTYLE 'YMD' DECIMALDELIM '.' DELIMITER '|' FORMAT 'TEXT' INCLUDEHEADER False INCLUDEZEROSECONDS True NULLVALUE 'NULL' SOCKETBUFSIZE 8388608 TIMEDELIM ':' TIMESTYLE '24HOUR' ESCAPECHAR '\' COMPRESS GZIP REMOTESOURCE 'YES'  ) AS SELECT * FROM "DB2INST1"."TEST" WHERE DATASLICEID IN (0) SYSTEM
+Key=, Value=17:10:55.083 |     INFO | <1014:MainThread> datasliced_migration.py:101 | Starting the transferring process...
+Key=, Value=17:10:55.083 |    TRACE | <1014:MainThread> logger.py:81 | LOAD: /usr/bin/python3 /usr/local/ibm_migration_platform/db_migr/scenarios/db2_db2/connection/query_script.py TARGET libdb2.so 206.12.98.221 50000 testdb db2inst1 ***** False INSERT INTO (SELECT * FROM "DB2INST1"."TEST" LIMIT 0) SELECT * FROM EXTERNAL '/tmp/db_migr/db_migr-20240411_171030.692520/com.ibm.migration.unload.oas4i548/6c2724826cb64a1e9b8bd946895e60d1migr.pipe.001' ("O_ORDERKEY" INTEGER, "O_CUSTKEY" INTEGER, "O_ORDERSTATUS" CHARACTER(1 OCTETS), "O_TOTALPRICE" DECIMAL(10,2), "O_ORDERDATE" DATE, "O_ORDERPRIORITY" CHARACTER(15 OCTETS), "O_CLERK" CHARACTER(15 OCTETS), "O_SHIPPRIORITY" INTEGER, "O_COMMENT" VARCHAR(79 OCTETS)) USING ( LOGDIR '/tmp/db_migr/db_migr-20240411_171030.692520/com.ibm.migration.unload.oas4i548/6c2724826cb64a1e9b8bd946895e60d1' BOOLSTYLE '1_0' CCSID 1208 CRINSTRING True DATEDELIM '-' DATESTYLE 'YMD' DECIMALDELIM '.' DELIMITER '|' FORMAT 'TEXT' INCLUDEHEADER False INCLUDEZEROSECONDS True NULLVALUE 'NULL' SOCKETBUFSIZE 8388608 TIMEDELIM ':' TIMESTYLE '24HOUR' ESCAPECHAR '\' COMPRESS GZIP REMOTESOURCE 'YES' CTRLCHARS True FILLRECORD False IGNOREZERO 'KEEP' MAXERRORS 1 MAXROWS 0 QUOTEDNULL True QUOTEDVALUE 'NO' RECORDDELIM '\n' REQUIREQUOTES False SKIPROWS 0 STRICTNUMERIC False TIMEROUNDNANOS False TRUNCSTRING False Y2BASE 2000  ) SYSTEM
+Key=, Value=17:10:56.385 |    DEBUG | <1014:MainThread> base_migration.py:403 | Successful insertions - 206.12.98.221: 1/1
+Key=, Value=17:10:56.385 |    DEBUG | <1014:MainThread> base_migration.py:405 | Successful insertions - total: 1/1
+Key=, Value=17:10:57.560 |    DEBUG | <1014:MainThread> base_migration.py:128 | Successful extractions: 1/1
+Key=, Value=17:10:57.561 |     INFO | <1014:MainThread> base_migration.py:374 | The transfer has finished successfully
+Key=, Value=17:10:57.561 |     INFO | <1014:MainThread> base_migration.py:377 | "DB2INST1"."TEST" -> "DB2INST1"."TEST" time: 00:00:03.791
+Key=, Value=17:10:57.562 |    TRACE | <1014:MainThread> logger.py:81 | Removing 1 pipes...
+Key=, Value=------------------------------------------------------------------------------------------
+Key=, Value=17:10:57.562 |     INFO | <1014:MainThread> base_migration.py:309 | Migration summary
+Key=, Value=Source object:        "DB2INST1"."TEST"
+Key=, Value=Target object:        "DB2INST1"."TEST"
+Key=, Value=Object type:          Table
+Key=, Value=Success:              True
+Key=, Value=Elapsed:              00:00:03.791
+Key=, Value=Start time:           2024-04-11 17:10:53.770251
+Key=, Value=End time:             2024-04-11 17:10:57.561368
+Key=, Value=
+Key=, Value=
+Key=, Value=17:10:57.563 |    DEBUG | <1014:MainThread> base_migration.py:328 | Removing /tmp/db_migr/db_migr-20240411_171030.692520/com.ibm.migration.unload.oas4i548/6c2724826cb64a1e9b8bd946895e60d1 ...
+Key=, Value=17:10:58.595 |     INFO | <967:MainThread> migration_runner.py:387 | Total time: 27.894861936569214 (0:00:27)
+Key=, Value=17:10:58.595 |    DEBUG | <967:MainThread> migration_runner.py:504 | Migration finished with exit code 0
+Key=, Value=17:10:58.595 |     INFO | <967:MainThread> migration_runner.py:508 | Log file: /tmp/db_migr/db_migr-20240411_171030.692520/db_migr-20240411_171030.697866.log
+Key=, Value=17:10:58.600 |     INFO | <967:MainThread> migration_runner.py:513 | JSON file: /tmp/db_migr/db_migr-20240411_171030.692520/migration_history_c8cce0b0d0a548f8a24948ddb1b9fa15/migration_report.json
+Key=, Value=17:10:58.604 |    TRACE | <967:MainThread> logger.py:81 | Migration executed with the following arguments:
+Key=, Value=Explicit arguments:
+Key=, Value=
+Key=, Value=Default arguments:

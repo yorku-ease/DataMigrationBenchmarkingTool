@@ -56,6 +56,6 @@ try:
             experiment.runExperiment()
             timeAfterTransfer = time.time()
             TotaltransferTime = timeAfterTransfer - timeBeforeTransfer
-            logger.logPerformanceBenchmark(loggingId,f"TotaltransferTime : {TotaltransferTime}")
+            logger.logPerformanceBenchmark(loggingId,f"TotalExperimentTime : {TotaltransferTime}")
 finally:
     logger.terminate_kafka_logger()

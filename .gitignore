@@ -10,3 +10,4 @@ deployment/reporter/logsParser/unitTest/o*.json
 databaseMigration/sourcedatadir/
 databaseMigration/targetdatadir/
 databaseMigration/backups/*
+deployment/database/data/*

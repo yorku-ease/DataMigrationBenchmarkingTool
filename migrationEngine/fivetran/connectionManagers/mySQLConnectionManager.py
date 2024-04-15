@@ -15,7 +15,9 @@ class MySQLConnectionManager(ConnectionManager):
         return cursor.fetchone() is not None
     def deleteTables(self,tables):
         for table in tables:
+            table = table.lower()
             query = f"DROP TABLE IF EXISTS {table}"
+            print(query)
             self.cursor.execute(query)
             self.connection.commit()
             while self.table_exists(self.cursor, table):

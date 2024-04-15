@@ -1,7 +1,7 @@
 Experiment Number,file,limit,compressionType,stream,Experiment startTime,logType,operation,statusOfOperation,timestamp
-1,NO,3,sample,>testdb,DEPARTMENT,info,Experiment,started,1701980841.246089
-1,NO,3,sample,>testdb,DEPARTMENT,info,Experiment,completed,1701980874.7665946
-1,GZIP,3,sample,>testdb,DEPARTMENT,info,Experiment,started,1701980874.7666667
-1,GZIP,3,sample,>testdb,DEPARTMENT,info,Experiment,completed,1701980909.5433493
-1,LZ4,3,sample,>testdb,DEPARTMENT,info,Experiment,started,1701980909.543437
-1,LZ4,3,sample,>testdb,DEPARTMENT,info,Experiment,completed,1701980944.9571698
+1,5mbFile,104857600,None,3,1712535787.2321649,info,Experiment,started,1712535792.2329063
+1,5mbFile,104857600,None,3,1712535787.2321649,info,Experiment,completed,1712535797.9971437
+1,5mbFile,104857600,gzip,3,1712535797.997203,info,Experiment,started,1712535802.9975805
+1,5mbFile,104857600,gzip,3,1712535797.997203,info,Experiment,completed,1712535807.5743916
+1,5mbFile,104857600,lz4,3,1712535807.5744715,info,Experiment,started,1712535812.5751595
+1,5mbFile,104857600,lz4,3,1712535807.5744715,info,Experiment,completed,1712535819.6213117

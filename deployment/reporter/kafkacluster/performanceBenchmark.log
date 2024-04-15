@@ -1,17 +1,51 @@
-Key=1-NO-3-sample->testdb-DEPARTMENT-1701980841.2460353, Value=TotalClearTime : 9.5367431640625e-07
-Key=1-NO-3-sample->testdb-DEPARTMENT-1701980841.2460353, Value=TotaltransferTime : 33.520575523376465
-Key=1-GZIP-3-sample->testdb-DEPARTMENT-1701980874.7666438, Value=TotalClearTime : 7.152557373046875e-07
-Key=1-GZIP-3-sample->testdb-DEPARTMENT-1701980874.7666438, Value=TotaltransferTime : 34.77674412727356
-Key=1-LZ4-3-sample->testdb-DEPARTMENT-1701980909.543414, Value=TotalClearTime : 7.152557373046875e-07
-Key=1-LZ4-3-sample->testdb-DEPARTMENT-1701980909.543414, Value=TotaltransferTime : 35.41377830505371
-Key=1-NO-3-sample->testdb-DEPARTMENT-1701980841.2460353, Value=TotalClearTime : 9.5367431640625e-07
-Key=1-NO-3-sample->testdb-DEPARTMENT-1701980841.2460353, Value=TotaltransferTime : 33.520575523376465
-Key=1-GZIP-3-sample->testdb-DEPARTMENT-1701980874.7666438, Value=TotalClearTime : 7.152557373046875e-07
-Key=1-GZIP-3-sample->testdb-DEPARTMENT-1701980874.7666438, Value=TotaltransferTime : 34.77674412727356
-Key=1-LZ4-3-sample->testdb-DEPARTMENT-1701980909.543414, Value=TotalClearTime : 7.152557373046875e-07
-Key=1-LZ4-3-sample->testdb-DEPARTMENT-1701980909.543414, Value=TotaltransferTime : 35.41377830505371Key=thisIdIsForTestPurposes, Value=TotalClearTime : 1.430511474609375e-06
-Key=thisIdIsForTestPurposes, Value=TotaltransferTime : 24.74663543701172
-Key=thisIdIsForTestPurposes, Value=TotalClearTime : 1.430511474609375e-06
-Key=thisIdIsForTestPurposes, Value=TotaltransferTime : 26.801308155059814
-Key=thisIdIsForTestPurposes, Value=TotalClearTime : 9.5367431640625e-07
-Key=thisIdIsForTestPurposes, Value=TotaltransferTime : 24.963908910751343
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=TotalClearTime : 7.152557373046875e-07
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=sizeOnTargetMachine : 1747626, stream : 1
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=sizeOnLocalMachine : 1747626, stream : 1
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=compressionTime : 0, stream : 1
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=dataTransferTime : 0.04533100128173828, stream : 1
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=readingFileTime : 0.0011577606201171875, stream : 1
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=sizeOnTargetMachine : 1747627, stream : 3
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=sizeOnLocalMachine : 1747627, stream : 3
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=compressionTime : 0, stream : 3
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=dataTransferTime : 0.0522913932800293, stream : 3
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=readingFileTime : 0.0010869503021240234, stream : 3
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=sizeOnTargetMachine : 1747627, stream : 2
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=sizeOnLocalMachine : 1747627, stream : 2
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=compressionTime : 0, stream : 2
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=dataTransferTime : 0.060214996337890625, stream : 2
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=readingFileTime : 0.002035856246948242, stream : 2
+Key=1-5mbFile-104857600-None-3-1712535787.2321649, Value=TotaltransferTime : 5.764369010925293
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=TotalClearTime : 4.76837158203125e-07
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=sizeOnTargetMachine : 1728, stream : 1
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=sizeOnLocalMachine : 1728, stream : 1
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=compressionTime : 0.009153366088867188, stream : 1
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=dataTransferTime : 0.0001201629638671875, stream : 1
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=readingFileTime : 0.0011780261993408203, stream : 1
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=sizeOnTargetMachine : 1728, stream : 2
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=sizeOnLocalMachine : 1728, stream : 2
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=compressionTime : 0.009408950805664062, stream : 2
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=dataTransferTime : 0.00011873245239257812, stream : 2
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=readingFileTime : 0.0011866092681884766, stream : 2
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=sizeOnTargetMachine : 1728, stream : 3
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=sizeOnLocalMachine : 1728, stream : 3
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=compressionTime : 0.009620189666748047, stream : 3
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=dataTransferTime : 0.0002548694610595703, stream : 3
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=readingFileTime : 0.0011584758758544922, stream : 3
+Key=1-5mbFile-104857600-gzip-3-1712535797.997203, Value=TotaltransferTime : 4.576982498168945
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=TotalClearTime : 4.76837158203125e-07
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=sizeOnTargetMachine : 7225, stream : 1
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=sizeOnLocalMachine : 7225, stream : 1
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=compressionTime : 0.00045609474182128906, stream : 1
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=dataTransferTime : 0.0001552104949951172, stream : 1
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=readingFileTime : 0.0017173290252685547, stream : 1
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=sizeOnTargetMachine : 7225, stream : 2
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=sizeOnLocalMachine : 7225, stream : 2
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=compressionTime : 0.00026702880859375, stream : 2
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=dataTransferTime : 0.0007863044738769531, stream : 2
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=readingFileTime : 0.0013985633850097656, stream : 2
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=sizeOnTargetMachine : 7225, stream : 3
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=sizeOnLocalMachine : 7225, stream : 3
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=compressionTime : 0.0002963542938232422, stream : 3
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=dataTransferTime : 0.0005114078521728516, stream : 3
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=readingFileTime : 0.001352071762084961, stream : 3
+Key=1-5mbFile-104857600-lz4-3-1712535807.5744715, Value=TotaltransferTime : 7.046536207199097
