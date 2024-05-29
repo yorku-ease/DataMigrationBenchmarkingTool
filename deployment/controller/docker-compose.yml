@@ -13,6 +13,7 @@ services:
       retries: 3
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
+    command: -storage_driver=kafka -storage_driver_kafka_broker_list=localhost:9092 -storage_driver_kafka_topic=cadvisor
     network_mode: "host"
     container_name: cadvisor
     ports:
