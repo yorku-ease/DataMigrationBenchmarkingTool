@@ -3,6 +3,9 @@ from performanceBenchmarkParser import PerformanceBenchmarkParser
 from db2PerformanceBenchmarkParser import Db2PerformanceBenchmarkParser
 from migrationEngineParser import MigrationEngineParser
 from db2migrationEngineParser import Db2MigrationEngineParser
+from cAdvisorParser import CAdvisorParser
+
+
 import configparser
 import os
 # Get the directory of the currently running script
@@ -40,5 +43,8 @@ for parser in parsers:
     parser.toJsonfile()
     parser.toCSVfile()
     parser.SavetoDB()
+
+cAdvisorParser = CAdvisorParser("../kafkacluster/cadvisor.log")
+cAdvisorParser.SavetoDB()
 
 print("Parsing done !")

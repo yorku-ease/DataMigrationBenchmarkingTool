@@ -72,7 +72,7 @@ def startConsumer():
                 value = msg.value().decode('utf-8')
 
 
-                message = 'Value={}'.format(value)
+                message = value
                 print(message)
                 topic_files[topic].write(f"{message}\n")
                 topic_files[topic].flush()  # Ensure data is written immediately
