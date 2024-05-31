@@ -158,7 +158,7 @@ class Experiment(Thread):
 
             client = docker.from_env()
             image_name = config.get('migrationEnvironment', 'migrationEngineDockerImage')
-            container_name = "MigrationEngine"
+            container_name = "MigrationEngine-" + self.loggingId
 
             volumes = {
                 f"{FOLDERS_PATH}/data": {"bind": "/app/data", "mode": "rw"},
