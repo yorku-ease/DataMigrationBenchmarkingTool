@@ -48,9 +48,9 @@ try:
             if not cloggingId:
                 loggingId = "-".join([str(i+1),*list(experimentOptions.values()),startTime])
             else:
-                loggingId = cloggingId
-            time.sleep(time_to_wait_beforeExperiment)
+                loggingId = cloggingId   
             print(f"Sleeping for {time_to_wait_beforeExperiment} seconds.")
+            time.sleep(time_to_wait_beforeExperiment)
             experiment = Experiment(experimentOptions, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId)
             timeBeforeTransfer = time.time()
             experiment.runExperiment()
