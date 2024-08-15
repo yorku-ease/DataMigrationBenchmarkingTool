@@ -1,7 +1,8 @@
-import time,sys,traceback,os,shutil,configparser,docker,paramiko,subprocess
+import time,sys,traceback,os,shutil,configparser,docker,paramiko,subprocess,yaml,threading
 from threading import Thread
 from src.kafkaLogger import KafkaLogger
 from src.connectionManager import ConnectionManager
+from src.dockerComposeParser import DockerComposeParser
 from itertools import product
 
 
@@ -100,6 +101,10 @@ class Experiment(Thread):
             stack_trace = traceback.format_exc()
             print(message)
             print(stack_trace)
+    def containerLog(self,container,service_name):
+        log_generator = container.logs(stream=True)
+        for log in log_generator:
+            print("log " + service_name + " : " +log.decode('utf-8'), end="")  # Print each log line
 
     def createMigrationEngineConfig(self):
         FOLDERS_PATH = os.environ.get("FOLDERS_PATH")
@@ -144,7 +149,8 @@ class Experiment(Thread):
     def migrate(self):
         
         try:
-            container = None
+            containers = []
+            loggingThreads = []
 
             FOLDERS_PATH = os.environ.get("FOLDERS_PATH")
             
@@ -157,56 +163,73 @@ class Experiment(Thread):
             self.createMigrationEngineConfig()
 
             client = docker.from_env()
-            image_name = config.get('migrationEnvironment', 'migrationEngineDockerImage')
-            container_name = "MigrationEngine-" + self.loggingId
 
+            composeParser = DockerComposeParser("configs/docker-compose.yml")
+
+            compose_data = composeParser.parseFile()
             volumes = {
-                f"{FOLDERS_PATH}/data": {"bind": "/app/data", "mode": "rw"},
+              #  f"{FOLDERS_PATH}/data": {"bind": "/app/data", "mode": "rw"},
                 f"{FOLDERS_PATH}/configs": {"bind": "/app/configs", "mode": "rw"},
             }
             labels = {
             'loggingId': self.loggingId,
             }
-            try:
-                container = client.containers.get(container_name)
-                container.remove()
-            except docker.errors.NotFound:
-                pass
-            container = None
-            existing_containers = client.containers.list(all=True)
-            container_exists = any(container.name == container_name for container in existing_containers)
+            for network_name, network_config in compose_data.get('networks', {}).items():
+                client.networks.create(network_name, **network_config)
 
-            '''if container_exists:
-                container = client.containers.get(container_name)
-                container.restart()
-            else:'''
-            ports = {
-    '50050': 50050,
-    '13080': 13080,
-    '14080': 14080
-}
-            #Run the migration engine in a docker container as a sibling to the container running this code.
-            container = client.containers.run(
-                privileged = True,
-                #mem_limit = "0",
-                volumes=volumes,
-                image=image_name,
-                name=container_name,
-                labels=labels,
-                detach= True,
-                ports=ports  # Add the 'ports' parameter
+            for volume_name, volume_config in compose_data.get('volumes', {}).items():
+                client.volumes.create(name=volume_name, **volume_config)
 
-                #cpuset_cpus = "0",
-            )
-            log_generator = container.logs(stream=True)
-            for log in log_generator:
-                print(log.decode('utf-8'), end="")  # Print each log line
+            for service_name, service_config in compose_data.get('services', {}).items():
+                print(service_config.get('ports'))
+                container_name =  "MigrationEngine_"+ service_name  + "-" + self.loggingId
+                additional_volume = f"{FOLDERS_PATH}/configs:/app/configs:rw"
 
-            container.wait()
+                if service_config.get('volumes') is None:
+                    service_config['volumes'] = [additional_volume]
+                elif isinstance(service_config['volumes'], list):
+                    service_config['volumes'].append(additional_volume)
+
+                try:
+                    oldContainer = client.containers.get(container_name)
+                    oldContainer.stop()
+                    oldContainer.remove()
+                except docker.errors.NotFound:
+                    pass
+                resources = composeParser.parseResources(service_config.get('deploy', {}).get('resources', {}))
+                print(resources) 
+                container = client.containers.run(
+                    image=service_config['image'],
+                    name=container_name,
+                    environment=service_config.get('environment'),
+                    ports=composeParser.parsePorts(service_config.get('ports')),
+                    volumes=service_config.get('volumes'),
+                    network=service_config.get('network'),
+                    labels = labels,
+                    command=service_config.get('command'),
+                    privileged=service_config.get('privileged'),
+                    cpu_quota=resources['cpu_quota'],
+                    cpu_period=resources['cpu_period'],
+                    mem_limit=resources['mem_limit'],
+                    mem_reservation=resources['mem_reservation'],
+                    detach=True  # Run in the background
+                )
+                log_thread = threading.Thread(target=self.containerLog, args=(container,service_name))
+
+                # Start the thread
+                loggingThreads.append(log_thread.start())
+
+                containers.append(container)
+
+            for container in containers: 
+                container.wait()
+
 
 
             self.removeConfigFile()
 
         finally:
-            if container is not None:
-                container.remove()
+            for container in containers:
+                if container is not None:
+                    container.stop()
+                    container.remove()
