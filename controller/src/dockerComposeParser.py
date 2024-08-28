@@ -13,11 +13,12 @@ class DockerComposeParser():
             return {} 
         return {port.split(':')[0]: int(port.split(':')[1]) for port in ports_list}
 
-    def parseResources(self,resources):
+    def parseResources(self, resources):
         if not resources:
             return {
                 'cpu_quota': None,
                 'cpu_period': None,
+                'cpu_shares': None,
                 'mem_limit': None,
                 'mem_reservation': None
             }
@@ -28,23 +29,27 @@ class DockerComposeParser():
         # Initialize default values
         cpu_quota = None
         cpu_period = 100000  # Default to 100 milliseconds
+        cpu_shares = None
         mem_limit = None
         mem_reservation = None
 
         # Convert CPU limits
         if 'cpus' in limits:
-            cpu_quota = int(float(limits['cpus']) * 100000)
+            cpu_quota = int(float(limits['cpus']) * cpu_period)
+        
+        # Convert CPU reservations
         if 'cpus' in reservations:
-            cpu_quota_res = int(float(reservations['cpus']) * 100000)
-            cpu_quota = cpu_quota_res if cpu_quota_res < cpu_quota else cpu_quota
-
-        # Convert memory limits
+            cpu_shares = int(float(reservations['cpus']) * 1024)
+        
+        # Convert memory limits and reservations
         mem_limit = limits.get('memory')
         mem_reservation = reservations.get('memory')
 
         return {
             'cpu_quota': cpu_quota,
             'cpu_period': cpu_period,
+            'cpu_shares': cpu_shares,
             'mem_limit': mem_limit,
             'mem_reservation': mem_reservation
         }
+

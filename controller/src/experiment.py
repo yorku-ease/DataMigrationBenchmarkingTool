@@ -210,6 +210,7 @@ class Experiment(Thread):
                     privileged=service_config.get('privileged'),
                     cpu_quota=resources['cpu_quota'],
                     cpu_period=resources['cpu_period'],
+                    cpu_shares=resources['cpu_shares'],
                     mem_limit=resources['mem_limit'],
                     mem_reservation=resources['mem_reservation'],
                     detach=True  # Run in the background
