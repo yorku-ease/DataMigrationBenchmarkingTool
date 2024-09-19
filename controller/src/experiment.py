@@ -10,6 +10,7 @@ from itertools import product
 class Experiment(Thread):
 
     output : dict
+    experimentStatus : bool
 
     def __init__(self, experimentOptions, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId):
         self.experimentOptions = experimentOptions
@@ -91,20 +92,28 @@ class Experiment(Thread):
             # Log error information
             self.migrate()
             self.logger.logFramework(self.loggingId,f"type : info, Experiment : completed, Timestamp : {time.time()}")
+            return self.experimentStatus
         except Exception as e:
             timestamp = time.time()
             error_message = str(e)
             error_location = f"File: {__file__}, Function: {__name__}, Line: {sys.exc_info()[-1].tb_lineno}"
             exception_type = type(e).__name__
-            message = f"type : error, Timestamp : {timestamp}, ErrorMessage : {error_message}, {error_location}, ExceptionType : {exception_type}"
+            message = f"type : error, Timestamp : {timestamp}, ErrorMessage : {error_message} {error_location} ExceptionType: {exception_type}"
             self.logger.logFramework(self.loggingId,message)
             stack_trace = traceback.format_exc()
             print(message)
             print(stack_trace)
+            
     def containerLog(self,container,service_name):
         log_generator = container.logs(stream=True)
+        log_code = "[EXP001] "  
+        log_text = log_code + "Experiment Status: " 
         for log in log_generator:
             print("log " + service_name + " : " +log.decode('utf-8'), end="")  # Print each log line
+            if  log_text + "Succeeded" in log.decode('utf-8'):
+                self.experimentStatus = True
+            elif log_text + "Failed" in log.decode('utf-8'):
+                self.experimentStatus = False
 
     def createMigrationEngineConfig(self):
         FOLDERS_PATH = os.environ.get("FOLDERS_PATH")
@@ -197,7 +206,7 @@ class Experiment(Thread):
                 except docker.errors.NotFound:
                     pass
                 resources = composeParser.parseResources(service_config.get('deploy', {}).get('resources', {}))
-                print(resources) 
+                self.experimentStatus = False
                 container = client.containers.run(
                     image=service_config['image'],
                     name=container_name,
@@ -227,10 +236,14 @@ class Experiment(Thread):
 
 
 
+            
             self.removeConfigFile()
 
         finally:
             for container in containers:
                 if container is not None:
+                    print("stopping")
                     container.stop()
+                    print("stopping")
                     container.remove()
+            return self.experimentStatus

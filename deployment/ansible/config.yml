@@ -1,0 +1,6 @@
+# Configuration settings for deployment
+mongoDatabase:
+  port : 27017
+  user : root
+  password : example
+

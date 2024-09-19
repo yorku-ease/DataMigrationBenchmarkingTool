@@ -1,3 +1,0 @@
-Experiment Number,compress,maxStreams,sourceDatabasetoTargetDatabase,tables,Experiment startTime,TotalExperimentTime,TotaltransferTime,totalPrecheckTime
-1,GZIP,3,testdb=>testdb,TEST,1713184082.223874,246.21767115592957,208.6765627861023,53.63825500000001
-2,GZIP,3,testdb=>testdb,TEST,1713184082.223874,0,0,0

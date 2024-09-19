@@ -49,13 +49,22 @@ try:
                 loggingId = "-".join([str(i+1),*list(experimentOptions.values()),startTime])
             else:
                 loggingId = cloggingId   
-            print(f"Sleeping for {time_to_wait_beforeExperiment} seconds.")
-            time.sleep(time_to_wait_beforeExperiment)
-            experiment = Experiment(experimentOptions, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId)
-            timeBeforeTransfer = time.time()
-            experiment.runExperiment()
-            timeAfterTransfer = time.time()
-            TotaltransferTime = timeAfterTransfer - timeBeforeTransfer
-            logger.logPerformanceBenchmark(loggingId,f"TotalExperimentTime : {TotaltransferTime}")
+            experimentStatus = False 
+            while not experimentStatus:
+                print(f"Sleeping for {time_to_wait_beforeExperiment} seconds.")
+                time.sleep(time_to_wait_beforeExperiment)
+                experiment = Experiment(experimentOptions, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId)
+                timeBeforeTransfer = time.time()
+                experimentStatus = experiment.runExperiment()
+                timeAfterTransfer = time.time()
+                TotaltransferTime = timeAfterTransfer - timeBeforeTransfer
+                logger.logPerformanceBenchmark(loggingId,f"TotalExperimentTime : {TotaltransferTime}")
+                # Check if the experiment failed
+                if not experimentStatus:
+                    print(f"Experiment {i+1} failed. Retrying after 600 seconds...")
+                    time.sleep(600)  # Wait 600 seconds before retrying
+                else:
+                    print(f"Experiment {i+1} succeeded.")
+
 finally:
     logger.terminate_kafka_logger()

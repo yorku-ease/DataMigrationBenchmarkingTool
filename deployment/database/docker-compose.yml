@@ -26,8 +26,8 @@ services:
       timeout: 10s
       retries: 5
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: {{ mongoDatabase.user }}
+      MONGO_INITDB_ROOT_PASSWORD: {{ mongoDatabase.password }}
     volumes:
       - ./data:/data/db
       
