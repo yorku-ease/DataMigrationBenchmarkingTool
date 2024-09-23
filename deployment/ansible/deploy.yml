@@ -174,3 +174,27 @@
       
       tags : 
         - pre_experiment
+
+- hosts: controller
+  tasks:
+    - name: Run pre_experiment steps depending on the migration Engine
+      block : 
+        - name : Run pre_experiment steps for Db2
+          ansible.builtin.include_tasks: 
+            file: migrationengines/db2/pre_experiment.yml
+            apply:
+              tags:
+                - pre_experiment
+                - debug
+          when:
+            - '"db2" in ansible_run_tags'
+          register: pre_experimentOutput
+          tags : 
+            - pre_experiment
+            - debug
+        - name: Output 
+          debug:
+            msg: "{{ pre_experimentOutput }}"
+          when: pre_experimentOutput is defined
+          tags:
+            - pre_experiment

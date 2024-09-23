@@ -1,0 +1,6 @@
+targetDB:
+  #path of folder where all docker compose files for the database exist
+  folderPath : /home/ubuntu/dump/databases/db2/target
+sourceDB:
+  #path of folder where all docker compose files for the database exist
+  folderPath : /home/ubuntu/dump/databases/db2/target
