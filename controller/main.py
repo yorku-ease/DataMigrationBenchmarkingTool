@@ -50,7 +50,9 @@ try:
             else:
                 loggingId = cloggingId   
             experimentStatus = False 
-            while not experimentStatus:
+            retries = -1
+            while not experimentStatus and retries < 5 :
+                retries += 1 
                 print(f"Sleeping for {time_to_wait_beforeExperiment} seconds.")
                 time.sleep(time_to_wait_beforeExperiment)
                 experiment = Experiment(experimentOptions, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId)
@@ -65,6 +67,9 @@ try:
                     time.sleep(600)  # Wait 600 seconds before retrying
                 else:
                     print(f"Experiment {i+1} succeeded.")
-
+            if retries == 5 : 
+                break    
+        if retries == 5 : 
+            break          
 finally:
     logger.terminate_kafka_logger()

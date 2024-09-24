@@ -185,16 +185,83 @@
             apply:
               tags:
                 - pre_experiment
-                - debug
           when:
             - '"db2" in ansible_run_tags'
           register: pre_experimentOutput
           tags : 
             - pre_experiment
-            - debug
         - name: Output 
           debug:
             msg: "{{ pre_experimentOutput }}"
           when: pre_experimentOutput is defined
           tags:
             - pre_experiment
+
+- hosts: controller
+  tasks:
+    - name: Start experiment 
+      block : 
+        - name : docker compose up 
+          shell: |
+            cd /home/{{ ansible_user }}/dmbench/controller
+            docker compose up -d
+          tags : 
+            - start_experiment
+        - name: Monitor Experiment ( "Waiting for experiment to finish. \n Check the logs of the controller docker container and the the .log files in the folder Kafkacluster in the reporter machine." )
+          shell: |
+            cd /home/{{ ansible_user }}/dmbench/controller
+            python3 monitor_experiment.py
+          tags:
+            - start_experiment
+
+- hosts: reporter
+  tasks:
+    - name: Post Experiment 
+      block : 
+        - name : kill Kafka cluster
+          shell: |
+            cd /home/{{ ansible_user }}/dmbench/reporter/kafkacluster/
+            docker compose down
+            chmod +x killConsumers.sh
+            ./killConsumers.sh 
+        - name : run parser
+          shell: |
+            cd /home/{{ ansible_user }}/dmbench/reporter/logsParser
+            python3 main.py
+        - name: Copy create results folder script
+          template:
+            src: ../reporter/logsParser/createResultsFolder.py
+            dest: /home/{{ ansible_user }}/dmbench/reporter/logsParser/createResultsFolder.py
+        - name : Create new folder for results
+          register : folderpath
+          shell: |
+            cd /home/{{ ansible_user }}/dmbench/reporter/logsParser
+            python3 createResultsFolder.py
+        - name: Fetch config.ini from controller host
+          ansible.builtin.fetch:
+            src: /home/{{ ansible_user }}/dmbench/controller/configs/config.ini
+            dest: /tmp/fetched_files/config.ini
+            flat: yes
+          delegate_to: controller      
+        - name: Fetch config.ini from controller host
+          ansible.builtin.fetch:
+            src: /home/{{ ansible_user }}/dmbench/controller/configs/docker-compose.yml
+            dest: /tmp/fetched_files/docker-compose.yml
+            flat: yes
+          delegate_to: controller
+        - name: Copy docker-compose.yml file to the results folder
+          ansible.builtin.copy:
+            src: /tmp/fetched_files/docker-compose.yml
+            dest: "{{folderpath.stdout}}"
+        - name: Copy config.ini file to the results folder
+          ansible.builtin.copy:
+            src: /tmp/fetched_files/config.ini
+            dest: "{{folderpath.stdout}}"
+        - name : Copy results to the new folder 
+          shell: |
+            cp /home/{{ ansible_user }}/dmbench/reporter/kafkacluster/migrationEngine.log "{{folderpath.stdout}}"
+            cp /home/{{ ansible_user }}/dmbench/reporter/logsParser/*.csv "{{folderpath.stdout}}"
+            cp /home/{{ ansible_user }}/dmbench/reporter/logsParser/*.json "{{folderpath.stdout}}"
+            cp /home/{{ ansible_user }}/dmbench/reporter/kafkacluster/cadvisor.log "{{folderpath.stdout}}"
+      tags : 
+        - post_experiment
