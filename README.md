@@ -48,6 +48,7 @@ To streamline the setup and deployment process, all key components of the framew
 - **Controller & Migration Engine**: Requires Docker.
 - **Logs Reporter**: Requires Docker and Python.
 - **Databases**: Requires Docker.
+- **Management Server**: Requires Ansible. This machine will host all source code and coordinate communication between all other machines in the system.
 
 While it's possible to deploy all components on a single machine, it is recommended to deploy them across separate machines, ideally in different locations. This setup mirrors real-world conditions, including network delays, which can help provide a more accurate evaluation of the migration process.
 
