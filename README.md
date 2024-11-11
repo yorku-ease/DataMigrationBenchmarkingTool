@@ -14,7 +14,10 @@ If you encounter any issues or have questions while using our system, please don
 
 To run tests for this project, please refer to the [TEST.md](TEST.md) file. The `TEST.md` file provides detailed instructions for each test scenario, including prerequisites, dependencies, and execution steps. Follow the outlined procedures to ensure the correctness and functionality of the project. If you encounter any issues or have questions related to the testing process, feel free to open an issue for assistance.
 
-## Physical Requirements
+## Overview of Key Components
+
+All the components of our framework, along with the data migration engine's environment, can be deployed either on a single machine, across separate machines, or a combination of both. The following descriptions will detail the role of each key component in the system.
+
 - Data Source: Where the data journey begins. The Migration Engine grabs data from here to send it off to the target machine.
 - Data Target: The final stop for migrated data. This is where data ends up after the Migration Engine does its job, finding its new home.
 - Controller: The mastermind behind all experiments. It sets up the Migration Engine for each experiment, tweaking parameters. The Controller kicks off and oversees the migration, keeping an eye on performance through migration logs. It also tracks resource usage by using cAdvisor and node-exporter on the same setup as the migration engine.
