@@ -42,7 +42,7 @@ The following components support the framework, enabling management, tracking, a
   *The Logs Reporter manages, parses, and stores logs to facilitate insight extraction.*
 
 ## Prerequisites
-For easy setup and deployment, all components of the framework are packaged as Docker containers. To run the tool, you'll need five machines, each with specific dependencies:
+For easy setup and deployment, all components of the framework are packaged as Docker containers. To run the tool, you'll need to set up five components, each with specific dependencies:
 - Data Source Machine
 - Data Target Machine
 - Controller & Migration Engine: Docker
