@@ -46,7 +46,7 @@ The following components support the framework, enabling management, tracking, a
 To streamline the setup and deployment process, all key components of the framework are packaged as Docker containers. Each component has specific dependencies that must be installed on the machine where it will be deployed:
 
 - **Controller & Migration Engine**: Requires Docker.
-- **Kafka Cluster**: Requires Docker and Python.
+- **Logs Reporter**: Requires Docker and Python.
 - **Databases**: Requires Docker.
 
 While it's possible to deploy all components on a single machine, it is recommended to deploy them across separate machines, ideally in different locations. This setup mirrors real-world conditions, including network delays, which can help provide a more accurate evaluation of the migration process.
