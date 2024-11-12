@@ -58,7 +58,11 @@ While it's possible to deploy all components on a single machine, it is recommen
 In our Git repository, you'll find a dedicated deployment folder. Inside this folder, there are distinct subfolders—databases, controller, and reporter—each designed for download onto their respective machines.
 
 ## Configuration
-In this section, we’ll configure each component of the framework deployed on each machine, assuming you’ve already downloaded the corresponding folders onto each machine.
+The configuration for the entire framework is centralized. We’ll make any necessary adjustments within the configuration files required for Ansible, which will then handle the setup and configuration of all machines involved in the framework.
+
+In our Git repository, you'll find a dedicated `deployment` folder that needs to be downloaded onto the management server machine. Within this folder, there are distinct subfolders—`databases`, `ansible`, `controller`, and `reporter`—each designed for deployment onto their respective machines. This section will outline the configuration files that need to be adjusted to ensure seamless setup across the framework.
+
+
 
 <details><summary> Databases</summary>
 <br />
