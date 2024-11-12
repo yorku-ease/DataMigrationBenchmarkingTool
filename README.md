@@ -57,45 +57,7 @@ The configuration for the entire framework is centralized. We’ll make any nece
 
 In our Git repository, you'll find a dedicated `deployment` folder that needs to be downloaded onto the management server machine. Within this folder, there are distinct subfolders—`databases`, `ansible`, `controller`, and `reporter`—each designed for deployment onto their respective machines. In this section, we’ll demonstrate how to centrally configure each component directly on the management server.
 
-<details><summary> Databases</summary>
-<br />
-For this machine, the only necessary configuration is to access the file `prometheus.yml` and modify the following sections by replacing 'localhost' with the IP address of the Controller & Migration Engine machine:
 
-```yaml
-- job_name: 'node-exporter'
-  static_configs:
-    - targets: ['<Controller-IP>:9100']
-
-- job_name: 'cAdvisorr'
-  static_configs:
-    - targets: ['<Controller-IP>:9100']
-```
-Replace <Controller-IP> with the actual IP address of your Controller & Migration Engine machine. 
-
-</details>
-
-<details><summary> Kafka Cluster</summary>
-<br />
-
-For this machine, we have to configure two subfolders.
-
-**Kafka Cluster**
-1. Change the current working directory to the Kafka cluster folder.
-2. Edit docker-compose.yml :
- <br/>  <br/>
-   In docker compose change these environment variables by changing 192.168.122.145 with your machine's public ip address.
-   KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka1:19092,EXTERNAL://192.168.122.145:9092,DOCKER://host.docker.internal:29092
-   KAFKA_JMX_HOSTNAME: 192.168.122.145.
-3. Run `pip install -r requirements.txt`.
-
-**Logs Reporter**
-1. Change the current working directory to the logsParser folder.
-2. Open the file `config.ini`; you have to edit the following parameters:
-
-   - `host = 192.168.122.1`: Change this with the IP address of your databases IP.
-   - `user = root`: This is the default username used to run the NoSQL MongoDB. If you want to change it, you also have to change `MONGO_INITDB_ROOT_USERNAME` in `docker-compose.yml` on the databases machine.
-   - `password = example`: This is the default password used to run the NoSQL MongoDB. If you want to change it, you also have to change `MONGO_INITDB_ROOT_PASSWORD` in `docker-compose.yml` on the databases machine.
-</details>
 
 <details><summary> Controller</summary>
 <br />
