@@ -133,31 +133,32 @@ This section of the configuration is transmitted unaltered to the Migration Engi
 **[[targetServer]]**
 
 This section includes connection details for the target server:
-- `host`: [target server IP]
-- `user`: [username]
-- `password`: [password]
+- `host` = [target server IP]
+- `user` = [username]
+- `password` = [password]
 
 **[[sourceServer]]**
 
 This section includes connection details for the source server:
-- `host`: [source server IP]
-- `user`: [username]
-- `password`: [password]
+- `host` = [source server IP]
+- `user` = [username]
+- `password` = [password]
 
 **[[KafkaCluster]]**
 
 This section requires the IP address of the reporter machine to be specified, while the rest of the values can remain default:
-- `host`: `<reporter_IP>` (Replace with the reporter machine IP)
-- `port`: 9092
-- `performanceBenchmarkTopic`: `performanceBenchmark`
-- `frameworkTopicName`: `framework`
+- `host` = `<reporter_IP>` (Replace with the reporter machine IP)
+- `port` = 9092
+- `performanceBenchmarkTopic` = `performanceBenchmark`
+- `frameworkTopicName` = `framework`
 
 **[[migrationEnvironment]]**
 
 This section defines settings related to the migration environment:
-- `migrationEngineDockerImage`: [docker image name]
-- `loggingId`: (Optional) Used to assign logs to a specific ID; leave empty if not needed.
-- `numberofexperiments`: Defines how many times the experiment is repeated for accuracy.
+- `migrationEngineDockerImage` = [docker image name]
+- `loggingId` = (Optional) Used to assign logs to a specific ID; leave empty if not needed.
+- `numberofexperiments` = Defines how many times the experiment is repeated for accuracy.
+- `time_to_wait_beforeExperiment` = Defines the time (in seconds) to wait before starting each experiment.
 
 #### Second Part
 
@@ -166,10 +167,10 @@ The second part contains all the parameters for the migration scenarios you wish
 **[[experiment]]**
 
 This section allows users to define migration parameters, such as files, limits, compression types, and stream counts. Here’s an example configuration for a file migration engine:
-- `file`: file1.csv, file2.txt, file3.java
-- `limit`: 1048576, 1048576
-- `compressiontype`: None, gzip, lz4
-- `stream`: 3, 2, 1
+- `file` = file1.csv, file2.txt, file3.java
+- `limit` = 1048576, 1048576
+- `compressiontype` = None, gzip, lz4
+- `stream` = 3, 2, 1
 
 The Controller systematically processes all possible combinations of these parameters to generate configurations for the Migration Engine. Below is an example for a file migration engine:
 
