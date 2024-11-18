@@ -228,7 +228,8 @@ services:
 </details> 
 
 
-### Optional Ansible Playbooks for Migration Engines
+<details><summary> Optional Ansible Playbooks for Migration Engines</summary>
+<br />
 
 For each migration engine, there are three optional Ansible playbooks located in the `deployment/ansible/migrationengines/<migration_engine>/` directory. These files allow users to define and automate additional steps to be executed on any machine during the migration process:
 
@@ -251,7 +252,9 @@ For example:
 ```yaml
 # Example of config.yml
 customVariable: someValue
+```
 
+</details> 
 
 ## Running the experiment 
 In this process, we will proceed step by step, emphasizing the importance of executing each component in a specified order. It is crucial to ensure that your source and target systems are operational and prepared for the migration process.
