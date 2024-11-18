@@ -228,6 +228,31 @@ services:
 </details> 
 
 
+### Optional Ansible Playbooks for Migration Engines
+
+For each migration engine, there are three optional Ansible playbooks located in the `deployment/ansible/migrationengines/<migration_engine>/` directory. These files allow users to define and automate additional steps to be executed on any machine during the migration process:
+
+1. **`pre_experiment.yml`**:  
+   This playbook contains steps to be executed *before the experiment begins* and immediately after the framework's pre-experiment steps. Users can define any required setup or preparatory tasks for the migration engine here.
+
+2. **`start_experiment.yml`**:  
+   This playbook includes steps to be executed *just before the experiment starts*. It is useful for initializing tasks or configurations needed to prepare for the experiment.
+
+3. **`post_experiment.yml`**:  
+   This playbook specifies steps to be executed *after the experiment concludes* and following the framework's post-experiment tasks. It is ideal for cleanup tasks, logging, or data collection after the migration.
+
+---
+
+#### Using `config.yml` for Custom Playbooks
+
+Each of the three playbooks (`pre_experiment.yml`, `start_experiment.yml`, and `post_experiment.yml`) can make use of a configuration file, `config.yml`, also found within the same migration engine directory. This configuration file allows users to define variables or settings that can be accessed by these playbooks to ensure they are dynamic and reusable. 
+
+For example:
+```yaml
+# Example of config.yml
+customVariable: someValue
+
+
 ## Running the experiment 
 In this process, we will proceed step by step, emphasizing the importance of executing each component in a specified order. It is crucial to ensure that your source and target systems are operational and prepared for the migration process.
 
