@@ -92,6 +92,7 @@ With this configuration, Ansible will use the `inventory.ini` file to manage con
 </details>
 
 <details><summary> Configuring config.yml</summary>
+<br />
 
 The `config.yml` file, located in `deployment/ansible/config.yml`, contains the configuration settings for various components of the framework, including the credentials for connecting to the MongoDB database used by the framework.
 
@@ -116,6 +117,7 @@ mongoDatabase:
 </details>
 
 <details><summary>Configuring the Controller </summary>
+<br />
 
 The Controller depends on the Migration Engine configuration, and you can choose to use one of the already supported engines or create a custom setup in the `custom` folder inside `deployment/controller/examples`. Inside each folder, you will find a `config.ini` file located in the `controller` folder. This file needs to be edited for your migration setup.
 
