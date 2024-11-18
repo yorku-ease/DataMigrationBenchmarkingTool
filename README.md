@@ -116,7 +116,7 @@ mongoDatabase:
 </details>
 
 
-<details><summary> Controller</summary>
+<details><summary> Configuring Controller</summary>
 <br />
 
 The Controller utilizes a pivotal configuration file named "config.ini," crucial for providing essential settings to the Migration Engine. This configuration holds paramount importance, guiding users in the dockerization of their migration engine.
