@@ -186,6 +186,7 @@ Once configured, the Controller will use these settings to coordinate the migrat
 </details> 
 
 <details><summary>Setting up docker-compose.yml</summary>
+<br />
 
 After selecting the appropriate migration engine in the `deployment/controller/examples` folder, the next step involves setting up the `docker-compose.yml` file. This file can be found in the `controller` folder inside the chosen migration engine's directory.
 
