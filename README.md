@@ -185,16 +185,16 @@ Once configured, the Controller will use these settings to coordinate the migrat
 
 </details> 
 
-<details><summary>Setting up `docker-compose.yml`</summary>
+<details><summary>Setting up docker-compose.yml</summary>
 
 After selecting the appropriate migration engine in the `deployment/controller/examples` folder, the next step involves setting up the `docker-compose.yml` file. This file can be found in the `controller` folder inside the chosen migration engine's directory.
 
-### Using `docker-compose.yml` for Deployment
+### Using docker-compose.yml for Deployment
 
 - If you are using one of the **supported migration engines**, a preconfigured `docker-compose.yml` file will already be available in the selected engine’s folder.
 - If you are creating a **custom migration engine**, you will need to create a `docker-compose.yml` file tailored to the specific Docker images required for your migration engine to run.
 
-### What to Include in Your `docker-compose.yml`
+### What to Include in Your docker-compose.yml
 
 If you are setting up a custom migration engine, ensure that your `docker-compose.yml` includes:
 1. **Service Definitions**: Define all the services needed for the migration engine.
