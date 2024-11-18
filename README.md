@@ -231,7 +231,7 @@ services:
 <details><summary> Optional Ansible Playbooks for Migration Engines</summary>
 <br />
 
-For each migration engine, there are three optional Ansible playbooks located in the `deployment/ansible/migrationengines/<migration_engine>/` directory. These files allow users to define and automate additional steps to be executed on any machine during the migration process:
+For each migration engine, there are three optional Ansible playbooks located in the `deployment/ansible/migrationengines/<migration_engine>/` directory. These files allow users to define and automate additional steps to be executed on any machine during the migration process. These playbooks can also utilize the `inventory.ini` file to define or access the machines involved in the migration, ensuring seamless integration with the deployment framework.
 
 1. **`pre_experiment.yml`**:  
    This playbook contains steps to be executed *before the experiment begins* and immediately after the framework's pre-experiment steps. Users can define any required setup or preparatory tasks for the migration engine here.
