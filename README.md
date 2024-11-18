@@ -155,7 +155,6 @@ This section requires the IP address of the reporter machine to be specified, wh
 **[[migrationEnvironment]]**
 
 This section defines settings related to the migration environment:
-- `migrationEngineDockerImage` = [docker image name]
 - `loggingId` = (Optional) Used to assign logs to a specific ID; leave empty if not needed.
 - `numberofexperiments` = Defines how many times the experiment is repeated for accuracy.
 - `time_to_wait_beforeExperiment` = Defines the time (in seconds) to wait before starting each experiment.
