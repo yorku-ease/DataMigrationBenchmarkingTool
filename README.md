@@ -57,8 +57,37 @@ The configuration for the entire framework is centralized. We’ll make any nece
 
 In our Git repository, you'll find a dedicated `deployment` folder that needs to be downloaded onto the management server machine. Within this folder, there are distinct subfolders—`databases`, `ansible`, `controller`, and `reporter`—each designed for deployment onto their respective machines. In this section, we’ll demonstrate how to centrally configure each component directly on the management server.
 
+<details><summary> Configuring `inventory.ini`</summary>
+<br />
+## Configuring `inventory.ini`
 
+The `inventory.ini` file is located in the `deployment/ansible` folder. This file is used to define the IP addresses and SSH access for the machines running the framework components: `reporter`, `databases`, and `controller`. Below is an example configuration:
 
+```ini
+[reporter]
+reporter ansible_host=<IP_ADDRESS> ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+[databases]
+databases ansible_host=<IP_ADDRESS> ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+[controller]
+controller ansible_host=<IP_ADDRESS> ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+To set this up:
+
+1. **Set IP Addresses:**  
+   Replace `<IP_ADDRESS>` with the IP of the machine assigned to each component.
+
+2. **Configure SSH Access:**  
+   - Generate an SSH key pair (private and public) on the management server using the following command:
+     ```bash
+     ssh-keygen -t rsa -b 2048
+     ```
+   - Place the private key path in the `ansible_ssh_private_key_file` field of the `inventory.ini` file.
+   - Add the generated public key to the `~/.ssh/authorized_keys` file on each machine to enable passwordless SSH access.
+With this configuration, Ansible will use the `inventory.ini` file to manage connections to the `reporter`, `databases`, and `controller` machines, ensuring a seamless and centralized deployment process.
+
+</details>
 <details><summary> Controller</summary>
 <br />
 
