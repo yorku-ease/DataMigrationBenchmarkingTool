@@ -60,7 +60,8 @@ In our Git repository, you'll find a dedicated `deployment` folder that needs to
 <details><summary> Configuring `inventory.ini`</summary>
 <br />
 
-The `inventory.ini` file is located in the `deployment/ansible` folder. This file is used to define the IP addresses and SSH access for the machines running the framework components: `reporter`, `databases`, and `controller`. Below is an example configuration:
+The `inventory.ini` file is located in the `deployment/ansible` folder. This file is used to define the IP addresses and SSH access for the machines running the framework components: `reporter`, `databases`, and `controller`. 
+Below is an example configuration:
 
 ```ini
 [reporter]
@@ -71,6 +72,8 @@ databases ansible_host=<IP_ADDRESS> ansible_user=ubuntu ansible_ssh_private_key_
 
 [controller]
 controller ansible_host=<IP_ADDRESS> ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+```
 
 To set this up:
 
