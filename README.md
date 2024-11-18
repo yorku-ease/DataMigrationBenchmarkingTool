@@ -173,7 +173,8 @@ The "config.ini" file consists of two integral parts:
 
 <details><summary>Configuring the Controller and `config.ini`</summary>
 
-The Controller depends on the Migration Engine configuration, and you can choose to use one of the already supported engines or create a custom setup in the `custom` folder inside `deployment/controller/examples`. Each folder contains a `config.ini` file that needs to be edited for your migration setup.
+The Controller depends on the Migration Engine configuration, and you can choose to use one of the already supported engines or create a custom setup in the `custom` folder inside `deployment/controller/examples`. Inside each folder, you will find a `config.ini` file located in the `controller` folder. This file needs to be edited for your migration setup.
+
 
 ### Understanding the `config.ini`
 
