@@ -115,63 +115,7 @@ mongoDatabase:
 
 </details>
 
-
-<details><summary> Configuring Controller</summary>
-<br />
-
-The Controller utilizes a pivotal configuration file named "config.ini," crucial for providing essential settings to the Migration Engine. This configuration holds paramount importance, guiding users in the dockerization of their migration engine.
-
-The "config.ini" file consists of two integral parts:
-
-1. **First Part:**
-   - This section is transmitted unaltered to the Migration Engine. Its content remains intact when creating `config.ini` for the migration engine.
-  
-   - **[[targetServer]]**
-     - In this section, the user can put any information needed to connect to the target Server.
-       - **host**
-       - **user**
-       - **password**
-       
-   - **[[sourceServer]]**
-     - In this section, the user can put any information needed to connect to the source Server.
-       - **host**
-       - **user**
-       - **password**
-       
-   - **[[KafkaCluster]]**
-     - In this section, the user should only change the value of the IP address of the reporter machine. The other variables should remain with the default values.
-       - **host**=192.168.122.143; this should be changed with the reporter IP
-       - **port**=9092
-       - **performanceBenchmarkTopic**=performanceBenchmark
-       - **frameworkTopicName**=framework
-       
-   - **[[migrationEnvironment]]**
-     - In this section, the user should choose to put information needed for the migration.
-       - **migrationEngineDockerImage**: the name of the docker image the user created for the migration engine.
-       - **loggingId**: In case the user needs all the logs and information collected during the monitoring to be assigned to a certain Id; this can be left empty.
-       - **numberofexperiments**: how many times each experiment is repeated with the same configuration (for the accuracy of the results).
-
-2. **Second Part:**
-   - The second part encompasses all conceivable parameters for the migration scenarios users wish to evaluate. Each parameter combination is systematically chosen by the Controller, which then conveys these specific parameters to the Migration Engine one at a time.
-   
-   - **[[experiment]]**
-     - In this section, this is an example for parameters for a file migration engine, the user can put parameters according to his engine.
-       - **file** = file1.csv, file2.txt, file3.java
-       - **limit** = 1048576, 1048576
-       - **compressiontype** = None, gzip, lz4
-       - **stream** = 3, 2, 1
-       
-   The Controller is responsible for examining all possible combinations when generating the configuration file for the Migration Engine. As an illustration of the second part of the configuration file, consider the following example:
-   - **[[experiment]]**
-     - **file** = file1.csv
-     - **limit** = 1048576
-     - **compressiontype** = None
-     - **stream** = 3
-
-</details>
-
-
-<details><summary>Configuring the Controller and `config.ini`</summary>
+<details><summary>Configuring the Controller </summary>
 
 The Controller depends on the Migration Engine configuration, and you can choose to use one of the already supported engines or create a custom setup in the `custom` folder inside `deployment/controller/examples`. Inside each folder, you will find a `config.ini` file located in the `controller` folder. This file needs to be edited for your migration setup.
 
