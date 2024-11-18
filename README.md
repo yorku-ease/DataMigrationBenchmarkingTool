@@ -91,6 +91,31 @@ With this configuration, Ansible will use the `inventory.ini` file to manage con
 
 </details>
 
+<details><summary> Configuring `config.yml`</summary>
+
+The `config.yml` file, located in `deployment/ansible/config.yml`, contains the configuration settings for various components of the framework, including the credentials for connecting to the MongoDB database used by the framework.
+
+#### MongoDB Credentials
+
+The MongoDB database is one of the core components of the framework's data storage, and you need to configure the credentials for access to this database. The `config.yml` file includes the following settings:
+
+```yaml
+# Configuration settings for deployment
+mongoDatabase:
+  port: <PORT>
+  user: <USER>
+  password: <PASSWORD>
+```
+
+#### To configure the database access:
+
+- **port**: The port on which the MongoDB server is running (default is `27017`).
+- **user**: The username for accessing MongoDB (e.g., `root`).
+- **password**: The password associated with the user.
+
+</details>
+
+
 <details><summary> Controller</summary>
 <br />
 
