@@ -59,7 +59,6 @@ In our Git repository, you'll find a dedicated `deployment` folder that needs to
 
 <details><summary> Configuring `inventory.ini`</summary>
 <br />
-## Configuring `inventory.ini`
 
 The `inventory.ini` file is located in the `deployment/ansible` folder. This file is used to define the IP addresses and SSH access for the machines running the framework components: `reporter`, `databases`, and `controller`. Below is an example configuration:
 
@@ -88,6 +87,7 @@ To set this up:
 With this configuration, Ansible will use the `inventory.ini` file to manage connections to the `reporter`, `databases`, and `controller` machines, ensuring a seamless and centralized deployment process.
 
 </details>
+
 <details><summary> Controller</summary>
 <br />
 
