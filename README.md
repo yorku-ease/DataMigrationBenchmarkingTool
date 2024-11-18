@@ -170,6 +170,76 @@ The "config.ini" file consists of two integral parts:
 
 </details>
 
+
+<details><summary>Configuring the Controller and `config.ini`</summary>
+
+The Controller depends on the Migration Engine configuration, and you can choose to use one of the already supported engines or create a custom setup in the `custom` folder inside `deployment/controller/examples`. Each folder contains a `config.ini` file that needs to be edited for your migration setup.
+
+### Understanding the `config.ini`
+
+The **config.ini** file plays a critical role in providing essential settings to the Migration Engine. It is divided into two sections: the first part contains static configurations for the Migration Engine, while the second part defines various parameters for specific migration scenarios.
+
+#### First Part
+
+This section of the configuration is transmitted unaltered to the Migration Engine.
+
+**[[targetServer]]**
+
+This section includes connection details for the target server:
+- `host`: [target server IP]
+- `user`: [username]
+- `password`: [password]
+
+**[[sourceServer]]**
+
+This section includes connection details for the source server:
+- `host`: [source server IP]
+- `user`: [username]
+- `password`: [password]
+
+**[[KafkaCluster]]**
+
+This section requires the IP address of the reporter machine to be specified, while the rest of the values can remain default:
+- `host`: `<reporter_IP>` (Replace with the reporter machine IP)
+- `port`: 9092
+- `performanceBenchmarkTopic`: `performanceBenchmark`
+- `frameworkTopicName`: `framework`
+
+**[[migrationEnvironment]]**
+
+This section defines settings related to the migration environment:
+- `migrationEngineDockerImage`: [docker image name]
+- `loggingId`: (Optional) Used to assign logs to a specific ID; leave empty if not needed.
+- `numberofexperiments`: Defines how many times the experiment is repeated for accuracy.
+
+#### Second Part
+
+The second part contains all the parameters for the migration scenarios you wish to evaluate. These parameters are used by the Controller to generate configurations for the Migration Engine.
+
+**[[experiment]]**
+
+This section allows users to define migration parameters, such as files, limits, compression types, and stream counts. Here’s an example configuration for a file migration engine:
+- `file`: file1.csv, file2.txt, file3.java
+- `limit`: 1048576, 1048576
+- `compressiontype`: None, gzip, lz4
+- `stream`: 3, 2, 1
+
+The Controller systematically processes all possible combinations of these parameters to generate configurations for the Migration Engine. Below is an example for a file migration engine:
+
+```ini
+[[experiment]]
+file = file1.csv
+limit = 1048576
+compressiontype = None
+stream = 3
+```
+
+Once configured, the Controller will use these settings to coordinate the migration process, sending the relevant parameters to the Migration Engine during each experiment.
+
+</details> ```
+
+
+
 ## Dockerizing the migration engine
 
 In this section, we delve into the migration engine Docker image as detailed in the configuration section . To effectively test your migration engine, adherence to our standards is essential. This implies dockerizing your migration engine in accordance with the specified guidelines.
