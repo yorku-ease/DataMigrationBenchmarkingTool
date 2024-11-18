@@ -226,6 +226,7 @@ services:
 ```
 
 </details> 
+</details> 
 
 
 ## Running the experiment 
