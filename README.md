@@ -269,27 +269,37 @@ To execute the migration experiment, follow these steps by navigating to the `an
 Run the following command to set up the infrastructure on all target machines. This step is executed only once:
 
 ```bash
-ansible-playbook -i inventory.ini deploy.yml --tags "infrastructure" &
+ansible-playbook -i inventory.ini deploy.yml --tags "infrastructure" 
 ```
+
+
+2. **Configuration**
+
+Run the following command to configure the infrastructure on all target machines. This step is executed only once:
+
+```bash
+ansible-playbook -i inventory.ini deploy.yml --tags "configuration" 
+```
+
 
 ---
 
-2. **Deploy Framework Databases**
+3. **Deploy Framework Databases**
 
 Run the following command to deploy the framework databases. This step is also executed only once:
 
 ```bash
-ansible-playbook -i inventory.ini deploy.yml --tags "deploy_db" &
+ansible-playbook -i inventory.ini deploy.yml --tags "deploy_db" 
 ```
 
 ---
 
-3. **Start the Experiment**
+4. **Start the Experiment**
 
 Use the following command to start the experiment:
 
 ```bash
-ansible-playbook -i inventory.ini deploy.yml --tags "pre_experiment,start_experiment,<migrationengine>" &
+ansible-playbook -i inventory.ini deploy.yml --tags "pre_experiment,start_experiment,<migrationengine>" 
 ```
 
 - Replace `<migrationengine>` with the name of the migration engine you want to use.  
@@ -298,12 +308,12 @@ ansible-playbook -i inventory.ini deploy.yml --tags "pre_experiment,start_experi
 
 ---
 
-4. **Run Post-Experiment Tasks**
+5. **Run Post-Experiment Tasks**
 
 After the experiment concludes, run this command:
 
 ```bash
-ansible-playbook -i inventory.ini deploy.yml --tags "post_experiment,<migrationengine>" &
+ansible-playbook -i inventory.ini deploy.yml --tags "post_experiment,<migrationengine>" 
 ```
 
 - Replace `<migrationengine>` with the name of the migration engine used in the experiment.
