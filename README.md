@@ -158,6 +158,8 @@ This section defines settings related to the migration environment:
 - `loggingId` = (Optional) Used to assign logs to a specific ID; leave empty if not needed.
 - `numberofexperiments` = Defines how many times the experiment is repeated for accuracy.
 - `time_to_wait_beforeExperiment` = Defines the time (in seconds) to wait before starting each experiment.
+-  `dummy` = A binary flag that should be set to True if the migration engine has a specific dummy experiment to run before each unique combination of parameters. 
+
 
 #### Second Part
 
