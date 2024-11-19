@@ -256,71 +256,59 @@ customVariable: someValue
 
 </details> 
 
-## Running the experiment 
-In this process, we will proceed step by step, emphasizing the importance of executing each component in a specified order. It is crucial to ensure that your source and target systems are operational and prepared for the migration process.
+## Running the Experiment
 
-Let's begin systematically:
+To execute the migration experiment, follow these steps by navigating to the `ansible` folder on the management server and running the specified commands:
 
-<details><summary> Databases</summary>
-Start by initiating the databases.
-  
-   - On the Databases machine, change the current working directory to the databases folder.
-   - Run the following command:
-     ```bash
-     docker-compose up
-     ```
-   - This will initiate `Prometheus` and `MongoDB` database along with `Grafana`. `Grafana` serves as a dashboard designed to help you monitor your migration engine's resource consumption in real-time.
+---
 
-</details>
+1. **Set Up Infrastructure**
 
-<details><summary> Kafka Cluster</summary>
-  Next, launch the Kafka cluster.
-  
-   - On the Kafka cluster machine, change the current working directory to the reporter/kafkacluster folder.
-   - Run the following command:
-     ```bash
-     docker-compose up
-     ```
+Run the following command to set up the infrastructure on all target machines. This step is executed only once:
 
-</details>
- 
-<details><summary> Kafka Consumer</summary>
-  After ensuring that Kafka is up and ready, follow up by activating the Kafka cluster's consumer.
-  
-   - On the Kafka cluster machine, change the current working directory to the reporter/kafkacluster folder.
-   - Run the following command:
-     ```bash
-     python consumer.py
-     ```
-</details>
-<details><summary> Controller</summary>
-  
-  Finally, initiate the Controller, which will orchestrate and commence all experiments.
-  
-   - On the controller machine, change the current working directory to the controller folder.
-   - Run the following command:
-     ```bash
-     docker pull "<your migration engine image>"
-     ```
-     ```bash
-     docker compose up
-     ```
-   - This will initiate the controller along with `cAdvisor` and `node-exporter`.
-     - `cAdvisor` serves as a daemon that collects, aggregates, processes, and exports information about running the controller and the migration engine.
-     - `node-exporter` is designed to monitor the host system where all the containers are deployed on.
+```bash
+ansible-playbook -i inventory.ini deploy.yml --tags "infrastructure" &
+```
 
-</details>
-<details><summary> Parser</summary>
-  Upon completion of the experiment, indicated by the termination of the Controller container, it is essential to navigate to the Kafka cluster machine.
-  
-   - Subsequently, the parser needs to be executed. Throughout the experiment, resource consumption logs were promptly stored in Prometheus. However, the logs pertaining to performance benchmarks remain localized on the Kafka machine.
-   - Running the parser becomes imperative at this juncture. Its role is twofold: to render the performance benchmark logs human-readable and to facilitate their exportation into `JSON` and `CSV` files. Furthermore, the parser ensures the archival of these logs in the `MongoDB` database for comprehensive analysis and reference.
-   - On the Kafka cluster machine, change the current working directory to the reporter/logsParser folder.
-   - Run the following command:
-     ```bash
-     python main.py
-     ```
-</details>
+---
+
+2. **Deploy Framework Databases**
+
+Run the following command to deploy the framework databases. This step is also executed only once:
+
+```bash
+ansible-playbook -i inventory.ini deploy.yml --tags "deploy_db" &
+```
+
+---
+
+3. **Start the Experiment**
+
+Use the following command to start the experiment:
+
+```bash
+ansible-playbook -i inventory.ini deploy.yml --tags "pre_experiment,start_experiment,<migrationengine>" &
+```
+
+- Replace `<migrationengine>` with the name of the migration engine you want to use.  
+- For example, to run steps for migrating DB2 databases, replace `<migrationengine>` with `db2`.
+
+
+---
+
+4. **Run Post-Experiment Tasks**
+
+After the experiment concludes, run this command:
+
+```bash
+ansible-playbook -i inventory.ini deploy.yml --tags "post_experiment,<migrationengine>" &
+```
+
+- Replace `<migrationengine>` with the name of the migration engine used in the experiment.
+
+This command performs the following:
+- Executes post-experiment steps for both the framework and the migration engine.
+
 
 ## Result
 
