@@ -3,10 +3,12 @@ services:
     image: icr.io/db2_community/db2
     container_name: db2source
     hostname: db2source
-    volumes:
-      - /home/ubuntu/dbsource/Docker:/database
     restart: always
     privileged: true
     ports:
       - "50000:50000"
     env_file: .env_list
+    volumes:
+      - /home/ubuntu/database:/database
+      - /home/ubuntu/generatedData:/data
+      - /mnt:/largedata:ro

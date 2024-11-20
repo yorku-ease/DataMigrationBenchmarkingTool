@@ -4,6 +4,7 @@
       block:
         - name: remove current databases 
           shell: |
+            mkdir -p /home/{{ ansible_user }}/dmbench/database
             cd /home/{{ ansible_user }}/dmbench/database
             docker compose down
             timestamp=$(date +%Y%m%d%H%M%S) 
@@ -18,7 +19,9 @@
             src: ../database/
             dest: /home/{{ ansible_user }}/dmbench/database/
       tags : 
+        - infrastructure-databases 
         - infrastructure
+        - databases-full
 - hosts: reporter
   tasks:
     - name: Infrastructure preparation 
@@ -32,7 +35,9 @@
             src: ../reporter/
             dest: /home/{{ ansible_user }}/dmbench/reporter/
       tags:
+        - infrastructure-reporter 
         - infrastructure
+        - reporter-full
 - hosts: controller
   tasks:
     - name: Infrastructure preparation 
@@ -46,6 +51,7 @@
             src: ../controller/
             dest: /home/{{ ansible_user }}/dmbench/controller/
       tags:
+        - infrastructure-controller 
         - infrastructure
 - hosts: databases
   tasks:
@@ -56,6 +62,7 @@
             src: ../database/prometheus.yml
             dest: /home/{{ ansible_user }}/dmbench/database/prometheus.yml
       tags : 
+        - configuration-databases
         - configuration
 - hosts: databases
   vars_files:
@@ -68,7 +75,9 @@
             src: ../database/docker-compose.yml
             dest: /home/{{ ansible_user }}/dmbench/database/docker-compose.yml
       tags : 
+        - configuration-databases
         - configuration
+        - databases-full
 - hosts: reporter
   tasks:
     - name: Configuration
@@ -77,8 +86,14 @@
           template:
             src: ../reporter/kafkacluster/docker-compose.yml
             dest: /home/{{ ansible_user }}/dmbench/reporter/kafkacluster/docker-compose.yml
+        - name: Install python required libraries 
+          shell: |
+            cd /home/{{ ansible_user }}/dmbench/reporter/kafkacluster
+            pip install -r requirements.txt
       tags : 
+        - configuration-reporter
         - configuration
+        - reporter-full
 - hosts: reporter
   vars_files:
     - config.yml  
@@ -90,7 +105,9 @@
             src: ../reporter/logsParser/config.ini
             dest: /home/{{ ansible_user }}/dmbench/reporter/logsParser/config.ini
       tags : 
+        - configuration-reporter
         - configuration
+        - reporter-full
 - hosts: databases
   vars_files:
     - config.yml 
@@ -121,6 +138,7 @@
           changed_when: false
       tags : 
         - deploy_db
+        - databases-full
 - hosts: reporter
   tasks:
     - name: Kafka Cluster Deployment
@@ -190,6 +208,28 @@
           register: pre_experimentOutput
           tags : 
             - pre_experiment
+        - name : Run pre_experiment steps for Default Migation engine
+          ansible.builtin.include_tasks: 
+            file: migrationengines/defaultEngine/pre_experiment.yml
+            apply:
+              tags:
+                - pre_experiment
+          when:
+            - '"default" in ansible_run_tags'
+          register: pre_experimentOutput
+          tags : 
+            - pre_experiment
+        - name : Run pre_experiment steps for custom Engine
+          ansible.builtin.include_tasks: 
+            file: migrationengines/custom/pre_experiment.yml
+            apply:
+              tags:
+                - pre_experiment
+          when:
+            - '"custom" in ansible_run_tags'
+          register: pre_experimentOutput
+          tags : 
+            - pre_experiment
         - name: Output 
           debug:
             msg: "{{ pre_experimentOutput }}"
@@ -200,7 +240,40 @@
 - hosts: controller
   tasks:
     - name: Start experiment 
-      block : 
+      block :
+        - name : Run start_experiment steps for Db2
+          ansible.builtin.include_tasks: 
+            file: migrationengines/db2/start_experiment.yml
+            apply:
+              tags:
+                - start_experiment
+          when:
+            - '"db2" in ansible_run_tags'
+          register: startdb2output
+          tags : 
+            - start_experiment
+        - name : Run start_experiment steps for Default
+          ansible.builtin.include_tasks: 
+            file: migrationengines/defaultEngine/start_experiment.yml
+            apply:
+              tags:
+                - start_experiment
+          when:
+            - '"default" in ansible_run_tags'
+          register: startdefaultoutput
+          tags : 
+            - start_experiment
+        - name : Run start_experiment steps for Custom
+          ansible.builtin.include_tasks: 
+            file: migrationengines/custom/start_experiment.yml
+            apply:
+              tags:
+                - start_experiment
+          when:
+            - '"custom" in ansible_run_tags'
+          register: startcustomoutput
+          tags : 
+            - start_experiment
         - name : docker compose up 
           shell: |
             cd /home/{{ ansible_user }}/dmbench/controller
@@ -210,7 +283,7 @@
         - name: Monitor Experiment ( "Waiting for experiment to finish. \n Check the logs of the controller docker container and the the .log files in the folder Kafkacluster in the reporter machine." )
           shell: |
             cd /home/{{ ansible_user }}/dmbench/controller
-            python3 monitor_experiment.py
+            nohup python3 monitor_experiment.py > monitor_experiment.log 2>&1 & 
           tags:
             - start_experiment
 
@@ -252,14 +325,58 @@
         - name: Copy docker-compose.yml file to the results folder
           ansible.builtin.copy:
             src: /tmp/fetched_files/docker-compose.yml
-            dest: "{{folderpath.stdout}}"
+            dest: "{{ folderpath.stdout }}/engine-docker-compose.yml"
         - name: Copy config.ini file to the results folder
           ansible.builtin.copy:
             src: /tmp/fetched_files/config.ini
             dest: "{{folderpath.stdout}}"
+        - name : Run post_experiment steps for Db2
+          vars:
+            resultsfolderpath: "{{ folderpath }}"
+          ansible.builtin.include_tasks: 
+
+            file: migrationengines/db2/post_experiment.yml
+            apply:
+              tags:
+                - post_experiment
+          when:
+            - '"db2" in ansible_run_tags'
+          register: postdb2output
+          tags : 
+            - post_experiment
+        - name : Run post_experiment steps for Db2
+          vars:
+            resultsfolderpath: "{{ folderpath }}"
+          ansible.builtin.include_tasks: 
+
+            file: migrationengines/defaultEngine/post_experiment.yml
+            apply:
+              tags:
+                - post_experiment
+          when:
+            - '"default" in ansible_run_tags'
+          register: postdefaultoutput
+          tags : 
+            - post_experiment
+        - name : Run post_experiment steps for Db2
+          vars:
+            resultsfolderpath: "{{ folderpath }}"
+          ansible.builtin.include_tasks: 
+
+            file: migrationengines/custom/post_experiment.yml
+            apply:
+              tags:
+                - post_experiment
+          when:
+            - '"custom" in ansible_run_tags'
+          register: postcustomoutput
+          tags : 
+            - post_experiment
         - name : Copy results to the new folder 
           shell: |
             cp /home/{{ ansible_user }}/dmbench/reporter/kafkacluster/migrationEngine.log "{{folderpath.stdout}}"
+            cp /home/{{ ansible_user }}/dmbench/reporter/kafkacluster/performanceBenchmark.log "{{folderpath.stdout}}"
+            cp /home/{{ ansible_user }}/dmbench/reporter/kafkacluster/framework.log "{{folderpath.stdout}}"
             cp /home/{{ ansible_user }}/dmbench/reporter/logsParser/*.csv "{{folderpath.stdout}}"
             cp /home/{{ ansible_user }}/dmbench/reporter/logsParser/*.json "{{folderpath.stdout}}"
             cp /home/{{ ansible_user }}/dmbench/reporter/kafkacluster/cadvisor.log "{{folderpath.stdout}}"

@@ -40,36 +40,53 @@ if time_to_wait_beforeExperiment is None:
 experiments = config['experiment']
 experimentsCombinations = Experiment.extractExperimentsCombinations(experiments)
 
-
+def runExperiment(dummy = False):
+    experimentStatus = False
+    attempt_number = 0
+    print("Controller : Value of Dummy is : " + str(dummy))
+    while not experimentStatus and attempt_number < 3 :
+        attempt_number += 1 
+        if not cloggingId:
+            if dummy : 
+                dummyexperimentOptions = experimentOptions.copy()
+                dummyexperimentOptions['tables'] = 'dummy'
+                loggingId = "-".join([str(i+1),*list(dummyexperimentOptions.values()),str(attempt_number),startTime])
+            else : 
+                loggingId = "-".join([str(i+1),*list(experimentOptions.values()),str(attempt_number),startTime])
+        else:
+            loggingId = cloggingId   
+        print(f"Sleeping for {time_to_wait_beforeExperiment} seconds.")
+        time.sleep(time_to_wait_beforeExperiment)
+        experiment = Experiment(experimentOptions, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId,dummy)
+        timeBeforeTransfer = time.time()
+        experimentStatus = experiment.runExperiment()
+        timeAfterTransfer = time.time()
+        TotaltransferTime = timeAfterTransfer - timeBeforeTransfer
+        logger.logPerformanceBenchmark(loggingId,f"TotalExperimentTime : {TotaltransferTime}")
+        logger.logPerformanceBenchmark(loggingId,f"ExperimentStatus : {experimentStatus}")
+        # Check if the experiment failed
+        if not experimentStatus:
+            print(f"Experiment {i+1} failed. Retrying after 600 seconds...")
+            time.sleep(600)  
+        else:
+            print(f"Experiment {i+1} succeeded.")
+    return experimentStatus
 try:
     for experimentOptions in experimentsCombinations:
         startTime = str(time.time())
         for i in range(0,numberOfExperiments):
-            if not cloggingId:
-                loggingId = "-".join([str(i+1),*list(experimentOptions.values()),startTime])
-            else:
-                loggingId = cloggingId   
-            experimentStatus = False 
-            retries = -1
-            while not experimentStatus and retries < 5 :
-                retries += 1 
-                print(f"Sleeping for {time_to_wait_beforeExperiment} seconds.")
-                time.sleep(time_to_wait_beforeExperiment)
-                experiment = Experiment(experimentOptions, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId)
-                timeBeforeTransfer = time.time()
-                experimentStatus = experiment.runExperiment()
-                timeAfterTransfer = time.time()
-                TotaltransferTime = timeAfterTransfer - timeBeforeTransfer
-                logger.logPerformanceBenchmark(loggingId,f"TotalExperimentTime : {TotaltransferTime}")
-                # Check if the experiment failed
-                if not experimentStatus:
-                    print(f"Experiment {i+1} failed. Retrying after 600 seconds...")
-                    time.sleep(600)  # Wait 600 seconds before retrying
-                else:
-                    print(f"Experiment {i+1} succeeded.")
-            if retries == 5 : 
+            if i == 0 : 
+                print("running the dummy experiment")
+                dummy  = True
+                experimentStatus = runExperiment(dummy)
+                if not experimentStatus : 
+                    break ; 
+            print("running the real experiment now")
+            print(experimentOptions)            
+            experimentStatus = runExperiment(False)
+            if not experimentStatus : 
                 break    
-        if retries == 5 : 
-            break          
+        if not experimentStatus : 
+            break ;        
 finally:
     logger.terminate_kafka_logger()

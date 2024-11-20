@@ -21,6 +21,6 @@ def create_new_exp_folder(base_folder):
 
 
 # Example usage
-base_folder =  '/home/{{ hostvars["databases"]["ansible_user"] }}/dmbench/reporter/results'
+base_folder =  '/home/{{ hostvars["databases"]["ansible_user"] }}/dmbench/results'
 new_folder_path = create_new_exp_folder(base_folder)
 print(f'{new_folder_path}')

@@ -89,8 +89,8 @@
           shell: timeout 60 docker exec {{ container_name }} su - db2inst1 -c "db2 connect to {{ db_name }}"
           register: db2_connect_output
           failed_when:  "'Database Connection Information' not in db2_connect_output.stdout"
-          retries: 60
-          delay: 5
+          retries: 30
+          delay: 30
           until: db2_connect_output.stdout is defined and  'Database Connection Information' in db2_connect_output.stdout
           ignore_errors: no
   delegate_to: db2-targetDB
@@ -163,11 +163,51 @@
           debug:
             msg: "The source database name is: {{ db_name }}"
         - name: Check if source db2 database is ready  
-          shell: timeout 60 docker exec {{ container_name }} su - db2inst1 -c "db2 connect to {{ db_name }}"
+          shell: timeout 300 docker exec {{ container_name }} su - db2inst1 -c "db2 connect to {{ db_name }}"
           register: db2_connect_output
           failed_when:  "'Database Connection Information' not in db2_connect_output.stdout"
-          retries: 60
-          delay: 5
+          retries: 30
+          delay: 30
           until: db2_connect_output.stdout is defined and  'Database Connection Information' in db2_connect_output.stdout
           ignore_errors: no
-  delegate_to: db2-sourceDB      
+  delegate_to: db2-sourceDB
+
+- name: Pull cAdvisor on source DB
+  block:
+    - name: Ensure dmbench directory exists
+      file:
+        path: /home/{{ ansible_user }}/dmbench
+        state: directory
+        mode: '0755'
+
+    - name: Copy the desired cadvisor docker compose file to db2 source
+      template:
+        src: migrationengines/db2/databases/cadvisor-docker-compose.yml
+        dest: /home/{{ ansible_user }}/dmbench/docker-compose.yml
+
+    - name: Docker compose pull for cAdvisor
+      shell: |
+        cd /home/{{ ansible_user }}/dmbench/
+        docker compose pull
+  when: hostvars['db2-sourceDB'].ansible_host  != hostvars['controller'].ansible_host
+  delegate_to: db2-sourceDB
+
+- name: Pull cAdvisor on target DB
+  block:
+    - name: Ensure dmbench directory exists
+      file:
+        path: /home/{{ ansible_user }}/dmbench
+        state: directory
+        mode: '0755'
+
+    - name: Copy the desired cadvisor docker compose file to db2 target
+      template:
+        src: migrationengines/db2/databases/cadvisor-docker-compose.yml
+        dest: /home/{{ ansible_user }}/dmbench/docker-compose.yml
+
+    - name: Docker compose pull for cAdvisor
+      shell: |
+        cd /home/{{ ansible_user }}/dmbench/
+        docker compose pull
+  when: hostvars['db2-targetDB'].ansible_host  !=  hostvars['controller'].ansible_host 
+  delegate_to: db2-targetDB

@@ -4,9 +4,9 @@ import configparser
 from pymongo import MongoClient
 import pandas as pd
 class FrameworkParser(Parser):
-    def __init__(self,log_file_path,json_file_path,csv_file_name):
+    def __init__(self,log_file_path,json_file_path,csv_file_name,experiment_metadataHeader,log_detailsHeader):
 
-        super().__init__(log_file_path,json_file_path,csv_file_name)
+        super().__init__(log_file_path,json_file_path,csv_file_name,experiment_metadataHeader)
         config = configparser.ConfigParser()
         config.comment_prefixes = (';',)  # Set the prefix character for comments
         config.read('config.ini')
@@ -14,5 +14,8 @@ class FrameworkParser(Parser):
         self.collection_name = config.get('mongo', 'frameworklogsCollection_name')
         # Define a regular expression pattern to extract the key and key-value pairs
         self.log_pattern = r'Key=(.*?), Value=(.*?)$'
-        self.header = ['Experiment Number','file','limit','compressionType','stream','Experiment startTime','logType','operation','statusOfOperation','timestamp']
+        self.experiment_metadataHeader = experiment_metadataHeader
+        self.log_detailsHeader = log_detailsHeader 
+
+        self.header = self.experiment_metadataHeader + self.log_detailsHeader
 

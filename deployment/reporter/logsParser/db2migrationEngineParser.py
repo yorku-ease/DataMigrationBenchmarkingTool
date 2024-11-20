@@ -7,9 +7,9 @@ import configparser
 from pymongo import MongoClient
 import pandas as pd
 class Db2MigrationEngineParser(Parser):
-    def __init__(self,log_file_path,json_file_path,csv_file_name):
+    def __init__(self,log_file_path,json_file_path,csv_file_name,experiment_metadataHeader,log_detailsHeader):
 
-        super().__init__(log_file_path,json_file_path,csv_file_name)
+        super().__init__(log_file_path,json_file_path,csv_file_name,experiment_metadataHeader)
         config = configparser.ConfigParser()
         config.comment_prefixes = (';',)  # Set the prefix character for comments
         config.read('config.ini')
@@ -17,8 +17,11 @@ class Db2MigrationEngineParser(Parser):
         self.collection_name = config.get('mongo', 'migrationEnginelogsCollection_name')
         # Define a regular expression pattern to extract the key and key-value pairs
         self.log_pattern = r'Key=(.*?), Value=(.*?)$'
-        self.header = ['Experiment Number','compress','maxStreams','sourceDatabasetoTargetDatabase','tables','Experiment startTime','logTime','logType','logLocation','logDescription']
-        
+        self.experiment_metadataHeader = experiment_metadataHeader
+        self.log_detailsHeader = log_detailsHeader 
+
+        self.header = self.experiment_metadataHeader + self.log_detailsHeader      
+          
     def toJsonData(self):
                # Compile the regular expression
         self.data = []
@@ -40,11 +43,11 @@ class Db2MigrationEngineParser(Parser):
 
                         # Create a dictionary to store the extracted key-value pairs
                         extracted_dict = {}
-                        for i in range(0,6):
+                        for i in range(0,8):
                             extracted_dict[self.header[i]] = key[i]
                         if (len(value_pairs)>1):
-                            for i in range(6,len(self.header)):
-                                extracted_dict[self.header[i]] = value_pairs[i - 6].strip()
+                            for i in range(8,len(self.header)):
+                                extracted_dict[self.header[i]] = value_pairs[i - 8].strip()
                         else : 
                             extracted_dict['description'] = value
 

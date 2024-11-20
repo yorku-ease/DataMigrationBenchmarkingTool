@@ -5,9 +5,14 @@ services:
     container_name: db2target
     hostname: db2Target
     restart: always
+    # deploy:
+    #     resources:
+    #       limits:
+    #         cpus: '0.05'
+    #         memory: '5g'
     privileged: true
     volumes:
-      - /home/{{ hostvars["db2-targetDB"]["ansible_user"] }}/db2target:/database
+      - /home/ubuntu/db2target:/database
     ports:
       - "50000:50000"
     env_file: .env_list

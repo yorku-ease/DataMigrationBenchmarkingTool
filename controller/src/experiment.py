@@ -12,7 +12,7 @@ class Experiment(Thread):
     output : dict
     experimentStatus : bool
 
-    def __init__(self, experimentOptions, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId):
+    def __init__(self, experimentOptions, remoteHostname, remoteUsername, remotePassword, localPassword, loggingId,dummy = False):
         self.experimentOptions = experimentOptions
  
         self.remoteHostname = remoteHostname
@@ -21,6 +21,7 @@ class Experiment(Thread):
         self.localPassword = localPassword
         self.loggingId = loggingId
         self.logger = KafkaLogger()
+        self.dummy = dummy
 
     @staticmethod
     def extractExperimentsCombinations(experiments):
@@ -142,9 +143,10 @@ class Experiment(Thread):
             config.set('experiment', key, self.experimentOptions[key])
 
         config.set('migrationEnvironment', 'loggingId', self.loggingId)
-        
-
-
+        if self.dummy : 
+            config.set('migrationEnvironment', 'dummy', True)
+        else : 
+            config.set('migrationEnvironment', 'dummy', False)
         # Writing our configuration file to 'example.ini'
         with open(f'configs/migrationEngineConfig.ini', 'w') as configfile:
             config.write(configfile)
@@ -160,7 +162,7 @@ class Experiment(Thread):
         try:
             containers = []
             loggingThreads = []
-
+            self.experimentStatus = False
             FOLDERS_PATH = os.environ.get("FOLDERS_PATH")
             
             config = configparser.RawConfigParser()
@@ -206,7 +208,6 @@ class Experiment(Thread):
                 except docker.errors.NotFound:
                     pass
                 resources = composeParser.parseResources(service_config.get('deploy', {}).get('resources', {}))
-                self.experimentStatus = False
                 container = client.containers.run(
                     image=service_config['image'],
                     name=container_name,

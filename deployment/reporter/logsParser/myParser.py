@@ -9,7 +9,7 @@ import pandas as pd
 class Parser():
 
 
-    def __init__(self,log_file_path,json_file_path,csv_file_path):
+    def __init__(self,log_file_path,json_file_path,csv_file_path,experiment_metadataHeader):
         self.log_file_path = log_file_path
         self.json_file_path = json_file_path
         self.csv_file_path = csv_file_path
@@ -27,6 +27,8 @@ class Parser():
         self.mongo_password = config.get('mongo', 'password')
         self.database_name = config.get('mongo', 'database_name')
 
+        self.experiment_metadataHeader = experiment_metadataHeader
+
 
 
 
@@ -34,7 +36,6 @@ class Parser():
     def toJsonData(self):
                # Compile the regular expression
         self.data = []
-        
         extracted_dict = {}
         log_regex = re.compile(self.log_pattern)
         try:
@@ -51,10 +52,11 @@ class Parser():
 
                         # Create a dictionary to store the extracted key-value pairs
                         extracted_dict = {}
-                        for i in range(0,6):
+                        for i in range(0,len(self.experiment_metadataHeader)):
                             extracted_dict[self.header[i]] = key[i]
                         # Iterate through the value pairs and add them to the dictionary
                         for pair in value_pairs:
+                            
                             k, v = pair.split(' : ')
                             extracted_dict[k] = v
                     self.data.append(extracted_dict)
@@ -75,7 +77,7 @@ class Parser():
                 writer = csv.writer(csvfile)
                 writer.writerow(self.header)
                 for row in self.data:
-                    i = 7
+                    i = len(self.experiment_metadataHeader) + 1
                     values = list(row.values())
                     operation = list(row.keys())[i]
                     values.insert(i, operation)

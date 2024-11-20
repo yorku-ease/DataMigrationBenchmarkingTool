@@ -21,7 +21,7 @@ def create_topics(bootstrap_servers):
     for topic_name in topic_names:
         if topic_name not in existing_topics:
             # Create a new topic with the desired configuration
-            new_topic = NewTopic(topic_name,1,1)
+            new_topic = NewTopic(topic_name, num_partitions=3, replication_factor=1)
 
             # Create the topic
             admin_client.create_topics([new_topic])
