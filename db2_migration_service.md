@@ -110,4 +110,9 @@ However, there are a couple of important tasks to complete:
 
    In `deployment/ansible/migrationengines/db2/config.yml`, you need to specify the folder paths (without the trailing slash) where these Docker Compose files exist on each machine. Update the configuration with the correct paths so that the management server can manage the Docker Compose services for both databases.
 
+### Final Steps
+
+Once you have completed the configuration, you can now return to the [README.md](README.md) file. Follow the steps outlined there for running the experiment. 
+
+Make sure to use the `db2` tag when running the playbooks to ensure that the DB2 migration engine is properly utilized during the experiment.
 
