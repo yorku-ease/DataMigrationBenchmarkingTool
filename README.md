@@ -57,7 +57,8 @@ The configuration for the entire framework is centralized. We’ll make any nece
 
 In our Git repository, you'll find a dedicated `deployment` folder that needs to be downloaded onto the management server machine. Within this folder, there are distinct subfolders—`databases`, `ansible`, `controller`, and `reporter`—each designed for deployment onto their respective machines. In this section, we’ll demonstrate how to centrally configure each component directly on the management server.
 
-<details> 1. <summary> Configuring inventory.ini for Ansible</summary>
+<details><summary> 1. Configuring inventory.ini for Ansible</summary>
+
 <br />
 
 The `inventory.ini` file is located in the `deployment/ansible` folder. This file is used to define the IP addresses and SSH access for the machines running the framework components: `reporter`, `databases`, and `controller`. 
@@ -230,7 +231,7 @@ services:
 </details> 
 
 
-5. <details><summary> Optional Ansible Playbooks for Migration Engines</summary>
+<details><summary> 5. Optional Ansible Playbooks for Migration Engines</summary>
 <br />
 
 For each migration engine, there are three optional Ansible playbooks located in the `deployment/ansible/migrationengines/<migration_engine>/` directory. These files allow users to define and automate additional steps to be executed on any machine during the migration process. These playbooks can also utilize the `inventory.ini` file to define or access the machines involved in the migration, ensuring seamless integration with the deployment framework.
