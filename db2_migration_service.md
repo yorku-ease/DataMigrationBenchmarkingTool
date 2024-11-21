@@ -85,5 +85,25 @@ This section contains the parameters for the migration experiments.
 
 For the DB2 migration service, nothing needs to be done here, as the Docker image is already dockerized, and the `docker-compose.yml` file is provided in the `configs` folder. You can use the pre-configured `docker-compose.yml` file for your migration engine setup.
 
+### Step 5: Optional Ansible Playbooks for Migration Engines
+
+For the DB2 migration service, not much needs to be done here either. The necessary Ansible playbooks have already been implemented. These playbooks handle various stages of the migration process, including pre-experiment, starting the experiment, and post-experiment steps. You can refer to the playbooks in the `deployment/ansible/migrationengines/db2/` folder for more details.
+
+However, there are a couple of important tasks to complete:
+
+1. **Configure `inventory.ini` for DB2 Machines**
+
+   Go to `deployment/ansible/inventory.ini` and add two machines for your DB2 migration:
+
+   - `db2-targetDB`
+   - `db2-sourceDB`
+
+   Make sure the management server has access to both of these machines by configuring their details in the inventory file.
+
+2. **Configure Docker Compose for Databases**
+
+   Both the source and target DB2 databases need to be running using Docker Compose. There should already be a Docker Compose file that starts these databases. 
+
+   In `deployment/ansible/migrationengines/db2/config.yml`, you need to specify the folder paths (without the trailing slash) where these Docker Compose files exist on each machine. Update the configuration with the correct paths so that the management server can manage the Docker Compose services for both databases.
 
 
