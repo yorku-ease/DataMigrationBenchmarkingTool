@@ -259,6 +259,11 @@ customVariable: someValue
 
 </details> 
 
+For most supported engines, steps 3, 4, and 5 are largely pre-configured and require minimal adjustments. Detailed instructions for these configurations can be found in the following files located alongside `README.md` in the respective directories:  
+
+- **default_migration_engine.md**: Provides guidance for the Default Migration Engine.  
+- **db2_migration_service.md**: Contains setup instructions for the DB2 Migration Service.
+
 ## Running the Experiment
 
 To execute the migration experiment, follow these steps by navigating to the `ansible` folder on the management server and running the specified commands:
@@ -305,6 +310,12 @@ ansible-playbook -i inventory.ini deploy.yml --tags "pre_experiment,start_experi
 
 - Replace `<migrationengine>` with the name of the migration engine you want to use.  
 - For example, to run steps for migrating DB2 databases, replace `<migrationengine>` with `db2`.
+- To use the Default Migration Engine, replace `<migrationengine>` with `default`.  
+
+
+
+
+
 
 
 ---
