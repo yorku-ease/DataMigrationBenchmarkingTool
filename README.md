@@ -57,7 +57,7 @@ The configuration for the entire framework is centralized. We’ll make any nece
 
 In our Git repository, you'll find a dedicated `deployment` folder that needs to be downloaded onto the management server machine. Within this folder, there are distinct subfolders—`databases`, `ansible`, `controller`, and `reporter`—each designed for deployment onto their respective machines. In this section, we’ll demonstrate how to centrally configure each component directly on the management server.
 
-<details> **1.** <summary> Configuring inventory.ini for Ansible</summary>
+<details> 1. <summary> Configuring inventory.ini for Ansible</summary>
 <br />
 
 The `inventory.ini` file is located in the `deployment/ansible` folder. This file is used to define the IP addresses and SSH access for the machines running the framework components: `reporter`, `databases`, and `controller`. 
@@ -91,7 +91,7 @@ With this configuration, Ansible will use the `inventory.ini` file to manage con
 
 </details>
 
-2. <details><summary> Configuring config.yml</summary>
+<details><summary> 2. Configuring config.yml</summary>
 <br />
 
 The `config.yml` file, located in `deployment/ansible/config.yml`, contains the configuration settings for various components of the framework, including the credentials for connecting to the MongoDB database used by the framework.
@@ -116,7 +116,7 @@ mongoDatabase:
 
 </details>
 
-3. <details><summary>Configuring the Controller </summary>
+<details><summary> 3. Configuring the Controller </summary>
 <br />
 
 The Controller depends on the Migration Engine configuration, and you can choose to use one of the already supported engines or create a custom setup in the `custom` folder inside `deployment/controller/examples`. Inside each folder, you will find a `config.ini` file located in the `controller` folder. This file needs to be edited for your migration setup.
@@ -187,7 +187,7 @@ Once configured, the Controller will use these settings to coordinate the migrat
 
 </details> 
 
-4. <details><summary>Setting up docker-compose.yml</summary>
+<details><summary> 4. Setting up docker-compose.yml</summary>
 <br />
 
 After selecting the appropriate migration engine in the `deployment/controller/examples` folder, the next step involves setting up the `docker-compose.yml` file. This file can be found in the `controller` folder inside the chosen migration engine's directory.
