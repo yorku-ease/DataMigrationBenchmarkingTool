@@ -261,8 +261,8 @@ customVariable: someValue
 
 For most supported engines, steps 3, 4, and 5 are largely pre-configured and require minimal adjustments. Detailed instructions for these configurations can be found in the following files located alongside `README.md` in the respective directories:  
 
-- **default_migration_engine.md**: Provides guidance for the Default Migration Engine.  
-- **db2_migration_service.md**: Contains setup instructions for the DB2 Migration Service.
+- [default_migration_engine.md](default_migration_engine.md): Provides guidance for the Default Migration Engine.  
+- [db2_migration_service.md](db2_migration_service.md): Contains setup instructions for the DB2 Migration Service.
 
 ## Running the Experiment
 
