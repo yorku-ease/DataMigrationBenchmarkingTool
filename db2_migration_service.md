@@ -21,3 +21,65 @@ Before proceeding, ensure the following:
    - The **source database** can optionally include a table named `dummy`.  
    - This is used to run a preliminary experiment before each combination of parameters, ensuring that cache from previous experiments is overwritten.  
    - If you choose to use this option, set `dummy = true` in the configuration file.
+## Configuration
+
+In this section, we will guide you through **steps 3, 4, and 5** from the configuration section of the main README file. These steps are essential for setting up the Controller, configuring `docker-compose.yml`, and optionally using Ansible playbooks for the DB2 migration service. 
+
+For detailed instructions on the other steps, please refer to the main README file.
+
+Since the current engine is already supported, a significant portion of these steps is pre-configured.
+
+### Step 3: Configuring the Controller
+
+To configure the Controller for the DB2 migration service, you will need to edit the following folder:
+
+`deployment/controller/examples/db2`
+
+### Configuration File: `configs/config.ini`
+
+The file `configs/config.ini` needs to be configured as follows:
+
+#### [targetServer]
+
+- `host =` IP address of the target database  
+- `username =` Username needed for connecting to the target database  
+- `password =` Password needed for connecting to the target database  
+  `;password = M0untainn` (example, comment out if using the real password)  
+- `port =` Port of the target database  
+- `type = db2` or `cloud` (use `db2` for local databases or `cloud` for DB2 on cloud)
+
+#### [sourceServer]
+
+- `host =` IP address of the source database  
+- `username =` Username needed for connecting to the source database  
+- `password =` Password needed for connecting to the source database  
+- `port =` Port of the source database  
+
+#### [KafkaCluster]
+
+- `host =` IP address of the Kafka reporter  
+- `port = 9092` (Keep this as the default port for the reporter)  
+- `performanceBenchmarkTopic = performanceBenchmark` (Keep this as default)  
+- `migrationEngineTopicName = migrationEngine` (Keep this as default)  
+- `frameworkTopicName = framework` (Keep this as default)
+
+#### [migrationEnvironment]
+
+- `loggingId =` (Leave it empty for development purposes, can be left blank)  
+- `numberofexperiments =` (Specify how many times each combination of parameters should be repeated)  
+- `time_to_wait_beforeExperiment =` Number of seconds to wait before each experiment starts  
+- `dummy = False` (Set to `True` if you want to run a dummy experiment before each combination of parameters, not before all experiments, just the first one to override the cache)  
+- `dummyTable =` Name of the table to be migrated during the dummy experiment (ensure `dummy` is set to `True`)
+
+#### [experiment]
+
+This section contains the parameters for the migration experiments.
+
+- `compress =` LZ4, gzip, or none (Choose the compression type for migration)  
+- `sourceDatabasetoTargetDatabase =` `test_test` (The name of the source and target databases, separated by an underscore)  
+- `tables =` LINEITEM (List the tables you want to migrate, separate multiple tables with underscores)  
+- `maxStreams =` Maximum number of parallel streams for the migration  
+- `binary =` False or True (Set to True to enable binary migration)
+
+
+
