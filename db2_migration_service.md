@@ -81,5 +81,9 @@ This section contains the parameters for the migration experiments.
 - `maxStreams =` Maximum number of parallel streams for the migration  
 - `binary =` False or True (Set to True to enable binary migration)
 
+### Step 4: Setting up `docker-compose.yml`
+
+For the DB2 migration service, nothing needs to be done here, as the Docker image is already dockerized, and the `docker-compose.yml` file is provided in the `configs` folder. You can use the pre-configured `docker-compose.yml` file for your migration engine setup.
+
 
 
