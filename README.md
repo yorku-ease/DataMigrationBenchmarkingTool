@@ -57,7 +57,7 @@ The configuration for the entire framework is centralized. We’ll make any nece
 
 In our Git repository, you'll find a dedicated `deployment` folder that needs to be downloaded onto the management server machine. Within this folder, there are distinct subfolders—`databases`, `ansible`, `controller`, and `reporter`—each designed for deployment onto their respective machines. In this section, we’ll demonstrate how to centrally configure each component directly on the management server.
 
-<details><summary>**1.** Configuring inventory.ini for Ansible</summary>
+<details> **1.** <summary> Configuring inventory.ini for Ansible</summary>
 <br />
 
 The `inventory.ini` file is located in the `deployment/ansible` folder. This file is used to define the IP addresses and SSH access for the machines running the framework components: `reporter`, `databases`, and `controller`. 
