@@ -16,11 +16,13 @@ Before proceeding, ensure the following:
 1. **Databases Setup**:  
    - A **source database** and a **target database** must be up and running. These will serve as the origin and destination for the DB2 migration process.  
    - The **source database** should already contain the data you want to transfer.  
+   - The machines must have been started with Docker Compose, and there should be a Docker Compose file for each database on their respective machines. This setup will ensure that both the source and target DB2 databases are properly configured to run with Docker Compose, making it easier to test experiments with resource constraints on the machines.
 
 2. **Dummy Table Option**:  
    - The **source database** can optionally include a table named `dummy`.  
    - This is used to run a preliminary experiment before each combination of parameters, ensuring that cache from previous experiments is overwritten.  
    - If you choose to use this option, set `dummy = true` in the configuration file.
+
 ## Configuration
 
 In this section, we will guide you through **steps 3, 4, and 5** from the configuration section of the main README file. These steps are essential for setting up the Controller, configuring `docker-compose.yml`, and optionally using Ansible playbooks for the DB2 migration service. 
@@ -84,6 +86,8 @@ This section contains the parameters for the migration experiments.
 ### Step 4: Setting up `docker-compose.yml`
 
 For the DB2 migration service, nothing needs to be done here, as the Docker image is already dockerized, and the `docker-compose.yml` file is provided in the `configs` folder. You can use the pre-configured `docker-compose.yml` file for your migration engine setup.
+
+However, the user is free to modify the resource constraints (such as CPU and RAM) in the `docker-compose.yml` file to experiment with different resource configurations. This allows you to test how the migration engine performs under various resource conditions.
 
 ### Step 5: Optional Ansible Playbooks for Migration Engines
 
