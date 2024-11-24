@@ -1,0 +1,12 @@
+services:
+  web:
+    image: fareshamouda/default-migration-engine:latest
+    container_name: default-migration-engine
+    privileged: true
+    # deploy:
+    #     resources:
+    #       limits:
+    #         cpus: '0.05'
+    #         memory: '5g'
+    volumes:
+    -  "{{ config_vars['source']['dataFolderAbsolutePath'] }}:/app/data"

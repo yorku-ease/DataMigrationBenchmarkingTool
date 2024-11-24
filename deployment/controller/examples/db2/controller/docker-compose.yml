@@ -13,7 +13,7 @@ services:
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
     network_mode: "host"
-    command: -storage_driver=kafka -storage_driver_kafka_broker_list=192.168.212.185:9092 -storage_driver_kafka_topic=cadvisor --housekeeping_interval=120s
+    command: -storage_driver=kafka -storage_driver_kafka_broker_list={{ hostvars["reporter"]["ansible_host"] }}:9092 -storage_driver_kafka_topic=cadvisor --housekeeping_interval=120s
     #command: -storage_driver=influxdb -storage_driver_db=cadvisor -storage_driver_host=192.168.212.109:8086 -storage_driver_user fareshamouda -storage_driver_password csvvwjU6dJrw8l46NQkuegOc1Xnaa98Cdv_nk4n2oyj5oYYwB9c308NfaYS13Ar9Vy1sfc1ufEF6VZYrGYiVeQ==
     container_name: cadvisor
     ports:
@@ -28,7 +28,7 @@ services:
     devices: 
       - "/dev/kmsg"
   controller:
-    image: fareshamouda/controller:beta
+    image: fareshamouda/controller:latest
     privileged: true
     container_name: controller
     environment:

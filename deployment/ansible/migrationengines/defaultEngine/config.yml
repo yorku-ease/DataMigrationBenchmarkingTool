@@ -1,0 +1,3 @@
+source:
+  #path of folder where all source data is in the controller machine
+  dataFolderAbsolutePath: /home/ubuntu/data

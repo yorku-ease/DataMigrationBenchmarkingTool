@@ -53,7 +53,6 @@ class DefaultFileMigrator():
 
 
             FilesManager.transferfile(sftp,local_file_path,remote_file_path,compressionType,limit,ssh,self.loggingId,streamNumber)
-
             connectionManager.close()
         except Exception as e:
             timestamp = time.time()

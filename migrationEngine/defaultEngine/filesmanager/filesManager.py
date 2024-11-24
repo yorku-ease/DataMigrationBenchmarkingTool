@@ -141,7 +141,6 @@ class FilesManager:
                 FilesManager.progressCallback(transferred, sizeOnLocalMachine)
                 chunk=f.read(limit)
             current_thread = threading.current_thread()
-
             print("Thread", current_thread.name)
             print(f'{sizeOnTargetMachine} bytes is the size of the file on the target Machine ')
             print(f'Compression took {compressionTime} seconds')

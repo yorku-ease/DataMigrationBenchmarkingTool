@@ -8,6 +8,22 @@
       copy:
         src: ../controller/examples/defaultEngine/controller/
         dest: /home/{{ ansible_user }}/dmbench/controller/
+    - name: Set up docker-compose.yml
+      template:
+        src: ../controller/examples/defaultEngine/controller/docker-compose.yml
+        dest: /home/{{ ansible_user }}/dmbench/controller/docker-compose.yml
+    - name: Set up config.ini
+      template:
+        src: ../controller/examples/defaultEngine/controller/configs/config.ini
+        dest: /home/{{ ansible_user }}/dmbench/controller/configs/config.ini
+    - name: Load datafolderPath from config.yml
+      ansible.builtin.include_vars:
+        file: config.yml
+        name: config_vars
+    - name: Transfer docker-compose.yml to the remote machine
+      ansible.builtin.template:
+        src: ../controller/examples/defaultEngine/controller/configs/docker-compose.yml
+        dest: /home/{{ ansible_user }}/dmbench/controller/configs/docker-compose.yml
     - name: docker compose pull for controller components 
       shell: |
         cd /home/{{ ansible_user }}/dmbench/controller/

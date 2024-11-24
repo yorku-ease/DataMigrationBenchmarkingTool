@@ -35,6 +35,7 @@ logger = KafkaLogger()
 migrationEngine = DefaultFileMigrator(remoteHostname,remoteUsername,remotePassword,localPassword,loggingId,logger)
 try:
     migrationEngine.migrate(local_file_path,remote_file_path,compressionType,limit,streams)
+    print("[EXP001] Experiment Status: Succeeded")
 except Exception as e:
     timestamp = time.time()
     error_message = str(e)
@@ -43,6 +44,7 @@ except Exception as e:
     message = f"type : error, Timestamp: {timestamp}, ErrorMessage: {error_message}, {error_location}, ExceptionType: {exception_type}"
     logger.logMigrationEngine(loggingId,message)
     stack_trace = traceback.format_exc()
+    print("[EXP001] Experiment Status: Failed")
     print(message)
     print(stack_trace)
 finally :

@@ -1,4 +1,3 @@
-version: '3'
 services:
   web:
     image: fareshamouda/db2migrationservice:test2

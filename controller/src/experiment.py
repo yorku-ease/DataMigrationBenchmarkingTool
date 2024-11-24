@@ -187,10 +187,9 @@ class Experiment(Thread):
             }
             for network_name, network_config in compose_data.get('networks', {}).items():
                 client.networks.create(network_name, **network_config)
-
             for volume_name, volume_config in compose_data.get('volumes', {}).items():
                 client.volumes.create(name=volume_name, **volume_config)
-
+            print(compose_data.get('services', {}).items())
             for service_name, service_config in compose_data.get('services', {}).items():
                 print(service_config.get('ports'))
                 container_name =  "MigrationEngine_"+ service_name  + "-" + self.loggingId
@@ -208,7 +207,8 @@ class Experiment(Thread):
                 except docker.errors.NotFound:
                     pass
                 resources = composeParser.parseResources(service_config.get('deploy', {}).get('resources', {}))
-                container = client.containers.run(
+                try : 
+                    container = client.containers.run(
                     image=service_config['image'],
                     name=container_name,
                     environment=service_config.get('environment'),
@@ -225,6 +225,16 @@ class Experiment(Thread):
                     mem_reservation=resources['mem_reservation'],
                     detach=True  # Run in the background
                 )
+                except Exception as e:
+                    timestamp = time.time()
+                    error_message = str(e)
+                    error_location = f"File: {__file__}, Function: {__name__}, Line: {sys.exc_info()[-1].tb_lineno}"
+                    exception_type = type(e).__name__
+                    message = f"type : error, Timestamp : {timestamp}, ErrorMessage : {error_message} {error_location} ExceptionType: {exception_type}"
+                    self.logger.logFramework(self.loggingId,message)
+                    stack_trace = traceback.format_exc()
+                    print(message)
+                    print(stack_trace)
                 log_thread = threading.Thread(target=self.containerLog, args=(container,service_name))
 
                 # Start the thread
@@ -239,7 +249,16 @@ class Experiment(Thread):
 
             
             self.removeConfigFile()
-
+        except Exception as e:
+            timestamp = time.time()
+            error_message = str(e)
+            error_location = f"File: {__file__}, Function: {__name__}, Line: {sys.exc_info()[-1].tb_lineno}"
+            exception_type = type(e).__name__
+            message = f"type : error, Timestamp : {timestamp}, ErrorMessage : {error_message} {error_location} ExceptionType: {exception_type}"
+            self.logger.logFramework(self.loggingId,message)
+            stack_trace = traceback.format_exc()
+            print(message)
+            print(stack_trace)
         finally:
             for container in containers:
                 if container is not None:

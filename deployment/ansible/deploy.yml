@@ -86,10 +86,14 @@
           template:
             src: ../reporter/kafkacluster/docker-compose.yml
             dest: /home/{{ ansible_user }}/dmbench/reporter/kafkacluster/docker-compose.yml
+        - name: Install required libraries for ubuntu
+          shell: |
+            sudo apt update
+            sudo apt install -y librdkafka-dev         
         - name: Install python required libraries 
           shell: |
             cd /home/{{ ansible_user }}/dmbench/reporter/kafkacluster
-            pip install -r requirements.txt
+            pip3 install -r requirements.txt
       tags : 
         - configuration-reporter
         - configuration
@@ -97,9 +101,24 @@
 - hosts: reporter
   vars_files:
     - config.yml  
+  vars:
+    logsparserconfig: "default"  
   tasks:
     - name: Configuration
       block:
+        - name: Set logsparserconfig to 'db2' when tag db2 is used
+          set_fact:
+            logsparserconfig: "db2"
+          when: "'db2' in ansible_run_tags"
+
+        - name: Set logsparserconfig to 'custom' when tag custom is used
+          set_fact:
+            logsparserconfig: "custom"
+          when: "'custom' in ansible_run_tags"
+
+        - name: Display the value of logsparserconfig
+          debug:
+            msg: "The value of logsparserconfig is: {{ logsparserconfig }}"
         - name: Set up config.ini for logs parser
           template:
             src: ../reporter/logsParser/config.ini
@@ -189,7 +208,6 @@
           delay: 10  # Delay between retries in seconds
           failed_when: false
           changed_when: false
-      
       tags : 
         - pre_experiment
 
@@ -277,6 +295,7 @@
         - name : docker compose up 
           shell: |
             cd /home/{{ ansible_user }}/dmbench/controller
+            docker compose down
             docker compose up -d
           tags : 
             - start_experiment
