@@ -1,59 +1,176 @@
-# Manual for extending the data migration Benchmarking tool
+# Extending the Default Migration Engine
 
 ## Overview
-In this manual, we will show how to extend our tool.
-## Bringing your own migration engine
-TBD
-## Extending the default migration engine
-<details><summary>Extending the file splitting algorithm </summary>
-<br />
-In this case you're going to edit the code that should be deployed on the source machine.
-<br />
-<p> 1. clone this repository on your sourceserver.</p>
-<p> 2. The class responsible of dealing with files is called FilesManager which you could find in this path : <br />
-DataMigrationBenchmarkingTool/fileMigration/classes/migrationEngine/defaultEngine/filesmanager/FilesManager.py <br /> 
-In order to change the default splitting algorithm you have to extend this class and override 3 static functions : <br />
+This document explains how to extend the **Default Migration Engine** of the Data Migration Benchmarking Tool by editing code in the `migrationengine/defaultengine` directory.
 
-     splitFile(input_file,num_files = None):
-        this function takes input_file which is the full path of the file and splits it into chunks and saves them in the data folder
-        it's preferable to use input_file to choose the path of the chunks.
-        you might optionally give it num_files if you want to specify how many chunks you want to save
-    
-     getChunksPaths(local_file_path,remote_file_path,num_files = None)-> Tuple[List[str], List[str]]:
-        local_file_path is the full path of the file without split
-        remote_file_path is the full path of the file without split on the remote machine , this is useful to choose the remote_chunks_paths
-        this function returns local_chunks_paths which are the paths of the chunks after running splitFile and remote_chunks_paths which should be the paths of the chunks on the remote machine 
+---
 
-     removeSplittedFiles(input_file,num_files= None):
-        this function deletes the local chunks after migrating them, it can stay empty if you prefer to keep the local chunks
-There is file on the path /DataMigrationBenchmarkingTool/fileMigration/classes/migrationEngine/defaultEngine/filesmanager/NewFilesManager.py , you can directly put your code in there.
-</p>
-<p> 3. Open the file /DataMigrationBenchmarkingTool/fileMigration/classes/migrationEngine/defaultEngine/DefaultFileMigrator.py<br />
-<ul>
-  <li>Add this import line below to the imports at the beginning of the file. <br />
-"from classes.migrationEngine.defaultEngine.filesmanager.NewFilesManager import NewFilesManager" </li>
-  <li>Now you're going to edit the first line of the migrateMultipleStreams() function : <br />
-  change "filesmanager = FilesManager" to "filesmanager = NewFilesManager" </li>
-</ul>
+## Extending the File Splitting Algorithm
 
- </p>
-<p> 4. If there is any library that you have imported in your code and "pip install" needs to run to install it, you have to add this library to the file below <br />
-/DataMigrationBenchmarkingTool/fileMigration/requirements.txt
-<br />
-Now that's it all changes to the code are done.
-</p>
-<p> 5. Change Directory ; use the 'cd' command to change your working directory to /DataMigrationBenchmarkingTool/fileMigration.</p>
-<p> 6. Run docker build -t fareshamouda/datamigrationbenchmarkingtool:latest . <br />
-Note : it's very important to run this command on the sourcemachine, you could do steps 1-4 on your dev machine, however you have to copy the repo with all new changes to the sourcemachine and the do steps 5-6 on that machine.
-<br />
-</p>
-</details>
-<details><summary>Extending the compression algorithm</summary>
-TBD
-</details>
+### Steps to Customize the Splitting Logic
 
-## Final steps
+#### 1. Clone the Repository
+Clone the repository from:
+```bash
+git clone https://github.com/yorku-ease/DataMigrationBenchmarkingTool.git
+cd DataMigrationBenchmarkingTool
+```
 
-Now after following the extension steps, you  need to go back to the [README.md](README.md) file and follow all the rest of the steps.
+#### 2. Modify the Code in the `migrationengine/defaultengine` Directory
+The `FilesManager.py` file, which handles file splitting, is located at:
+```
+defaultEngine/filesmanager/FilesManager.py
+```
 
+To implement a custom file splitting logic:
+1. Create a new class by extending `FilesManager`.  
+   - Use the provided template file at:
+     ```
+     defaultEngine/filesmanager/newFilesManager.py
+     ```
+   - Override these methods as needed:
+     - `splitFile(input_file, num_files=None)`  
+       Splits `input_file` into chunks and saves them locally. Optionally, specify `num_files` for a fixed number of chunks.
+     - `getChunksPaths(local_file_path, remote_file_path, num_files=None) -> Tuple[List[str], List[str]]`  
+       Defines local and remote chunk paths for migration.
+     - `removeSplittedFiles(input_file, num_files=None)`  
+       Deletes local chunks after migration (can remain empty if keeping local chunks).
 
+2. Save your custom logic in `newFilesManager.py`.
+
+---
+
+#### 3. Integrate the New Logic in `DefaultFileMigrator`
+The `DefaultFileMigrator` class is responsible for orchestrating the file migration. To use your new file manager:
+1. Open the file:
+   ```
+   defaultEngine/defaultFileMigrator.py
+   ```
+2. Add this import statement:
+   ```python
+   from filesmanager.newFilesManager import NewFilesManager
+   ```
+3. Modify the first line of the `migrateMultipleStreams` method:
+   ```python
+   filesmanager = NewFilesManager
+   ```
+
+---
+
+#### 4. Add Any Required Dependencies
+If your code uses new libraries, add them to:
+```
+defaultengine/requirements.txt
+```
+
+---
+
+## Extending the Compression Algorithm
+
+### Steps to Add a New Compression Algorithm
+
+#### 1. Create a New Compressor Class
+In the directory:  
+```
+defaultEngine/compression
+```  
+1. Create a new class that implements the `Compressor` interface found in:  
+```
+defaultEngine/compression/compressor.py
+```  
+2. Implement the following methods:  
+```python
+@abstractmethod
+def compress(self, data) -> str:
+    pass
+
+@abstractmethod
+def addFileExtension(self, filename) -> str:
+    pass
+```  
+3. Your `compress` method should handle the logic for compression.  
+4. The `addFileExtension` method should take a `filename` and add the appropriate extension (e.g., `.gz` for Gzip).  
+
+For reference, check the existing implementations:  
+- `GzipCompressor.py`  
+- `Lz4Compressor.py`  
+
+---
+
+#### 2. Update the FilesManager Class
+Navigate to:  
+```
+defaultEngine/filesmanager/FilesManager.py
+```  
+1. Import your new compressor class:  
+```python
+from compression.YourCompressor import YourCompressor
+```  
+2. In the `transferFile` static method, locate the following section:  
+```python
+if compression == "gzip":
+    compressor = GzipCompressor()
+elif compression == "lz4":
+    compressor = Lz4Compressor()
+elif compression == "None":
+    pass
+else:
+    print("Wrong compression type")
+    return 0
+```  
+3. Add a new `if` statement for your compressor:  
+```python
+elif compression == "yourcompression":
+    compressor = YourCompressor()
+```  
+Replace `yourcompression` with the value you want to use for the `compressionType` in `config.ini`.  
+
+---
+
+#### 4. Add Any Required Dependencies
+If your code uses new libraries, add them to:
+```
+defaultengine/requirements.txt
+```
+
+---
+
+## Build and Push the Updated Docker Image
+
+Once you've made the necessary changes, build and push the updated Docker image:
+
+### 1. Build the Docker Image
+Change your working directory to the folder containing the Dockerfile:
+```bash
+cd migrationengine/defaultengine
+```
+Run the following command to build the Docker image:
+```bash
+docker build -t your-dockerhub-username/defaultengine:custom .
+```
+
+---
+
+### 2. Push the Image to Docker Hub
+Log in to Docker Hub:
+```bash
+docker login
+```
+Push the updated image:
+```bash
+docker push your-dockerhub-username/defaultengine:custom
+```
+
+---
+
+## Update the Controller Configuration
+
+To use your custom image, update the `docker-compose.yml` file:
+1. Navigate to:
+```plaintext
+deployment/controller/examples/defaultEngine/controller/configs
+```
+2. Edit the `docker-compose.yml` file to replace the image with your new custom image:
+```yaml
+    image: your-dockerhub-username/datamigrationbenchmarkingtool:custom
+```
