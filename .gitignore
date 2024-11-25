@@ -11,3 +11,6 @@ databaseMigration/sourcedatadir/
 databaseMigration/targetdatadir/
 databaseMigration/backups/*
 deployment/database/data/*
+deployment/ansible/inventorycopy.ini
+deployment/controller/examples/db2/controller/configs/configcopy.ini
+deployment/controller/examples/defaultEngine/controller/configs/configcopy.ini
