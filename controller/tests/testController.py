@@ -4,7 +4,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import unittest
 import configparser
-from src.Experiment import Experiment
+from src.experiment import Experiment
 from unittest.mock import patch
 
 # Get the directory of the currently running script
@@ -15,7 +15,7 @@ os.chdir(script_dir)
 
 class TestExperiment(unittest.TestCase):
 
-    @patch('src.Experiment.KafkaLogger')
+    @patch('src.experiment.KafkaLogger')
     def test_createMigrationEngineConfig(self,mock_KafkaLogger):
         mock_KafkaLogger.return_value=None
         config = configparser.ConfigParser()
@@ -26,7 +26,7 @@ class TestExperiment(unittest.TestCase):
         for i in range(len(experimentsCombinations)):
              experiment = Experiment(experimentsCombinations[i], None, None, None, None, None)
              experiment.createMigrationEngineConfig()
-             expectedMigrationEngineConfigfile = f"ExpectedConfigfiles/config{i+1}.ini"
+             expectedMigrationEngineConfigfile = f"expectedConfigfiles/config{i+1}.ini"
              with open(expectedMigrationEngineConfigfile, 'r') as file1, open('configs/migrationEngineConfig.ini', 'r') as file2:
                 content1 = file1.read()
                 content2 = file2.read()

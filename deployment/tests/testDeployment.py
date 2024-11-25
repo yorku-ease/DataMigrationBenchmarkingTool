@@ -93,14 +93,14 @@ class testDeployment(unittest.TestCase):
                 if os.path.exists(logfile):
                         os.remove(logfile)
 
-            self.kafka_compose_file_path = "../reporter/kafkacluster/docker-compose.yml"
-            self.controller_compose_file_path = "../controller/docker-compose.yml"
-            shutil.copy2("../reporter/kafkacluster/docker-compose.yml", "kafka_compose_file.yml")
-            shutil.copy2("../controller/docker-compose.yml", "controller_compose_file.yml")
-            subprocess.run(['docker', 'compose', '-f', "controller_compose_file.yml", 'down','--volumes','--remove-orphans'], check=True)        
-            subprocess.run(['docker', 'compose', '-f', "kafka_compose_file.yml", 'down','--volumes','--remove-orphans'], check=True)    
+            self.kafkaComposefilePath = "../reporter/kafkacluster/docker-compose.yml"
+            self.controllerComposefilePath = "../controller/docker-compose.yml"
+            shutil.copy2("../reporter/kafkacluster/docker-compose.yml", "kafka-compose-file.yml")
+            shutil.copy2("../controller/docker-compose.yml", "controller-compose-file.yml")
+            subprocess.run(['docker', 'compose', '-f', "controller-compose-file.yml", 'down','--volumes','--remove-orphans'], check=True)        
+            subprocess.run(['docker', 'compose', '-f', "kafka-compose-file.yml", 'down','--volumes','--remove-orphans'], check=True)    
             # Run docker-compose up with the specified service name
-            subprocess.run(['docker', 'compose', '-f',"kafka_compose_file.yml",'up','-d'], check=True)
+            subprocess.run(['docker', 'compose', '-f',"kafka-compose-file.yml",'up','-d'], check=True)
             self.wait_for_container(container_name='kafka1')
             create_topics(self.bootstrap_servers)
             
@@ -113,7 +113,7 @@ class testDeployment(unittest.TestCase):
             # Start the consumer thread
             self.consumer_thread.start()
 
-            subprocess.run(['docker', 'compose', '-f',"controller_compose_file.yml",'up','-d'], check=True)
+            subprocess.run(['docker', 'compose', '-f',"controller-compose-file.yml",'up','-d'], check=True)
 
         except Exception as e:
             print(f"Error: {e}")
@@ -136,8 +136,8 @@ class testDeployment(unittest.TestCase):
     @classmethod
     def tearDownClass(self):
         try:
-            subprocess.run(['docker', 'compose', '-f', "controller_compose_file.yml", 'down','--volumes','--remove-orphans'], check=True)        
-            subprocess.run(['docker', 'compose', '-f', "kafka_compose_file.yml", 'down','--volumes','--remove-orphans'], check=True)        
+            subprocess.run(['docker', 'compose', '-f', "controller-compose-file.yml", 'down','--volumes','--remove-orphans'], check=True)        
+            subprocess.run(['docker', 'compose', '-f', "kafka-compose-file.yml", 'down','--volumes','--remove-orphans'], check=True)        
         except subprocess.CalledProcessError as e:
             print(f"Error during tearDown: {e}")
             # Handle the error as needed

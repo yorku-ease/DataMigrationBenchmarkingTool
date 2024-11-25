@@ -1,0 +1,15 @@
+- name: Start cAdvisor on source DB
+  shell: |
+    cd /home/{{ ansible_user }}/dmbench/
+    docker compose down
+    docker compose up -d
+  when: hostvars['db2-sourceDB'].ansible_host  != hostvars['controller'].ansible_host
+  delegate_to: db2-sourceDB
+
+- name: Start cAdvisor on target DB
+  shell: |
+    cd /home/{{ ansible_user }}/dmbench/
+    docker compose down
+    docker compose up -d
+  when :  hostvars['db2-targetDB'].ansible_host  !=  hostvars['controller'].ansible_host 
+  delegate_to: db2-targetDB

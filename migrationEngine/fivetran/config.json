@@ -1,0 +1,9 @@
+{
+    "API_KEY": "W9PO0pydUvskC7Wc",
+    "API_SECRET": "4394Lyonf3c9aM7xU0r3M1ANX2AHZmKB",
+    "group_id": "presoak_picked",
+    "connector_id": "tragic_soda",
+    "schema": "source",
+    "tables" : ["user_details10", "user_details100","user_details1000", "user_details10000", "user_details50000", "user_details5000"]
+  }
+  

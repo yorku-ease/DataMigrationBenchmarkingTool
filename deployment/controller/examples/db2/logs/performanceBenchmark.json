@@ -1,0 +1,368 @@
+{
+    "NO-3-testdb=>testdb-ORDERS1-1710850927.916329": {
+        "1": {
+            "TotalClearTime": "4.76837158203125e-07",
+            "TotaltransferTime": "998.4916923046112"
+        },
+        "2": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "487.788697719574"
+        },
+        "3": {
+            "TotalClearTime": "4.76837158203125e-07",
+            "TotaltransferTime": "1267.4685907363892"
+        },
+        "4": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "354.55627274513245"
+        },
+        "5": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1090.1534552574158"
+        },
+        "6": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "870.763959646225"
+        },
+        "7": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1060.2750942707062"
+        },
+        "8": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "2214.6437537670135"
+        },
+        "9": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "2237.188121318817"
+        },
+        "10": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "882.8543379306793"
+        },
+        "11": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1375.3638203144073"
+        },
+        "12": {
+            "TotalClearTime": "4.76837158203125e-07",
+            "TotaltransferTime": "1593.5394208431244"
+        },
+        "13": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1065.69047498703"
+        },
+        "14": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1091.7395372390747"
+        },
+        "15": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1110.3735892772675"
+        },
+        "16": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "860.5283932685852"
+        },
+        "17": {
+            "TotalClearTime": "7.152557373046875e-07",
+            "TotaltransferTime": "753.2169411182404"
+        },
+        "18": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "965.5652868747711"
+        },
+        "19": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "768.7505669593811"
+        },
+        "20": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1382.8054223060608"
+        },
+        "21": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1279.281299829483"
+        },
+        "22": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1082.5507876873016"
+        },
+        "23": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1055.7684915065765"
+        },
+        "24": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1183.671502828598"
+        },
+        "25": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1164.2951374053955"
+        },
+        "26": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1201.072687625885"
+        },
+        "27": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1213.0088803768158"
+        },
+        "28": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1388.3103692531586"
+        },
+        "29": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1233.4538588523865"
+        },
+        "30": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1377.2650349140167"
+        }
+    },
+    "GZIP-3-testdb=>testdb-ORDERS1-1710885568.3606272": {
+        "1": {
+            "TotalClearTime": "4.76837158203125e-07",
+            "TotaltransferTime": "1447.1761820316315"
+        },
+        "2": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1522.600227355957"
+        },
+        "3": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1012.6995010375977"
+        },
+        "4": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1241.8126935958862"
+        },
+        "5": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1419.0424196720123"
+        },
+        "6": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "781.3988099098206"
+        },
+        "7": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1010.5752341747284"
+        },
+        "8": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1365.3553626537323"
+        },
+        "9": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1180.5262212753296"
+        },
+        "10": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1430.2306237220764"
+        },
+        "11": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1249.8190715312958"
+        },
+        "12": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1940.7629833221436"
+        },
+        "13": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1218.9509556293488"
+        },
+        "14": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1244.4475824832916"
+        },
+        "15": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1353.6797850131989"
+        },
+        "16": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1399.6157722473145"
+        },
+        "17": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "958.3716859817505"
+        },
+        "18": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1262.5030918121338"
+        },
+        "19": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1562.1535453796387"
+        },
+        "20": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1181.7041006088257"
+        },
+        "21": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1418.6407589912415"
+        },
+        "22": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1381.533662557602"
+        },
+        "23": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1539.535656929016"
+        },
+        "24": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1649.7333261966705"
+        },
+        "25": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1266.5181698799133"
+        },
+        "26": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1444.7424478530884"
+        },
+        "27": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1346.2092280387878"
+        },
+        "28": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1041.0077502727509"
+        },
+        "29": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1203.575633764267"
+        },
+        "30": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1512.008572101593"
+        }
+    },
+    "LZ4-3-testdb=>testdb-ORDERS1-1710925185.302707": {
+        "1": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "993.0667684078217"
+        },
+        "2": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1208.5000755786896"
+        },
+        "3": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1318.0549268722534"
+        },
+        "4": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "981.4482362270355"
+        },
+        "5": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "854.3478162288666"
+        },
+        "6": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "905.4562156200409"
+        },
+        "7": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "918.4948680400848"
+        },
+        "8": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1170.0525760650635"
+        },
+        "9": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "913.5212700366974"
+        },
+        "10": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1385.7431030273438"
+        },
+        "11": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1139.7594766616821"
+        },
+        "12": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "984.6047875881195"
+        },
+        "13": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1192.1739003658295"
+        },
+        "14": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1294.5696568489075"
+        },
+        "15": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "880.494265794754"
+        },
+        "16": {
+            "TotalClearTime": "3.24249267578125e-05",
+            "TotaltransferTime": "1024.0228443145752"
+        },
+        "17": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1273.4333009719849"
+        },
+        "18": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "852.6970682144165"
+        },
+        "19": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "990.1757879257202"
+        },
+        "20": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "931.6888358592987"
+        },
+        "21": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1067.1686398983002"
+        },
+        "22": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1028.65376329422"
+        },
+        "23": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1298.4245734214783"
+        },
+        "24": {
+            "TotalClearTime": "4.76837158203125e-07",
+            "TotaltransferTime": "986.9664974212646"
+        },
+        "25": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1025.4161949157715"
+        },
+        "26": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "1087.5813119411469"
+        },
+        "27": {
+            "TotalClearTime": "4.76837158203125e-07",
+            "TotaltransferTime": "1164.6675338745117"
+        },
+        "28": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1078.6451716423035"
+        },
+        "29": {
+            "TotalClearTime": "0.0",
+            "TotaltransferTime": "1114.7377080917358"
+        },
+        "30": {
+            "TotalClearTime": "2.384185791015625e-07",
+            "TotaltransferTime": "959.8142614364624"
+        }
+    }
+}

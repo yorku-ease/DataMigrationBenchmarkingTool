@@ -1,0 +1,221 @@
+- name: pull required images for Migration Engine.
+  block:
+    - name: Clean up the controller directory
+      ansible.builtin.file:
+        state: absent
+        path: /home/{{ ansible_user }}/dmbench/controller/
+    - name: Copy entire folder with static and config files
+      copy:
+        src: ../controller/examples/db2/controller/
+        dest: /home/{{ ansible_user }}/dmbench/controller/
+    - name: docker compose pull for controller components 
+      shell: |
+        cd /home/{{ ansible_user }}/dmbench/controller/
+        docker compose pull
+    - name: Set up docker-compose.yml
+      template:
+        src: ../controller/examples/db2/controller/docker-compose.yml
+        dest: /home/{{ ansible_user }}/dmbench/controller/docker-compose.yml
+    - name: Set up config.ini
+      template:
+        src: ../controller/examples/db2/controller/configs/config.ini
+        dest: /home/{{ ansible_user }}/dmbench/controller/configs/config.ini
+    - name: docker compose pull for db2 components 
+      shell: |
+        cd /home/{{ ansible_user }}/dmbench/controller/configs/
+        docker compose pull
+      register : pre_experimentOutput
+
+- name: Configure DB2 target database
+  block:
+    - name: Load file paths from config.yml
+      include_vars:
+        file: migrationengines/db2/config.yml
+    - name: Check if target database docker compose file exists
+      stat:
+        path: "{{ targetDB.folderPath }}/docker-compose.yml"
+      register: file_stat
+    - name: Fail if the destination file does not exist
+      fail:
+        msg:  "docker-compose.yml does not exist in {{ targetDB.folderPath }}"
+      when: file_stat.stat.exists == False
+    - name: Copy the desired docker compose file to db2 target
+      template:
+        src:  migrationengines/db2/databases/target/docker-compose.yml
+        dest: /tmp/db2-target-docker-compose.yml
+      when: file_stat.stat.exists == True
+    - name: check if the configuration of the current docker compose file is as desired.
+      command: diff /tmp/db2-target-docker-compose.yml "{{ targetDB.folderPath }}/docker-compose.yml"
+      register: file_diff
+      ignore_errors: yes
+      when: file_stat.stat.exists == True
+
+    - name: Output if files are identical
+      debug:
+        msg: "Source and destination files are identical."
+      when: file_diff.rc == 0
+    - name: Run alternative tasks if files differ
+      block:
+        - name: Notify that files are different
+          debug:
+            msg: "Source and destination files are different."
+        - name: Stop old database
+          shell: |
+            cd {{ targetDB.folderPath }}
+            docker compose down
+        - name: Copy new file
+          template:
+            src:  migrationengines/db2/databases/target/docker-compose.yml
+            dest: "{{ targetDB.folderPath }}/docker-compose.yml"
+        - name: start database with new file
+          shell: |
+            cd {{ targetDB.folderPath }}
+            docker compose up -d 
+      when: file_diff.rc != 0
+    - name: Verify that database is up and ready for connections
+      block:
+        - name: Load variables from docker-compose.yml and config.ini of controller
+          include_vars:
+            file: migrationengines/db2/databases/target/docker-compose.yml
+            name: docker_compose_vars
+        - name: Set container name
+          set_fact:
+            container_name: "{{ docker_compose_vars.services.db2target.container_name }}"
+        - name: Load experiment settings from config.ini
+          set_fact:
+            experiment_source: "{{ lookup('ansible.builtin.ini', 'sourceDatabasetoTargetDatabase', section='experiment', file='../controller/examples/db2/controller/configs/config.ini') }}"
+        - name: Output the database name
+          debug:
+            msg: "The experiment source to targetdb is : {{ experiment_source }}"
+        - name: Split sourceDatabasetoTargetDatabase and get the second part
+          set_fact:
+            db_name: "{{ experiment_source.split('_')[1] }}"
+        - name: Output the database name
+          debug:
+            msg: "The target database name is: {{ db_name }}"
+        - name: Check if db2 database is ready  
+          shell: timeout 60 docker exec {{ container_name }} su - db2inst1 -c "db2 connect to {{ db_name }}"
+          register: db2_connect_output
+          failed_when:  "'Database Connection Information' not in db2_connect_output.stdout"
+          retries: 30
+          delay: 30
+          until: db2_connect_output.stdout is defined and  'Database Connection Information' in db2_connect_output.stdout
+          ignore_errors: no
+  delegate_to: db2-targetDB
+
+- name: Configure DB2 source database
+  block:
+    - name: Load file paths from config.yml
+      include_vars:
+        file: migrationengines/db2/config.yml
+    - name: Check if source database docker compose file exists
+      stat:
+        path: "{{ sourceDB.folderPath }}/docker-compose.yml"
+      register: file_stat
+    - name: Fail if the destination file does not exist
+      fail:
+        msg:  "docker-compose.yml does not exist in {{ sourceDB.folderPath }}"
+      when: file_stat.stat.exists == False
+    - name: Copy the desired docker compose file to db2 source
+      template:
+        src:  migrationengines/db2/databases/source/docker-compose.yml
+        dest: /tmp/db2-source-docker-compose.yml
+      when: file_stat.stat.exists == True
+    - name: check if the configuration of the current docker compose file is as desired.
+      command: diff /tmp/db2-source-docker-compose.yml "{{ sourceDB.folderPath }}/docker-compose.yml"
+      register: file_diff
+      ignore_errors: yes
+      when: file_stat.stat.exists == True
+
+    - name: Output if files are identical
+      debug:
+        msg: "Source and destination files are identical."
+      when: file_diff.rc == 0
+    - name: Run alternative tasks if files differ
+      block:
+        - name: Notify that files are different
+          debug:
+            msg: "Source and destination files are different."
+        - name: Stop old database
+          shell: |
+            cd {{ sourceDB.folderPath }}
+            docker compose down
+        - name: Copy new file
+          template:
+            src:  migrationengines/db2/databases/source/docker-compose.yml
+            dest: "{{ sourceDB.folderPath }}/docker-compose.yml"
+        - name: start database with new file
+          shell: |
+            cd {{ sourceDB.folderPath }}
+            docker compose up -d 
+      when: file_diff.rc != 0
+    - name: Verify that database is up and ready for connections
+      block:
+        - name: Load variables from docker-compose.yml and config.ini of controller
+          include_vars:
+            file: migrationengines/db2/databases/source/docker-compose.yml
+            name: docker_compose_vars
+        - name: Set container name
+          set_fact:
+            container_name: "{{ docker_compose_vars.services.db2source.container_name }}"
+        - name: Load experiment settings from config.ini
+          set_fact:
+            experiment_source: "{{ lookup('ansible.builtin.ini', 'sourceDatabasetoTargetDatabase', section='experiment', file='../controller/examples/db2/controller/configs/config.ini') }}"
+        - name: Output the database name
+          debug:
+            msg: "The experiment source to targetdb is : {{ experiment_source }}"
+        - name: Split sourceDatabasetoTargetDatabase and get the second part
+          set_fact:
+            db_name: "{{ experiment_source.split('_')[0] }}"
+        - name: Output the database name
+          debug:
+            msg: "The source database name is: {{ db_name }}"
+        - name: Check if source db2 database is ready  
+          shell: timeout 300 docker exec {{ container_name }} su - db2inst1 -c "db2 connect to {{ db_name }}"
+          register: db2_connect_output
+          failed_when:  "'Database Connection Information' not in db2_connect_output.stdout"
+          retries: 30
+          delay: 30
+          until: db2_connect_output.stdout is defined and  'Database Connection Information' in db2_connect_output.stdout
+          ignore_errors: no
+  delegate_to: db2-sourceDB
+
+- name: Pull cAdvisor on source DB
+  block:
+    - name: Ensure dmbench directory exists
+      file:
+        path: /home/{{ ansible_user }}/dmbench
+        state: directory
+        mode: '0755'
+
+    - name: Copy the desired cadvisor docker compose file to db2 source
+      template:
+        src: migrationengines/db2/databases/cadvisor-docker-compose.yml
+        dest: /home/{{ ansible_user }}/dmbench/docker-compose.yml
+
+    - name: Docker compose pull for cAdvisor
+      shell: |
+        cd /home/{{ ansible_user }}/dmbench/
+        docker compose pull
+  when: hostvars['db2-sourceDB'].ansible_host  != hostvars['controller'].ansible_host
+  delegate_to: db2-sourceDB
+
+- name: Pull cAdvisor on target DB
+  block:
+    - name: Ensure dmbench directory exists
+      file:
+        path: /home/{{ ansible_user }}/dmbench
+        state: directory
+        mode: '0755'
+
+    - name: Copy the desired cadvisor docker compose file to db2 target
+      template:
+        src: migrationengines/db2/databases/cadvisor-docker-compose.yml
+        dest: /home/{{ ansible_user }}/dmbench/docker-compose.yml
+
+    - name: Docker compose pull for cAdvisor
+      shell: |
+        cd /home/{{ ansible_user }}/dmbench/
+        docker compose pull
+  when: hostvars['db2-targetDB'].ansible_host  !=  hostvars['controller'].ansible_host 
+  delegate_to: db2-targetDB

@@ -7,6 +7,6 @@ COPY . .
 #ENTRYPOINT ["tail"]
 #CMD ["-f","/dev/null"]
 
-CMD [ "python", "-u", "./Main.py" ]
+CMD [ "python", "-u", "./main.py" ]
 
 #docker run --privileged --memory="0" --cpus="0" -v "$(pwd)"/data:/app/data -v "$(pwd)"/configs:/app/configs -v "$(pwd)"/output:/app/output test

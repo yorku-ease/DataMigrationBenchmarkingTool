@@ -1,4 +1,4 @@
-from my_parser import Parser
+from myParser import Parser
 import re
 import json
 import csv
@@ -7,9 +7,9 @@ import configparser
 from pymongo import MongoClient
 import pandas as pd
 class PerformanceBenchmarkParser(Parser):
-    def __init__(self,log_file_path,json_file_path,csv_file_path):
+    def __init__(self,log_file_path,json_file_path,csv_file_path,experiment_metadataHeader,streamMetrics,nonStreamMetrics):
 
-        super().__init__(log_file_path,json_file_path,csv_file_path)
+        super().__init__(log_file_path,json_file_path,csv_file_path,experiment_metadataHeader)
         config = configparser.ConfigParser()
         config.comment_prefixes = (';',)  # Set the prefix character for comments
         config.read('config.ini')
@@ -18,9 +18,9 @@ class PerformanceBenchmarkParser(Parser):
 
         # Define a regular expression pattern to extract the key and key-value pairs
         self.log_pattern = r'Key=(.*?), Value=(.*?)$'
-        self.header = ['Experiment Number','file','limit','compressionType','stream','Experiment startTime']
-        self.streamMetrics = ['sizeOnTargetMachine','sizeOnLocalMachine','compressionTime','dataTransferTime','readingFileTime']
-        self.nonStreamMetrics = ['TotalBackupTime','TotaltransferTime','TotalMigrationTime','TotalValidationTime','TotalClearTime']
+        self.experiment_metadataHeader = experiment_metadataHeader
+        self.streamMetrics = streamMetrics
+        self.nonStreamMetrics = nonStreamMetrics
 
     def toJsonData(self):
         # Compile the regular expression
@@ -84,18 +84,18 @@ class PerformanceBenchmarkParser(Parser):
 
     def writeCSVHeader(self):
         for key in self.nonStreamMetrics:
-            self.header.append(key)
+            self.experiment_metadataHeader.append(key)
 
         for key in self.streamMetrics:
-            self.header.append(key)         
+            self.experiment_metadataHeader.append(key)         
         for key in self.streamMetrics:
-            self.header.append(f"sum{key}")        
-            self.header.append(f"max{key}")        
-            self.header.append(f"avg{key}")     
+            self.experiment_metadataHeader.append(f"sum{key}")        
+            self.experiment_metadataHeader.append(f"max{key}")        
+            self.experiment_metadataHeader.append(f"avg{key}")     
                 
         with open(self.csv_file_path, 'w', encoding='UTF8') as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow(self.header)
+            writer.writerow(self.experiment_metadataHeader)
 
     def toCSVfile(self):
         self.writeCSVHeader()

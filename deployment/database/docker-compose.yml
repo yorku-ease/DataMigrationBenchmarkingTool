@@ -1,4 +1,3 @@
-version: '3'
 services:
   prometheus:
     network_mode: "host"
@@ -26,8 +25,8 @@ services:
       timeout: 10s
       retries: 5
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: {{ mongoDatabase.user }}
+      MONGO_INITDB_ROOT_PASSWORD: {{ mongoDatabase.password }}
     volumes:
       - ./data:/data/db
       
@@ -48,8 +47,8 @@ services:
     volumes: 
       - "grafana-data:/var/lib/grafana"
       - "./datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml"
-      - "./dockercontainersmonitoring.json:/var/lib/grafana/dashboards/dockercontainersmonitoring.json"
-      - "./Systemmonitoring.json:/var/lib/grafana/dashboards/Systemmonitoring.json"
+      - "./dockerContainersMonitoring.json:/var/lib/grafana/dashboards/dockerContainersMonitoring.json"
+      - "./systemMonitoring.json:/var/lib/grafana/dashboards/systemMonitoring.json"
       - "./default.yaml:/etc/grafana/provisioning/dashboards/default.yaml"
     privileged: true
     depends_on:

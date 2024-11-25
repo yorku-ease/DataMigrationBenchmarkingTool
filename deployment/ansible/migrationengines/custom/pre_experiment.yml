@@ -1,0 +1,19 @@
+- name: pull required images for Migration Engine.
+  block:
+    - name: Clean up the controller directory
+      ansible.builtin.file:
+        state: absent
+        path: /home/{{ ansible_user }}/dmbench/controller/
+    - name: Copy entire folder with static and config files
+      copy:
+        src: ../controller/examples/custom/controller/
+        dest: /home/{{ ansible_user }}/dmbench/controller/
+    - name: docker compose pull for controller components 
+      shell: |
+        cd /home/{{ ansible_user }}/dmbench/controller/
+        docker compose pull
+    - name: docker compose pull for custom engine components 
+      shell: |
+        cd /home/{{ ansible_user }}/dmbench/controller/configs/
+        docker compose pull
+      register : pre_experimentOutput
