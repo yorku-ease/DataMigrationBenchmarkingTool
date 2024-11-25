@@ -46,9 +46,14 @@ The following components support the framework, enabling management, tracking, a
 To streamline the setup and deployment process, all key components of the framework are packaged as Docker containers. Each component has specific dependencies that must be installed on the machine where it will be deployed:
 
 - **Controller & Migration Engine**: Requires Docker.
-- **Logs Reporter**: Requires Docker and Python.
+- **Logs Reporter**: Requires Docker, Python, and Pip.
 - **Databases**: Requires Docker.
 - **Management Server**: Requires Ansible. This machine will host all source code and coordinate communication between all other machines in the system.
+
+Additionally, ensure the following:
+
+- The **latest version of Ubuntu** is installed on all machines.
+- Docker can be managed as a **non-root user** on each machine. This means Docker should be usable without requiring `sudo`. You can achieve this by adding the user to the `docker` group.  
 
 While it's possible to deploy all components on a single machine, it is recommended to deploy them across separate machines, ideally in different locations. This setup mirrors real-world conditions, including network delays, which can help provide a more accurate evaluation of the migration process.
 
@@ -268,6 +273,10 @@ For most supported engines, steps 3, 4, and 5 are largely pre-configured and req
 
 To execute the migration experiment, follow these steps by navigating to the `ansible` folder on the management server and running the specified commands:
 
+- Replace `<migrationengine>` with the name of the migration engine you want to use.  
+- For example, to run steps for migrating DB2 databases, replace `<migrationengine>` with `db2`.
+- To use the Default Migration Engine, replace `<migrationengine>` with `default`.  
+
 ---
 
 1. **Set Up Infrastructure**
@@ -275,7 +284,7 @@ To execute the migration experiment, follow these steps by navigating to the `an
 Run the following command to set up the infrastructure on all target machines. This step is executed only once:
 
 ```bash
-ansible-playbook -i inventory.ini deploy.yml --tags "infrastructure" 
+ansible-playbook -i inventory.ini deploy.yml --tags "infrastructure,<migrationengine>" 
 ```
 
 
@@ -284,7 +293,7 @@ ansible-playbook -i inventory.ini deploy.yml --tags "infrastructure"
 Run the following command to configure the infrastructure on all target machines. This step is executed only once:
 
 ```bash
-ansible-playbook -i inventory.ini deploy.yml --tags "configuration" 
+ansible-playbook -i inventory.ini deploy.yml --tags "configuration,<migrationengine>" 
 ```
 
 
@@ -295,7 +304,7 @@ ansible-playbook -i inventory.ini deploy.yml --tags "configuration"
 Run the following command to deploy the framework databases. This step is also executed only once:
 
 ```bash
-ansible-playbook -i inventory.ini deploy.yml --tags "deploy_db" 
+ansible-playbook -i inventory.ini deploy.yml --tags "deploy_db,<migrationengine>" 
 ```
 
 ---
@@ -307,13 +316,6 @@ Use the following command to start the experiment:
 ```bash
 ansible-playbook -i inventory.ini deploy.yml --tags "pre_experiment,start_experiment,<migrationengine>" 
 ```
-
-- Replace `<migrationengine>` with the name of the migration engine you want to use.  
-- For example, to run steps for migrating DB2 databases, replace `<migrationengine>` with `db2`.
-- To use the Default Migration Engine, replace `<migrationengine>` with `default`.  
-
-
-
 
 
 
@@ -328,13 +330,26 @@ After the experiment concludes, run this command:
 ansible-playbook -i inventory.ini deploy.yml --tags "post_experiment,<migrationengine>" 
 ```
 
-- Replace `<migrationengine>` with the name of the migration engine used in the experiment.
-
 This command performs the following:
 - Executes post-experiment steps for both the framework and the migration engine.
 
 
-## Result
+---
 
-After following all the steps we talked about earlier, you've got a bunch of data from your experiments. Every performance benchmark, including migration time per experiment and, if there's any, compression time, is now neatly stored in the MongoDB database. At the same time, PrometheusDB has all the nitty-gritty details about resource consumption, and you can easily visualize it using the Grafana Dashboard. This mix ensures you've got all the important info at your fingertips for a deep dive into your experiments.
+
+- If you want to run a different experiment with a **new migration engine**, you must restart the setup process from the beginning. This includes reconfiguring all required files and rerunning the necessary steps outlined above. 
+
+- However, if you want to test a **different combination of parameters** for the current migration engine, simply update the `configs/config.ini` file located on the management server with the new parameters. Once updated, rerun **Step 4** (Start the Experiment) and **Step 5** (Run Post-Experiment Tasks) to apply the changes and conduct the new experiment.
+
+
+## Results
+
+All results from the experiment will be saved in the **framework databases** for centralized access and analysis. Additionally, on the **reporter machine**, you will find a dedicated folder under `dmbench/results/`. Each experiment run will generate a new subfolder containing the following:
+
+- **CSV files**: Human-readable structured data detailing performance metrics, resource consumption, and other relevant statistics.
+- **JSON files**: The same data as the CSV files, provided in a structured format for programmatic access and integration with other tools.
+- **Log files**: Comprehensive logs capturing all information from the experiment, including execution details and any encountered issues.
+
+Every time you run another experiment, a new folder will automatically be created within the `dmbench/results/` directory, ensuring that data from different runs is organized and preserved.
+
 

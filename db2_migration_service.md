@@ -106,9 +106,11 @@ However, there are a couple of important tasks to complete:
 
 2. **Configure Docker Compose for Databases**
 
-   Both the source and target DB2 databases need to be running using Docker Compose. There should already be a Docker Compose file that starts these databases. 
+Both the source and target DB2 databases should be started using Docker Compose files. These files must be present in the `deployment/ansible/migrationengines/db2/databases` directory and also appropriately configured on the source and target DB2 machines. This setup ensures that DMBench can manage and adjust the resources (CPU, RAM, etc.) allocated to these databases as needed.  
 
-   In `deployment/ansible/migrationengines/db2/config.yml`, you need to specify the folder paths (without the trailing slash) where these Docker Compose files exist on each machine. Update the configuration with the correct paths so that the management server can manage the Docker Compose services for both databases.
+Before each experiment, DMBench will verify that the Docker Compose files in `deployment/ansible/migrationengines/db2/databases` match the databases currently running on the respective source and target machines. If discrepancies are found, DMBench will stop the old databases and start new ones using the updated resource allocations. This ensures consistent and accurate testing conditions.
+
+In `deployment/ansible/migrationengines/db2/config.yml`, you need to specify the folder paths (without a trailing slash `/` at the end ) where these Docker Compose files exist on each machine. Update the configuration with the correct paths so that the management server can manage the Docker Compose services for both databases.
 
 ### Final Steps
 
