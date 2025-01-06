@@ -67,5 +67,5 @@ jobs:
         uses: docker/build-push-action@v6
         with:
         push: true
-         # file: {context}/controller/Dockerfile
-          tags: fareshamouda/controller:dev, fareshamouda/controller:${{ env.TIMESTAMP }}
+        file: {context}/controller/Dockerfile
+        tags: fareshamouda/controller:dev, fareshamouda/controller:${{ env.TIMESTAMP }}
