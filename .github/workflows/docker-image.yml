@@ -22,5 +22,6 @@ jobs:
         pip install -r requirements.txt
     - name: Run Config Parser Test
       run: |
-        cd controller
+        cd controller/tests
         python3 -m unittest testController.py
+
