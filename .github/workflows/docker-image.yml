@@ -74,4 +74,4 @@ jobs:
         with:
           context: ./controller
           push: true
-          tags: fareshamouda/controller:dev
+          tags: fareshamouda/controller:${{ env.TIMESTAMP }},fareshamouda/controller:latest
