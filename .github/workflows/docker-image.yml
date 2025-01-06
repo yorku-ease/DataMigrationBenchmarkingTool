@@ -24,4 +24,16 @@ jobs:
       run: |
         cd controller/tests
         python3 -m unittest testController.py
+    - name: Install dependencies for Container Deployment Test
+      run: |
+        cd deployment/controller/tests
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Container Deployment Test
+      run: |
+        cd deployment/controller/tests
+        python -m unittest testDeployment.py
+
+
 
