@@ -42,7 +42,7 @@ jobs:
       run: |
         cd deployment/reporter/kafkacluster/test
         python -m unittest testLogger.py
-        
+
   build-and-push-docker:
     name: Build and Push Controller Docker Image
     runs-on: ubuntu-latest
@@ -57,16 +57,12 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      -
-        name: Build and push
+      - name: Build and push
         uses: docker/build-push-action@v6
         with:
           push: true
           file: {context}/controller/Dockerfile
-          tags: 
- #           - fareshamouda/controller:latest
-            - fareshamouda/controller:$(date +%Y%m%d%H%M%S)
+          tags: fareshamouda/controller:${{ date +%Y%m%d%H%M%S) }}
