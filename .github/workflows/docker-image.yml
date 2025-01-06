@@ -23,17 +23,27 @@ jobs:
     - name: Run Config Parser Test
       run: |
         cd controller/tests
-        python3 -m unittest testController.py
+        python -m unittest testController.py
     - name: Install dependencies for Container Deployment Test
       run: |
         cd deployment/controller/tests
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-
     - name: Run Container Deployment Test
       run: |
         cd deployment/controller/tests
         python -m unittest testDeployment.py
+    - name: Install dependencies for Kafka Logger Test
+      run: |
+        cd deployment/reporter/kafkacluster
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run Kafka Logger Test
+      run: |
+        cd deployment/reporter/kafkacluster/test
+        python -m unittest testLogger.py
+
+        
 
 
 
