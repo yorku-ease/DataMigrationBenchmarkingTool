@@ -33,7 +33,6 @@ class TestDeployment(unittest.TestCase):
     
     def test_deploy(self):
         try:
-            shutil.copy2('../examples/defaultEngine/controller/docker-compose.yml', 'docker-compose.yml')
 
             # Run docker-compose up with the specified service name
             subprocess.run(['docker', 'compose','up', '-d', "controller"], check=True)
@@ -53,7 +52,8 @@ class TestDeployment(unittest.TestCase):
             while(not migrationContainerStarted and controllerisAlive):
                 migrationContainerStarted = self.wait_for_container(container_name)
                 controllerisAlive = self.wait_for_container('controller')
-
+            if (migrationContainerStarted) : 
+                print(f'container {container_name} not found')
             self.assertTrue(migrationContainerStarted, "'MigrationEngine' not started.")
   
         except subprocess.CalledProcessError as e:
