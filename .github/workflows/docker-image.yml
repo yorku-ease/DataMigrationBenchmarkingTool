@@ -55,7 +55,7 @@ jobs:
       - name: Get Last Tag
         id: get_last_tag
         run: |
-          last_tag=$(git describe --tags --abbrev=0 || echo "0.0.0")
+          last_tag=$(git describe --tags --abbrev=0)
           echo "last_tag=$last_tag" >> $GITHUB_ENV
 
       - name: Get Commit Messages
