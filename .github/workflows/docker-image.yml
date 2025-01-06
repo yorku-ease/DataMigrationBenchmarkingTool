@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: CI/CD for DmBench
 
 on:
   push:
@@ -6,74 +6,21 @@ on:
   pull_request:
     branches: [ "main" ]
 jobs:
-
-  build:
-
+  test:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
-    - name: Run databases
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.9  
+    - name: Install dependencies for Config Parser Test
       run: |
-        cd deployment/database
-        docker compose up -d
-    - name: Check Prometheus
-      run: |
-        chmod +x ./.github/workflows/checkHealth.sh
-        ./.github/workflows/checkHealth.sh prometheus
-#    - name: kill cAdvisor and node-exporter
-#      run: |
-#       cd deployment/controller
-#       docker compose down
-    - name: Check Mongo
-      run: |
-        ./.github/workflows/checkHealth.sh my-mongodb
-    - name: Check Grafana
-      run: |
-        ./.github/workflows/checkHealth.sh my-mongodb
-    - name: Run cAdvisor and node-exporter
-      run: |
-        cd deployment/controller
-        docker compose up -d cadvisor node-exporter
-    - name: Check cadvisor
-      run: |
-        ./.github/workflows/checkHealth.sh cadvisor
-    - name: Check node-exporter
-      run: |
-        ./.github/workflows/checkHealth.sh node-exporter
-#    - name: kill databases
- #     run: |
- #       cd deployment/database
- #       docker compose down
-    - name: Run reporter
-      run: |
-        cd deployment/reporter/"kafkacluster"
-        docker compose up -d
-    - name: Check kafka
-      run: |
-        ./.github/workflows/checkHealth.sh kafka1
-#    - name: kill reporter
-#      run: |
-#        cd deployment/reporter/"kafkacluster"
-#        docker compose down
-    - name: Run consumer
-      run: |
-        cd deployment/reporter/"kafkacluster"
+        cd controller
+        python -m pip install --upgrade pip
         pip install -r requirements.txt
-        nohup python consumer.py > output.log 2>&1 &
-    - name: Run experiment
-      env:
-        SOURCE_HOST: ${{ secrets.SOURCE_HOST }}
-        SOURCE_PASSWORD: ${{ secrets.SOURCE_PASSWORD }}
-        SOURCE_USERNAME: ${{ secrets.SOURCE_USERNAME }}
-        TARGET_HOST: ${{ secrets.TARGET_HOST }}
-        TARGET_PASSWORD: ${{ secrets.TARGET_PASSWORD }}
-        TARGET_PORT: ${{ secrets.TARGET_PORT }}
-        TARGET_TYPE: ${{ secrets.TARGET_TYPE }}
-        TARGET_USERNAME: ${{ secrets.TARGET_USERNAME }}
+    - name: Run Config Parser Test
       run: |
-        cp ./.github/workflows/config.ini deployment/controller/configs/config.ini 
-        cd deployment/controller
-        docker compose down
-        docker compose up -d 
-        docker logs controller --follow
+        cd controller
+        python3 -m unittest testController.py

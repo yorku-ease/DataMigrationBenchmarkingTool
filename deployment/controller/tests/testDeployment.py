@@ -1,4 +1,5 @@
 import unittest,os,subprocess,time,docker,shutil
+import yaml
 
 # Get the directory of the currently running script
 script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -32,7 +33,7 @@ class TestDeployment(unittest.TestCase):
     
     def test_deploy(self):
         try:
-            shutil.copy2('../docker-compose.yml', 'docker-compose.yml')
+            shutil.copy2('../examples/defaultEngine/controller/docker-compose.yml', 'docker-compose.yml')
 
             # Run docker-compose up with the specified service name
             subprocess.run(['docker', 'compose','up', '-d', "controller"], check=True)
@@ -40,14 +41,23 @@ class TestDeployment(unittest.TestCase):
             self.assertTrue(self.wait_for_container('controller'), "Timed out waiting for 'controller' container to start.")
             migrationContainerStarted = False
             controllerisAlive = True
+            dockerComposeYamlFile = "configs/docker-compose.yml"
+            with open(dockerComposeYamlFile, 'r') as file:
+                data = yaml.safe_load(file)
+            if 'services' in data:
+                first_service_key = next(iter(data['services']), None)
+                container_name = "MigrationEngine_" + first_service_key + "-MigrationEngineDeploymentTest"
+            else:
+                print("The key 'services' does not exist in the YAML file.")
+
             while(not migrationContainerStarted and controllerisAlive):
-                migrationContainerStarted = self.wait_for_container('MigrationEngine')
+                migrationContainerStarted = self.wait_for_container(container_name)
                 controllerisAlive = self.wait_for_container('controller')
 
             self.assertTrue(migrationContainerStarted, "'MigrationEngine' not started.")
   
         except subprocess.CalledProcessError as e:
-            print(f"Error: {e}")
+            self.fail(f"Docker compose up failed: {e}")
             # Handle the error as needed
 
     def tearDown(self):

@@ -1,4 +1,3 @@
-version: '3'
 services:
   node-exporter:
     network_mode: "host"
@@ -13,6 +12,7 @@ services:
       retries: 3
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
+    command: -storage_driver=kafka -storage_driver_kafka_broker_list={{ hostvars["reporter"]["ansible_host"] }}:9092 -storage_driver_kafka_topic=cadvisor --housekeeping_interval=120s
     network_mode: "host"
     container_name: cadvisor
     ports:
@@ -27,7 +27,7 @@ services:
     devices: 
       - "/dev/kmsg"
   controller:
-    image: fareshamouda/datamigrationbenchmarkingtool:latest
+    image: fareshamouda/controller:latest
     privileged: true
     container_name: controller
     environment:

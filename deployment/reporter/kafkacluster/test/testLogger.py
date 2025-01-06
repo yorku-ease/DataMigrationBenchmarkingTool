@@ -25,7 +25,11 @@ class TestLogger(unittest.TestCase):
             compose_file_path = '../docker-compose.yml'
             
             # Run docker-compose up with the specified service name
-            subprocess.run(['docker', 'compose', '-f', compose_file_path, 'down'], check=True)        
+            subprocess.run(['docker', 'compose', '-f', compose_file_path, 'down'], check=True) 
+            replacement_text = '{{ hostvars["reporter"]["ansible_host"] }}'
+            target_text = 'localhost'
+            replace_text_in_file(compose_file_path, target_text, replacement_text)  
+            remove_log_files()     
         except subprocess.CalledProcessError as e:
             print(f"Error during tearDown: {e}")
             # Handle the error as needed
@@ -39,6 +43,9 @@ class TestLogger(unittest.TestCase):
                 if os.path.exists(file):
                     os.remove(file)
             compose_file_path = '../docker-compose.yml'
+            target_text = '{{ hostvars["reporter"]["ansible_host"] }}'
+            replacement_text = 'localhost'
+            replace_text_in_file(compose_file_path, target_text, replacement_text)
             # Run docker-compose up with the specified service name
             subprocess.run(['docker', 'compose', '-f', compose_file_path,'up','-d'], check=True)
               # Replace with your Kafka broker address
@@ -92,6 +99,49 @@ def createProducer(bootstrap_servers):
         'delivery.timeout.ms': 10000  # Set a delivery timeout (optional)
     })
     return producer 
+
+def replace_text_in_file(file_path, target_text, replacement_text):
+    """
+    Replace all occurrences of target_text in the file with replacement_text.
+    
+    :param file_path: Path to the file
+    :param target_text: Text to find and replace
+    :param replacement_text: Replacement text
+    """
+    try:
+        # Read the content of the file
+        with open(file_path, 'r') as file:
+            content = file.read()
+        
+        # Escape special characters in the target text for regex
+        escaped_target_text = re.escape(target_text)
+        
+        # Replace the target text with the replacement text
+        updated_content = re.sub(escaped_target_text, replacement_text, content)
+        
+        # Write the updated content back to the file
+        with open(file_path, 'w') as file:
+            file.write(updated_content)
+        
+        print(f"Replaced occurrences of '{target_text}' with '{replacement_text}' in {file_path} successfully.")
+    except FileNotFoundError:
+        print(f"The file {file_path} does not exist.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+def remove_log_files():
+    """
+    Remove all files ending with .log in the current directory.
+    """
+    current_dir = os.getcwd()
+    log_files = [f for f in os.listdir(current_dir) if f.endswith('.log')]
+    
+    for log_file in log_files:
+        try:
+            os.remove(log_file)
+            print(f"Removed: {log_file}")
+        except Exception as e:
+            print(f"Failed to remove {log_file}: {e}")
 
 def parseFile(filename,topic,key_pattern,value_pattern,bootstrap_servers):
     filename = "expectedFiles/" + filename
