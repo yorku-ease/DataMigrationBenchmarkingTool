@@ -1,3 +1,4 @@
+[![CI/CD for DmBench](https://github.com/yorku-ease/DataMigrationBenchmarkingTool/actions/workflows/docker-image.yml/badge.svg)](https://github.com/yorku-ease/DataMigrationBenchmarkingTool/actions/workflows/docker-image.yml)
 
 # Manual for using the data migration benchmarking tool 
 
