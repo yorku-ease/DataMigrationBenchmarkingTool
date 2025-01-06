@@ -42,8 +42,56 @@ jobs:
       run: |
         cd deployment/reporter/kafkacluster/test
         python -m unittest testLogger.py
+  determine-version:
+    name: Determine New Version
+    runs-on: ubuntu-latest
+    outputs:
+      new_version: ${{ steps.set-version.outputs.new_version }}
 
-        
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
 
+      - name: Get Last Tag
+        id: get_last_tag
+        run: |
+          last_tag=$(git describe --tags --abbrev=0 || echo "0.0.0")
+          echo "last_tag=$last_tag" >> $GITHUB_ENV
 
+      - name: Get Commit Messages
+        id: get_commits
+        run: |
+          # Get commit messages since the last tag
+          commits=$(git log ${GITHUB_ENV/last_tag}..HEAD --pretty=format:"%s")
+          echo "commits=$commits" >> $GITHUB_ENV
 
+      - name: Determine Version Increment
+        id: set-version
+        run: |
+          # Start with patch increment
+          major=0; minor=0; patch=0
+          
+          while IFS= read -r commit; do
+            if [[ "$commit" =~ BREAKING[[:space:]]CHANGE ]]; then
+              major=1
+            elif [[ "$commit" =~ ^feat ]]; then
+              minor=1
+            elif [[ "$commit" =~ ^fix ]]; then
+              patch=1
+            fi
+          done <<< "${GITHUB_ENV/commits}"
+          
+          # Get last version
+          IFS='.' read -r old_major old_minor old_patch <<< "${GITHUB_ENV/last_tag}"
+          
+          # Calculate new version
+          if [[ $major -eq 1 ]]; then
+            new_version="$((old_major + 1)).0.0"
+          elif [[ $minor -eq 1 ]]; then
+            new_version="$old_major.$((old_minor + 1)).0"
+          else
+            new_version="$old_major.$old_minor.$((old_patch + 1))"
+          fi
+          
+          echo "new_version=$new_version" >> $GITHUB_ENV
+          echo "::set-output name=new_version::$new_version"
