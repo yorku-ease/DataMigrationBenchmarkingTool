@@ -46,7 +46,7 @@ jobs:
   build-and-push-docker:
     name: Build and Push Controller Docker Image
     runs-on: ubuntu-latest
-   # needs: test 
+    needs: test 
 
     steps:
       - name: Checkout Code
