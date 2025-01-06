@@ -65,4 +65,4 @@ jobs:
         with:
           push: true
           file: {context}/controller/Dockerfile
-          tags: fareshamouda/controller:${{ date +%Y%m%d%H%M%S) }}
+          tags: fareshamouda/controller:dev
