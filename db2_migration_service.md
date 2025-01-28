@@ -104,19 +104,26 @@ However, there are a couple of important tasks to complete:
 
    Make sure the management server has access to both of these machines by configuring their details in the inventory file.
 
-2. **Configure Docker Compose for Databases**
+2. **Configure Docker Compose for Databases**  
+This section is optional. You can have your databases up and running wherever you want (on-premises or in the cloud). However, if you want to use the steps that handle the deployment and monitor the resource consumption of the DB2 databases, follow the instructions below:
 
-Both the source and target DB2 databases should be started using Docker Compose files. These files must be present in the `deployment/ansible/migrationengines/db2/databases` directory and also appropriately configured on the source and target DB2 machines. This setup ensures that DMBench can manage and adjust the resources (CPU, RAM, etc.) allocated to these databases as needed.  
+To use these steps, you need to:
+1. Add the `check_db2_DBs` tag to your playbook runs.
+2. Ensure that the Docker Compose files are present in the `deployment/ansible/migrationengines/db2/databases` directory.  
+3. Make sure to name the service for the source database `db2source` and the service for the target database `db2target` in the Docker Compose files. Additionally, add container names for both of these services.
+
+Both the source and target DB2 databases should be started using the configured Docker Compose files. These files must also be appropriately configured on the source and target DB2 machines. This setup ensures that DMBench can manage and adjust the resources (CPU, RAM, etc.) allocated to these databases as needed.
 
 Before each experiment, DMBench will verify that the Docker Compose files in `deployment/ansible/migrationengines/db2/databases` match the databases currently running on the respective source and target machines. If discrepancies are found, DMBench will stop the old databases and start new ones using the updated resource allocations. This ensures consistent and accurate testing conditions.
 
-In `deployment/ansible/migrationengines/db2/config.yml`, you need to specify the folder paths (without a trailing slash `/` at the end ) where these Docker Compose files exist on each machine. Update the configuration with the correct paths so that the management server can manage the Docker Compose services for both databases.
+Additionally, the steps will automatically pull and run **cAdvisor** on the machines where the databases are hosted. cAdvisor will monitor and log the resource consumption (CPU, memory, etc.) of both the source and target databases. This provides valuable insights into database performance and helps ensure proper resource allocation during experiments.
+
+In `deployment/ansible/migrationengines/db2/config.yml`, you need to specify the folder paths (without a trailing slash `/` at the end) where these Docker Compose files exist on each machine. Update the configuration with the correct paths so that the management server can manage the Docker Compose services for both databases and monitor their resource consumption.
+
 
 ### Final Steps
 
 Once you have completed the configuration, you can now return to the [README.md](README.md) file. Follow the steps outlined there for running the experiment. 
 
 Make sure to use the `db2` tag when running the playbooks to ensure that the DB2 migration engine is properly utilized during the experiment.
-
-**Note:** There are Ansible steps available to check the DB2 source and target databases. If you want to include these steps, simply add the `check_db2_DBs` tag. This will check the Docker Compose files that deploys the DB2 source and target databases and will automatically determine if they need to be killed and restarted. These steps also pull cAdvisor on the machines where the databases are hosted and log resource consumption for both databases. This is particularly useful in cases where database resource constraints have changed, ensuring the process is handled automatically.
 
