@@ -101,6 +101,7 @@
           delay: 30
           until: db2_connect_output.stdout is defined and  'Database Connection Information' in db2_connect_output.stdout
           ignore_errors: no
+  when : "'check_db2_DBs' in ansible_run_tags"
   delegate_to: db2-targetDB
 
 - name: Configure DB2 source database
@@ -178,6 +179,7 @@
           delay: 30
           until: db2_connect_output.stdout is defined and  'Database Connection Information' in db2_connect_output.stdout
           ignore_errors: no
+  when : "'check_db2_DBs' in ansible_run_tags"
   delegate_to: db2-sourceDB
 
 - name: Pull cAdvisor on source DB
@@ -197,7 +199,9 @@
       shell: |
         cd /home/{{ ansible_user }}/dmbench/
         docker compose pull
-  when: hostvars['db2-sourceDB'].ansible_host  != hostvars['controller'].ansible_host
+  when: 
+    - hostvars['db2-sourceDB'].ansible_host  != hostvars['controller'].ansible_host 
+    -  "'check_db2_DBs' in ansible_run_tags"
   delegate_to: db2-sourceDB
 
 - name: Pull cAdvisor on target DB
@@ -217,5 +221,7 @@
       shell: |
         cd /home/{{ ansible_user }}/dmbench/
         docker compose pull
-  when: hostvars['db2-targetDB'].ansible_host  !=  hostvars['controller'].ansible_host 
+  when: 
+    - hostvars['db2-targetDB'].ansible_host  !=  hostvars['controller'].ansible_host 
+    - "'check_db2_DBs' in ansible_run_tags"
   delegate_to: db2-targetDB
