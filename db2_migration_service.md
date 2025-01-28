@@ -118,3 +118,5 @@ Once you have completed the configuration, you can now return to the [README.md]
 
 Make sure to use the `db2` tag when running the playbooks to ensure that the DB2 migration engine is properly utilized during the experiment.
 
+**Note:** There are Ansible steps available to check the DB2 source and target databases. If you want to include these steps, simply add the `check_db2_DBs` tag. This will check the Docker Compose files that deploys the DB2 source and target databases and will automatically determine if they need to be killed and restarted. These steps also pull cAdvisor on the machines where the databases are hosted and log resource consumption for both databases. This is particularly useful in cases where database resource constraints have changed, ensuring the process is handled automatically.
+
