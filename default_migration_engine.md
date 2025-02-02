@@ -50,13 +50,12 @@ The file `configs/config.ini` needs to be configured as follows:
 - `dataFolder_path = /app/data/` (do not change this)
 
 #### [KafkaCluster]
-
-- `host =` Host of the Kafka Reporter machine  
+#### This section needs to remain as it is not edited.
+- `host = {{ hostvars["reporter"]["ansible_host"] }}` (don't change this)
 - `port = 9092` (keep this as 9092)  
 - `performanceBenchmarkTopic = performanceBenchmark`  
 - `migrationEngineTopicName = migrationEngine`  
 - `frameworktopicname = framework`  
-- `host = {{ hostvars["reporter"]["ansible_host"] }}` (don't change this)
 
 #### [migrationEnvironment]
 

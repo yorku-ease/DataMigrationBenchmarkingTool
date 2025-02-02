@@ -154,8 +154,8 @@ This section includes connection details for the source server:
 
 **[[KafkaCluster]]**
 
-This section requires the IP address of the reporter machine to be specified, while the rest of the values can remain default:
-- `host` = `<reporter_IP>` (Replace with the reporter machine IP)
+#### This section needs to remain as it is not edited.
+- `host` = `{{ hostvars["reporter"]["ansible_host"] }}` 
 - `port` = 9092
 - `performanceBenchmarkTopic` = `performanceBenchmark`
 - `frameworkTopicName` = `framework`
