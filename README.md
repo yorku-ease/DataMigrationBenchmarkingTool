@@ -73,13 +73,13 @@ Below is an example configuration:
 
 ```ini
 [reporter]
-reporter ansible_host=<IP_ADDRESS> ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa
+reporter ansible_host=<IP_ADDRESS> ansible_user=<USER> ansible_ssh_private_key_file=<PATH-TO-PRIVATEKEY>
 
 [databases]
-databases ansible_host=<IP_ADDRESS> ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa
+databases ansible_host=<IP_ADDRESS> ansible_user=<USER> ansible_ssh_private_key_file=<PATH-TO-PRIVATEKEY>
 
 [controller]
-controller ansible_host=<IP_ADDRESS> ansible_user=ubuntu ansible_ssh_private_key_file=~/.ssh/id_rsa
+controller ansible_host=<IP_ADDRESS> ansible_user=<USER> ansible_ssh_private_key_file=<PATH-TO-PRIVATEKEY>
 
 ```
 
