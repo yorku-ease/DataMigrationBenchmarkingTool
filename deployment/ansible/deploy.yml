@@ -1,3 +1,22 @@
+- hosts: controller, databases, reporter
+  become: true
+  tasks:
+    - name: Update package lists
+      apt:
+        update_cache: yes
+      retries: 5
+      delay: 10
+    - name: Install Python 3 and pip3
+      apt:
+        name:
+          - python3
+          - python3-pip
+        state: present
+      retries: 5
+      delay: 10
+      tags : 
+        - infrastructure
+
 - hosts: databases
   tasks:
     - name: Infrastructure preparation 
@@ -86,15 +105,27 @@
           template:
             src: ../reporter/kafkacluster/docker-compose.yml
             dest: /home/{{ ansible_user }}/dmbench/reporter/kafkacluster/docker-compose.yml
-        - name: Install required libraries for ubuntu
-          shell: |
-            sudo apt update
-            sudo apt install -y librdkafka-dev         
-        - name: Install python required libraries 
+
+        - name: Install required libraries for Ubuntu
+          become: yes
+          apt:
+            name:
+              - librdkafka-dev
+            update_cache: yes
+        - name: Install python3-venv
+          become: yes
+          apt:
+            name: python3.12-venv
+            state: present
+        - name: Install Python required libraries
           shell: |
             cd /home/{{ ansible_user }}/dmbench/reporter/kafkacluster
+            python3 -m venv venv
+            . venv/bin/activate
             pip3 install -r requirements.txt
-      tags : 
+          args:
+            executable: /bin/bash
+      tags:
         - configuration-reporter
         - configuration
         - reporter-full
@@ -141,9 +172,18 @@
             cd /home/{{ ansible_user }}/dmbench/database
             docker compose down
             docker compose up -d
+        - name: Install python3-venv
+          become: yes
+          apt:
+            name: python3.12-venv
+            state: present
         - name: Install requests library needed for community.docker.docker_container_info 
           shell: |
-            pip install requests
+            python3 -m venv venv
+            . venv/bin/activate
+            pip3 install requests
+          args:
+            executable: /bin/bash
         - name: Check container health status
           community.docker.docker_container_info:
             name: grafana
@@ -173,9 +213,18 @@
           shell: |
             cd /home/{{ ansible_user }}/dmbench/reporter/kafkacluster
             docker compose up -d
+        - name: Install python3-venv
+          become: yes
+          apt:
+            name: python3.12-venv
+            state: present
         - name: Install requests library needed for community.docker.docker_container_info 
           shell: |
-            pip install requests
+            python3 -m venv venv
+            . venv/bin/activate
+            pip3 install requests
+          args:
+            executable: /bin/bash 
         - name: Check container health status
           community.docker.docker_container_info:
             name: kafka1
@@ -190,6 +239,7 @@
         - name: Start Kafka Consumers
           shell: |
             cd /home/{{ ansible_user }}/dmbench/reporter/kafkacluster
+            . venv/bin/activate
             nohup python3 -u consumer.py > consumperoutput.log 2>&1 & 
             nohup python3 -u resourcesConsumer.py  > resourceconsumperoutput.log 2>&1 & 
         - name: Wait for all log files to appear
@@ -302,6 +352,7 @@
         - name: Monitor Experiment ( "Waiting for experiment to finish. \n Check the logs of the controller docker container and the the .log files in the folder Kafkacluster in the reporter machine." )
           shell: |
             cd /home/{{ ansible_user }}/dmbench/controller
+          
             nohup python3 monitor_experiment.py > monitor_experiment.log 2>&1 & 
           tags:
             - start_experiment
@@ -319,6 +370,7 @@
         - name : run parser
           shell: |
             cd /home/{{ ansible_user }}/dmbench/reporter/logsParser
+            . /home/{{ ansible_user }}/dmbench/reporter/kafkacluster/venv/bin/activate
             python3 main.py
         - name: Copy create results folder script
           template:
@@ -328,6 +380,7 @@
           register : folderpath
           shell: |
             cd /home/{{ ansible_user }}/dmbench/reporter/logsParser
+            . /home/{{ ansible_user }}/dmbench/reporter/kafkacluster/venv/bin/activate
             python3 createResultsFolder.py
         - name: Fetch config.ini from controller host
           ansible.builtin.fetch:
