@@ -59,7 +59,8 @@ The file `configs/config.ini` needs to be configured as follows:
 
 #### [KafkaCluster]
 
-- `host =` IP address of the Kafka reporter  
+#### This section needs to remain as it is not edited.
+- `host =` {{ hostvars["reporter"]["ansible_host"] }} 
 - `port = 9092` (Keep this as the default port for the reporter)  
 - `performanceBenchmarkTopic = performanceBenchmark` (Keep this as default)  
 - `migrationEngineTopicName = migrationEngine` (Keep this as default)  
