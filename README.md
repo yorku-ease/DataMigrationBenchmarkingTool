@@ -125,8 +125,9 @@ mongoDatabase:
 </details>
 
 For most supported engines, steps 3, 4, and 5 are largely pre-configured and require minimal adjustments. If you would like to use the already supported engines (DB2 Migration Service or Default Migration Engine), **ignore steps 3, 4, and 5** here. Instead, follow the instructions in the respective README files mentioned below:
-  - [default_migration_engine.md](default_migration_engine.md): Provides guidance for the Default Migration Engine.
-  - [db2_migration_service.md](db2_migration_service.md): Contains setup instructions for the DB2 Migration Service.
+  - [default_migration_engine.md](default_migration_engine.md): Provides guidance for the migrating files.
+  - [db2_migration_service.md](db2_migration_service.md): Contains setup instructions migrating IBM Db2 Databases.
+
 Once you have completed those steps, return here to continue with the "Running the Experiment" section.
 
 <details><summary> 3. Configuring the Controller </summary>
