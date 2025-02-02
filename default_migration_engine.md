@@ -1,7 +1,7 @@
 
 # Default Migration Engine Documentation
 
-This guide outlines the steps required to run DMBench with the **default migration engine**, which is used for general-purpose migrations. 
+This guide outlines the steps required to run DMBench with the **default migration engine**, which is used for file migrations. 
 This file assumes you have already read the `README.md` file. Here, we will focus on steps from the **Configuration** section specific to the default migration engine. The rest of the process remains as described in the `README.md`.
 
 If you want to extend the default migration engine, refer to the instructions in [`default_migration_engine_extend.md`](default_migration_engine_extend.md) before returning to this guide.
