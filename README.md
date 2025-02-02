@@ -124,6 +124,11 @@ mongoDatabase:
 
 </details>
 
+For most supported engines, steps 3, 4, and 5 are largely pre-configured and require minimal adjustments. If you would like to use the already supported engines (DB2 Migration Service or Default Migration Engine), **ignore steps 3, 4, and 5** here. Instead, follow the instructions in the respective README files mentioned below:
+  - [default_migration_engine.md](default_migration_engine.md): Provides guidance for the Default Migration Engine.
+  - [db2_migration_service.md](db2_migration_service.md): Contains setup instructions for the DB2 Migration Service.
+Once you have completed those steps, return here to continue with the "Running the Experiment" section.
+
 <details><summary> 3. Configuring the Controller </summary>
 <br />
 
@@ -265,11 +270,6 @@ customVariable: someValue
 ```
 
 </details> 
-
-For most supported engines, steps 3, 4, and 5 are largely pre-configured and require minimal adjustments. Detailed instructions for these configurations can be found in the following files located alongside `README.md` in the respective directories:  
-
-- [default_migration_engine.md](default_migration_engine.md): Provides guidance for the Default Migration Engine.  
-- [db2_migration_service.md](db2_migration_service.md): Contains setup instructions for the DB2 Migration Service.
 
 ## Running the Experiment
 
