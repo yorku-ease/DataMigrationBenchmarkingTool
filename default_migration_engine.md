@@ -13,7 +13,8 @@ If you want to extend the default migration engine, refer to the instructions in
 Before proceeding, ensure the following:
 
 1. **Controller Machine Setup**:  
-   - The **controller machine** must be the machine that contains the data to be transferred.  
+   - The **controller machine** must be the machine that contains the data to be transferred.
+   - The controller machine's **public key** needs to be added to the **authorized_keys** file on the target machine where the data will be transferred. This can be done using the `ssh-copy-id` command. By doing this, the controller machine can SSH into the target machine without requiring a password, allowing automated processes to run smoothly.
    - This machine should have a folder with all the data you intend to migrate.  
    - Ensure that in the `inventory.ini` file in Ansible, the machine selected as the controller corresponds to this data-hosting machine.
 
