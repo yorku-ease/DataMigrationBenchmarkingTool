@@ -23,8 +23,10 @@ class DefaultFileMigrator():
 
         except paramiko.SSHException as sshException:
             print('Unable to establish SSH connection: %s' % sshException)
+            raise
         except paramiko.SFTPError as sftpError:
             print('Unable to open SFTP session: %s' % sftpError)
+            raise 
         return connectionManager
     
 
@@ -64,6 +66,7 @@ class DefaultFileMigrator():
             stack_trace = traceback.format_exc()
             print(message)
             print(stack_trace)
+            raise
 
         self.logger.logMigrationEngine(self.loggingId,f"type : info, migration : completed, Timestamp : {time.time()}, stream : {streamNumber}")
 

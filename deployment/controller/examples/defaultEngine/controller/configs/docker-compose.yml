@@ -10,3 +10,4 @@ services:
     #         memory: '5g'
     volumes:
     -  "{{ config_vars['source']['dataFolderAbsolutePath'] }}:/app/data"
+    -  "/home/{{ ansible_user }}/.ssh:/root/.ssh"
