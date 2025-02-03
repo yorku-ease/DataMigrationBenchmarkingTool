@@ -19,7 +19,7 @@ class ConnectionManager:
 
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(self.hostname, username=self.username, password = self.password)
+        ssh.connect(self.hostname, username=self.username)
         #ssh.get_transport().window_size = self.limit
         self.ssh = ssh
         # Open a SFTP connection
