@@ -11,6 +11,7 @@
         name:
           - python3
           - python3-pip
+          - python3-venv
         state: present
       retries: 5
       delay: 10
@@ -112,11 +113,6 @@
             name:
               - librdkafka-dev
             update_cache: yes
-        - name: Install python3-venv
-          become: yes
-          apt:
-            name: python3.12-venv
-            state: present
         - name: Install Python required libraries
           shell: |
             cd /home/{{ ansible_user }}/dmbench/reporter/kafkacluster
@@ -172,11 +168,6 @@
             cd /home/{{ ansible_user }}/dmbench/database
             docker compose down
             docker compose up -d
-        - name: Install python3-venv
-          become: yes
-          apt:
-            name: python3.12-venv
-            state: present
         - name: Install requests library needed for community.docker.docker_container_info 
           shell: |
             python3 -m venv venv
@@ -213,11 +204,6 @@
           shell: |
             cd /home/{{ ansible_user }}/dmbench/reporter/kafkacluster
             docker compose up -d
-        - name: Install python3-venv
-          become: yes
-          apt:
-            name: python3.12-venv
-            state: present
         - name: Install requests library needed for community.docker.docker_container_info 
           shell: |
             python3 -m venv venv
@@ -349,11 +335,6 @@
             docker compose up -d
           tags : 
             - start_experiment
-        - name: Install python3-venv
-          become: yes
-          apt:
-            name: python3.12-venv
-            state: present
         - name: Monitor Experiment ( "Waiting for experiment to finish. \n Check the logs of the controller docker container and the the .log files in the folder Kafkacluster in the reporter machine." )
           shell: |
             cd /home/{{ ansible_user }}/dmbench/controller
