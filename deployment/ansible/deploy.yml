@@ -349,10 +349,17 @@
             docker compose up -d
           tags : 
             - start_experiment
+        - name: Install python3-venv
+          become: yes
+          apt:
+            name: python3.12-venv
+            state: present
         - name: Monitor Experiment ( "Waiting for experiment to finish. \n Check the logs of the controller docker container and the the .log files in the folder Kafkacluster in the reporter machine." )
           shell: |
             cd /home/{{ ansible_user }}/dmbench/controller
-          
+            python3 -m venv venv
+            . venv/bin/activate
+            pip3 install docker           
             nohup python3 monitor_experiment.py > monitor_experiment.log 2>&1 & 
           tags:
             - start_experiment
