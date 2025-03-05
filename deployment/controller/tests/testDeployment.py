@@ -17,7 +17,6 @@ class TestDeployment(unittest.TestCase):
         while time.time() - start_time < timeout and exist == False:
             try:
                 # Check if the container is running
-                subprocess.run(['docker', 'logs', "controller"], check=True)
                 container = client.containers.get(container_name)
                 exist = container.status == 'running'
             except docker.errors.NotFound:
