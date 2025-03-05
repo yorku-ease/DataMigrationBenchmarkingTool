@@ -32,7 +32,6 @@ jobs:
     - name: Run Container Deployment Test
       run: |
         cd deployment/controller/tests
-        docker ps 
         python -m unittest testDeployment.py
     - name: Install dependencies for Kafka Logger Test
       run: |
