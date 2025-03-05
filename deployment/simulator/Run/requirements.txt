@@ -1,5 +1,0 @@
-pandas
-numpy
-scikit-learn
-xgboost
-json5

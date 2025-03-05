@@ -362,16 +362,22 @@ The simulation model is built based on the analysis of numerous previous experim
 
 To run the simulator, follow these steps:
 
-1. **Edit the Configuration**  
+1. **Navigate to the Simulator Folder**  
+   Go to the `deployment/simulator` folder:  
+   ```bash
+   cd deployment/simulator
+    ```   
+
+2. **Edit the Configuration**  
    - Update the configuration settings in `configs/config.jsonc` as needed.  
    - Ensure the values match your data migration scenario.
 
-2. **Build the Docker Image**  
+3. **Build the Docker Image**  
    Run the following command to build the Docker image:  
    ```bash
    docker-compose build
     ```
-3. **Run the Simulator**  
+4. **Run the Simulator**  
    After building the Docker image, start the container using:  
    ```bash
    docker-compose up
