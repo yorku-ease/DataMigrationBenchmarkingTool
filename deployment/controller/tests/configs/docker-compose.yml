@@ -1,7 +1,7 @@
 services:
   web:
-    image: fareshamouda/db2migrationservice:test2
-    container_name: db2migrationservice
+    image: fareshamouda/default-migration-engine:latest
+    container_name: default
     privileged: true
     # deploy:
     #     resources:

@@ -355,4 +355,30 @@ All results from the experiment will be saved in the **framework databases** for
 
 Every time you run another experiment, a new folder will automatically be created within the `dmbench/results/` directory, ensuring that data from different runs is organized and preserved.
 
+## Running the Simulator
 
+The simulation model is built based on the analysis of numerous previous experiments. It leverages historical data to predict the duration of future experiments without the need to run additional test experiments. By analyzing patterns and trends from past results, the model provides predictions, saving time and resources while optimizing the experiment scheduling process. This enables faster decision-making and more efficient planning of data migration tasks.
+
+
+To run the simulator, follow these steps:
+
+1. **Navigate to the Simulator Folder**  
+   Go to the `deployment/simulator` folder:  
+   ```bash
+   cd deployment/simulator
+    ```   
+
+2. **Edit the Configuration**  
+   - Update the configuration settings in `configs/config.jsonc` as needed.  
+   - Ensure the values match your data migration scenario.
+
+3. **Build the Docker Image**  
+   Run the following command to build the Docker image:  
+   ```bash
+   docker-compose build
+    ```
+4. **Run the Simulator**  
+   After building the Docker image, start the container using:  
+   ```bash
+   docker-compose up
+   ```
