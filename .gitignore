@@ -14,3 +14,7 @@ deployment/database/data/*
 deployment/ansible/inventorycopy.ini
 deployment/controller/examples/db2/controller/configs/configcopy.ini
 deployment/controller/examples/defaultEngine/controller/configs/configcopy.ini
+migrationEngine/IBM\ Bridge/ibm_migration_platform-BETA5-centos7
+migrationEngine/IBM\ Bridge/ibm_migration_platform-BETA5-rhel8
+migrationEngine/IBM\ Bridge/RPMS
+migrationEngine/IBM\ Bridge/args.txt

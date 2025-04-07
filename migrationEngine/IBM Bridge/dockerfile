@@ -1,0 +1,58 @@
+# Start with the RHEL 8.4 base image
+FROM registry.access.redhat.com/ubi8/ubi:8.10
+
+# Set the maintainer label
+LABEL maintainer="hamoudaferes@gmail.com"
+
+
+# Set the working directory in the container
+WORKDIR /app
+
+RUN dnf -y update 
+
+# This command is needed to install confluent kafka later , 
+# make sure to always choose the latest available tag and match it with the version for confluent kafka in requirements.txt
+# if you choose the latest tag of librdkafka , later when installing confluent kafka you will see the latest version of confluent kafka that you can choose for librdkafka
+RUN dnf install -y --setopt=install_weak_deps=False gcc git gcc-c++ make && \
+    cd /tmp && git clone https://github.com/edenhill/librdkafka.git && \
+    cd librdkafka && git checkout tags/v2.6.0 && \
+    ./configure && make && make install && \
+    cd ../ && rm -rf librdkafka && \
+    dnf clean all
+
+RUN dnf install -y python3 python3-pip python3-devel
+RUN python3 -m pip install --upgrade pip
+
+ARG REDHAT_USERNAME
+ARG REDHAT_PASSWORD
+
+RUN subscription-manager register --username ${REDHAT_USERNAME} --password ${REDHAT_PASSWORD}
+
+COPY RPMS/x86_64 . 
+COPY ibm_migration_platform-BETA5-rhel8 . 
+
+#RUN dnf module enable -y python3.11
+RUN    dnf install -y python3.11 python3.11-pip
+RUN    dnf clean all
+RUN alternatives --set python3 /usr/bin/python3.11
+RUN ln -sf /usr/bin/python3.11 /usr/bin/python3 
+ RUN   ln -sf /usr/bin/pip3.11 /usr/bin/pip3
+RUN yum localinstall -y ibm_db2bridge_platform-1.1.0-1.el8.x86_64.rpm
+#RUN yum localinstall -y gskcrypt64-8.0.55.24.linux.x86_64.rpm gskssl64-8.0.55.24.linux.x86_64.rpm
+
+COPY migrationTool .
+
+RUN pip3 install  -r /app/requirements.txt 
+
+
+# Expose the required ports
+EXPOSE 50050 13080 14080
+
+COPY myscript.sh /usr/local/bin/myscript.sh
+
+RUN chmod +x /usr/local/bin/myscript.sh 
+
+#CMD ["tail", "-f", "/dev/null"]
+
+CMD ["/usr/local/bin/myscript.sh"]
+

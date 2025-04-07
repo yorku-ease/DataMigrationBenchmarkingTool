@@ -1,11 +1,11 @@
 
-# DB2 Migration Service Documentation
+# DB2 Bridge Documentation
 
 ## Overview
 
-This document outlines the steps needed to run **DMBench** with the **DB2 Migration Service**, which is specifically designed for migrating DB2 databases.  
+This document outlines the steps needed to run **DMBench** with the **DB2 Bridge**, which is specifically designed for migrating DB2 databases.  
 
-This file assumes that you have already read the main [README.md](README.md). Here, we will focus on some specific configurations for the DB2 Migration Service. All other steps remain as described in the README file.
+This file assumes that you have already read the main [README.md](README.md). Here, we will focus on some specific configurations for the DB2 Bridge. All other steps remain as described in the README file.
 
 ---
 
@@ -19,13 +19,12 @@ Before proceeding, ensure the following:
    - The machines must have been started with Docker Compose, and there should be a Docker Compose file for each database on their respective machines. This setup will ensure that both the source and target DB2 databases are properly configured to run with Docker Compose, making it easier to test experiments with resource constraints on the machines.
 
 2. **Dummy Table Option**:  
-   - The **source database** can optionally include a table named `dummy`.  
-   - This is used to run a preliminary experiment before each combination of parameters, ensuring that cache from previous experiments is overwritten.  
-   - If you choose to use this option, set `dummy = true` in the configuration file.
+   - `dummy = True` (Set to `True` if you want to run a dummy experiment before each combination of parameters, not before all experiments, just the first one to override the cache)  
+   - `dummyTable =` Name of the table to be migrated during the dummy experiment (ensure `dummy` is set to `True`).  Ideally, this should be a table different from the ones you intend to migrate.
 
 ## Configuration
 
-In this section, we will guide you through **steps 3, 4, and 5** from the configuration section of the main README file. These steps are essential for setting up the Controller, configuring `docker-compose.yml`, and optionally using Ansible playbooks for the DB2 migration service. 
+In this section, we will guide you through **steps 3, 4, and 5** from the configuration section of the main README file. These steps are essential for setting up the Controller, configuring `docker-compose.yml`, and optionally using Ansible playbooks for the DB2 Bridge. 
 
 For detailed instructions on the other steps, please refer to the main README file.
 
@@ -33,7 +32,7 @@ Since the current engine is already supported, a significant portion of these st
 
 ### Step 3: Configuring the Controller
 
-To configure the Controller for the DB2 migration service, you will need to edit the following folder:
+To configure the Controller for the DB2 Bridge, you will need to edit the following folder:
 
 `deployment/controller/examples/db2`
 
@@ -46,7 +45,6 @@ The file `configs/config.ini` needs to be configured as follows:
 - `host =` IP address of the target database  
 - `username =` Username needed for connecting to the target database  
 - `password =` Password needed for connecting to the target database  
-  `;password = M0untainn` (example, comment out if using the real password)  
 - `port =` Port of the target database  
 - `type = db2` or `cloud` (use `db2` for local databases or `cloud` for DB2 on cloud)
 
@@ -83,16 +81,24 @@ This section contains the parameters for the migration experiments.
 - `tables =` LINEITEM (List the tables you want to migrate, separate multiple tables with underscores)  
 - `maxStreams =` Maximum number of parallel streams for the migration  
 - `binary =` False or True (Set to True to enable binary migration)
+- `websiteUsername = ` admin (This is the username for the website started by IBM Bridge. Keep this as default, but you can change it if needed) 
+- `websitePassword = ` EWeBBqOF8LwcHDQI (This is the password for the website started by IBM Bridge. Keep this as default, but you can change it if needed)
+
+### Configuration File: `configs/migrationengine_static.json`
+
+This file contains more advanced configuration settings for the IBM Bridge. You can edit these settings to customize the behavior of the migration engine, or you can choose to keep the default values if no changes are needed.
 
 ### Step 4: Setting up `docker-compose.yml`
 
-For the DB2 migration service, nothing needs to be done here, as the Docker image is already dockerized, and the `docker-compose.yml` file is provided in the `configs` folder. You can use the pre-configured `docker-compose.yml` file for your migration engine setup.
+For the DB2 Bridge, nothing needs to be done here, as the Docker image is already dockerized, and the `docker-compose.yml` file is provided in the `configs` folder. You can use the pre-configured `docker-compose.yml` file for your migration engine setup.
 
 However, the user is free to modify the resource constraints (such as CPU and RAM) in the `docker-compose.yml` file to experiment with different resource configurations. This allows you to test how the migration engine performs under various resource conditions.
 
+
+
 ### Step 5: Optional Ansible Playbooks for Migration Engines
 
-For the DB2 migration service, not much needs to be done here either. The necessary Ansible playbooks have already been implemented. These playbooks handle various stages of the migration process, including pre-experiment, starting the experiment, and post-experiment steps. You can refer to the playbooks in the `deployment/ansible/migrationengines/db2/` folder for more details.
+For the DB2 Bridge, not much needs to be done here either. The necessary Ansible playbooks have already been implemented. These playbooks handle various stages of the migration process, including pre-experiment, starting the experiment, and post-experiment steps. You can refer to the playbooks in the `deployment/ansible/migrationengines/db2/` folder for more details.
 
 However, there are a couple of important tasks to complete:
 

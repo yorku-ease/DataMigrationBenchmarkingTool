@@ -1,0 +1,17 @@
+services:
+  web:
+    image: fareshamouda/db2migrationservice:bridge
+    container_name: db2migrationservice
+    privileged: true
+    ports:
+      - "50050:50050"
+      - "13080:13080"
+      - "14080:14080"
+      - "8080:8080"
+    volumes:
+      - ./configs:/app/configs
+      - /run
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      #- .:/app
+    #command: sleep 500000
+    
