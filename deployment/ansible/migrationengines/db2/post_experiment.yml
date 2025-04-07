@@ -4,7 +4,9 @@
       shell: |
         cd /home/{{ ansible_user }}/dmbench/
         docker compose down
-  when: hostvars['db2-sourceDB'].ansible_host  != hostvars['controller'].ansible_host
+  when: 
+    - hostvars['db2-sourceDB'].ansible_host  != hostvars['controller'].ansible_host
+    - "'check_db2_DBs' in ansible_run_tags"
   delegate_to: db2-sourceDB
 
 - name: STOP cAdvisor on target DB
@@ -13,16 +15,22 @@
       shell: |
         cd /home/{{ ansible_user }}/dmbench/
         docker compose down
-  when :  hostvars['db2-targetDB'].ansible_host  !=  hostvars['controller'].ansible_host 
+  when :  
+    - hostvars['db2-targetDB'].ansible_host  !=  hostvars['controller'].ansible_host 
+    - "'check_db2_DBs' in ansible_run_tags"
   delegate_to: db2-targetDB
 
 - name: Copy sourceDB docker compose file to the results folder
   ansible.builtin.copy:
     src: migrationengines/db2/databases/source/docker-compose.yml
     dest: "{{ resultsfolderpath.stdout }}/sourceDB-docker-compose.yml"
+  when :  
+    - "'check_db2_DBs' in ansible_run_tags"
 - name: Copy targetDB docker compose file to the results folder
   ansible.builtin.copy:
     src: migrationengines/db2/databases/target/docker-compose.yml
     dest: "{{ resultsfolderpath.stdout }}/targetDB-docker-compose.yml"
+  when :  
+    - "'check_db2_DBs' in ansible_run_tags"
 
     
