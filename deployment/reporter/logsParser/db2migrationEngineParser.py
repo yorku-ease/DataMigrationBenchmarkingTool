@@ -47,7 +47,10 @@ class Db2MigrationEngineParser(Parser):
                             extracted_dict[self.header[i]] = key[i]
                         if (len(value_pairs)>1):
                             for i in range(8,len(self.header)):
-                                extracted_dict[self.header[i]] = value_pairs[i - 8].strip()
+                                if 0 <= i - 8 < len(value_pairs)  : 
+                                    extracted_dict[self.header[i]] = value_pairs[i - 8].strip()
+                                else: 
+                                    extracted_dict[self.header[i]] = ""
                         else : 
                             extracted_dict['description'] = value
 
