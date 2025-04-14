@@ -1,6 +1,6 @@
 services:
   web:
-    image: fareshamouda/db2migrationservice:bridge
+    image: fareshamouda/db2migrationservice:latest
     container_name: db2migrationservice
     privileged: true
     # deploy:
