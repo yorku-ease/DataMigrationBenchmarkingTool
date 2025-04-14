@@ -54,8 +54,12 @@ class ConfigManager:
         conf["tables"] = [ conf["sourceDB2Username"].upper() + '.' + element for element in conf["tables"] ]
         conf["sourceDatabasetoTargetDatabase"]=parser.get('experiment', 'sourceDatabasetoTargetDatabase').split('_')
         conf["loggingId"] = parser.get('migrationEnvironment', 'loggingId')
+        conf["websiteUsername"] = parser.get('migrationEnvironment', 'websiteUsername')
+        conf["websitePassword"] = parser.get('migrationEnvironment', 'websitePassword')
         conf["dummy"] = parser.getboolean('migrationEnvironment', 'dummy', fallback='False')
+        #conf["dummyTable"] = conf["sourceDB2Username"].upper() + '.' + parser.get('migrationEnvironment', 'dummyTable')
         conf["dummyTable"] = parser.get('migrationEnvironment', 'dummyTable')
+
         
         if conf['tables'][0] == "*":
             conf["whole_db"] = True

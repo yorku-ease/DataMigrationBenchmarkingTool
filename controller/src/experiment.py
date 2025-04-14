@@ -4,6 +4,7 @@ from src.kafkaLogger import KafkaLogger
 from src.connectionManager import ConnectionManager
 from src.dockerComposeParser import DockerComposeParser
 from itertools import product
+from docker.errors import NotFound, APIError
 
 
 
@@ -97,7 +98,7 @@ class Experiment(Thread):
         except Exception as e:
             timestamp = time.time()
             error_message = str(e)
-            error_location = f"File: {__file__}, Function: {__name__}, Line: {sys.exc_info()[-1].tb_lineno}"
+            error_location = f"File: {__file__} Function: {__name__} Line: {sys.exc_info()[-1].tb_lineno}"
             exception_type = type(e).__name__
             message = f"type : error, Timestamp : {timestamp}, ErrorMessage : {error_message} {error_location} ExceptionType: {exception_type}"
             self.logger.logFramework(self.loggingId,message)
@@ -155,7 +156,21 @@ class Experiment(Thread):
         os.remove("configs/migrationEngineConfig.ini")
         shutil.copy('configs/migrationEngineConfig1.ini', 'configs/migrationEngineConfig.ini')
         os.remove("configs/migrationEngineConfig1.ini")
-
+    def wait_for_container_removal(self,container_id, client, timeout=30, interval=1):
+        start = time.time()
+        while time.time() - start < timeout:
+            try:
+                client.containers.get(container_id)
+                print(f"Container {container_id} still exists. Waiting...")
+                time.sleep(interval)
+            except NotFound:
+                print(f"Container {container_id} successfully removed.")
+                return True
+            except APIError as e:
+                print(f"Docker API error while checking container {container_id}: {e}")
+                break
+        print(f"Timeout waiting for container {container_id} to be removed.")
+        return False
 
     def migrate(self):
         
@@ -202,10 +217,42 @@ class Experiment(Thread):
 
                 try:
                     oldContainer = client.containers.get(container_name)
-                    oldContainer.stop()
-                    oldContainer.remove()
+                    container.stop(timeout=10)
+                    oldContainer.remove(force=True)
                 except docker.errors.NotFound:
                     pass
+                # max_retries = 5
+                # attempt = 0
+
+                # while attempt < max_retries:
+                #     try:
+                #         oldContainer = client.containers.get(container_name)
+                #         oldContainer.stop(timeout=10)
+                #         print(f"Sent stop command to container {container_name}")
+                #         time.sleep(10)
+
+                #         # Try removing the container
+                #         oldContainer = client.containers.get(container_name)
+                #         oldContainer.remove(force=True)
+                #         print(f"Container {container_name} successfully removed.")
+                #         break
+
+                #     except NotFound:
+                #         print(f"Container {container_name} not found. Cleanup complete.")
+                #         break
+
+                #     except APIError as e:
+                #         if "removal of container" in str(e) and "is already in progress" in str(e):
+                #             print(f"Removal already in progress for container {container_name}. Waiting 2 minutes...")
+                #             time.sleep(120)
+                #         else:
+                #             print(f"Unexpected Docker API error: {e}")
+                #             raise
+
+                #     attempt += 1
+
+                # else:
+                #     raise TimeoutError(f"Container {container_name} still exists after {max_retries} retries.")
                 resources = composeParser.parseResources(service_config.get('deploy', {}).get('resources', {}))
                 try : 
                     container = client.containers.run(
@@ -223,12 +270,14 @@ class Experiment(Thread):
                     cpu_shares=resources['cpu_shares'],
                     mem_limit=resources['mem_limit'],
                     mem_reservation=resources['mem_reservation'],
-                    detach=True  # Run in the background
+                    detach=True  ,
+                    auto_remove=True,  
+                    restart_policy={"Name": "no"}  
                 )
                 except Exception as e:
                     timestamp = time.time()
                     error_message = str(e)
-                    error_location = f"File: {__file__}, Function: {__name__}, Line: {sys.exc_info()[-1].tb_lineno}"
+                    error_location = f"File: {__file__} Function: {__name__} Line: {sys.exc_info()[-1].tb_lineno}"
                     exception_type = type(e).__name__
                     message = f"type : error, Timestamp : {timestamp}, ErrorMessage : {error_message} {error_location} ExceptionType: {exception_type}"
                     self.logger.logFramework(self.loggingId,message)
@@ -252,9 +301,9 @@ class Experiment(Thread):
         except Exception as e:
             timestamp = time.time()
             error_message = str(e)
-            error_location = f"File: {__file__}, Function: {__name__}, Line: {sys.exc_info()[-1].tb_lineno}"
+            error_location = f"File {__file__} Function {__name__} Line {sys.exc_info()[-1].tb_lineno}"
             exception_type = type(e).__name__
-            message = f"type : error, Timestamp : {timestamp}, ErrorMessage : {error_message} {error_location} ExceptionType: {exception_type}"
+            message = f"type : error, Timestamp : {timestamp}, ErrorMessage : {error_message} {error_location} ExceptionType {exception_type}"
             self.logger.logFramework(self.loggingId,message)
             stack_trace = traceback.format_exc()
             print(message)
@@ -262,8 +311,11 @@ class Experiment(Thread):
         finally:
             for container in containers:
                 if container is not None:
-                    print("stopping")
-                    container.stop()
-                    print("stopping")
-                    container.remove()
+                    #container.stop()
+                    try:
+                        print(f"Removing container {container.name}...")
+                        container.remove(force=True)
+                    except APIError as e:
+                        print(f"Error during removal: {e}")
+                    self.wait_for_container_removal(container.id, container.client)
             return self.experimentStatus

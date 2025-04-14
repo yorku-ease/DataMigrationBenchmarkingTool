@@ -10,10 +10,11 @@ class Migration:
     def __init__(self,conf):
         self.conf = conf
         self.logger = KafkaLogger()
+
         self.client = HttpClient(
         base_url="https://localhost:14080",
-        username="admin",
-        password="EWeBBqOF8LwcHDQI"
+        username=self.conf['websiteUsername'],
+        password=self.conf['websitePassword']
     )
     def str_to_bool(self,value):
         return str(value).strip().lower() in ("true", "1", "yes", "y")

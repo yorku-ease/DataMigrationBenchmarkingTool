@@ -30,9 +30,9 @@ class Db2Database :
         }
         return client.post("/migration/test-connection/", payload)
     
-    def clearDB(self,tables):
+    def clearDB(self,tablesToMigrate):
         try:
-            self.tablesToMigrate  = [string.lower() for string in tables]
+            self.tablesToMigrate  = [string.split('.')[-1].lower() for string in tablesToMigrate]
             ibm_db_conn = ibm_db.connect(self.dsn , "", "")
             conn = ibm_db_dbi.Connection(ibm_db_conn)
             tables = conn.tables(self.DBschema, '%')

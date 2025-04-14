@@ -1,0 +1,1 @@
+This folder is to parse data in the results folder, just put these 3 files in the results folder. First run combine.py then run main.py
